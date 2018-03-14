@@ -5,6 +5,7 @@ using UnityEngine;
 public enum STATE {
 	STATE_SEAT,
 	STATE_BETTING,
+	STATE_DEAL,
 	STATE_SORTING,
 	STATE_SHOWHAND,
 	STATE_FINISH,
@@ -14,6 +15,7 @@ public enum STATE {
 public class StateManage : MonoBehaviour {
 	public StateSeat 		m_StateSeat;
 	public StateBetting 	m_StateBetting;
+	public StateDeal 	m_StateDeal;
 	public StateSorting 	m_StateSorting;
 	public StateShowHand 	m_StateShowHand;
 	public StateFinish 		m_StateFinish;
@@ -32,6 +34,7 @@ public class StateManage : MonoBehaviour {
 	void Awake(){
 		m_StateList.Add (m_StateSeat);
 		m_StateList.Add (m_StateBetting);
+		m_StateList.Add (m_StateDeal);
 		m_StateList.Add (m_StateSorting);
 		m_StateList.Add (m_StateShowHand);
 		m_StateList.Add (m_StateFinish);

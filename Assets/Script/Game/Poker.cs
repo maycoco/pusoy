@@ -189,4 +189,14 @@ public class Poker : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDra
 		CancelInvoke ();
 		TouchSwitch = false;
 	}
+
+	public void ShowFace(){
+		Image image = transform.GetComponent<Image>();
+		image.sprite = Resources.Load("Image/Poker/" + PokerID, typeof(Sprite)) as Sprite;
+	}
+
+	public void ShowBack(){
+		Image image = transform.GetComponent<Image>();
+		image.sprite = Resources.Load("Image/Poker/poker_back", typeof(Sprite)) as Sprite;
+	}
 }

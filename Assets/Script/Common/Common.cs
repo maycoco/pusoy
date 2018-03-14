@@ -60,6 +60,7 @@ public class Common
 	public static Msg.GameState CState			= Msg.GameState.Ready;
 	public static List<PlayerInfo> CPlayers	= new List<PlayerInfo>();
 	public static List<int>	CPokers			= new List<int>();
+	public static List<int>	CSeats			= new List<int>();
 
 
 	//Room Config

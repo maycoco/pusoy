@@ -53,15 +53,15 @@ public class StateSorting : State {
 		postype1.Add (new Vector3 (-252, -328, 0));
 		postype1.Add (new Vector3 (252, -328, 0));
 
-		RanksText.Add ("High Card");
-		RanksText.Add ("One Pair");
-		RanksText.Add ("Two Pair");
-		RanksText.Add ("Three of a kind");
-		RanksText.Add ("Straight");
-		RanksText.Add ("Flush");
-		RanksText.Add ("Full House");
-		RanksText.Add ("Four of a kind");
-		RanksText.Add ("Straight Flush");
+		RanksText.Add ("high card");
+		RanksText.Add ("one pair");
+		RanksText.Add ("two pair");
+		RanksText.Add ("three of a kind");
+		RanksText.Add ("straight");
+		RanksText.Add ("flush");
+		RanksText.Add ("full house");
+		RanksText.Add ("four of a kind");
+		RanksText.Add ("straight flush");
 	}
 
 	// Update is called once per frame
@@ -120,7 +120,10 @@ public class StateSorting : State {
 
 		UpdateControlButton ();
 		AdjustPokers ();
+		UpdatePokerTips ();
+	}
 
+	public void ShowControlUI(){
 		//get lucky or battle
 		Dictionary<Msg.CardRank, List<uint[]>> result = GetRanks(HandPokers);
 		bool getlucky = false;
@@ -129,8 +132,6 @@ public class StateSorting : State {
 				getlucky = true;
 			}
 		}
-
-		UpdatePokerTips ();
 
 		if (getlucky) {
 			Layer1.Find ("GetLucky").gameObject.SetActive (true);
@@ -187,6 +188,7 @@ public class StateSorting : State {
 	}
 
 	 public void AdjustPokers(){
+		float iv = 0.2f;
 		for (int i = 0; i <HandPokers.Count; i++) {
 			Poker Poker = Instantiate(m_GameController.m_PrefabPoker) as Poker;
 			Poker.canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
@@ -198,12 +200,30 @@ public class StateSorting : State {
 			Poker.transform.tag = "SortHand";
 			Poker.transform.SetParent(GameObject.Find("Pokers").transform);
 
-			Image image = Poker.GetComponent<Image>();
-			image.sprite = Resources.Load("Image/Poker/" + HandPokers[i], typeof(Sprite)) as Sprite;
+			Poker.ShowBack();
 			Poker.transform.localPosition = m_GameController.DefaultHandPisitions [i];
 			Poker.SetBelongPos (m_GameController.DefaultHandPisitions [i]);
 			Poker.transform.localScale = new Vector3 (1, 1, 1);
 			Pokers.Add (Poker.PokerID, Poker);
+			Invoke ("RoateAni", iv*(i+1));
+		}
+	}
+
+	private int RoateAniIndex = 0;
+	private int RoateCAniIndex = 0;
+
+	public void RoateAni(){
+		Pokers[HandPokers[RoateAniIndex]].transform.DORotate (new Vector3 (0, 180, 0), 0.5f).OnComplete(RoateAniCallBack);
+		RoateAniIndex++;
+	}
+
+	public void RoateAniCallBack(){
+		Pokers [HandPokers [RoateCAniIndex]].ShowFace ();
+		Pokers [HandPokers [RoateCAniIndex]].transform.localRotation = new Quaternion (0,0,0,0);
+		RoateCAniIndex++;
+
+		if(RoateCAniIndex == HandPokers.Count){
+			ShowControlUI ();
 		}
 	}
 

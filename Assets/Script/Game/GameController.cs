@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour {
 
 	//effect
 	public GameObject									m_PrefabEffectSL;
+	public GameObject 									m_PrefabEffectDeal;
 
 	//Self Info
 	[HideInInspector] public int 						m_SelfSeatID 	= -1;
@@ -94,12 +95,7 @@ public class GameController : MonoBehaviour {
 
 		if(Common.CState == Msg.GameState.Deal){
 			m_StateManage.SetState (STATE.STATE_SEAT);
-			//ResultEvent(data.gameStateNotify.Results);
 		}
-
-//		if(Common.CState == Msg.GameState.Deal){
-//			m_StateManage.SetState (STATE.STATE_SEAT);
-//		}
 
 		if(Common.CState == Msg.GameState.Combine){
 			m_StateManage.SetState (STATE.STATE_SEAT);
@@ -129,14 +125,14 @@ public class GameController : MonoBehaviour {
 //		Common.FB_id = "123235234";
 //		Common.FB_access_token = "sd23edasdasdasdasd12easd";
 //		Common.FB_name = "Walter wang";
-//		Common.Uid = 222;
+//		Common.Uid = 777;
 //		Common.CMin_bet 	= 20;
 //		Common.CMax_bet 	= 1000;
 //		Common.CHands 		= 300;
 //		Common.CPlayed_hands= 10;
 //		Common.CIs_share 	= true;
 //		Common.CCredit_points = 1000;
-//		Common.CState 		= Msg.GameState.Combine;
+//		Common.CState 		= Msg.GameState.Ready;
 //		if(Common.CState == Msg.GameState.Show){
 //			Common.ConfigBetTime = 5;
 //		}
@@ -149,7 +145,7 @@ public class GameController : MonoBehaviour {
 //
 //		PlayerInfo p2 = new PlayerInfo ();
 //		p2.Uid = 111;
-//		p2.SeatID = 2;
+//		p2.SeatID = 0;
 //		p2.Name = "Bruce";
 //		p2.Win = 123456789;
 //		p2.Bet = 100;
@@ -164,13 +160,13 @@ public class GameController : MonoBehaviour {
 //
 //		PlayerInfo p3 = new PlayerInfo ();
 //		p3.Uid = 777;
-//		p3.SeatID = 0;
+//		p3.SeatID = 2;
 //		p3.Name = "HAHA";
 //		p3.Win = -76456789;
 //		Common.CPlayers.Add (p3);
 //
-//		uint[] ps =  new uint[]{1,13,3,36,5,6,24,8,18,10,38,12,27};
-//		DealCardsEvent (ps);
+//		int[] s = new int[]{1,13,3,36,5,6,24,8,18,10,38,12,27};
+//		Common.CPokers = new List<int> (s);
 //		ResultEvent (null);
 
 		// Already Sit Down
@@ -337,6 +333,13 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	public void DealSeatEvent(RepeatedField<uint> seats){
+		Common.CSeats.Clear ();
+		for(int i = 0; i < seats.Count; i++){
+			Common.CSeats.Add ((int)seats[i]);
+		}
+	}
+
 	public void ResultEvent(RepeatedField<global::Msg.SeatResult> ResultList){
 		SeatResults.Clear ();	
 
@@ -494,6 +497,9 @@ public class GameController : MonoBehaviour {
 			case Msg.GameState.Deal:
 				Loom.QueueOnMainThread(()=>{
 					DealCardsEvent(data.GameStateNotify.DealCards);
+					//data.GameStateNotify.deal_seats
+
+					m_StateManage.ChangeState (STATE.STATE_DEAL);
 				}); 
 				break;
 
@@ -659,5 +665,14 @@ public class GameController : MonoBehaviour {
 			msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
 		}
+	}
+
+	public void Test(){
+		m_StateManage.ChangeState (STATE.STATE_SEAT);
+		m_StateManage.ChangeState (STATE.STATE_DEAL);
+	}
+
+	public void Test2(){
+		m_StateManage.ChangeState (STATE.STATE_SORTING);
 	}
 }
