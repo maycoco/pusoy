@@ -204,6 +204,12 @@ namespace Pusoy
                             if (cards[found - 1].Value != 5 - found && cards[found - 1].Value != 13 - found)
                                 return false;
 
+                            for (int i = 1; i < found - 1; i++)
+                            {
+                                if (cards[i].Value != cards[i + 1].Value+1)
+                                    return false;
+                            }
+    
                             return true;
                         }
                         if (found > 1 && cards[0].Value - cards[found - 1].Value > found - 1)
