@@ -25,6 +25,7 @@ public class StateSorting : State {
 
 	private Dictionary<int, Poker> Pokers	= new Dictionary<int, Poker>();
 	private bool AlreadyComfim				= true;
+	private bool GetLuckyConfim				= false;
 
 	Dictionary<Msg.CardRank, List<uint[]>> RankResult = new Dictionary<Msg.CardRank, List<uint[]>> ();
 
@@ -90,6 +91,7 @@ public class StateSorting : State {
 		MiddlePokers.Clear ();
 		UnderPokers.Clear ();
 		SelectedPokers.Clear ();
+		GetLuckyConfim = false;
 
 		AdjustUI ();
 		CountDownTime = Common.ConfigSortTime;
@@ -168,6 +170,7 @@ public class StateSorting : State {
 		Layer1.Find ("GetLucky").gameObject.SetActive (false);
 		Layer1.Find ("Battle").gameObject.SetActive (false);
 		Layer2.Find ("Types").gameObject.SetActive (false);
+		GetLuckyConfim = true;
 	}
 
 	public void BeginCountDown(){
@@ -640,6 +643,7 @@ public class StateSorting : State {
 	public void SortConfrm(){
 		AlreadyComfim = true;
 		DisPokers ();
+		HideConfim ();
 		if (TweenColor != null) {TweenColor.Kill ();}
 
 		if (!PlayBaoPai ()) {
@@ -674,8 +678,7 @@ public class StateSorting : State {
 		cards.Add (middle_pokers);
 		cards.Add (under_pokers);
 
-		m_GameController.CombineServer (cards, false);
-
+		m_GameController.CombineServer (cards, GetLuckyConfim);
 		HideConfim ();
 	}
 

@@ -658,8 +658,6 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void CombineServer(List<Msg.CardGroup> cards, bool autowin){
-		m_StateManage.m_StateSorting.HideConfim ();
-
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CombineReq;
 		msg.CombineReq 					= new CombineReq();
