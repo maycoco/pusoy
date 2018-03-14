@@ -25,6 +25,7 @@ public class SeatResult{
 	public List<int> score		 	= new List<int> ();
 	public RepeatedField<global::Msg.CardRank> Ranks = new RepeatedField<global::Msg.CardRank>();
 	public bool autowin;
+	public bool foul;
 	public int Bet;
 	public int Win;
 }
@@ -353,6 +354,7 @@ public class GameController : MonoBehaviour {
 			}
 
 			info.autowin 		= ResultList [i].Autowin;
+			info.foul			= ResultList [i].Foul;
 			//info.Bet 			= (int)ResultList [i].Bet;
 			info.Win 			= ResultList [i].Win;
 			info.Ranks 			= ResultList [i].Ranks;
@@ -365,18 +367,24 @@ public class GameController : MonoBehaviour {
 		}
 
 
-
-//		uint[] arr = { 1, 2, 3 };
+//		uint[] arr = { 1, 2, 3};
+//		RepeatedField<uint> arrr = new RepeatedField<uint>{ arr };
+//
 //		uint[] arr1 = { 4, 5, 6, 7, 8 };
+//		RepeatedField<uint> arrr1 = new RepeatedField<uint>{ arr1 };
+//
 //		uint[] arr2 = { 9, 10, 11, 12, 13 };
+//		RepeatedField<uint> arrr2 = new RepeatedField<uint>{ arr2 };
 //
 //		SeatResult hinfo = new SeatResult ();
 //		hinfo.Bet = 2000;
 //		hinfo.Win = -150;
 //		hinfo.SeatID = 0;
-//		hinfo.Pres.Add (arr);
-//		hinfo.Pres.Add (arr1);
-//		hinfo.Pres.Add (arr2);
+//		hinfo.autowin = true;
+//		hinfo.foul = false;
+//		hinfo.Pres.Add (arrr);
+//		hinfo.Pres.Add (arrr1);
+//		hinfo.Pres.Add (arrr2);
 //
 //		hinfo.score.Add (1);
 //		hinfo.score.Add (-1);
@@ -497,8 +505,7 @@ public class GameController : MonoBehaviour {
 			case Msg.GameState.Deal:
 				Loom.QueueOnMainThread(()=>{
 					DealCardsEvent(data.GameStateNotify.DealCards);
-					//data.GameStateNotify.deal_seats
-
+					DealSeatEvent(data.GameStateNotify.DealSeats);
 					m_StateManage.ChangeState (STATE.STATE_DEAL);
 				}); 
 				break;
@@ -512,8 +519,7 @@ public class GameController : MonoBehaviour {
 
 			case Msg.GameState.Show:
 				Loom.QueueOnMainThread(()=>{
-					Debug.Log(data.GameStateNotify.Result.Count);
-                    
+					Debug.Log(data.GameStateNotify.Result.ToString());
 					ResultEvent(data.GameStateNotify.Result);
 					m_StateManage.ChangeState (STATE.STATE_SHOWHAND);
 				}); 
@@ -668,11 +674,10 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void Test(){
-		m_StateManage.ChangeState (STATE.STATE_SEAT);
-		m_StateManage.ChangeState (STATE.STATE_DEAL);
+		m_StateManage.ChangeState (STATE.STATE_FINISH);
 	}
 
 	public void Test2(){
-		m_StateManage.ChangeState (STATE.STATE_SORTING);
+		m_StateManage.ChangeState (STATE.STATE_SHOWHAND);
 	}
 }

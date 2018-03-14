@@ -131,7 +131,7 @@ public class StateFinish : State {
 			Transform number = PreInfoObj.Find ("Amount");
 			string	typestr = "";
 
-			if (hInfo.Win < 0) {typestr = "lost";}
+			if (hInfo.Win <= 0) {typestr = "lost";}
 			else {typestr = "win";}
 
 			string amount = Mathf.Abs (hInfo.Win).ToString ();
@@ -147,10 +147,12 @@ public class StateFinish : State {
 			}
 
 			float right = number.localPosition.x - 16 * amount.Length;
-			if (hInfo.Win >= 0) {
+			if (hInfo.autowin) {
 				PreInfoObj.Find ("GetLucky").gameObject.SetActive (true);
-				PreInfoObj.Find ("GetLucky").localPosition = new Vector3 ( right, PreInfoObj.Find ("GetLucky").localPosition.y, 0);
-			} else {
+				PreInfoObj.Find ("GetLucky").localPosition = new Vector3 (right, PreInfoObj.Find ("GetLucky").localPosition.y, 0);
+			}
+
+			if (hInfo.foul) {
 				PreInfoObj.Find ("Foul").gameObject.SetActive (true);
 				PreInfoObj.Find ("Foul").localPosition = new Vector3( right, PreInfoObj.Find ("GetLucky").localPosition.y, 0);
 			}

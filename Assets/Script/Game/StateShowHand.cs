@@ -136,13 +136,19 @@ public class StateShowHand : State {
 				Image typeI = ParResult.Find("Type").GetComponent<Image> ();
 				Image ResI = ParResult.Find("Res").GetComponent<Image> ();
 
-				if (pinfo.score[i] > 0) {
-					typeI.sprite = Resources.Load ("Image/Game/winicon", typeof(Sprite)) as Sprite;
-					ResI.sprite = Resources.Load ("Image/Game/win1", typeof(Sprite)) as Sprite;
-				} else {
-					typeI.sprite = Resources.Load ("Image/Game/losticon", typeof(Sprite)) as Sprite;
-					ResI.sprite = Resources.Load ("Image/Game/lost1", typeof(Sprite)) as Sprite;
+				Debug.Log (pinfo.foul);
+				if(!pinfo.foul){
+					Debug.Log (pinfo.score.Count);
+					Debug.Log (pinfo.score);
+					if (pinfo.score[i] > 0) {
+						typeI.sprite = Resources.Load ("Image/Game/winicon", typeof(Sprite)) as Sprite;
+						ResI.sprite = Resources.Load ("Image/Game/win1", typeof(Sprite)) as Sprite;
+					} else {
+						typeI.sprite = Resources.Load ("Image/Game/losticon", typeof(Sprite)) as Sprite;
+						ResI.sprite = Resources.Load ("Image/Game/lost1", typeof(Sprite)) as Sprite;
+					}
 				}
+
 				ParResult.gameObject.SetActive (true);
 			}
 				

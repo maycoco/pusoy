@@ -18,6 +18,9 @@ public class StateSorting : State {
 	private List<int> UnderPokers 			= new List<int>();
 	private List<int> SelectedPokers		= new List<int>();
 
+	private int RoateAniIndex 				= 0;
+	private int RoateCAniIndex 				= 0;
+
 	private	GameObject Effect_BaoPai		= null;
 
 	private Dictionary<int, Poker> Pokers	= new Dictionary<int, Poker>();
@@ -70,6 +73,9 @@ public class StateSorting : State {
 
 	public override void Enter(){
 		Debug.Log ("==============================state sorting===================================");
+		RoateAniIndex = 0;
+		RoateCAniIndex = 0;
+
 		m_GameController.HideSeatLayer ();
 		m_GameController.HideTableInfo ();
 		m_GameController.HideGameConsole ();
@@ -208,10 +214,7 @@ public class StateSorting : State {
 			Invoke ("RoateAni", iv*(i+1));
 		}
 	}
-
-	private int RoateAniIndex = 0;
-	private int RoateCAniIndex = 0;
-
+		
 	public void RoateAni(){
 		Pokers[HandPokers[RoateAniIndex]].transform.DORotate (new Vector3 (0, 180, 0), 0.5f).OnComplete(RoateAniCallBack);
 		RoateAniIndex++;
