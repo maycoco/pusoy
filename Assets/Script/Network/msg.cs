@@ -91,58 +91,60 @@ namespace Msg {
             "R3JvdXASDQoFY2FyZHMYASADKA0iQgoKQ29tYmluZVJlcRIjCgtjYXJkX2dy",
             "b3VwcxgBIAMoCzIOLm1zZy5DYXJkR3JvdXASDwoHYXV0b3dpbhgCIAEoCCIn",
             "CgpDb21iaW5lUnNwEhkKA3JldBgBIAEoDjIMLm1zZy5FcnJvcklEIiAKDUNv",
-            "bWJpbmVOb3RpZnkSDwoHc2VhdF9pZBgBIAEoDSKwAQoKU2VhdFJlc3VsdBIP",
+            "bWJpbmVOb3RpZnkSDwoHc2VhdF9pZBgBIAEoDSK+AQoKU2VhdFJlc3VsdBIP",
             "CgdzZWF0X2lkGAEgASgNEiMKC2NhcmRfZ3JvdXBzGAIgAygLMg4ubXNnLkNh",
-            "cmRHcm91cBIPCgdhdXRvd2luGAMgASgIEhwKBXJhbmtzGAQgAygOMg0ubXNn",
-            "LkNhcmRSYW5rEg4KBnNjb3JlcxgFIAMoBRITCgt0b3RhbF9zY29yZRgGIAEo",
-            "BRILCgN3aW4YByABKAUSCwoDYmV0GAggASgNIngKD0dhbWVTdGF0ZU5vdGlm",
-            "eRIdCgVzdGF0ZRgBIAEoDjIOLm1zZy5HYW1lU3RhdGUSEQoJY291bnRkb3du",
-            "GAIgASgNEhIKCmRlYWxfY2FyZHMYAyADKA0SHwoGcmVzdWx0GAQgAygLMg8u",
-            "bXNnLlNlYXRSZXN1bHQq4wQKCU1lc3NhZ2VJRBINCglMb2dpbl9SZXEQABIN",
-            "CglMb2dpbl9Sc3AQARIPCgtLaWNrX05vdGlmeRACEhIKDkNyZWF0ZVJvb21f",
-            "UmVxEAMSEgoOQ3JlYXRlUm9vbV9Sc3AQBBIaChZDb25zdW1lRGlhbW9uZHNf",
-            "Tm90aWZ5EAUSEAoMSm9pblJvb21fUmVxEAYSEAoMSm9pblJvb21fUnNwEAcS",
-            "EwoPSm9pblJvb21fTm90aWZ5EAgSEQoNTGVhdmVSb29tX1JlcRAJEhEKDUxl",
-            "YXZlUm9vbV9Sc3AQChIUChBMZWF2ZVJvb21fTm90aWZ5EAsSDwoLU2l0RG93",
-            "bl9SZXEQDBIPCgtTaXREb3duX1JzcBANEhIKDlNpdERvd25fTm90aWZ5EA4S",
-            "DwoLU3RhbmRVcF9SZXEQDxIPCgtTdGFuZFVwX1JzcBAQEhIKDlN0YW5kVXBf",
-            "Tm90aWZ5EBESEgoOQXV0b0Jhbmtlcl9SZXEQFRISCg5BdXRvQmFua2VyX1Jz",
-            "cBAWEhEKDVN0YXJ0R2FtZV9SZXEQFxIRCg1TdGFydEdhbWVfUnNwEBgSCwoH",
-            "QmV0X1JlcRAZEgsKB0JldF9Sc3AQGhIOCgpCZXRfTm90aWZ5EBsSDwoLQ29t",
-            "YmluZV9SZXEQHBIPCgtDb21iaW5lX1JzcBAdEhIKDkNvbWJpbmVfTm90aWZ5",
-            "EB4SEQoNUmVzdWx0X05vdGlmeRAfEhQKEEdhbWVTdGF0ZV9Ob3RpZnkQIBIV",
-            "ChFEaXNjb25uZWN0X05vdGlmeRAhEhQKEFJlY29ubmVjdF9Ob3RpZnkQIirh",
-            "BwoHRXJyb3JJRBIGCgJPaxAAEhIKDkludmFsaWRfUGFyYW1zEAESDAoIREJf",
-            "RXJyb3IQAhISCg5JbnRlcm5hbF9FcnJvchADEiAKHENyZWF0ZVJvb21fSW52",
-            "YWxpZF9Sb29tX05hbWUQZBIiCh5DcmVhdGVSb29tX0ludmFsaWRfTWluX01h",
-            "eF9CZXQQZRIkCiBDcmVhdGVSb29tX0ludmFsaWRfQ3JlZGl0X1BvaW50cxBm",
-            "EiIKHkNyZWF0ZVJvb21fTm90X0Vub3VnaF9EaWFtb25kcxBnEiYKIkNyZWF0",
-            "ZVJvb21fRXhjZWVkX0xpbWl0YXRpb25fUm9vbXMQaBIcChhDcmVhdGVSb29t",
-            "X0ludmFsaWRfSGFuZHMQaRIeChpKb2luUm9vbV9Xcm9uZ19Sb29tX051bWJl",
-            "chBuEhEKDUpvaW5Sb29tX0Z1bGwQbxIXChNKb2luUm9vbV9BbHJlYWR5X0lu",
-            "EHASFAoQTGVhdmVSb29tX05vdF9JbhB4EhUKEUxlYXZlUm9vbV9QbGF5aW5n",
-            "EHkSHAoXU2l0RG93bl9JbnZhbGlkX1NlYXRfSWQQggESIQocU2l0RG93bl9B",
-            "bHJlYWR5X0V4aXN0X1BsYXllchCDARIYChNTaXREb3duX0FscmVhZHlfU2l0",
-            "EIQBEhQKD1N0YW5kVXBfTm90X1NpdBCMARIcChdTdGFuZFVwX0Nhbm5vdF9T",
-            "dGFuZF9VcBCNARIaChVBdXRvQmFua2VyX05vdF9CYW5rZXIQlgESHQoYQXV0",
-            "b0Jhbmtlcl9JbnZhbGlkX1N0YXRlEJcBEhkKFFN0YXJ0R2FtZV9Ob3RfQmFu",
-            "a2VyEKABEiEKHFN0YXJ0R2FtZV9Ob3RfRW5vdWdoX1BsYXllcnMQoQESIgod",
-            "U3RhcnRHYW1lX05vdF9Fbm91Z2hfRGlhbW9uZHMQogESHgoZU3RhcnRHYW1l",
-            "X05vdF9SZWFkeV9TdGF0ZRCjARIWChFCZXRfTm90X0JldF9TdGF0ZRCqARIa",
-            "ChVCZXRfQmFua2VyX0Nhbm5vdF9CZXQQqwESFgoRQmV0X0ludmFsaWRfQ2hp",
-            "cHMQrAESHQoYQmV0X05vdF9BX1BsYXllcl9Pbl9TZWF0EK0BEhQKD0JldF9B",
-            "bHJlYWR5X0JldBCuARIeChlDb21iaW5lX05vdF9Db21iaW5lX1N0YXRlELQB",
-            "Eh4KGUNvbWJpbmVfTm90X0luX1RoaXNfUm91bmQQtQESIQocQ29tYmluZV9J",
-            "bnZhbGlkX1JlcXVlc3RfRGF0YRC2ARIZChRDb21iaW5lX0FscmVhZHlfRG9u",
-            "ZRC3ASoZCglMb2dpblR5cGUSDAoIRmFjZWJvb2sQACogCgtTaXREb3duVHlw",
-            "ZRIHCgNTaXQQABIICgRTd2FwEAEqXQoJR2FtZVN0YXRlEgkKBVJlYWR5EAAS",
-            "BwoDQmV0EAESDwoLQ29uZmlybV9CZXQQAhIICgREZWFsEAMSCwoHQ29tYmlu",
-            "ZRAEEggKBFNob3cQBRIKCgZSZXN1bHQQBiqbAQoIQ2FyZFJhbmsSDQoJSGln",
-            "aF9DYXJkEAASDAoIT25lX1BhaXIQARIMCghUd29fUGFpchACEhMKD1RocmVl",
-            "X09mX0FfS2luZBADEgwKCFN0cmFpZ2h0EAQSCQoFRmx1c2gQBRIOCgpGdWxs",
-            "X0hvdXNlEAYSEgoORm91cl9PZl9BX0tpbmQQBxISCg5TdHJhaWdodF9GbHVz",
-            "aBAIKksKDUNhcmRDb2xvclN1aXQSCQoFQ2x1YnMQABIKCgZTcGFkZXMQARIK",
-            "CgZIZWFydHMQAhIMCghEaWFtb25kcxADEgkKBUNvdW50EARiBnByb3RvMw=="));
+            "cmRHcm91cBIPCgdhdXRvd2luGAMgASgIEgwKBGZvdWwYBCABKAgSHAoFcmFu",
+            "a3MYBSADKA4yDS5tc2cuQ2FyZFJhbmsSDgoGc2NvcmVzGAYgAygFEhMKC3Rv",
+            "dGFsX3Njb3JlGAcgASgFEgsKA3dpbhgIIAEoBRILCgNiZXQYCSABKA0ijAEK",
+            "D0dhbWVTdGF0ZU5vdGlmeRIdCgVzdGF0ZRgBIAEoDjIOLm1zZy5HYW1lU3Rh",
+            "dGUSEQoJY291bnRkb3duGAIgASgNEhIKCmRlYWxfY2FyZHMYAyADKA0SEgoK",
+            "ZGVhbF9zZWF0cxgEIAMoDRIfCgZyZXN1bHQYBSADKAsyDy5tc2cuU2VhdFJl",
+            "c3VsdCrjBAoJTWVzc2FnZUlEEg0KCUxvZ2luX1JlcRAAEg0KCUxvZ2luX1Jz",
+            "cBABEg8KC0tpY2tfTm90aWZ5EAISEgoOQ3JlYXRlUm9vbV9SZXEQAxISCg5D",
+            "cmVhdGVSb29tX1JzcBAEEhoKFkNvbnN1bWVEaWFtb25kc19Ob3RpZnkQBRIQ",
+            "CgxKb2luUm9vbV9SZXEQBhIQCgxKb2luUm9vbV9Sc3AQBxITCg9Kb2luUm9v",
+            "bV9Ob3RpZnkQCBIRCg1MZWF2ZVJvb21fUmVxEAkSEQoNTGVhdmVSb29tX1Jz",
+            "cBAKEhQKEExlYXZlUm9vbV9Ob3RpZnkQCxIPCgtTaXREb3duX1JlcRAMEg8K",
+            "C1NpdERvd25fUnNwEA0SEgoOU2l0RG93bl9Ob3RpZnkQDhIPCgtTdGFuZFVw",
+            "X1JlcRAPEg8KC1N0YW5kVXBfUnNwEBASEgoOU3RhbmRVcF9Ob3RpZnkQERIS",
+            "Cg5BdXRvQmFua2VyX1JlcRAVEhIKDkF1dG9CYW5rZXJfUnNwEBYSEQoNU3Rh",
+            "cnRHYW1lX1JlcRAXEhEKDVN0YXJ0R2FtZV9Sc3AQGBILCgdCZXRfUmVxEBkS",
+            "CwoHQmV0X1JzcBAaEg4KCkJldF9Ob3RpZnkQGxIPCgtDb21iaW5lX1JlcRAc",
+            "Eg8KC0NvbWJpbmVfUnNwEB0SEgoOQ29tYmluZV9Ob3RpZnkQHhIRCg1SZXN1",
+            "bHRfTm90aWZ5EB8SFAoQR2FtZVN0YXRlX05vdGlmeRAgEhUKEURpc2Nvbm5l",
+            "Y3RfTm90aWZ5ECESFAoQUmVjb25uZWN0X05vdGlmeRAiKvkHCgdFcnJvcklE",
+            "EgYKAk9rEAASEgoOSW52YWxpZF9QYXJhbXMQARIMCghEQl9FcnJvchACEhIK",
+            "DkludGVybmFsX0Vycm9yEAMSIAocQ3JlYXRlUm9vbV9JbnZhbGlkX1Jvb21f",
+            "TmFtZRBkEiIKHkNyZWF0ZVJvb21fSW52YWxpZF9NaW5fTWF4X0JldBBlEiQK",
+            "IENyZWF0ZVJvb21fSW52YWxpZF9DcmVkaXRfUG9pbnRzEGYSIgoeQ3JlYXRl",
+            "Um9vbV9Ob3RfRW5vdWdoX0RpYW1vbmRzEGcSJgoiQ3JlYXRlUm9vbV9FeGNl",
+            "ZWRfTGltaXRhdGlvbl9Sb29tcxBoEhwKGENyZWF0ZVJvb21fSW52YWxpZF9I",
+            "YW5kcxBpEh4KGkpvaW5Sb29tX1dyb25nX1Jvb21fTnVtYmVyEG4SEQoNSm9p",
+            "blJvb21fRnVsbBBvEhcKE0pvaW5Sb29tX0FscmVhZHlfSW4QcBIUChBMZWF2",
+            "ZVJvb21fTm90X0luEHgSFQoRTGVhdmVSb29tX1BsYXlpbmcQeRIcChdTaXRE",
+            "b3duX0ludmFsaWRfU2VhdF9JZBCCARIhChxTaXREb3duX0FscmVhZHlfRXhp",
+            "c3RfUGxheWVyEIMBEhgKE1NpdERvd25fQWxyZWFkeV9TaXQQhAESFAoPU3Rh",
+            "bmRVcF9Ob3RfU2l0EIwBEhwKF1N0YW5kVXBfQ2Fubm90X1N0YW5kX1VwEI0B",
+            "EhoKFUF1dG9CYW5rZXJfTm90X0JhbmtlchCWARIdChhBdXRvQmFua2VyX0lu",
+            "dmFsaWRfU3RhdGUQlwESGQoUU3RhcnRHYW1lX05vdF9CYW5rZXIQoAESIQoc",
+            "U3RhcnRHYW1lX05vdF9Fbm91Z2hfUGxheWVycxChARIiCh1TdGFydEdhbWVf",
+            "Tm90X0Vub3VnaF9EaWFtb25kcxCiARIeChlTdGFydEdhbWVfTm90X1JlYWR5",
+            "X1N0YXRlEKMBEhYKEUJldF9Ob3RfQmV0X1N0YXRlEKoBEhoKFUJldF9CYW5r",
+            "ZXJfQ2Fubm90X0JldBCrARIWChFCZXRfSW52YWxpZF9DaGlwcxCsARIdChhC",
+            "ZXRfTm90X0FfUGxheWVyX09uX1NlYXQQrQESFAoPQmV0X0FscmVhZHlfQmV0",
+            "EK4BEh4KGUNvbWJpbmVfTm90X0NvbWJpbmVfU3RhdGUQtAESHgoZQ29tYmlu",
+            "ZV9Ob3RfSW5fVGhpc19Sb3VuZBC1ARIhChxDb21iaW5lX0ludmFsaWRfUmVx",
+            "dWVzdF9EYXRhELYBEhkKFENvbWJpbmVfQWxyZWFkeV9Eb25lELcBEhYKEUNv",
+            "bWJpbmVfTm90X0x1Y2t5EIsBKhkKCUxvZ2luVHlwZRIMCghGYWNlYm9vaxAA",
+            "KiAKC1NpdERvd25UeXBlEgcKA1NpdBAAEggKBFN3YXAQASpdCglHYW1lU3Rh",
+            "dGUSCQoFUmVhZHkQABIHCgNCZXQQARIPCgtDb25maXJtX0JldBACEggKBERl",
+            "YWwQAxILCgdDb21iaW5lEAQSCAoEU2hvdxAFEgoKBlJlc3VsdBAGKpsBCghD",
+            "YXJkUmFuaxINCglIaWdoX0NhcmQQABIMCghPbmVfUGFpchABEgwKCFR3b19Q",
+            "YWlyEAISEwoPVGhyZWVfT2ZfQV9LaW5kEAMSDAoIU3RyYWlnaHQQBBIJCgVG",
+            "bHVzaBAFEg4KCkZ1bGxfSG91c2UQBhISCg5Gb3VyX09mX0FfS2luZBAHEhIK",
+            "DlN0cmFpZ2h0X0ZsdXNoEAgqSwoNQ2FyZENvbG9yU3VpdBIJCgVDbHVicxAA",
+            "EgoKBlNwYWRlcxABEgoKBkhlYXJ0cxACEgwKCERpYW1vbmRzEAMSCQoFQ291",
+            "bnQQBGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Msg.MessageID), typeof(global::Msg.ErrorID), typeof(global::Msg.LoginType), typeof(global::Msg.SitDownType), typeof(global::Msg.GameState), typeof(global::Msg.CardRank), typeof(global::Msg.CardColorSuit), }, new pbr::GeneratedClrTypeInfo[] {
@@ -181,8 +183,8 @@ namespace Msg {
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.CombineReq), global::Msg.CombineReq.Parser, new[]{ "CardGroups", "Autowin" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.CombineRsp), global::Msg.CombineRsp.Parser, new[]{ "Ret" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.CombineNotify), global::Msg.CombineNotify.Parser, new[]{ "SeatId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.SeatResult), global::Msg.SeatResult.Parser, new[]{ "SeatId", "CardGroups", "Autowin", "Ranks", "Scores", "TotalScore", "Win", "Bet" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.GameStateNotify), global::Msg.GameStateNotify.Parser, new[]{ "State", "Countdown", "DealCards", "Result" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.SeatResult), global::Msg.SeatResult.Parser, new[]{ "SeatId", "CardGroups", "Autowin", "Foul", "Ranks", "Scores", "TotalScore", "Win", "Bet" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.GameStateNotify), global::Msg.GameStateNotify.Parser, new[]{ "State", "Countdown", "DealCards", "DealSeats", "Result" }, null, null, null)
           }));
     }
     #endregion
@@ -410,6 +412,10 @@ namespace Msg {
     /// 已经提交过了
     /// </summary>
     [pbr::OriginalName("Combine_Already_Done")] CombineAlreadyDone = 183,
+    /// <summary>
+    /// 不是lucky
+    /// </summary>
+    [pbr::OriginalName("Combine_Not_Lucky")] CombineNotLucky = 139,
   }
 
   /// <summary>
@@ -6743,6 +6749,7 @@ namespace Msg {
       seatId_ = other.seatId_;
       cardGroups_ = other.cardGroups_.Clone();
       autowin_ = other.autowin_;
+      foul_ = other.foul_;
       ranks_ = other.ranks_.Clone();
       scores_ = other.scores_.Clone();
       totalScore_ = other.totalScore_;
@@ -6786,6 +6793,7 @@ namespace Msg {
     public const int AutowinFieldNumber = 3;
     private bool autowin_;
     /// <summary>
+    /// 是否get lucky
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool Autowin {
@@ -6795,10 +6803,24 @@ namespace Msg {
       }
     }
 
+    /// <summary>Field number for the "foul" field.</summary>
+    public const int FoulFieldNumber = 4;
+    private bool foul_;
+    /// <summary>
+    /// 是否乌龙
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Foul {
+      get { return foul_; }
+      set {
+        foul_ = value;
+      }
+    }
+
     /// <summary>Field number for the "ranks" field.</summary>
-    public const int RanksFieldNumber = 4;
+    public const int RanksFieldNumber = 5;
     private static readonly pb::FieldCodec<global::Msg.CardRank> _repeated_ranks_codec
-        = pb::FieldCodec.ForEnum(34, x => (int) x, x => (global::Msg.CardRank) x);
+        = pb::FieldCodec.ForEnum(42, x => (int) x, x => (global::Msg.CardRank) x);
     private readonly pbc::RepeatedField<global::Msg.CardRank> ranks_ = new pbc::RepeatedField<global::Msg.CardRank>();
     /// <summary>
     /// 牌型
@@ -6809,12 +6831,12 @@ namespace Msg {
     }
 
     /// <summary>Field number for the "scores" field.</summary>
-    public const int ScoresFieldNumber = 5;
+    public const int ScoresFieldNumber = 6;
     private static readonly pb::FieldCodec<int> _repeated_scores_codec
-        = pb::FieldCodec.ForInt32(42);
+        = pb::FieldCodec.ForInt32(50);
     private readonly pbc::RepeatedField<int> scores_ = new pbc::RepeatedField<int>();
     /// <summary>
-    /// 牌组得分
+    /// 牌组得分,banker不用此值，banker的scores与闲家为正负关系
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<int> Scores {
@@ -6822,10 +6844,10 @@ namespace Msg {
     }
 
     /// <summary>Field number for the "total_score" field.</summary>
-    public const int TotalScoreFieldNumber = 6;
+    public const int TotalScoreFieldNumber = 7;
     private int totalScore_;
     /// <summary>
-    /// 得分总和，如果是autowin赢或者输, score字段为空
+    /// 得分总和，如果是autowin赢输和或者乌龙, score字段为空
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int TotalScore {
@@ -6836,7 +6858,7 @@ namespace Msg {
     }
 
     /// <summary>Field number for the "win" field.</summary>
-    public const int WinFieldNumber = 7;
+    public const int WinFieldNumber = 8;
     private int win_;
     /// <summary>
     /// 输赢积分
@@ -6850,7 +6872,7 @@ namespace Msg {
     }
 
     /// <summary>Field number for the "bet" field.</summary>
-    public const int BetFieldNumber = 8;
+    public const int BetFieldNumber = 9;
     private uint bet_;
     /// <summary>
     /// 下注
@@ -6879,6 +6901,7 @@ namespace Msg {
       if (SeatId != other.SeatId) return false;
       if(!cardGroups_.Equals(other.cardGroups_)) return false;
       if (Autowin != other.Autowin) return false;
+      if (Foul != other.Foul) return false;
       if(!ranks_.Equals(other.ranks_)) return false;
       if(!scores_.Equals(other.scores_)) return false;
       if (TotalScore != other.TotalScore) return false;
@@ -6893,6 +6916,7 @@ namespace Msg {
       if (SeatId != 0) hash ^= SeatId.GetHashCode();
       hash ^= cardGroups_.GetHashCode();
       if (Autowin != false) hash ^= Autowin.GetHashCode();
+      if (Foul != false) hash ^= Foul.GetHashCode();
       hash ^= ranks_.GetHashCode();
       hash ^= scores_.GetHashCode();
       if (TotalScore != 0) hash ^= TotalScore.GetHashCode();
@@ -6917,18 +6941,22 @@ namespace Msg {
         output.WriteRawTag(24);
         output.WriteBool(Autowin);
       }
+      if (Foul != false) {
+        output.WriteRawTag(32);
+        output.WriteBool(Foul);
+      }
       ranks_.WriteTo(output, _repeated_ranks_codec);
       scores_.WriteTo(output, _repeated_scores_codec);
       if (TotalScore != 0) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(56);
         output.WriteInt32(TotalScore);
       }
       if (Win != 0) {
-        output.WriteRawTag(56);
+        output.WriteRawTag(64);
         output.WriteInt32(Win);
       }
       if (Bet != 0) {
-        output.WriteRawTag(64);
+        output.WriteRawTag(72);
         output.WriteUInt32(Bet);
       }
     }
@@ -6941,6 +6969,9 @@ namespace Msg {
       }
       size += cardGroups_.CalculateSize(_repeated_cardGroups_codec);
       if (Autowin != false) {
+        size += 1 + 1;
+      }
+      if (Foul != false) {
         size += 1 + 1;
       }
       size += ranks_.CalculateSize(_repeated_ranks_codec);
@@ -6968,6 +6999,9 @@ namespace Msg {
       cardGroups_.Add(other.cardGroups_);
       if (other.Autowin != false) {
         Autowin = other.Autowin;
+      }
+      if (other.Foul != false) {
+        Foul = other.Foul;
       }
       ranks_.Add(other.ranks_);
       scores_.Add(other.scores_);
@@ -7002,25 +7036,29 @@ namespace Msg {
             Autowin = input.ReadBool();
             break;
           }
-          case 34:
           case 32: {
-            ranks_.AddEntriesFrom(input, _repeated_ranks_codec);
+            Foul = input.ReadBool();
             break;
           }
           case 42:
           case 40: {
+            ranks_.AddEntriesFrom(input, _repeated_ranks_codec);
+            break;
+          }
+          case 50:
+          case 48: {
             scores_.AddEntriesFrom(input, _repeated_scores_codec);
             break;
           }
-          case 48: {
+          case 56: {
             TotalScore = input.ReadInt32();
             break;
           }
-          case 56: {
+          case 64: {
             Win = input.ReadInt32();
             break;
           }
-          case 64: {
+          case 72: {
             Bet = input.ReadUInt32();
             break;
           }
@@ -7057,6 +7095,7 @@ namespace Msg {
       state_ = other.state_;
       countdown_ = other.countdown_;
       dealCards_ = other.dealCards_.Clone();
+      dealSeats_ = other.dealSeats_.Clone();
       result_ = other.result_.Clone();
     }
 
@@ -7106,10 +7145,23 @@ namespace Msg {
       get { return dealCards_; }
     }
 
+    /// <summary>Field number for the "deal_seats" field.</summary>
+    public const int DealSeatsFieldNumber = 4;
+    private static readonly pb::FieldCodec<uint> _repeated_dealSeats_codec
+        = pb::FieldCodec.ForUInt32(34);
+    private readonly pbc::RepeatedField<uint> dealSeats_ = new pbc::RepeatedField<uint>();
+    /// <summary>
+    /// 发牌的座位
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<uint> DealSeats {
+      get { return dealSeats_; }
+    }
+
     /// <summary>Field number for the "result" field.</summary>
-    public const int ResultFieldNumber = 4;
+    public const int ResultFieldNumber = 5;
     private static readonly pb::FieldCodec<global::Msg.SeatResult> _repeated_result_codec
-        = pb::FieldCodec.ForMessage(34, global::Msg.SeatResult.Parser);
+        = pb::FieldCodec.ForMessage(42, global::Msg.SeatResult.Parser);
     private readonly pbc::RepeatedField<global::Msg.SeatResult> result_ = new pbc::RepeatedField<global::Msg.SeatResult>();
     /// <summary>
     /// 结算结果
@@ -7135,6 +7187,7 @@ namespace Msg {
       if (State != other.State) return false;
       if (Countdown != other.Countdown) return false;
       if(!dealCards_.Equals(other.dealCards_)) return false;
+      if(!dealSeats_.Equals(other.dealSeats_)) return false;
       if(!result_.Equals(other.result_)) return false;
       return true;
     }
@@ -7145,6 +7198,7 @@ namespace Msg {
       if (State != 0) hash ^= State.GetHashCode();
       if (Countdown != 0) hash ^= Countdown.GetHashCode();
       hash ^= dealCards_.GetHashCode();
+      hash ^= dealSeats_.GetHashCode();
       hash ^= result_.GetHashCode();
       return hash;
     }
@@ -7165,6 +7219,7 @@ namespace Msg {
         output.WriteUInt32(Countdown);
       }
       dealCards_.WriteTo(output, _repeated_dealCards_codec);
+      dealSeats_.WriteTo(output, _repeated_dealSeats_codec);
       result_.WriteTo(output, _repeated_result_codec);
     }
 
@@ -7178,6 +7233,7 @@ namespace Msg {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Countdown);
       }
       size += dealCards_.CalculateSize(_repeated_dealCards_codec);
+      size += dealSeats_.CalculateSize(_repeated_dealSeats_codec);
       size += result_.CalculateSize(_repeated_result_codec);
       return size;
     }
@@ -7194,6 +7250,7 @@ namespace Msg {
         Countdown = other.Countdown;
       }
       dealCards_.Add(other.dealCards_);
+      dealSeats_.Add(other.dealSeats_);
       result_.Add(other.result_);
     }
 
@@ -7218,7 +7275,12 @@ namespace Msg {
             dealCards_.AddEntriesFrom(input, _repeated_dealCards_codec);
             break;
           }
-          case 34: {
+          case 34:
+          case 32: {
+            dealSeats_.AddEntriesFrom(input, _repeated_dealSeats_codec);
+            break;
+          }
+          case 42: {
             result_.AddEntriesFrom(input, _repeated_result_codec);
             break;
           }
