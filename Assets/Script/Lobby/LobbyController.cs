@@ -168,10 +168,9 @@ public class LobbyController : MonoBehaviour {
 		if(data == null){
 			return;
 		}
-		Debug.Log(data.Msgid.ToString());
+
 		switch (data.Msgid) {
 		case MessageID.CreateRoomRsp:
-			Debug.Log(data.CreateRoomRsp.Ret.ToString());
 			if(data.CreateRoomRsp.Ret == 0){
 				Common.CRoom_id 	= data.CreateRoomRsp.RoomId;
 				Common.CRoom_number	= data.CreateRoomRsp.RoomNumber;
@@ -208,6 +207,7 @@ public class LobbyController : MonoBehaviour {
 					
 				}
 
+				Common.CPlayers.Clear ();
 				for(int i = 0; i < data.JoinRoomRsp.Room.Players.Count; i++){
 					PlayerInfo p = new PlayerInfo ();
 					p.Uid = data.JoinRoomRsp.Room.Players[i].Uid;

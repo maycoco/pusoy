@@ -417,9 +417,6 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void Data(Protocol data){
-		Debug.Log (data.ToString ());
-		Debug.Log (data.Msgid.ToString());
-
 		if(data == null){
 			return; 
 		}
