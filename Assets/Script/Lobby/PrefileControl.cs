@@ -293,9 +293,7 @@ public class PrefileControl : MonoBehaviour
 		}
 
 
-
-		transform.Find ("Date/BK/Year").GetComponent<Text> ().text = m_CurDate.Year.ToString();
-		transform.Find ("Date/BK/Month").GetComponent<Text> ().text = m_months [m_CurDate.Month - 1];
+		transform.Find ("Date/BK/Month").GetComponent<Text> ().text = m_months [m_CurDate.Month - 1] + " " + m_CurDate.Year.ToString();
 
 		int mounthdays = DateTime.DaysInMonth (m_CurDate.Year, m_CurDate.Month); 
 		int weekindex = m_weeks.IndexOf(DateTime.Parse (m_CurDate.Year + "/" + m_CurDate.Month + "/1").DayOfWeek);

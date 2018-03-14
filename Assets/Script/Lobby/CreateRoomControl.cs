@@ -63,7 +63,7 @@ public class CreateRoomControl : MonoBehaviour {
 
 	void UpdateCreditPoints(){
 		if (CreditPointsArray[CurCreditPoints] == 0) {
-			transform.Find ("CreditPoints/Amount").GetComponent<Text> ().text = "unlimited";
+			transform.Find ("CreditPoints/Amount").GetComponent<Text> ().text = "Unlimited";
 		} else {
 			transform.Find ("CreditPoints/Amount").GetComponent<Text> ().text = CreditPointsArray[CurCreditPoints].ToString();
 		}
@@ -106,7 +106,7 @@ public class CreateRoomControl : MonoBehaviour {
 		}
 
 		this.transform.Find ("MaxHands/Hands/HandAmount" + CurHands + "/Text").GetComponent<Text> ().color = new Color (1,1,1);
-		int amount = (int)HandsArray [CurHands] * 20;
+		int amount = (int)HandsArray [CurHands] * 2;
 		this.transform.Find ("RoomRate/Amount").GetComponent<Text> ().text = amount.ToString ();
 	}
 
