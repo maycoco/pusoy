@@ -1,15 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
-using Facebook.Unity;
-
-using networkengine;
-using ProtoBuf;
+﻿using Facebook.Unity;
+using Google.Protobuf;
 using Msg;
+using networkengine;
+using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoginController : MonoBehaviour { 
 	
@@ -70,9 +66,9 @@ public class LoginController : MonoBehaviour {
 		}
 
 		if(data.Msgid  == MessageID.LoginRsp){
-			if(data.loginRsp.Ret == 0){
-				Common.Uid = data.loginRsp.Uid;
-				Common.CRoom_id = data.loginRsp.RoomId;
+			if(data.LoginRsp.Ret == 0){
+				Common.Uid = data.LoginRsp.Uid;
+				Common.CRoom_id = data.LoginRsp.RoomId;
 				Loom.QueueOnMainThread(()=>{  
 					GotoLobby ();
 				}); 
@@ -83,15 +79,15 @@ public class LoginController : MonoBehaviour {
 	public void LoginServer(){
 		Protocol msg 			= new Protocol();
 		msg.Msgid 				= MessageID.LoginReq;
-		msg.loginReq 			= new LoginReq();
-		msg.loginReq.Type		= LoginType.Facebook;
-		msg.loginReq.Fb 		= new LoginFBReq();
-		msg.loginReq.Fb.FbId 	= Common.FB_id;
-		msg.loginReq.Fb.Token 	= Common.FB_access_token;
-		msg.loginReq.Fb.Name 	= Common.FB_name;
+		msg.LoginReq = new LoginReq();
+		msg.LoginReq.Type		= LoginType.Facebook;
+		msg.LoginReq.Fb 		= new LoginFBReq();
+		msg.LoginReq.Fb.FbId 	= Common.FB_id;
+		msg.LoginReq.Fb.Token 	= Common.FB_access_token;
+		msg.LoginReq.Fb.Name 	= Common.FB_name;
 		using (var stream = new MemoryStream())
 		{
-			Serializer.Serialize<Protocol>(stream, msg);
+            msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
 		}
 	}

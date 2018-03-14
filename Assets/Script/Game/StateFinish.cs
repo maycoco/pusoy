@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Google.Protobuf.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -118,9 +119,9 @@ public class StateFinish : State {
 			PreInfoObj.Find ("Name").GetComponent<Text> ().text = p.Name;
 
 			for(int i = 0; i < hInfo.Pres.Count; i++){
-				uint[] pInfo = hInfo.Pres [i];
+                RepeatedField<uint> pInfo = hInfo.Pres [i];
 
-				for(int o = 0; o < pInfo.Length; o++){
+				for(int o = 0; o < pInfo.Count; o++){
 					Transform Poker = PreInfoObj.Find ("Hand" + i + "/Poker" + o);
 					Image image = Poker.GetComponent<Image>();
 					image.sprite = Resources.Load("Image/Poker/" + pInfo[o], typeof(Sprite)) as Sprite;

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using Facebook.Unity;
 
 using networkengine;
-using ProtoBuf;
+using Google.Protobuf;
 using Msg;
 using System.IO;
 
@@ -171,10 +171,10 @@ public class LobbyController : MonoBehaviour {
 		Debug.Log(data.Msgid.ToString());
 		switch (data.Msgid) {
 		case MessageID.CreateRoomRsp:
-			Debug.Log(data.createRoomRsp.Ret.ToString());
-			if(data.createRoomRsp.Ret == 0){
-				Common.CRoom_id 	= data.createRoomRsp.RoomId;
-				Common.CRoom_number	= data.createRoomRsp.RoomNumber;
+			Debug.Log(data.CreateRoomRsp.Ret.ToString());
+			if(data.CreateRoomRsp.Ret == 0){
+				Common.CRoom_id 	= data.CreateRoomRsp.RoomId;
+				Common.CRoom_number	= data.CreateRoomRsp.RoomNumber;
 				Loom.QueueOnMainThread(()=>{
 					JoinRoomServer(Common.CRoom_number);
 				}); 
@@ -183,37 +183,37 @@ public class LobbyController : MonoBehaviour {
 
 
 		case MessageID.JoinRoomRsp:
-			if (data.joinRoomRsp.Ret == 0) {
-				Common.CRoom_id 	= data.joinRoomRsp.Room.RoomId;
-				Common.CRoom_number = data.joinRoomRsp.Room.Number;
-				Common.CRoom_name	= data.joinRoomRsp.Room.Name;
-				Common.CMin_bet 	= data.joinRoomRsp.Room.MinBet;
-				Common.CMax_bet 	= data.joinRoomRsp.Room.MaxBet;
-				Common.CHands 		= data.joinRoomRsp.Room.Hands;
-				Common.CPlayed_hands= data.joinRoomRsp.Room.PlayedHands;
-				Common.CIs_share 	= data.joinRoomRsp.Room.IsShare;
-				Common.CCredit_points = data.joinRoomRsp.Room.CreditPoints;
-				Common.CState 		= data.joinRoomRsp.Room.State;
+			if (data.JoinRoomRsp.Ret == 0) {
+				Common.CRoom_id 	= data.JoinRoomRsp.Room.RoomId;
+				Common.CRoom_number = data.JoinRoomRsp.Room.Number;
+				Common.CRoom_name	= data.JoinRoomRsp.Room.Name;
+				Common.CMin_bet 	= data.JoinRoomRsp.Room.MinBet;
+				Common.CMax_bet 	= data.JoinRoomRsp.Room.MaxBet;
+				Common.CHands 		= data.JoinRoomRsp.Room.Hands;
+				Common.CPlayed_hands= data.JoinRoomRsp.Room.PlayedHands;
+				Common.CIs_share 	= data.JoinRoomRsp.Room.IsShare;
+				Common.CCredit_points = data.JoinRoomRsp.Room.CreditPoints;
+				Common.CState 		= data.JoinRoomRsp.Room.State;
 
 				if(Common.CState == Msg.GameState.Bet){
-					Common.ConfigBetTime = data.joinRoomRsp.Room.Countdown;
+					Common.ConfigBetTime = data.JoinRoomRsp.Room.Countdown;
 				}
 				else if(Common.CState == Msg.GameState.Combine){
-					Common.ConfigSortTime = data.joinRoomRsp.Room.Countdown;
+					Common.ConfigSortTime = data.JoinRoomRsp.Room.Countdown;
 				}
 				else if(Common.CState == Msg.GameState.Result){
-					Common.ConfigFinishTime = data.joinRoomRsp.Room.Countdown;
+					Common.ConfigFinishTime = data.JoinRoomRsp.Room.Countdown;
 				}
 				else if(Common.CState == Msg.GameState.Deal){
 					
 				}
 
-				for(int i = 0; i < data.joinRoomRsp.Room.Players.Count; i++){
+				for(int i = 0; i < data.JoinRoomRsp.Room.Players.Count; i++){
 					PlayerInfo p = new PlayerInfo ();
-					p.Uid = data.joinRoomRsp.Room.Players[i].Uid;
-					p.SeatID = data.joinRoomRsp.Room.Players[i].SeatId;
-					p.Name = data.joinRoomRsp.Room.Players[i].Name;
-					p.Bet = data.joinRoomRsp.Room.Players[i].Bet;
+					p.Uid = data.JoinRoomRsp.Room.Players[i].Uid;
+					p.SeatID = data.JoinRoomRsp.Room.Players[i].SeatId;
+					p.Name = data.JoinRoomRsp.Room.Players[i].Name;
+					p.Bet = data.JoinRoomRsp.Room.Players[i].Bet;
 					Debug.Log (p.Uid + "===" + p.SeatID + "===" +p.Name);
 					Common.CPlayers.Add (p);
 				}
@@ -232,17 +232,17 @@ public class LobbyController : MonoBehaviour {
 	public void CreatRoomServer(string roomname, uint min_bet, uint max_bet, uint hands, uint credit_points, bool is_share){
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CreateRoomReq;
-		msg.createRoomReq 				= new CreateRoomReq();
-		msg.createRoomReq.Name			= roomname;
-		msg.createRoomReq.MinBet		= min_bet;
-		msg.createRoomReq.MaxBet		= max_bet;
-		msg.createRoomReq.Hands			= hands;
-		msg.createRoomReq.CreditPoints	= credit_points;
-		msg.createRoomReq.IsShare		= is_share;
+		msg.CreateRoomReq 				= new CreateRoomReq();
+		msg.CreateRoomReq.Name			= roomname;
+		msg.CreateRoomReq.MinBet		= min_bet;
+		msg.CreateRoomReq.MaxBet		= max_bet;
+		msg.CreateRoomReq.Hands			= hands;
+		msg.CreateRoomReq.CreditPoints	= credit_points;
+		msg.CreateRoomReq.IsShare		= is_share;
 
 		using (var stream = new MemoryStream())
 		{
-			Serializer.Serialize<Protocol>(stream, msg);
+			msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
 		}
 	}
@@ -250,12 +250,12 @@ public class LobbyController : MonoBehaviour {
 	 public void JoinRoomServer(string room_number){
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.JoinRoomReq;
-		msg.joinRoomReq 				= new JoinRoomReq();
-		msg.joinRoomReq.RoomNumber		= room_number;
+		msg.JoinRoomReq 				= new JoinRoomReq();
+		msg.JoinRoomReq.RoomNumber		= room_number;
 
 		using (var stream = new MemoryStream())
 		{
-			Serializer.Serialize<Protocol>(stream, msg);
+			msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
 		}
 	}

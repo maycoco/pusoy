@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 
 using Facebook.Unity;
 
+using Google.Protobuf;
 using networkengine;
-using ProtoBuf;
 using Msg;
 using System.IO;
+using Google.Protobuf.Collections;
 
 public class PreInfo{
 	public List<int> Hand = new List<int>();
@@ -20,9 +21,9 @@ public class PreInfo{
 
 public class SeatResult{
 	public int SeatID;
-	public List<uint[]> Pres 	= new List<uint[]>();
+	public RepeatedField<RepeatedField<uint>> Pres 	= new RepeatedField<RepeatedField<uint>>();
 	public List<int> score		 	= new List<int> ();
-	public List<Msg.CardRank> Ranks = new List<CardRank> ();
+	public RepeatedField<global::Msg.CardRank> Ranks = new RepeatedField<global::Msg.CardRank>();
 	public bool autowin;
 	public int Bet;
 	public int Win;
@@ -329,14 +330,14 @@ public class GameController : MonoBehaviour {
 	}
 
 	//===================================Event=================================
-	public void DealCardsEvent(uint[] poks){
+	public void DealCardsEvent(RepeatedField<uint> poks){
 		Common.CPokers.Clear ();
-		for(int i = 0; i < poks.Length; i++){
+		for(int i = 0; i < poks.Count; i++){
 			Common.CPokers.Add ((int)poks[i]);
 		}
 	}
 
-	public void ResultEvent(List<Msg.SeatResult> ResultList){
+	public void ResultEvent(RepeatedField<global::Msg.SeatResult> ResultList){
 		SeatResults.Clear ();	
 
 		for(int i = 0; i < ResultList.Count; i++){
@@ -426,7 +427,7 @@ public class GameController : MonoBehaviour {
 		switch (data.Msgid) {
 
 		case MessageID.LeaveRoomRsp:
-			if(data.leaveRoomRsp.Ret == 0){
+			if(data.LeaveRoomRsp.Ret == 0){
 				Loom.QueueOnMainThread(()=>{
 					ExitGame();
 				}); 
@@ -434,7 +435,7 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.SitDownRsp:
-			if (data.sitDownRsp.Ret == 0) {
+			if (data.SitDownRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
 					SetSeatID (Common.Uid, m_TatgetSeatID);
 					UpdateOrderList ();
@@ -443,7 +444,7 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.StandUpRsp:
-			if (data.standUpRsp.Ret == 0) {
+			if (data.StandUpRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
 					SetSeatID (Common.Uid, -1);
 					UpdateOrderList ();
@@ -452,12 +453,12 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.StartGameRsp:
-			if (data.startGameRsp.Ret == 0) {
+			if (data.StartGameRsp.Ret == 0) {
 			}
 			break;
 
 		case MessageID.BetRsp:
-			if (data.betRsp.Ret == 0) {
+			if (data.BetRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
 					m_StateManage.m_StateBetting.DCanBetCall();
 				}); 
@@ -465,13 +466,13 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.CombineRsp:
-			if (data.combineRsp.Ret == 0) {
+			if (data.CombineRsp.Ret == 0) {
 			}
 			break;
 
 		case MessageID.GameStateNotify:
-			Debug.Log (data.gameStateNotify.State.ToString());
-			switch(data.gameStateNotify.State){
+			Debug.Log (data.GameStateNotify.State.ToString());
+			switch(data.GameStateNotify.State){
 	
 			case Msg.GameState.Ready:
 				Loom.QueueOnMainThread(()=>{
@@ -480,9 +481,9 @@ public class GameController : MonoBehaviour {
 				break;
 
 			case Msg.GameState.Bet:
-				Debug.Log (data.gameStateNotify.Countdown);
+				Debug.Log (data.GameStateNotify.Countdown);
 				Loom.QueueOnMainThread(()=>{
-					Common.ConfigBetTime = (int)data.gameStateNotify.Countdown / 1000;
+					Common.ConfigBetTime = (int)data.GameStateNotify.Countdown / 1000;
 					m_StateManage.ChangeState (STATE.STATE_BETTING);
 				}); 
 				break;
@@ -495,28 +496,29 @@ public class GameController : MonoBehaviour {
 
 			case Msg.GameState.Deal:
 				Loom.QueueOnMainThread(()=>{
-					DealCardsEvent(data.gameStateNotify.DealCards);
+					DealCardsEvent(data.GameStateNotify.DealCards);
 				}); 
 				break;
 
 			case Msg.GameState.Combine:
 				Loom.QueueOnMainThread(()=>{
-					Common.ConfigSortTime = (int)data.gameStateNotify.Countdown / 1000;
+					Common.ConfigSortTime = (int)data.GameStateNotify.Countdown / 1000;
 					m_StateManage.ChangeState (STATE.STATE_SORTING);
 				}); 
 				break;
 
 			case Msg.GameState.Show:
 				Loom.QueueOnMainThread(()=>{
-					Debug.Log(data.gameStateNotify.Results.Count);
-					ResultEvent(data.gameStateNotify.Results);
+					Debug.Log(data.GameStateNotify.Result.Count);
+                    
+					ResultEvent(data.GameStateNotify.Result);
 					m_StateManage.ChangeState (STATE.STATE_SHOWHAND);
 				}); 
 				break;
 
 			case Msg.GameState.Result:
 				Loom.QueueOnMainThread(()=>{
-					Common.ConfigFinishTime = (int)data.gameStateNotify.Countdown / 1000;
+					Common.ConfigFinishTime = (int)data.GameStateNotify.Countdown / 1000;
 					m_StateManage.ChangeState (STATE.STATE_FINISH);
 				}); 
 				break;
@@ -524,11 +526,11 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.SitDownNotify:
-			if(data.sitDownNotify.Type == Msg.SitDownType.Sit){
-				Debug.Log (data.sitDownNotify.Uid);
-				Debug.Log (data.sitDownNotify.SeatId);
+			if(data.SitDownNotify.Type == Msg.SitDownType.Sit){
+				Debug.Log (data.SitDownNotify.Uid);
+				Debug.Log (data.SitDownNotify.SeatId);
 				Loom.QueueOnMainThread(()=>{
-					SetSeatID (data.sitDownNotify.Uid, (int)data.sitDownNotify.SeatId);
+					SetSeatID (data.SitDownNotify.Uid, (int)data.SitDownNotify.SeatId);
 					UpdateOrderList ();
 				}); 
 			}
@@ -536,17 +538,17 @@ public class GameController : MonoBehaviour {
 
 		case MessageID.StandUpNotify:
 			Loom.QueueOnMainThread(()=>{
-				SetSeatID (data.standUpNotify.Uid, -1);
+				SetSeatID (data.StandUpNotify.Uid, -1);
 				UpdateOrderList ();
 			}); 
 			break;
 
 		case MessageID.JoinRoomNotify:
 			Loom.QueueOnMainThread(()=>{
-				if (GetSeatIDForPlayerID (data.joinRoomNotify.Uid) == 999) {
+				if (GetSeatIDForPlayerID (data.JoinRoomNotify.Uid) == 999) {
 					PlayerInfo p = new PlayerInfo ();
-					p.Uid 		= data.joinRoomNotify.Uid;
-					p.Name 		= data.joinRoomNotify.Name;
+					p.Uid 		= data.JoinRoomNotify.Uid;
+					p.Name 		= data.JoinRoomNotify.Name;
 					p.SeatID 	= -1;
 					Common.CPlayers.Add (p);
 				} 
@@ -555,13 +557,13 @@ public class GameController : MonoBehaviour {
 
 		case MessageID.LeaveRoomNotify:
 			Loom.QueueOnMainThread (() => {
-				LeaveRoomEvent (data.leaveRoomNotify.Uid);
+				LeaveRoomEvent (data.LeaveRoomNotify.Uid);
 			}); 
 			break;
 
 		case MessageID.BetNotify:
 			Loom.QueueOnMainThread (() => {
-				m_StateManage.m_StateBetting.UpdateChipsUI ((int)data.betNotify.Chips, (int)data.betNotify.SeatId);
+				m_StateManage.m_StateBetting.UpdateChipsUI ((int)data.BetNotify.Chips, (int)data.BetNotify.SeatId);
 			}); 
 			break;
 		}
@@ -570,11 +572,11 @@ public class GameController : MonoBehaviour {
 	public void LeaveRoomServer(){
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.LeaveRoomReq;
-		msg.leaveRoomReq 				= new LeaveRoomReq();
+		msg.LeaveRoomReq 				= new LeaveRoomReq();
 
 		using (var stream = new MemoryStream())
 		{
-			Serializer.Serialize<Protocol>(stream, msg);
+			msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
 		}
 	}
@@ -582,12 +584,12 @@ public class GameController : MonoBehaviour {
 	public void SitDownServer(int seatID){
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.SitDownReq;
-		msg.sitDownReq 					= new SitDownReq();
-		msg.sitDownReq.SeatId 			= (uint)seatID;
+		msg.SitDownReq 					= new SitDownReq();
+		msg.SitDownReq.SeatId 			= (uint)seatID;
 
 		using (var stream = new MemoryStream())
 		{
-			Serializer.Serialize<Protocol>(stream, msg);
+			msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
 		}
 	}
@@ -605,11 +607,11 @@ public class GameController : MonoBehaviour {
 
 			Protocol msg 					= new Protocol();
 			msg.Msgid 						= MessageID.StandUpReq;
-			msg.standUpReq 					= new StandUpReq();
+			msg.StandUpReq 					= new StandUpReq();
 
 			using (var stream = new MemoryStream())
 			{
-				Serializer.Serialize<Protocol>(stream, msg);
+				msg.WriteTo(stream);
 				Client.Instance.Send(stream.ToArray());
 			}
 		}
@@ -622,11 +624,11 @@ public class GameController : MonoBehaviour {
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.StartGameReq;
-		msg.startGameReq 				= new StartGameReq();
+		msg.StartGameReq 				= new StartGameReq();
 
 		using (var stream = new MemoryStream())
 		{
-			Serializer.Serialize<Protocol>(stream, msg);
+			msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
 		}
 	}
@@ -636,12 +638,12 @@ public class GameController : MonoBehaviour {
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.BetReq;
-		msg.betReq 						= new BetReq();
-		msg.betReq.Chips 				= chips;
+		msg.BetReq 						= new BetReq();
+		msg.BetReq.Chips 				= chips;
 
 		using (var stream = new MemoryStream())
 		{
-			Serializer.Serialize<Protocol>(stream, msg);
+			msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
 		}
 	}
@@ -651,13 +653,13 @@ public class GameController : MonoBehaviour {
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CombineReq;
-		msg.combineReq 					= new CombineReq();
-		msg.combineReq.Autowin 			= autowin;
-		msg.combineReq.CardGroups.AddRange (cards);
+		msg.CombineReq 					= new CombineReq();
+		msg.CombineReq.Autowin 			= autowin;
+		msg.CombineReq.CardGroups.AddRange (cards);
 	
 		using (var stream = new MemoryStream())
 		{
-			Serializer.Serialize<Protocol>(stream, msg);
+			msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
 		}
 	}

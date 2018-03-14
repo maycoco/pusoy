@@ -631,19 +631,19 @@ public class StateSorting : State {
 		Msg.CardGroup middle_pokers = new Msg.CardGroup();
 		Msg.CardGroup under_pokers = new Msg.CardGroup();
 
-		upper_pokers.Cards = new uint[UpperPokers.Count];
+		//upper_pokers.Cards = new uint[UpperPokers.Count];
 		for(int i = 0; i < UpperPokers.Count; i++){
-			upper_pokers.Cards[i] = (uint)UpperPokers[i];
+			upper_pokers.Cards.Add((uint)UpperPokers[i]);
 		}
 
-		middle_pokers.Cards = new uint[MiddlePokers.Count];
+		//middle_pokers.Cards = new uint[MiddlePokers.Count];
 		for(int i = 0; i < MiddlePokers.Count; i++){
-			middle_pokers.Cards[i] = (uint)MiddlePokers[i];
+			middle_pokers.Cards.Add((uint)MiddlePokers[i]);
 		}
 
-		under_pokers.Cards = new uint[UnderPokers.Count];
+		//under_pokers.Cards = new uint[UnderPokers.Count];
 		for(int i = 0; i < UnderPokers.Count; i++){
-			under_pokers.Cards[i] = (uint)UnderPokers[i];
+			under_pokers.Cards.Add((uint)UnderPokers[i]);
 		}
 
 		List<Msg.CardGroup> cards = new List<Msg.CardGroup> ();

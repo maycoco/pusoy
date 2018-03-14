@@ -4,11 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-using networkengine;
-using ProtoBuf;
-using Msg;
-using System.IO;
-
 public class CreateRoomControl : MonoBehaviour {
 	public LobbyController	LobbyControl;
 
