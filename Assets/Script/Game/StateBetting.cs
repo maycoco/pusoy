@@ -5,13 +5,15 @@ using UnityEngine.UI;
 using DG.Tweening;
 
 public class StateBetting : State {
-	private int 		BettingTime 	= 0;
-	private Transform 	Layer 			= null;
-	private	Vector3		CMPos			= new Vector3();	
-	private bool 		CanBet			= false;
-	private List<int> 	m_Chips			= new List<int>();
-	private List<Vector3> m_ChipsPos 	= new List<Vector3> ();
-	private List<Vector3> m_ChipsBeginPos 	= new List<Vector3> ();
+	private int 			BettingTime 		= 0;
+	private Transform 		Layer 				= null;
+	private	Vector3			CMPos				= new Vector3();	
+	private bool 			CanBet				= false;
+	private List<int> 		m_Chips				= new List<int>();
+	private List<Vector3> 	m_ChipsPos 			= new List<Vector3> ();
+	private List<Vector3> 	m_ChipsBeginPos 	= new List<Vector3> ();
+	private List<int> 		m_ChipsType			= new List<int>();
+	private int 			m_MaxChips    		= 0;
 
 	// Use this for initialization
 	void Start () {
@@ -29,17 +31,37 @@ public class StateBetting : State {
 	public override void Enter (){
 		Debug.Log ("==============================state betting===================================");
 		Layer.gameObject.SetActive (true);
+		UpdateDate ();
 
-		BettingTime = Common.ConfigBetTime;
 		BeginCountDown ();
-
-		if (m_GameController.m_SelfSeatID != -1 && m_GameController.m_SelfSeatID != 0) {
-			AdjustUI ();
-		}
 		m_Chips.Clear ();
 		m_ChipsPos.Clear ();
 		m_ChipsBeginPos.Clear ();
 		CreateChipPos ();
+
+		if (m_GameController.m_SelfSeatID != -1 && m_GameController.m_SelfSeatID != 0 && m_GameController.GetPlayerInfoForSeatID(m_GameController.m_SelfSeatID).Bet == 0) {
+			AdjustUI ();
+		}
+	}
+
+	public void UpdateDate(){
+		m_MaxChips = 0;
+		if(Common.CMin_bet > 0){
+			for(int i = 0; i < Common.ConfigChips.Length; i++){
+				m_ChipsType.Add ( ((int)Common.CMin_bet * Common.ConfigChips[i]) );
+			}
+			m_MaxChips = (int)Common.CMin_bet * Common.ConfigMaxChips;
+		}
+
+		BettingTime = Common.ConfigBetTime;
+	}
+
+	public void UpdatePlayersChips(){
+		foreach(PlayerInfo p in Common.CPlayers){
+			if(p.Bet > 0){
+				UpdateChipsUI (p.SeatID, (int)p.Bet);
+			}
+		}
 	}
 
 	public void CreateChipPos(){
@@ -51,17 +73,17 @@ public class StateBetting : State {
 
 	public override void AdjustUI (){
 		Layer.Find ("ChipsMask").localPosition =  CMPos;
-		for(int i = 0; i < m_GameController.m_ChipsType.Count; i++){
-			Layer.Find ("ChipsMask/Chip" + i + "/Value").GetComponent<Text> ().text = m_GameController.m_ChipsType [i].ToString ();
+		for(int i = 0; i < m_ChipsType.Count; i++){
+			Layer.Find ("ChipsMask/Chip" + i + "/Value").GetComponent<Text> ().text = m_ChipsType [i].ToString ();
 		}
 		ShowBeetingArea ();
 	}
 
 	public override void Exit (){
 		UpdateChipsUI (0,0);
-		UpdateChipsUI (0,1);
-		UpdateChipsUI (0,2);
-		UpdateChipsUI (0,3);
+		UpdateChipsUI (1,0);
+		UpdateChipsUI (2,0);
+		UpdateChipsUI (3,0);
 		ClearChipsButton ();
 		ClearCountDown ();
 		Layer.gameObject.SetActive (false);
@@ -116,9 +138,9 @@ public class StateBetting : State {
 
 		if(!CanBet){return;}
 
-		int BettingAmount = m_GameController.m_ChipsType[Index];
+		int BettingAmount = m_ChipsType[Index];
 
-		if(GetChipsAmoun() + BettingAmount > m_GameController.m_MaxChips){return;}
+		if(GetChipsAmoun() + BettingAmount > m_MaxChips){return;}
 
 		m_Chips.Add(BettingAmount);
 
@@ -144,33 +166,6 @@ public class StateBetting : State {
 	}
 
 	public void BettingCall(){
-//		foreach(int t in m_GameController.m_ChipsType){
-//			int amount = 0;
-//			int count = 0;
-//
-//			foreach(int c in m_Chips){
-//				if(c == t){
-//					count++;
-//				}
-//			}
-//
-//			if(count > 1){
-//				amount = t * count;
-//				for(int o = 1;  o <  m_GameController.m_ChipsType.Count; o++){
-//					if(m_GameController.m_ChipsType[o] == amount){
-//						for (int i = m_Chips.Count - 1; i >= 0; i--) {
-//							if(m_Chips[i] == t){
-//								m_Chips.Remove (m_Chips[i]);
-//							}
-//						}
-//
-//						m_Chips.Add (amount);
-//					}
-//				}
-//			}
-//		}
-
-		//UpdateSelfChips (m_GameController.m_SelfSeatID);
 		UpdateChipsAmount (m_GameController.m_SelfSeatID , GetChipsAmoun());
 	}
 
@@ -190,15 +185,15 @@ public void UpdateSelfChips(int SeatID){
 			EventTriggerListener.Get(Chip).onClick = onClickButtonHandler;
 
 			Image image = Chip.GetComponent<Image>();
-			image.sprite = Resources.Load("Image/Game/chip" + m_GameController.m_ChipsType.IndexOf(m_Chips[i]), typeof(Sprite)) as Sprite;
+			image.sprite = Resources.Load("Image/Game/chip" + m_ChipsType.IndexOf(m_Chips[i]), typeof(Sprite)) as Sprite;
 			Chip.transform.Find ("Value").GetComponent<Text> ().text = m_Chips[i].ToString ();
 
-			Color c = Layer.Find ("ChipsMask/Chip" + m_GameController.m_ChipsType.IndexOf(m_Chips[i]) + "/Value").GetComponent<Outline> ().effectColor;
+			Color c = Layer.Find ("ChipsMask/Chip" + m_ChipsType.IndexOf(m_Chips[i]) + "/Value").GetComponent<Outline> ().effectColor;
 			Chip.transform.Find ("Value").GetComponent<Outline> ().effectColor = c;
 		}
 	}
 
-	public void UpdateChipsUI(int Amount, int SeatID){
+	public void UpdateChipsUI(int SeatID, int Amount){
 		List<int> 	TableChips = CountingChips(Amount);
 		Transform Obj = Layer.Find ("SeatCom/Seat" + SeatID + "/ChipsAssets");
 
@@ -212,7 +207,7 @@ public void UpdateSelfChips(int SeatID){
 			Chip.transform.name = TableChips [i].ToString ();
 			Chip.transform.localPosition = RandomChipsPos();
 
-			int index  = m_GameController.m_ChipsType.IndexOf (TableChips[i]);
+			int index  = m_ChipsType.IndexOf (TableChips[i]);
 			Image image = Chip.GetComponent<Image>();
 			image.sprite = Resources.Load("Image/Game/chip" + index, typeof(Sprite)) as Sprite;
 			Chip.transform.Find ("Value").GetComponent<Text> ().text = TableChips [i].ToString ();
@@ -283,17 +278,17 @@ public void UpdateSelfChips(int SeatID){
 		List<int> temp = new List<int>();
 		int amount = CAmount;
 
-		for(int i = m_GameController.m_ChipsType.Count - 1; i >= 0; i--){
+		for(int i = m_ChipsType.Count - 1; i >= 0; i--){
 
-			int c = amount / m_GameController.m_ChipsType [i];
+			int c = amount / m_ChipsType [i];
 
 			if(c > 0){
 				for(int o = 0; o < c; o++){
-					temp.Add (m_GameController.m_ChipsType [i]);
+					temp.Add (m_ChipsType [i]);
 				}
 			}
 
-			amount -= c * m_GameController.m_ChipsType [i];
+			amount -= c * m_ChipsType [i];
 		}
 
 		temp.Sort ();

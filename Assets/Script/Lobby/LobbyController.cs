@@ -203,9 +203,6 @@ public class LobbyController : MonoBehaviour {
 				else if(Common.CState == Msg.GameState.Result){
 					Common.ConfigFinishTime = data.JoinRoomRsp.Room.Countdown;
 				}
-				else if(Common.CState == Msg.GameState.Deal){
-					
-				}
 
 				Common.CPlayers.Clear ();
 				for(int i = 0; i < data.JoinRoomRsp.Room.Players.Count; i++){
@@ -214,6 +211,7 @@ public class LobbyController : MonoBehaviour {
 					p.SeatID = data.JoinRoomRsp.Room.Players[i].SeatId;
 					p.Name = data.JoinRoomRsp.Room.Players[i].Name;
 					p.Bet = data.JoinRoomRsp.Room.Players[i].Bet;
+
 					Debug.Log (p.Uid + "===" + p.SeatID + "===" +p.Name);
 					Common.CPlayers.Add (p);
 				}

@@ -34,6 +34,23 @@ public class StateSeat : State{
 		m_GameController.UpdateOrderList();
 	}
 
+	public override void DisEnter(){
+		if(!Initialized){
+			AdjustUI ();
+			Initialized = true;
+		}
+
+		m_GameController.ShowTableInfo ();
+		m_GameController.ShowGameConsole ();
+		m_GameController.UpdateOrderList();
+
+		Layer.Find("LetPlay").gameObject.SetActive(false);
+		Layer.Find("AutoBanker").gameObject.SetActive (false);
+		Layer.Find ("TipsPick").gameObject.SetActive (false);
+		Layer.Find("TipsWaitStart").gameObject.SetActive (false);
+		Layer.Find("TipsNoPlayers").gameObject.SetActive (false);
+	}
+
 	public override void Exit(){
 		Layer.Find("LetPlay").gameObject.SetActive(false);
 		Layer.Find("AutoBanker").gameObject.SetActive (false);
