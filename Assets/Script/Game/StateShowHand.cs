@@ -40,12 +40,14 @@ public class StateShowHand : State {
 		m_GameController.ShowSeatLayer ();
 		AdjustUI ();
 
+
 		foreach (KeyValuePair<int, SeatResult> pair in m_GameController.SeatResults) {
 			Seats.Add (pair.Key);
 		}
 		Seats.Sort ();
+
 		SHowPokerBack ();
-		DisShowHand ();
+		ShowAll ();
 	}
 
 	public override void Exit(){
@@ -78,9 +80,9 @@ public class StateShowHand : State {
 		}
 	}
 
-	public void DisShowHand(){
-		for(int i = 0; i < 4; i++) {
-			ShowPokerFace (i);
+	public void ShowAll(){
+		for(int i = 0; i < Seats.Count; i++) {
+			ShowPokerFace (Seats[i]);
 		}
 	}
 

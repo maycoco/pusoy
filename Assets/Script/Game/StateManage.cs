@@ -57,12 +57,17 @@ public class StateManage : MonoBehaviour {
 		}
 	}
 
-	public void ChangeState(STATE state){
+	public void ChangeState(STATE state,  bool dis = false){
 		if(m_CurState != state){
 			m_StateList [(int)m_CurState].Exit ();
 			m_LastState = m_CurState;
 			m_CurState = state;
-			m_StateList [(int)m_CurState].Enter ();
+
+			if (!dis) {
+				m_StateList [(int)m_CurState].Enter ();
+			} else {
+				m_StateList [(int)m_CurState].DisEnter ();
+			}
 		}
 	}
 

@@ -44,6 +44,22 @@ public class StateBetting : State {
 		}
 	}
 
+	public override void DisEnter (){
+		Layer.gameObject.SetActive (true);
+		UpdateDate ();
+
+		BeginCountDown ();
+		m_Chips.Clear ();
+		m_ChipsPos.Clear ();
+		m_ChipsBeginPos.Clear ();
+		CreateChipPos ();
+
+		if (m_GameController.m_SelfSeatID != -1 && m_GameController.m_SelfSeatID != 0 && m_GameController.GetPlayerInfoForSeatID(m_GameController.m_SelfSeatID).Bet == 0) {
+			AdjustUI ();
+		}
+		UpdatePlayersChips ();
+	}
+
 	public void UpdateDate(){
 		m_MaxChips = 0;
 		if(Common.CMin_bet > 0){

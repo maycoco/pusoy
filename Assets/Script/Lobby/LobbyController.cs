@@ -203,8 +203,14 @@ public class LobbyController : MonoBehaviour {
 				else if(Common.CState == Msg.GameState.Result){
 					Common.ConfigFinishTime = data.JoinRoomRsp.Room.Countdown;
 				}
-
-				Common.CPlayers.Clear ();
+				else if(Common.CState == Msg.GameState.Deal){
+					Common.CPokers.Clear ();
+					for(int i = 0; i < data.JoinRoomRsp.Room.Cards.Count; i++){
+						Common.CPokers.Add ( (int)data.JoinRoomRsp.Room.Cards[i] );
+					}
+				}
+					
+				Common.CPokers.Clear ();
 				for(int i = 0; i < data.JoinRoomRsp.Room.Players.Count; i++){
 					PlayerInfo p = new PlayerInfo ();
 					p.Uid = data.JoinRoomRsp.Room.Players[i].Uid;

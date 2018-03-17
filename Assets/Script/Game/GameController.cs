@@ -79,14 +79,12 @@ public class GameController : MonoBehaviour {
 
 		if(Common.CState == Msg.GameState.Bet){
 			m_StateManage.SetState (STATE.STATE_SEAT);
-			m_StateManage.ChangeState (STATE.STATE_BETTING);
-			m_StateManage.m_StateBetting.UpdatePlayersChips ();
+			m_StateManage.ChangeState (STATE.STATE_BETTING, true);
 		}
 
 		if(Common.CState == Msg.GameState.ConfirmBet){
 			m_StateManage.SetState (STATE.STATE_SEAT);
-			m_StateManage.ChangeState (STATE.STATE_BETTING);
-			m_StateManage.m_StateBetting.UpdatePlayersChips ();
+			m_StateManage.ChangeState (STATE.STATE_BETTING, true);
 			m_StateManage.m_StateBetting.ShowConfimBet();
 		}
 
@@ -96,12 +94,12 @@ public class GameController : MonoBehaviour {
 
 		if(Common.CState == Msg.GameState.Combine){
 			m_StateManage.SetState (STATE.STATE_SEAT);
-			m_StateManage.ChangeState (STATE.STATE_SORTING);
+			m_StateManage.ChangeState (STATE.STATE_SORTING, true);
 		}
 
 		if(Common.CState == Msg.GameState.Show){
 			m_StateManage.SetState (STATE.STATE_SEAT);
-			m_StateManage.SetState (STATE.STATE_SHOWHAND);
+			m_StateManage.ChangeState (STATE.STATE_SHOWHAND, true);
 		}
 
 		if(Common.CState == Msg.GameState.Result){
@@ -119,64 +117,64 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void initializeRoomData(){
-		Common.FB_id = "123235234";
-		Common.FB_access_token = "sd23edasdasdasdasd12easd";
-		Common.FB_name = "Walter wang";
-		Common.Uid = 222;
-		Common.CMin_bet 	= 20;
-		Common.CMax_bet 	= 1000;
-		Common.CHands 		= 300;
-		Common.CPlayed_hands= 10;
-		Common.CIs_share 	= true;
-		Common.CCredit_points = 1000;
-		Common.CState 		= Msg.GameState.Deal;
-		if(Common.CState == Msg.GameState.Show){
-			Common.ConfigBetTime = 5;
-		}
-		else if(Common.CState == Msg.GameState.Combine){
-			Common.ConfigSortTime = 1000;
-		}
-		else if(Common.CState == Msg.GameState.Result){
-			Common.ConfigFinishTime = 10;
-		}
-
-		PlayerInfo p2 = new PlayerInfo ();
-		p2.Uid = 111;
-		p2.SeatID = 0;
-		p2.Name = "Bruce";
-		p2.Win = 123456789;
-		p2.Bet = 0;
-		Common.CPlayers.Add (p2);
-
-		PlayerInfo p1 = new PlayerInfo ();
-		p1.Uid = 222;
-		p1.SeatID = 1;
-		p1.Name = "Ali";
-		p1.Win = -123456789;
-		p1.Bet = 0;
-
-		Common.CPlayers.Add (p1);
-
-		PlayerInfo p3 = new PlayerInfo ();
-		p3.Uid = 777;
-		p3.SeatID = 2;
-		p3.Name = "HAHA";
-		p3.Win = -76456789;
-		p3.Bet = 200;
-		Common.CPlayers.Add (p3);
-
-
-
-		int[] s = new int[]{1,13,3,36,5,6,24,8,18,10,38,12,27};
-		Common.CPokers = new List<int> (s);
-		ResultEvent (null);
+//		Common.FB_id = "123235234";
+//		Common.FB_access_token = "sd23edasdasdasdasd12easd";
+//		Common.FB_name = "Walter wang";
+//		Common.Uid = 222;
+//		Common.CMin_bet 	= 20;
+//		Common.CMax_bet 	= 1000;
+//		Common.CHands 		= 300;
+//		Common.CPlayed_hands= 10;
+//		Common.CIs_share 	= true;
+//		Common.CCredit_points = 1000;
+//		Common.CState 		= Msg.GameState.Result;
+//		if(Common.CState == Msg.GameState.Show){
+//			Common.ConfigBetTime = 5;
+//		}
+//		else if(Common.CState == Msg.GameState.Combine){
+//			Common.ConfigSortTime = 45;
+//		}
+//		else if(Common.CState == Msg.GameState.Result){
+//			Common.ConfigFinishTime = 100;
+//		}
+//
+//		PlayerInfo p2 = new PlayerInfo ();
+//		p2.Uid = 111;
+//		p2.SeatID = 0;
+//		p2.Name = "Bruce";
+//		p2.Win = 123456789;
+//		p2.Bet = 0;
+//		Common.CPlayers.Add (p2);
+//
+//		PlayerInfo p1 = new PlayerInfo ();
+//		p1.Uid = 222;
+//		p1.SeatID = 1;
+//		p1.Name = "Ali";
+//		p1.Win = -123456789;
+//		p1.Bet = 0;
+//
+//		Common.CPlayers.Add (p1);
+//
+//		PlayerInfo p3 = new PlayerInfo ();
+//		p3.Uid = 777;
+//		p3.SeatID = 2;
+//		p3.Name = "HAHA";
+//		p3.Win = -76456789;
+//		p3.Bet = 200;
+//		Common.CPlayers.Add (p3);
+//
+//
+//
+//		int[] s = new int[]{1,13,3,36,5,6,24,8,18,10,38,12,27};
+//		Common.CPokers = new List<int> (s);
+//		ResultEvent (null);
 
 		// Already Sit Down
 
 
-//		foreach(PlayerInfo p in Common.CPlayers){
-//			p.Bet = 0;
-//		}
+		foreach(PlayerInfo p in Common.CPlayers){
+			p.Bet = 0;
+		}
 
 		if (GetSeatIDForPlayerID (Common.Uid) == 999) {
 			PlayerInfo p = new PlayerInfo ();
@@ -343,56 +341,56 @@ public class GameController : MonoBehaviour {
 	 public void ResultEvent(RepeatedField<global::Msg.SeatResult> ResultList){
 		SeatResults.Clear ();	
 
-//		for(int i = 0; i < ResultList.Count; i++){
-//			
-//			SeatResult info 	= new SeatResult ();
-//			info.SeatID 		= (int)ResultList [i].SeatId;
+		for(int i = 0; i < ResultList.Count; i++){
+			
+			SeatResult info 	= new SeatResult ();
+			info.SeatID 		= (int)ResultList [i].SeatId;
+
+			if((int)ResultList [i].SeatId != 0){
+				info.score 			= new List<int> (ResultList [i].Scores);
+			}
+
+			info.autowin 		= ResultList [i].Autowin;
+			info.foul			= ResultList [i].Foul;
+			//info.Bet 			= (int)ResultList [i].Bet;
+			info.Win 			= ResultList [i].Win;
+			info.Ranks 			= ResultList [i].Ranks;
+
+			for(int o = 0; o < ResultList [i].CardGroups.Count; o++){
+				Msg.CardGroup cg = ResultList [i].CardGroups[o];
+				info.Pres.Add (cg.Cards);
+			}
+			SeatResults.Add (info.SeatID, info);
+		}
+
+
+//		uint[] arr = { 1, 2, 3};
+//		RepeatedField<uint> arrr = new RepeatedField<uint>{ arr };
 //
-//			if((int)ResultList [i].SeatId != 0){
-//				info.score 			= new List<int> (ResultList [i].Scores);
-//			}
+//		uint[] arr1 = { 4, 5, 6, 7, 8 };
+//		RepeatedField<uint> arrr1 = new RepeatedField<uint>{ arr1 };
 //
-//			info.autowin 		= ResultList [i].Autowin;
-//			info.foul			= ResultList [i].Foul;
-//			//info.Bet 			= (int)ResultList [i].Bet;
-//			info.Win 			= ResultList [i].Win;
-//			info.Ranks 			= ResultList [i].Ranks;
+//		uint[] arr2 = { 9, 10, 11, 12, 13 };
+//		RepeatedField<uint> arrr2 = new RepeatedField<uint>{ arr2 };
 //
-//			for(int o = 0; o < ResultList [i].CardGroups.Count; o++){
-//				Msg.CardGroup cg = ResultList [i].CardGroups[o];
-//				info.Pres.Add (cg.Cards);
-//			}
-//			SeatResults.Add (info.SeatID, info);
-//		}
-
-
-		uint[] arr = { 1, 2, 3};
-		RepeatedField<uint> arrr = new RepeatedField<uint>{ arr };
-
-		uint[] arr1 = { 4, 5, 6, 7, 8 };
-		RepeatedField<uint> arrr1 = new RepeatedField<uint>{ arr1 };
-
-		uint[] arr2 = { 9, 10, 11, 12, 13 };
-		RepeatedField<uint> arrr2 = new RepeatedField<uint>{ arr2 };
-
-		SeatResult hinfo = new SeatResult ();
-		hinfo.Bet = 2000;
-		hinfo.Win = -150;
-		hinfo.SeatID = 0;
-		hinfo.autowin = true;
-		hinfo.foul = false;
-		hinfo.Pres.Add (arrr);
-		hinfo.Pres.Add (arrr1);
-		hinfo.Pres.Add (arrr2);
-
-		hinfo.score.Add (1);
-		hinfo.score.Add (-1);
-		hinfo.score.Add (-1);
-
-
-		SeatResults.Add (0, hinfo);
-		SeatResults.Add (1, hinfo);
-		SeatResults.Add (2, hinfo);
+//		SeatResult hinfo = new SeatResult ();
+//		hinfo.Bet = 2000;
+//		hinfo.Win = -150;
+//		hinfo.SeatID = 0;
+//		hinfo.autowin = true;
+//		hinfo.foul = false;
+//		hinfo.Pres.Add (arrr);
+//		hinfo.Pres.Add (arrr1);
+//		hinfo.Pres.Add (arrr2);
+//
+//		hinfo.score.Add (1);
+//		hinfo.score.Add (-1);
+//		hinfo.score.Add (-1);
+//
+//
+//		SeatResults.Add (0, hinfo);
+//		SeatResults.Add (1, hinfo);
+//		SeatResults.Add (2, hinfo);
 	}
 
 	public void LeaveRoomEvent(uint uid){

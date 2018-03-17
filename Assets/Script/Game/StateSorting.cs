@@ -94,6 +94,33 @@ public class StateSorting : State {
 		GetLuckyConfim = false;
 
 		AdjustUI ();
+		AdjustPokers ();
+		CountDownTime = Common.ConfigSortTime;
+		BeginCountDown ();
+	}
+
+	public override void DisEnter(){
+		RoateAniIndex = 0;
+		RoateCAniIndex = 0;
+
+		m_GameController.HideSeatLayer ();
+		m_GameController.HideTableInfo ();
+		m_GameController.HideGameConsole ();
+		Layer.gameObject.SetActive (true);
+
+		RankResult.Clear ();
+		Pokers.Clear ();
+		HandPokers = new List<int> (Common.CPokers);
+		HandPokers.Sort ();
+
+		UpperPokers.Clear ();
+		MiddlePokers.Clear ();
+		UnderPokers.Clear ();
+		SelectedPokers.Clear ();
+		GetLuckyConfim = false;
+
+		AdjustUI ();
+		AdjustPokers (true);
 		CountDownTime = Common.ConfigSortTime;
 		BeginCountDown ();
 	}
@@ -127,7 +154,6 @@ public class StateSorting : State {
 		Layer2.Find ("Confim").gameObject.SetActive (false);
 
 		UpdateControlButton ();
-		AdjustPokers ();
 		UpdatePokerTips ();
 	}
 
@@ -196,7 +222,7 @@ public class StateSorting : State {
 		CountDownTime--;
 	}
 
-	 public void AdjustPokers(){
+	public void AdjustPokers(bool ini = false){
 		float iv = 0.2f;
 		for (int i = 0; i <HandPokers.Count; i++) {
 			Poker Poker = Instantiate(m_GameController.m_PrefabPoker) as Poker;
@@ -209,12 +235,20 @@ public class StateSorting : State {
 			Poker.transform.tag = "SortHand";
 			Poker.transform.SetParent(GameObject.Find("Pokers").transform);
 
-			Poker.ShowBack();
+			if (!ini) {
+				Poker.ShowBack ();
+			} else {
+				Poker.ShowFace ();
+			}
+
 			Poker.transform.localPosition = m_GameController.DefaultHandPisitions [i];
 			Poker.SetBelongPos (m_GameController.DefaultHandPisitions [i]);
 			Poker.transform.localScale = new Vector3 (1, 1, 1);
 			Pokers.Add (Poker.PokerID, Poker);
-			Invoke ("RoateAni", iv*(i+1));
+
+			if(!ini){
+				Invoke ("RoateAni", iv*(i+1));
+			}
 		}
 	}
 		
