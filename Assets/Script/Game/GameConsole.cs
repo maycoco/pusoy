@@ -9,6 +9,7 @@ public class GameConsole : MonoBehaviour
 	private bool			MenuOpen 	= false;
 	public 	GameController 	m_GameController;
 	public  GameObject 		m_ConsoleMenu;
+	public  GameObject		m_ConsoleMenu_Mask;
 
 	void Start (){
 	}
@@ -21,19 +22,30 @@ public class GameConsole : MonoBehaviour
 	}
 
 	void AdjustUI(){
+		EventTriggerListener.Get(m_ConsoleMenu_Mask).onClick = onClickButtonHandler;
 	}
 
 	public void MenuBTConsole(){
 		if (!MenuOpen) {
 			m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
 			m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_open");
+			m_ConsoleMenu_Mask.SetActive (true);
 			MenuOpen = true;
 		} else {
 			m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
 			m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_close");
+			m_ConsoleMenu_Mask.SetActive (false);
 			MenuOpen = false;
 		}
+	}
 
+	public void onClickButtonHandler(GameObject obj){
+		if(MenuOpen){
+			m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
+			m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_close");
+			m_ConsoleMenu_Mask.SetActive (false);
+			MenuOpen = false;
+		}
 	}
 
 	public void StandUp(){

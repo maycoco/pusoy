@@ -2856,7 +2856,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: hands
+  m_Text: Hands
 --- !u!222 &280143215
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7607,7 +7607,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enjoy the time of bet with friends
+  m_Text: Fun time Betting time
 --- !u!222 &697876011
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10429,7 +10429,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: .
+  m_Text: 
 --- !u!222 &923885270
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18921,7 +18921,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Minimum bet
+  m_Text: Maxmum bet
 --- !u!222 &1664159595
 CanvasRenderer:
   m_ObjectHideFlags: 0

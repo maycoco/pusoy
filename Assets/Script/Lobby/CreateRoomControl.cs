@@ -30,7 +30,6 @@ public class CreateRoomControl : MonoBehaviour {
 	public void Enter(){
 		CurMinBet 		= 0;
 		CurHands 		= 0;
-		CurCreditPoints = 0;
 
 		MinBetArray = new List<uint> (Common.ConfigMinBet);
 		HandsArray 	= new List<uint> (Common.ConfigHands);
@@ -44,7 +43,7 @@ public class CreateRoomControl : MonoBehaviour {
 	}
 
 	void AdjustUI(){
-		transform.Find ("InputName").GetComponent<InputField> ().text = "";
+		transform.Find ("InputName").GetComponent<InputField> ().text = Common.FB_name + "'s room";
 		transform.Find ("BetSize/Slider").GetComponent<Slider> ().value = CurMinBet;
 		transform.Find ("MaxHands/Slider").GetComponent<Slider> ().value = CurHands;
 
@@ -89,13 +88,13 @@ public class CreateRoomControl : MonoBehaviour {
 		transform.Find ("BetSize/MaxBet").GetComponent<Text> ().text = (MinBetArray [CurMinBet] * 20).ToString ();
 
 		CreditPointsArray.Clear ();
-		CurCreditPoints = 0;
 
 		uint maxbet = MinBetArray [CurMinBet] * 20;
 		for(int i = 0; i < Common.ConfigCredit.Length; i++){
 			CreditPointsArray.Add (maxbet * Common.ConfigCredit[i]);
 		}
-			
+
+		CurCreditPoints = CreditPointsArray.Count - 1;
 		UpdateCreditPoints ();
 	}
 
