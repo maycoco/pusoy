@@ -204,6 +204,7 @@ public class LobbyController : MonoBehaviour {
 					}
 				}
 					
+				Common.CPlayers.Clear ();
 				Common.CPokers.Clear ();
 				for(int i = 0; i < data.JoinRoomRsp.Room.Players.Count; i++){
 					PlayerInfo p = new PlayerInfo ();
