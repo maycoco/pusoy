@@ -432,6 +432,7 @@ public class GameController : MonoBehaviour {
 			return; 
 		}
 
+		Debug.Log (data.ToString ());
 		switch (data.Msgid) {
 
 		case MessageID.LeaveRoomRsp:
@@ -445,6 +446,9 @@ public class GameController : MonoBehaviour {
 		case MessageID.SitDownRsp:
 			if (data.SitDownRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
+					if(m_TatgetSeatID == 0){
+						Common.CAutoBanker = data.SitDownRsp.Autobanker;
+					}
 					SetSeatID (Common.Uid, m_TatgetSeatID);
 					UpdateOrderList ();
 				}); 
@@ -604,17 +608,23 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	public void AutoBankServer(){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.AutoBankerReq;
+		msg.AutoBankerReq 				= new AutoBankerReq();
+		msg.AutoBankerReq.AutoBanker	= Common.CAutoBanker;
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
 	public void StandUpServer(){
 		if(m_SelfSeatID == -1){return;}
 		if(m_StateManage.GetCulState() == STATE.STATE_SEAT || m_StateManage.GetCulState() == STATE.STATE_BETTING){
 			
-			//for demo
-//			SetSeatID (Common.Uid, -1);
-//			UpdateOrderList ();
-//			return;
-
-
-
 			Protocol msg 					= new Protocol();
 			msg.Msgid 						= MessageID.StandUpReq;
 			msg.StandUpReq 					= new StandUpReq();
@@ -628,10 +638,6 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void StartGameServer(){
-		//for demo
-		//m_StateManage.ChangeState(STATE.STATE_BETTING);
-		//return;
-
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.StartGameReq;
 		msg.StartGameReq 				= new StartGameReq();

@@ -219,7 +219,7 @@ public class StateSorting : State {
 
 			if(CountDownTime == 5){
 				Effect_DX = Instantiate(m_GameController.m_PrefabEffectED) as GameObject;
-				Effect_DX.transform.SetParent (Layer);
+				Effect_DX.transform.SetParent (Layer.Find("EffectDX").transform);
 				Effect_DX.transform.localScale = new Vector3 (1, 1, 1);
 				Effect_DX.transform.localPosition = new Vector3 (0, 0, 0);
 			}

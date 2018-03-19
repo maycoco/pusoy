@@ -105,8 +105,7 @@ public class StateSeat : State{
 				Layer.Find ("LetPlay").gameObject.SetActive (false);
 				Layer.Find ("TipsNoPlayers").gameObject.SetActive (true);
 			}
-
-			if (Common.CAutoBanker) {ShowAutoBanker ();} else {HideAutoBanker ();}
+			ShowAutoBanker (Common.CAutoBanker);
 
 		} else {
 			Layer.Find ("LetPlay").gameObject.SetActive (false);
@@ -155,14 +154,16 @@ public class StateSeat : State{
 		}
 	}
 
-	public void ShowAutoBanker(){
-		Common.CAutoBanker = true;
+	public void ShowAutoBanker(bool isauto){
 		Layer.Find ("AutoBanker/Auto").gameObject.SetActive (true);
-		Layer.Find ("AutoBanker/Autot").gameObject.SetActive (true);
-	}
+		if (isauto) {
+			Layer.Find ("AutoBanker/Autot").gameObject.SetActive (true);
+		} else {
+			Layer.Find ("AutoBanker/Autot").gameObject.SetActive (false);
+		}
 
-	public void HideAutoBanker(){
-		Common.CAutoBanker = false;
-		Layer.Find ("AutoBanker/Autot").gameObject.SetActive (false);
+		Common.CAutoBanker	= isauto;
+		Debug.Log (Common.CAutoBanker);
+		m_GameController.AutoBankServer ();
 	}
 }

@@ -87,6 +87,7 @@ public class StateFinish : State {
 
 	public void ShowResultInfo(){
 		Layer.Find ("HandCount").GetComponent<Text>().text = "# " + (Common.CPlayed_hands + 1) + " / " + Common.CHands + " Hand";
+		Common.CPlayed_hands++;
 
 		List<int> Seats = new List<int> ();
 		foreach (KeyValuePair<int, SeatResult> pair in m_GameController.SeatResults) {
@@ -96,7 +97,6 @@ public class StateFinish : State {
 
 		int index = 0;
 		foreach (int seatid in Seats){
-			Common.CPlayed_hands++;
 			SeatResult hInfo = m_GameController.SeatResults[seatid];
 
 			Transform PreInfoObj = Layer.Find ("PreInfoCom/PreInfo" + index).transform;
