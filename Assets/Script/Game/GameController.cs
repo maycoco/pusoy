@@ -93,6 +93,7 @@ public class GameController : MonoBehaviour {
 			m_StateManage.SetState (STATE.STATE_SEAT, true);
 		}
 
+		Debug.Log (Common.CState);
 		if(Common.CState == Msg.GameState.Combine){
 			m_StateManage.SetState (STATE.STATE_SEAT);
 			m_StateManage.ChangeState (STATE.STATE_SORTING);
@@ -168,7 +169,7 @@ public class GameController : MonoBehaviour {
 //
 //		int[] s = new int[]{1,13,3,36,5,6,24,8,18,10,38,12,27};
 //		Common.CPokers = new List<int> (s);
-		//ResultEvent (null);
+//		ResultEvent (null);
 
 		//Bet type
 		m_StateManage.m_StateBetting.UpdateDateBetType ();
