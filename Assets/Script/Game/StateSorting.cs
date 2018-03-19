@@ -804,15 +804,21 @@ public class StateSorting : State {
 		if (jo) {pos = postype1;} else {pos = postype0;}
 		posindex = (pos.Count - RankResult.Count) / 2;
 
-		foreach (KeyValuePair<Msg.CardRank, List<uint[]>> pair in RankResult){
+		List<Msg.CardRank> ranks = new List<Msg.CardRank> ();
+		foreach (KeyValuePair<Msg.CardRank, List<uint[]>> pair in RankResult) {
+			ranks.Add (pair.Key);
+		}
+		ranks.Sort ();
+
+		for(int i = 0; i < ranks.Count; i++){
 			GameObject Rank = Instantiate(m_GameController.m_PrefabRank) as GameObject;
 			Rank.GetComponent<Image>().sprite = Resources.Load ("Image/Game/poker_type" + index, typeof(Sprite)) as Sprite;
-			Rank.transform.Find("Text").GetComponent<Text> ().text = RanksText[(int)pair.Key];
+			Rank.transform.Find("Text").GetComponent<Text> ().text = RanksText[(int)ranks[i]];
 			Rank.transform.SetParent (Layer2.Find("Types/PokerType"));
 			Rank.transform.localScale = new Vector3 (0,0,0);
 			Rank.transform.DOScale (new Vector3(1,1,1), 0.09f);
 			Rank.transform.localPosition = pos [posindex];
-			Rank.name = ((int)(pair.Key)).ToString();
+			Rank.name = ((int)(ranks[i])).ToString();
 			EventTriggerListener.Get(Rank).onClick = onClickRanksHandler;
 			index++;
 			posindex++;
