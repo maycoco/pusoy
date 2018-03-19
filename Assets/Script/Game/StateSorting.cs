@@ -263,7 +263,7 @@ public class StateSorting : State {
 	}
 		
 	public void RoateAni(){
-		Pokers[HandPokers[RoateAniIndex]].transform.DORotate (new Vector3 (0, 180, 0), 0.5f).OnComplete(RoateAniCallBack);
+		Pokers[HandPokers[RoateAniIndex]].transform.DORotate (new Vector3 (0, 180, 0), 0.1f).OnComplete(RoateAniCallBack);
 		RoateAniIndex++;
 	}
 

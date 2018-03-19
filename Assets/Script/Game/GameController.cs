@@ -552,6 +552,8 @@ public class GameController : MonoBehaviour {
 
 		case MessageID.JoinRoomNotify:
 			Loom.QueueOnMainThread(()=>{
+				Debug.Log(data.JoinRoomNotify.Uid);
+				Debug.Log(GetSeatIDForPlayerID (data.JoinRoomNotify.Uid));
 				if (GetSeatIDForPlayerID (data.JoinRoomNotify.Uid) == 999) {
 					PlayerInfo p = new PlayerInfo ();
 					p.Uid 		= data.JoinRoomNotify.Uid;

@@ -29,6 +29,7 @@ public class StateSeat : State{
 			Initialized = true;
 		}
 
+		m_GameController.UpdateRooimInfo ();
 		m_GameController.ShowTableInfo ();
 		m_GameController.ShowGameConsole ();
 		m_GameController.UpdateOrderList();
@@ -40,6 +41,7 @@ public class StateSeat : State{
 			Initialized = true;
 		}
 
+		m_GameController.UpdateRooimInfo ();
 		m_GameController.ShowTableInfo ();
 		m_GameController.ShowGameConsole ();
 		m_GameController.UpdateOrderList();
@@ -60,8 +62,6 @@ public class StateSeat : State{
 	}
 		
 	public override void AdjustUI(){
-		m_GameController.UpdateRooimInfo ();
-
 		for(int i = 0; i < Layer.Find("SeatCom").childCount; i++){
 			UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
 			avatar.transform.SetParent (Layer.Find ("SeatCom/Seat" + i + "/Avatar"));
