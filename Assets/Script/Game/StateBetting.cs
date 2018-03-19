@@ -31,8 +31,8 @@ public class StateBetting : State {
 	public override void Enter (){
 		Debug.Log ("==============================state betting===================================");
 		Layer.gameObject.SetActive (true);
-		UpdateDate ();
 
+		BettingTime = Common.ConfigBetTime;
 		BeginCountDown ();
 		m_Chips.Clear ();
 		m_ChipsPos.Clear ();
@@ -46,8 +46,8 @@ public class StateBetting : State {
 
 	public override void DisEnter (){
 		Layer.gameObject.SetActive (true);
-		UpdateDate ();
 
+		BettingTime = Common.ConfigBetTime;
 		BeginCountDown ();
 		m_Chips.Clear ();
 		m_ChipsPos.Clear ();
@@ -60,16 +60,13 @@ public class StateBetting : State {
 		UpdatePlayersChips ();
 	}
 
-	public void UpdateDate(){
-		m_MaxChips = 0;
+	public void UpdateDateBetType(){
 		if(Common.CMin_bet > 0){
 			for(int i = 0; i < Common.ConfigChips.Length; i++){
 				m_ChipsType.Add ( ((int)Common.CMin_bet * Common.ConfigChips[i]) );
 			}
 			m_MaxChips = (int)Common.CMin_bet * Common.ConfigMaxChips;
 		}
-
-		BettingTime = Common.ConfigBetTime;
 	}
 
 	public void UpdatePlayersChips(){

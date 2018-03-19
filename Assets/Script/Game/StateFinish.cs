@@ -86,7 +86,7 @@ public class StateFinish : State {
 	}
 
 	public void ShowResultInfo(){
-		Layer.Find ("HandCount").GetComponent<Text>().text = "# " + Common.CPlayed_hands + " / " + Common.CHands + " Hand";
+		Layer.Find ("HandCount").GetComponent<Text>().text = "# " + (Common.CPlayed_hands + 1) + " / " + Common.CHands + " Hand";
 
 		List<int> Seats = new List<int> ();
 		foreach (KeyValuePair<int, SeatResult> pair in m_GameController.SeatResults) {

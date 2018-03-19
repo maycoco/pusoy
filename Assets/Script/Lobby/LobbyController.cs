@@ -97,12 +97,6 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void UpdateRoomsInfo(){
-		if(RoomInfos.Count <= 0){
-			GameObject.Find ("Canvas").transform.Find ("RoomList/Notable").gameObject.SetActive (true);
-			return;
-		}
-
-		GameObject.Find ("Canvas").transform.Find ("RoomList/Notable").gameObject.SetActive (false);
 		Transform Content = GameObject.Find ("Canvas").transform.Find("RoomList/Viewport/Content");
 
 		float width = GameObject.Find ("Canvas").transform.Find ("RoomList").GetComponent<RectTransform> ().sizeDelta.x;;
@@ -195,13 +189,13 @@ public class LobbyController : MonoBehaviour {
 				Common.CState 		= data.JoinRoomRsp.Room.State;
 
 				if(Common.CState == Msg.GameState.Bet){
-					Common.ConfigBetTime = data.JoinRoomRsp.Room.Countdown;
+					Common.ConfigBetTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
 				}
 				else if(Common.CState == Msg.GameState.Combine){
-					Common.ConfigSortTime = data.JoinRoomRsp.Room.Countdown;
+					Common.ConfigSortTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
 				}
 				else if(Common.CState == Msg.GameState.Result){
-					Common.ConfigFinishTime = data.JoinRoomRsp.Room.Countdown;
+					Common.ConfigFinishTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
 				}
 				else if(Common.CState == Msg.GameState.Deal){
 					Common.CPokers.Clear ();

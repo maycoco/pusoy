@@ -22,6 +22,7 @@ public class StateSorting : State {
 	private int RoateCAniIndex 				= 0;
 
 	private	GameObject Effect_BaoPai		= null;
+	private	GameObject Effect_DX			= null;
 
 	private Dictionary<int, Poker> Pokers	= new Dictionary<int, Poker>();
 	private bool AlreadyComfim				= true;
@@ -44,17 +45,17 @@ public class StateSorting : State {
 		Layer2 = Layer.Find ("SortingLayer02");
 
 	
+		postype0.Add (new Vector3( -252, -328, 0));
+		postype0.Add (new Vector3( -160, -272, 0));
 		postype0.Add ( new Vector3(-55, -244, 0));
 		postype0.Add ( new Vector3(55, -244, 0));
-		postype0.Add (new Vector3( -160, -272, 0));
 		postype0.Add (new Vector3( 160, -272, 0));
-		postype0.Add (new Vector3( -252, -328, 0));
 		postype0.Add (new Vector3( 252, -328, 0));
 
-		postype1.Add ( new Vector3(-0, -244, 0));
-		postype1.Add ( new Vector3(-128, -270, 0));
-		postype1.Add (new Vector3( 128, -270, 0));
 		postype1.Add (new Vector3 (-252, -328, 0));
+		postype1.Add ( new Vector3(-128, -270, 0));
+		postype1.Add ( new Vector3(-0, -244, 0));
+		postype1.Add (new Vector3( 128, -270, 0));
 		postype1.Add (new Vector3 (252, -328, 0));
 
 		RanksText.Add ("high card");
@@ -123,6 +124,7 @@ public class StateSorting : State {
 		AdjustPokers (true);
 		CountDownTime = Common.ConfigSortTime;
 		BeginCountDown ();
+		ShowControlUI ();
 	}
 
 	public override void Exit(){
@@ -139,10 +141,8 @@ public class StateSorting : State {
 	}
 
 	 public override void AdjustUI(){
-		if (Effect_BaoPai != null) {
-			Destroy (Effect_BaoPai);
-			Effect_BaoPai = null;
-		} 
+		if (Effect_BaoPai != null) {Destroy (Effect_BaoPai);Effect_BaoPai = null;} 
+		if (Effect_DX != null) {Destroy (Effect_DX);Effect_DX = null;} 
 
 		GameObject[] SortHandObjs = GameObject.FindGameObjectsWithTag("SortHand");
 		for(int i = 0; i < SortHandObjs.Length; i++){
@@ -151,7 +151,7 @@ public class StateSorting : State {
 
 		Layer.gameObject.SetActive (true);
 		Layer1.Find ("CountDown").gameObject.SetActive (false);
-		Layer2.Find ("Confim").gameObject.SetActive (false);
+		HideConfim ();
 
 		UpdateControlButton ();
 		UpdatePokerTips ();
@@ -179,20 +179,23 @@ public class StateSorting : State {
 	public void HideConfim(){
 		Layer2.Find ("Confim").gameObject.SetActive (false);
 	}
+
+	public void ShowConfim(){
+		Layer2.Find ("Confim").gameObject.SetActive (true);
+	}
 		
 	public void Battle(){
-		Layer2.Find ("Confim").gameObject.SetActive (true);
+		HideConfim ();
 		Layer1.Find ("GetLucky").gameObject.SetActive (false);
 		Layer1.Find ("Battle").gameObject.SetActive (false);
 		Layer2.Find ("Types").gameObject.SetActive (true);
 		UpdateRanks ();
-		Layer2.GetComponent<Animation> ().Play ("SortingLayer02");
 		AlreadyComfim = false;
 		EnPokers ();
 	}
 
 	public void GetLucky(){
-		Layer2.Find ("Confim").gameObject.SetActive (true);
+		ShowConfim ();
 		Layer1.Find ("GetLucky").gameObject.SetActive (false);
 		Layer1.Find ("Battle").gameObject.SetActive (false);
 		Layer2.Find ("Types").gameObject.SetActive (false);
@@ -213,6 +216,13 @@ public class StateSorting : State {
 			float temp = 1.0f /Common.ConfigSortTime;
 			Layer1.Find ("CountDown/Clock/Text").GetComponent<Text> ().text = CountDownTime.ToString() + "s";
 			Layer1.Find ("CountDown/Clock").GetComponent<Image> ().fillAmount = CountDownTime * temp;
+
+			if(CountDownTime == 5){
+				Effect_DX = Instantiate(m_GameController.m_PrefabEffectED) as GameObject;
+				Effect_DX.transform.SetParent (Layer);
+				Effect_DX.transform.localScale = new Vector3 (1, 1, 1);
+				Effect_DX.transform.localPosition = new Vector3 (0, 0, 0);
+			}
 		} 
 		else {
 			CancelInvoke ();
@@ -366,7 +376,6 @@ public class StateSorting : State {
 		}
 
 		UpdateControlButton ();
-		UpdateRanks ();
 	}
 
 	 public void MovePokers(string belong, string tag, int[] pokers){
@@ -442,6 +451,7 @@ public class StateSorting : State {
 			}
 			break;
 		}
+			
 		UpdateRanks ();
 	}
 
@@ -492,6 +502,8 @@ public class StateSorting : State {
 			HandPokers.Sort ();
 			break;
 		}
+
+		//UpdateRanks ();
 	}
 
 	 public void DeletePokerFromTag(string tag, int[] pokers){
@@ -635,7 +647,7 @@ public class StateSorting : State {
 		}
 
 		UpdateControlButton ();
-		UpdateRanks ();
+		//UpdateRanks ();
 		UpdatePokerTips ();
 	}
 
@@ -652,7 +664,7 @@ public class StateSorting : State {
 		}
 
 		UpdateControlButton ();
-		UpdateRanks ();
+		//UpdateRanks ();
 		UpdatePokerTips ();
 	}
 
@@ -763,7 +775,12 @@ public class StateSorting : State {
 	}
 
 	public void UpdateRanks(){
-		
+		if (HandPokers.Count <= 0) {
+			ShowConfim ();
+		} else {
+			HideConfim ();
+		}
+			
 		for (int i = Layer2.Find("Types/PokerType").childCount - 1; i >= 0; i--) {
 			Destroy (Layer2.Find ("Types/PokerType").GetChild (i).gameObject);
 		}
@@ -778,20 +795,27 @@ public class StateSorting : State {
 			Layer2.Find ("Types/Line").gameObject.SetActive (true);
 		}
 
+
+		int index = 0;
+		int posindex = 0;
+
 		List<Vector3> pos = new List<Vector3> ();
 		bool jo = (RankResult.Count % 2 == 1) ? true : false;
 		if (jo) {pos = postype1;} else {pos = postype0;}
+		posindex = (pos.Count - RankResult.Count) / 2;
 
-		int index = 0;
 		foreach (KeyValuePair<Msg.CardRank, List<uint[]>> pair in RankResult){
 			GameObject Rank = Instantiate(m_GameController.m_PrefabRank) as GameObject;
+			Rank.GetComponent<Image>().sprite = Resources.Load ("Image/Game/poker_type" + index, typeof(Sprite)) as Sprite;
 			Rank.transform.Find("Text").GetComponent<Text> ().text = RanksText[(int)pair.Key];
 			Rank.transform.SetParent (Layer2.Find("Types/PokerType"));
-			Rank.transform.localScale = new Vector3 (1,1,1);
-			Rank.transform.localPosition = pos [index];
+			Rank.transform.localScale = new Vector3 (0,0,0);
+			Rank.transform.DOScale (new Vector3(1,1,1), 0.09f);
+			Rank.transform.localPosition = pos [posindex];
 			Rank.name = ((int)(pair.Key)).ToString();
 			EventTriggerListener.Get(Rank).onClick = onClickRanksHandler;
 			index++;
+			posindex++;
 		}
 	}
 
