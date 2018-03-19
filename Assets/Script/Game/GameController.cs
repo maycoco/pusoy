@@ -118,76 +118,76 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void initializeRoomData(){
-		Common.FB_id = "123235234";
-		Common.FB_access_token = "sd23edasdasdasdasd12easd";
-		Common.FB_name = "Walter wang";
-		Common.Uid = 222;
-		Common.CMin_bet 	= 20;
-		Common.CMax_bet 	= 1000;
-		Common.CHands 		= 300;
-		Common.CPlayed_hands= 10;
-		Common.CIs_share 	= true;
-		Common.CCredit_points = 1000;
-		Common.CState 		= Msg.GameState.Combine;
-		if(Common.CState == Msg.GameState.Show){
-			Common.ConfigBetTime = 5;
-		}
-		else if(Common.CState == Msg.GameState.Combine){
-			Common.ConfigSortTime = 45;
-		}
-		else if(Common.CState == Msg.GameState.Result){
-			Common.ConfigFinishTime = 100;
-		}
-
-		PlayerInfo p2 = new PlayerInfo ();
-		p2.Uid = 111;
-		p2.SeatID = 0;
-		p2.Name = "Bruce";
-		p2.Win = 123456789;
-		p2.Bet = 0;
-		Common.CPlayers.Add (p2);
-
-		PlayerInfo p1 = new PlayerInfo ();
-		p1.Uid = 222;
-		p1.SeatID = 1;
-		p1.Name = "Ali";
-		p1.Win = -123456789;
-		p1.Bet = 0;
-
-		Common.CPlayers.Add (p1);
-
-		PlayerInfo p3 = new PlayerInfo ();
-		p3.Uid = 777;
-		p3.SeatID = 2;
-		p3.Name = "HAHA";
-		p3.Win = -76456789;
-		p3.Bet = 200;
-		Common.CPlayers.Add (p3);
-
-
-
-		int[] s = new int[]{1,13,3,36,5,6,24,8,18,10,38,12,27};
-		Common.CPokers = new List<int> (s);
+//		Common.FB_id = "123235234";
+//		Common.FB_access_token = "sd23edasdasdasdasd12easd";
+//		Common.FB_name = "Walter wang";
+//		Common.Uid = 222;
+//		Common.CMin_bet 	= 20;
+//		Common.CMax_bet 	= 1000;
+//		Common.CHands 		= 300;
+//		Common.CPlayed_hands= 10;
+//		Common.CIs_share 	= true;
+//		Common.CCredit_points = 1000;
+//		Common.CState 		= Msg.GameState.Combine;
+//		if(Common.CState == Msg.GameState.Show){
+//			Common.ConfigBetTime = 5;
+//		}
+//		else if(Common.CState == Msg.GameState.Combine){
+//			Common.ConfigSortTime = 45;
+//		}
+//		else if(Common.CState == Msg.GameState.Result){
+//			Common.ConfigFinishTime = 100;
+//		}
+//
+//		PlayerInfo p2 = new PlayerInfo ();
+//		p2.Uid = 111;
+//		p2.SeatID = 0;
+//		p2.Name = "Bruce";
+//		p2.Win = 123456789;
+//		p2.Bet = 0;
+//		Common.CPlayers.Add (p2);
+//
+//		PlayerInfo p1 = new PlayerInfo ();
+//		p1.Uid = 222;
+//		p1.SeatID = 1;
+//		p1.Name = "Ali";
+//		p1.Win = -123456789;
+//		p1.Bet = 0;
+//
+//		Common.CPlayers.Add (p1);
+//
+//		PlayerInfo p3 = new PlayerInfo ();
+//		p3.Uid = 777;
+//		p3.SeatID = 2;
+//		p3.Name = "HAHA";
+//		p3.Win = -76456789;
+//		p3.Bet = 200;
+//		Common.CPlayers.Add (p3);
+//
+//
+//
+//		int[] s = new int[]{1,13,3,36,5,6,24,8,18,10,38,12,27};
+//		Common.CPokers = new List<int> (s);
 		//ResultEvent (null);
 
 		//Bet type
-//		m_StateManage.m_StateBetting.UpdateDateBetType ();
-//
-//
-//		foreach(PlayerInfo p in Common.CPlayers){
-//			p.Bet = 0;
-//		}
-//
-//		if (GetSeatIDForPlayerID (Common.Uid) == 999) {
-//			PlayerInfo p = new PlayerInfo ();
-//			p.Uid = Common.Uid;
-//			p.Name = Common.FB_name;
-//			p.SeatID = -1;
-//			m_SelfSeatID = -1;
-//			Common.CPlayers.Add (p);
-//		} else {
-//			m_SelfSeatID = GetSeatIDForPlayerID (Common.Uid);
-//		}
+		m_StateManage.m_StateBetting.UpdateDateBetType ();
+
+
+		foreach(PlayerInfo p in Common.CPlayers){
+			p.Bet = 0;
+		}
+
+		if (GetSeatIDForPlayerID (Common.Uid) == 999) {
+			PlayerInfo p = new PlayerInfo ();
+			p.Uid = Common.Uid;
+			p.Name = Common.FB_name;
+			p.SeatID = -1;
+			m_SelfSeatID = -1;
+			Common.CPlayers.Add (p);
+		} else {
+			m_SelfSeatID = GetSeatIDForPlayerID (Common.Uid);
+		}
 	}
 
 	public void SetSeatID(uint Uid, int SeatID){
