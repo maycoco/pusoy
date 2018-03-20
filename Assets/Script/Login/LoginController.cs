@@ -98,15 +98,9 @@ public class LoginController : MonoBehaviour {
 	}
 
 	public void LoginFacebook(){
-		//for demo
-//		GotoLobby();
-//		return;
-
-//		if(FB.IsInitialized){
-//			this.CallFBLogin();
-//		}
-
-		ConnectServer ();
+		if(FB.IsInitialized){
+			this.CallFBLogin();
+		}
 	}
 
 	private void CallFBLogin(){
