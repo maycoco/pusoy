@@ -35,6 +35,7 @@ public class StateDeal : State {
 	}
 
 	public override void AdjustUI(){
+		m_StateManage.m_StateSeat.HideAutoBanker ();
 		Layer.gameObject.SetActive (true);
 		if(Deal != null){
 			Destroy (Deal);

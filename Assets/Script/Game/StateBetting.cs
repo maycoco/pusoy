@@ -32,6 +32,10 @@ public class StateBetting : State {
 		Debug.Log ("==============================state betting===================================");
 		Layer.gameObject.SetActive (true);
 
+		foreach(PlayerInfo p in Common.CPlayers){
+			p.Bet = 0;
+		}
+
 		BettingTime = Common.ConfigBetTime;
 		BeginCountDown ();
 		m_Chips.Clear ();
@@ -100,6 +104,7 @@ public class StateBetting : State {
 		ClearChipsButton ();
 		ClearCountDown ();
 		Layer.gameObject.SetActive (false);
+		m_StateManage.m_StateSeat.HideAutoBanker ();
 	}
 
 	public void BeginCountDown(){
@@ -110,6 +115,10 @@ public class StateBetting : State {
 	public void ShowBeetingArea(){
 		Tweener tween = Layer.Find ("ChipsMask").DOLocalMove (new Vector3 (CMPos.x, CMPos.y + 110, CMPos.z), 0.3f, true);
 		tween.onComplete = CanBetCall;
+	}
+
+	public void ClearChipsButton(){
+		Layer.Find ("ChipsMask").DOLocalMove (CMPos, 0.3f, true);
 	}
 		
 	public void UpdateBettingTime(){
@@ -145,7 +154,7 @@ public class StateBetting : State {
 		}
 		return sum;
 	}
-		
+
 	public void Betting(int Index){
 		if(m_StateManage.GetCulState() != STATE.STATE_BETTING){return;}
 
@@ -175,35 +184,16 @@ public class StateBetting : State {
 
 		Tweener tween = Chip.transform.DOLocalMove (m_ChipsPos[m_Chips.Count - 1], 0.2f, true);
 		tween.onComplete =BettingCall;
-		//anime
 	}
 
 	public void BettingCall(){
 		UpdateChipsAmount (m_GameController.m_SelfSeatID , GetChipsAmoun());
 	}
 
-public void UpdateSelfChips(int SeatID){
-		Transform Obj = Layer.Find ("SeatCom/Seat" + SeatID + "/ChipsAssets");
-
-		for (int i = Obj.childCount - 1; i >= 0; i--) {  
-			Destroy(Obj.GetChild(i).gameObject);  
-		}  
-
-		for (int i = 0; i < m_Chips.Count; i++) {
-			GameObject Chip = (GameObject)Instantiate(m_GameController.m_PrefabChip);  
-			Chip.transform.SetParent (Obj.transform);
-			Chip.transform.localPosition = m_ChipsPos [i];
-			Chip.name = (m_Chips.Count - 1).ToString ();
-
-			EventTriggerListener.Get(Chip).onClick = onClickButtonHandler;
-
-			Image image = Chip.GetComponent<Image>();
-			image.sprite = Resources.Load("Image/Game/chip" + m_ChipsType.IndexOf(m_Chips[i]), typeof(Sprite)) as Sprite;
-			Chip.transform.Find ("Value").GetComponent<Text> ().text = m_Chips[i].ToString ();
-
-			Color c = Layer.Find ("ChipsMask/Chip" + m_ChipsType.IndexOf(m_Chips[i]) + "/Value").GetComponent<Outline> ().effectColor;
-			Chip.transform.Find ("Value").GetComponent<Outline> ().effectColor = c;
-		}
+	public void CancelBet(){
+		UpdateChipsUI(m_GameController.m_SelfSeatID, 0);
+		ClearChipsButton ();
+		m_Chips.Clear ();
 	}
 
 	public void UpdateChipsUI(int SeatID, int Amount){
@@ -217,7 +207,7 @@ public void UpdateSelfChips(int SeatID){
 		for(int i = 0; i < TableChips.Count; i++){
 			GameObject Chip = (GameObject)Instantiate(m_GameController.m_PrefabChip);  
 			Chip.transform.SetParent (Obj.transform);
-			Chip.transform.name = TableChips [i].ToString ();
+			//Chip.transform.name = TableChips [i].ToString ();
 			Chip.transform.localPosition = RandomChipsPos();
 
 			int index  = m_ChipsType.IndexOf (TableChips[i]);
@@ -271,7 +261,6 @@ public void UpdateSelfChips(int SeatID){
 
 		m_ChipsBeginPos.RemoveAt (count);
 		m_Chips.RemoveAt (count);
-		//UpdateSelfChips (m_GameController.m_SelfSeatID);
 		UpdateChipsAmount (m_GameController.m_SelfSeatID, GetChipsAmoun());
 	}
 
@@ -283,8 +272,13 @@ public void UpdateSelfChips(int SeatID){
 		CanBet = false;
 	}
 
-	public void ClearChipsButton(){
-		Layer.Find ("ChipsMask").DOLocalMove (CMPos, 0.3f, true);
+	public void UpdatePlayerBet(){
+		m_GameController.GetPlayerInfoForSeatID (m_GameController.m_SelfSeatID).Bet = (uint)GetChipsAmoun ();
+	}
+
+	public void SitDown(){
+		m_Chips.Clear ();
+		ShowBeetingArea ();
 	}
 
 	public List<int> CountingChips(int  CAmount){
@@ -316,9 +310,6 @@ public void UpdateSelfChips(int SeatID){
 	}
 
 	public void BetConfim(){
-		//for demo
-		//m_StateManage.ChangeState(STATE.STATE_SORTING);
-
 		if(m_StateManage.GetCulState() != STATE.STATE_BETTING){return;}
 		if(GetChipsAmoun() > 0){
 			CanBet = false;

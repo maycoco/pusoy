@@ -32,6 +32,7 @@ public class SeatResult{
 	
 public class GameController : MonoBehaviour {
 	private Transform									Canvas;
+	public  GameConsole									m_GameConsole;
 
 	//State Manage
 	public StateManage									m_StateManage;
@@ -40,6 +41,7 @@ public class GameController : MonoBehaviour {
 	public GameObject			   						m_PrefabChip;
 	public GameObject			   						m_PrefabRank;
 	public GameObject			   						m_PrefabTPlayer;
+	public GameObject			   						m_PrefabObInfo;
 	public UICircle			   							m_PrefabAvatar;
 	public Poker			   							m_PrefabPoker;
 
@@ -92,11 +94,10 @@ public class GameController : MonoBehaviour {
 		if(Common.CState == Msg.GameState.Deal){
 			m_StateManage.SetState (STATE.STATE_SEAT, true);
 		}
-
-		Debug.Log (Common.CState);
+			
 		if(Common.CState == Msg.GameState.Combine){
 			m_StateManage.SetState (STATE.STATE_SEAT);
-			m_StateManage.ChangeState (STATE.STATE_SORTING);
+			m_StateManage.ChangeState (STATE.STATE_SORTING, true);
 		}
 
 		if(Common.CState == Msg.GameState.Show){
@@ -129,7 +130,7 @@ public class GameController : MonoBehaviour {
 //		Common.CPlayed_hands= 10;
 //		Common.CIs_share 	= true;
 //		Common.CCredit_points = 1000;
-//		Common.CState 		= Msg.GameState.Combine;
+//		Common.CState 		= Msg.GameState.Ready;
 //		if(Common.CState == Msg.GameState.Show){
 //			Common.ConfigBetTime = 5;
 //		}
@@ -144,7 +145,6 @@ public class GameController : MonoBehaviour {
 //		p2.Uid = 111;
 //		p2.SeatID = 0;
 //		p2.Name = "Bruce";
-//		p2.Win = 123456789;
 //		p2.Bet = 0;
 //		Common.CPlayers.Add (p2);
 //
@@ -152,24 +152,24 @@ public class GameController : MonoBehaviour {
 //		p1.Uid = 222;
 //		p1.SeatID = 1;
 //		p1.Name = "Ali";
-//		p1.Win = -123456789;
 //		p1.Bet = 0;
 //
 //		Common.CPlayers.Add (p1);
 //
-//		PlayerInfo p3 = new PlayerInfo ();
-//		p3.Uid = 777;
-//		p3.SeatID = 2;
-//		p3.Name = "HAHA";
-//		p3.Win = -76456789;
-//		p3.Bet = 200;
-//		Common.CPlayers.Add (p3);
+//		for(int i = 0; i < 10; i++){
+//			PlayerInfo p3 = new PlayerInfo ();
+//			p3.Uid = 777;
+//			p3.SeatID = 2;
+//			p3.Name = "HAHA";
+//			p3.Bet = 200;
+//			Common.CPlayers.Add (p3);
+//		}
 //
 //
 //
 //		int[] s = new int[]{1,13,3,36,5,6,24,8,18,10,38,12,27};
 //		Common.CPokers = new List<int> (s);
-//		ResultEvent (null);
+		//ResultEvent (null);
 
 		//Bet type
 		m_StateManage.m_StateBetting.UpdateDateBetType ();
@@ -446,11 +446,10 @@ public class GameController : MonoBehaviour {
 		case MessageID.SitDownRsp:
 			if (data.SitDownRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
-					if(m_TatgetSeatID == 0){
-						Common.CAutoBanker = data.SitDownRsp.Autobanker;
-					}
+					if(m_TatgetSeatID == 0){Common.CAutoBanker = data.SitDownRsp.Autobanker;}
 					SetSeatID (Common.Uid, m_TatgetSeatID);
 					UpdateOrderList ();
+					m_StateManage.m_StateBetting.SitDown();
 				}); 
 			}
 			break;
@@ -458,6 +457,7 @@ public class GameController : MonoBehaviour {
 		case MessageID.StandUpRsp:
 			if (data.StandUpRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
+					m_StateManage.m_StateBetting.CancelBet();
 					SetSeatID (Common.Uid, -1);
 					UpdateOrderList ();
 				}); 
@@ -472,6 +472,7 @@ public class GameController : MonoBehaviour {
 		case MessageID.BetRsp:
 			if (data.BetRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
+					m_StateManage.m_StateBetting.UpdatePlayerBet();
 					m_StateManage.m_StateBetting.DCanBetCall();
 				}); 
 			}
@@ -479,6 +480,18 @@ public class GameController : MonoBehaviour {
 
 		case MessageID.CombineRsp:
 			if (data.CombineRsp.Ret == 0) {
+			}
+			break;
+
+		case MessageID.GetScoreboardRsp:
+			if (data.GetScoreboardRsp.Ret == 0) {
+				Loom.QueueOnMainThread (() => {
+					List<Msg.ScoreboardItem> list = new List<ScoreboardItem>();
+					foreach(Msg.ScoreboardItem t in data.GetScoreboardRsp.Items){
+						list.Add(t);
+					}
+					m_GameConsole.ShowPlayerList (list);
+				});
 			}
 			break;
 
@@ -539,8 +552,6 @@ public class GameController : MonoBehaviour {
 
 		case MessageID.SitDownNotify:
 			if(data.SitDownNotify.Type == Msg.SitDownType.Sit){
-				Debug.Log (data.SitDownNotify.Uid);
-				Debug.Log (data.SitDownNotify.SeatId);
 				Loom.QueueOnMainThread(()=>{
 					SetSeatID (data.SitDownNotify.Uid, (int)data.SitDownNotify.SeatId);
 					UpdateOrderList ();
@@ -550,6 +561,7 @@ public class GameController : MonoBehaviour {
 
 		case MessageID.StandUpNotify:
 			Loom.QueueOnMainThread(()=>{
+				m_StateManage.m_StateBetting.UpdateChipsUI(GetSeatIDForPlayerID(data.StandUpNotify.Uid), 0);
 				SetSeatID (data.StandUpNotify.Uid, -1);
 				UpdateOrderList ();
 			}); 
@@ -625,6 +637,10 @@ public class GameController : MonoBehaviour {
 		if(m_SelfSeatID == -1){return;}
 		if(m_StateManage.GetCulState() == STATE.STATE_SEAT || m_StateManage.GetCulState() == STATE.STATE_BETTING){
 			
+			if(GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){
+				return;
+			}
+				
 			Protocol msg 					= new Protocol();
 			msg.Msgid 						= MessageID.StandUpReq;
 			msg.StandUpReq 					= new StandUpReq();
@@ -678,14 +694,16 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	public void Test(){
-		m_StateManage.ChangeState (STATE.STATE_BETTING);
-	}
+	public void ScoreboardServer(){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.GetScoreboardReq;
+		msg.GetScoreboardReq 			= new GetScoreboardReq();
+		msg.GetScoreboardReq.Pos 		= 0;
 
-	public void Test2(){
-		m_StateManage.SetState (STATE.STATE_SEAT);
-		m_StateManage.ChangeState (STATE.STATE_BETTING);
-		m_StateManage.m_StateBetting.UpdatePlayersChips ();
-		m_StateManage.m_StateBetting.ShowConfimBet();
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
 	}
 }

@@ -55,7 +55,6 @@ public class StateSeat : State{
 
 	public override void Exit(){
 		Layer.Find("LetPlay").gameObject.SetActive(false);
-		Layer.Find("AutoBanker").gameObject.SetActive (false);
 		Layer.Find ("TipsPick").gameObject.SetActive (false);
 		Layer.Find("TipsWaitStart").gameObject.SetActive (false);
 		Layer.Find("TipsNoPlayers").gameObject.SetActive (false);
@@ -97,7 +96,7 @@ public class StateSeat : State{
 		Layer.Find ("LetPlay").gameObject.SetActive (false);
 
 		//LetPlay & AutoBanker
-		if (m_GameController.m_SelfSeatID == 0) {
+		if (m_GameController.m_SelfSeatID == 0 && m_StateManage.GetCulState() == STATE.STATE_SEAT) {
 			Layer.Find ("AutoBanker").gameObject.SetActive (true);
 			Layer.Find ("LetPlay").gameObject.SetActive (true);
 
@@ -112,7 +111,7 @@ public class StateSeat : State{
 			Layer.Find ("AutoBanker").gameObject.SetActive (false);
 		}
 			
-		if (m_GameController.m_SelfSeatID > 0) {
+		if (m_GameController.m_SelfSeatID > 0 && m_StateManage.GetCulState() == STATE.STATE_SEAT) {
 			Layer.Find ("TipsWaitStart").gameObject.SetActive (true);
 		} else {
 			Layer.Find ("TipsWaitStart").gameObject.SetActive (false);
@@ -163,7 +162,10 @@ public class StateSeat : State{
 		}
 
 		Common.CAutoBanker	= isauto;
-		Debug.Log (Common.CAutoBanker);
 		m_GameController.AutoBankServer ();
+	}
+
+	public void HideAutoBanker(){
+		Layer.Find("AutoBanker").gameObject.SetActive (false);
 	}
 }

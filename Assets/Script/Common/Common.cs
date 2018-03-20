@@ -27,7 +27,6 @@ public class PlayerInfo{
 	public int 			SeatID	  = -1;
 	public string 		FB_id     = "";
 	public Sprite 		FB_avatar = null;
-	public int			Win		  = 0;
 	public uint			Bet		  = 0;
 }
 
