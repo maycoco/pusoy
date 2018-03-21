@@ -53,11 +53,11 @@ namespace Msg {
             "Y3ROb3RpZnkSLQoPcmVjb25uZWN0Tm90aWZ5GCQgASgLMhQubXNnLlJlY29u",
             "bmVjdE5vdGlmeRIvChBnZXRTY29yZWJvYXJkUmVxGCUgASgLMhUubXNnLkdl",
             "dFNjb3JlYm9hcmRSZXESLwoQZ2V0U2NvcmVib2FyZFJzcBgmIAEoCzIVLm1z",
-            "Zy5HZXRTY29yZWJvYXJkUnNwIjgKCkxvZ2luRkJSZXESDQoFZmJfaWQYASAB",
-            "KAkSDQoFdG9rZW4YAiABKAkSDAoEbmFtZRgDIAEoCSJFCghMb2dpblJlcRIc",
-            "CgR0eXBlGAEgASgOMg4ubXNnLkxvZ2luVHlwZRIbCgJmYhgCIAEoCzIPLm1z",
-            "Zy5Mb2dpbkZCUmVxIkMKCExvZ2luUnNwEhkKA3JldBgBIAEoDjIMLm1zZy5F",
-            "cnJvcklEEgsKA3VpZBgCIAEoDRIPCgdyb29tX2lkGAMgASgNIgwKCktpY2tO",
+            "Zy5HZXRTY29yZWJvYXJkUnNwIioKCkxvZ2luRkJSZXESDQoFZmJfaWQYASAB",
+            "KAkSDQoFdG9rZW4YAiABKAkiRQoITG9naW5SZXESHAoEdHlwZRgBIAEoDjIO",
+            "Lm1zZy5Mb2dpblR5cGUSGwoCZmIYAiABKAsyDy5tc2cuTG9naW5GQlJlcSJR",
+            "CghMb2dpblJzcBIZCgNyZXQYASABKA4yDC5tc2cuRXJyb3JJRBILCgN1aWQY",
+            "AiABKA0SDAoEbmFtZRgDIAEoCRIPCgdyb29tX2lkGAQgASgNIgwKCktpY2tO",
             "b3RpZnkiHwoQRGlzY29ubmVjdE5vdGlmeRILCgN1aWQYASABKA0iHgoPUmVj",
             "b25uZWN0Tm90aWZ5EgsKA3VpZBgBIAEoDSJ3Cg1DcmVhdGVSb29tUmVxEgwK",
             "BG5hbWUYASABKAkSDwoHbWluX2JldBgCIAEoDRIPCgdtYXhfYmV0GAMgASgN",
@@ -120,46 +120,47 @@ namespace Msg {
             "DkNvbWJpbmVfTm90aWZ5EB4SEQoNUmVzdWx0X05vdGlmeRAfEhQKEEdhbWVT",
             "dGF0ZV9Ob3RpZnkQIBIVChFEaXNjb25uZWN0X05vdGlmeRAhEhQKEFJlY29u",
             "bmVjdF9Ob3RpZnkQIhIVChFHZXRTY29yZWJvYXJkX1JlcRAjEhUKEUdldFNj",
-            "b3JlYm9hcmRfUnNwECQqnggKB0Vycm9ySUQSBgoCT2sQABISCg5JbnZhbGlk",
-            "X1BhcmFtcxABEgwKCERCX0Vycm9yEAISEgoOSW50ZXJuYWxfRXJyb3IQAxIg",
-            "ChxDcmVhdGVSb29tX0ludmFsaWRfUm9vbV9OYW1lEGQSIgoeQ3JlYXRlUm9v",
-            "bV9JbnZhbGlkX01pbl9NYXhfQmV0EGUSJAogQ3JlYXRlUm9vbV9JbnZhbGlk",
-            "X0NyZWRpdF9Qb2ludHMQZhIiCh5DcmVhdGVSb29tX05vdF9Fbm91Z2hfRGlh",
-            "bW9uZHMQZxImCiJDcmVhdGVSb29tX0V4Y2VlZF9MaW1pdGF0aW9uX1Jvb21z",
-            "EGgSHAoYQ3JlYXRlUm9vbV9JbnZhbGlkX0hhbmRzEGkSHgoaSm9pblJvb21f",
-            "V3JvbmdfUm9vbV9OdW1iZXIQbhIRCg1Kb2luUm9vbV9GdWxsEG8SFwoTSm9p",
-            "blJvb21fQWxyZWFkeV9JbhBwEhQKEExlYXZlUm9vbV9Ob3RfSW4QeBIVChFM",
-            "ZWF2ZVJvb21fUGxheWluZxB5EhwKF1NpdERvd25fSW52YWxpZF9TZWF0X0lk",
-            "EIIBEiEKHFNpdERvd25fQWxyZWFkeV9FeGlzdF9QbGF5ZXIQgwESGAoTU2l0",
-            "RG93bl9BbHJlYWR5X1NpdBCEARIUCg9TdGFuZFVwX05vdF9TaXQQjAESHAoX",
-            "U3RhbmRVcF9DYW5ub3RfU3RhbmRfVXAQjQESGgoVQXV0b0Jhbmtlcl9Ob3Rf",
-            "QmFua2VyEJYBEh0KGEF1dG9CYW5rZXJfSW52YWxpZF9TdGF0ZRCXARIZChRT",
-            "dGFydEdhbWVfTm90X0JhbmtlchCgARIhChxTdGFydEdhbWVfTm90X0Vub3Vn",
-            "aF9QbGF5ZXJzEKEBEiIKHVN0YXJ0R2FtZV9Ob3RfRW5vdWdoX0RpYW1vbmRz",
-            "EKIBEh4KGVN0YXJ0R2FtZV9Ob3RfUmVhZHlfU3RhdGUQowESFgoRQmV0X05v",
-            "dF9CZXRfU3RhdGUQqgESGgoVQmV0X0Jhbmtlcl9DYW5ub3RfQmV0EKsBEhYK",
-            "EUJldF9JbnZhbGlkX0NoaXBzEKwBEh0KGEJldF9Ob3RfQV9QbGF5ZXJfT25f",
-            "U2VhdBCtARIUCg9CZXRfQWxyZWFkeV9CZXQQrgESHgoZQ29tYmluZV9Ob3Rf",
-            "Q29tYmluZV9TdGF0ZRC0ARIeChlDb21iaW5lX05vdF9Jbl9UaGlzX1JvdW5k",
-            "ELUBEiEKHENvbWJpbmVfSW52YWxpZF9SZXF1ZXN0X0RhdGEQtgESGQoUQ29t",
-            "YmluZV9BbHJlYWR5X0RvbmUQtwESFgoRQ29tYmluZV9Ob3RfTHVja3kQuAES",
-            "IwoeR2V0U2NvcmVib2FyZF9Qb3NfRXhjZWVkX1JhbmdlEL4BKhkKCUxvZ2lu",
-            "VHlwZRIMCghGYWNlYm9vaxAAKiAKC1NpdERvd25UeXBlEgcKA1NpdBAAEggK",
-            "BFN3YXAQASpdCglHYW1lU3RhdGUSCQoFUmVhZHkQABIHCgNCZXQQARIPCgtD",
-            "b25maXJtX0JldBACEggKBERlYWwQAxILCgdDb21iaW5lEAQSCAoEU2hvdxAF",
-            "EgoKBlJlc3VsdBAGKpsBCghDYXJkUmFuaxINCglIaWdoX0NhcmQQABIMCghP",
-            "bmVfUGFpchABEgwKCFR3b19QYWlyEAISEwoPVGhyZWVfT2ZfQV9LaW5kEAMS",
-            "DAoIU3RyYWlnaHQQBBIJCgVGbHVzaBAFEg4KCkZ1bGxfSG91c2UQBhISCg5G",
-            "b3VyX09mX0FfS2luZBAHEhIKDlN0cmFpZ2h0X0ZsdXNoEAgqSwoNQ2FyZENv",
-            "bG9yU3VpdBIJCgVDbHVicxAAEgoKBlNwYWRlcxABEgoKBkhlYXJ0cxACEgwK",
-            "CERpYW1vbmRzEAMSCQoFQ291bnQQBGIGcHJvdG8z"));
+            "b3JlYm9hcmRfUnNwECQquQgKB0Vycm9ySUQSBgoCT2sQABISCg5JbnZhbGlk",
+            "X1BhcmFtcxABEgwKCERCX0Vycm9yEAISEgoOSW50ZXJuYWxfRXJyb3IQAxIZ",
+            "ChVMb2dpbl9GYWNlYm9va19GYWlsZWQQBBIgChxDcmVhdGVSb29tX0ludmFs",
+            "aWRfUm9vbV9OYW1lEGQSIgoeQ3JlYXRlUm9vbV9JbnZhbGlkX01pbl9NYXhf",
+            "QmV0EGUSJAogQ3JlYXRlUm9vbV9JbnZhbGlkX0NyZWRpdF9Qb2ludHMQZhIi",
+            "Ch5DcmVhdGVSb29tX05vdF9Fbm91Z2hfRGlhbW9uZHMQZxImCiJDcmVhdGVS",
+            "b29tX0V4Y2VlZF9MaW1pdGF0aW9uX1Jvb21zEGgSHAoYQ3JlYXRlUm9vbV9J",
+            "bnZhbGlkX0hhbmRzEGkSHgoaSm9pblJvb21fV3JvbmdfUm9vbV9OdW1iZXIQ",
+            "bhIRCg1Kb2luUm9vbV9GdWxsEG8SFwoTSm9pblJvb21fQWxyZWFkeV9JbhBw",
+            "EhQKEExlYXZlUm9vbV9Ob3RfSW4QeBIVChFMZWF2ZVJvb21fUGxheWluZxB5",
+            "EhwKF1NpdERvd25fSW52YWxpZF9TZWF0X0lkEIIBEiEKHFNpdERvd25fQWxy",
+            "ZWFkeV9FeGlzdF9QbGF5ZXIQgwESGAoTU2l0RG93bl9BbHJlYWR5X1NpdBCE",
+            "ARIUCg9TdGFuZFVwX05vdF9TaXQQjAESHAoXU3RhbmRVcF9DYW5ub3RfU3Rh",
+            "bmRfVXAQjQESGgoVQXV0b0Jhbmtlcl9Ob3RfQmFua2VyEJYBEh0KGEF1dG9C",
+            "YW5rZXJfSW52YWxpZF9TdGF0ZRCXARIZChRTdGFydEdhbWVfTm90X0Jhbmtl",
+            "chCgARIhChxTdGFydEdhbWVfTm90X0Vub3VnaF9QbGF5ZXJzEKEBEiIKHVN0",
+            "YXJ0R2FtZV9Ob3RfRW5vdWdoX0RpYW1vbmRzEKIBEh4KGVN0YXJ0R2FtZV9O",
+            "b3RfUmVhZHlfU3RhdGUQowESFgoRQmV0X05vdF9CZXRfU3RhdGUQqgESGgoV",
+            "QmV0X0Jhbmtlcl9DYW5ub3RfQmV0EKsBEhYKEUJldF9JbnZhbGlkX0NoaXBz",
+            "EKwBEh0KGEJldF9Ob3RfQV9QbGF5ZXJfT25fU2VhdBCtARIUCg9CZXRfQWxy",
+            "ZWFkeV9CZXQQrgESHgoZQ29tYmluZV9Ob3RfQ29tYmluZV9TdGF0ZRC0ARIe",
+            "ChlDb21iaW5lX05vdF9Jbl9UaGlzX1JvdW5kELUBEiEKHENvbWJpbmVfSW52",
+            "YWxpZF9SZXF1ZXN0X0RhdGEQtgESGQoUQ29tYmluZV9BbHJlYWR5X0RvbmUQ",
+            "twESFgoRQ29tYmluZV9Ob3RfTHVja3kQuAESIwoeR2V0U2NvcmVib2FyZF9Q",
+            "b3NfRXhjZWVkX1JhbmdlEL4BKhkKCUxvZ2luVHlwZRIMCghGYWNlYm9vaxAA",
+            "KiAKC1NpdERvd25UeXBlEgcKA1NpdBAAEggKBFN3YXAQASpdCglHYW1lU3Rh",
+            "dGUSCQoFUmVhZHkQABIHCgNCZXQQARIPCgtDb25maXJtX0JldBACEggKBERl",
+            "YWwQAxILCgdDb21iaW5lEAQSCAoEU2hvdxAFEgoKBlJlc3VsdBAGKpsBCghD",
+            "YXJkUmFuaxINCglIaWdoX0NhcmQQABIMCghPbmVfUGFpchABEgwKCFR3b19Q",
+            "YWlyEAISEwoPVGhyZWVfT2ZfQV9LaW5kEAMSDAoIU3RyYWlnaHQQBBIJCgVG",
+            "bHVzaBAFEg4KCkZ1bGxfSG91c2UQBhISCg5Gb3VyX09mX0FfS2luZBAHEhIK",
+            "DlN0cmFpZ2h0X0ZsdXNoEAgqSwoNQ2FyZENvbG9yU3VpdBIJCgVDbHVicxAA",
+            "EgoKBlNwYWRlcxABEgoKBkhlYXJ0cxACEgwKCERpYW1vbmRzEAMSCQoFQ291",
+            "bnQQBGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Msg.MessageID), typeof(global::Msg.ErrorID), typeof(global::Msg.LoginType), typeof(global::Msg.SitDownType), typeof(global::Msg.GameState), typeof(global::Msg.CardRank), typeof(global::Msg.CardColorSuit), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.Protocol), global::Msg.Protocol.Parser, new[]{ "Msgid", "LoginReq", "LoginRsp", "KickNotify", "CreateRoomReq", "CreateRoomRsp", "ConsumeDiamondsNotify", "JoinRoomReq", "JoinRoomRsp", "JoinRoomNotify", "LeaveRoomReq", "LeaveRoomRsp", "LeaveRoomNotify", "SitDownReq", "SitDownRsp", "SitDownNotify", "StandUpReq", "StandUpRsp", "StandUpNotify", "AutoBankerReq", "AutoBankerRsp", "StartGameReq", "StartGameRsp", "BetReq", "BetRsp", "BetNotify", "CombineReq", "CombineRsp", "CombineNotify", "GameStateNotify", "DisconnectNotify", "ReconnectNotify", "GetScoreboardReq", "GetScoreboardRsp" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.LoginFBReq), global::Msg.LoginFBReq.Parser, new[]{ "FbId", "Token", "Name" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.LoginFBReq), global::Msg.LoginFBReq.Parser, new[]{ "FbId", "Token" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.LoginReq), global::Msg.LoginReq.Parser, new[]{ "Type", "Fb" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.LoginRsp), global::Msg.LoginRsp.Parser, new[]{ "Ret", "Uid", "RoomId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.LoginRsp), global::Msg.LoginRsp.Parser, new[]{ "Ret", "Uid", "Name", "RoomId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.KickNotify), global::Msg.KickNotify.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.DisconnectNotify), global::Msg.DisconnectNotify.Parser, new[]{ "Uid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ReconnectNotify), global::Msg.ReconnectNotify.Parser, new[]{ "Uid" }, null, null, null),
@@ -304,6 +305,10 @@ namespace Msg {
     /// 内部错误
     /// </summary>
     [pbr::OriginalName("Internal_Error")] InternalError = 3,
+    /// <summary>
+    /// facebook登录失败
+    /// </summary>
+    [pbr::OriginalName("Login_Facebook_Failed")] LoginFacebookFailed = 4,
     /// <summary>
     /// 非法的房间名称
     /// </summary>
@@ -1841,7 +1846,6 @@ namespace Msg {
     public LoginFBReq(LoginFBReq other) : this() {
       fbId_ = other.fbId_;
       token_ = other.token_;
-      name_ = other.name_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1877,20 +1881,6 @@ namespace Msg {
       }
     }
 
-    /// <summary>Field number for the "name" field.</summary>
-    public const int NameFieldNumber = 3;
-    private string name_ = "";
-    /// <summary>
-    /// facebook username
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Name {
-      get { return name_; }
-      set {
-        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as LoginFBReq);
@@ -1906,7 +1896,6 @@ namespace Msg {
       }
       if (FbId != other.FbId) return false;
       if (Token != other.Token) return false;
-      if (Name != other.Name) return false;
       return true;
     }
 
@@ -1915,7 +1904,6 @@ namespace Msg {
       int hash = 1;
       if (FbId.Length != 0) hash ^= FbId.GetHashCode();
       if (Token.Length != 0) hash ^= Token.GetHashCode();
-      if (Name.Length != 0) hash ^= Name.GetHashCode();
       return hash;
     }
 
@@ -1934,10 +1922,6 @@ namespace Msg {
         output.WriteRawTag(18);
         output.WriteString(Token);
       }
-      if (Name.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Name);
-      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1948,9 +1932,6 @@ namespace Msg {
       }
       if (Token.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Token);
-      }
-      if (Name.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
       return size;
     }
@@ -1965,9 +1946,6 @@ namespace Msg {
       }
       if (other.Token.Length != 0) {
         Token = other.Token;
-      }
-      if (other.Name.Length != 0) {
-        Name = other.Name;
       }
     }
 
@@ -1985,10 +1963,6 @@ namespace Msg {
           }
           case 18: {
             Token = input.ReadString();
-            break;
-          }
-          case 26: {
-            Name = input.ReadString();
             break;
           }
         }
@@ -2177,6 +2151,7 @@ namespace Msg {
     public LoginRsp(LoginRsp other) : this() {
       ret_ = other.ret_;
       uid_ = other.uid_;
+      name_ = other.name_;
       roomId_ = other.roomId_;
     }
 
@@ -2207,8 +2182,19 @@ namespace Msg {
       }
     }
 
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 3;
+    private string name_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "room_id" field.</summary>
-    public const int RoomIdFieldNumber = 3;
+    public const int RoomIdFieldNumber = 4;
     private uint roomId_;
     /// <summary>
     /// 如果用户在房间中，返回房间id，否则返回0
@@ -2236,6 +2222,7 @@ namespace Msg {
       }
       if (Ret != other.Ret) return false;
       if (Uid != other.Uid) return false;
+      if (Name != other.Name) return false;
       if (RoomId != other.RoomId) return false;
       return true;
     }
@@ -2245,6 +2232,7 @@ namespace Msg {
       int hash = 1;
       if (Ret != 0) hash ^= Ret.GetHashCode();
       if (Uid != 0) hash ^= Uid.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (RoomId != 0) hash ^= RoomId.GetHashCode();
       return hash;
     }
@@ -2264,8 +2252,12 @@ namespace Msg {
         output.WriteRawTag(16);
         output.WriteUInt32(Uid);
       }
+      if (Name.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Name);
+      }
       if (RoomId != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(32);
         output.WriteUInt32(RoomId);
       }
     }
@@ -2278,6 +2270,9 @@ namespace Msg {
       }
       if (Uid != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Uid);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
       if (RoomId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RoomId);
@@ -2295,6 +2290,9 @@ namespace Msg {
       }
       if (other.Uid != 0) {
         Uid = other.Uid;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
       }
       if (other.RoomId != 0) {
         RoomId = other.RoomId;
@@ -2317,7 +2315,11 @@ namespace Msg {
             Uid = input.ReadUInt32();
             break;
           }
-          case 24: {
+          case 26: {
+            Name = input.ReadString();
+            break;
+          }
+          case 32: {
             RoomId = input.ReadUInt32();
             break;
           }
