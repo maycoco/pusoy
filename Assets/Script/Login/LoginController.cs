@@ -1,18 +1,27 @@
 ﻿using Facebook.Unity;
+
 using Google.Protobuf;
 using Msg;
 using networkengine;
+
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LoginController : MonoBehaviour { 
-	
+	public GameObject 		Canvas;
+	private AsyncOperation 	async = null;
+	private int 			progress = 0;
+
 	// Use this for initialization
 	void Start () {
 		//for demo
 		Screen.SetResolution(448, 795, false);
+		Canvas.transform.Find ("Button").gameObject.SetActive (true);
 	}
 
 	void Awake(){
@@ -28,10 +37,21 @@ public class LoginController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(async != null){
+			//Debug.Log(async.progress);
+			//Canvas.transform.Find ("Loading/Loading").GetComponent<Image>().fillAmount = async.progress;
+		}
 	}
 
 	public void GotoLobby(){
 		SceneManager.LoadScene (1);
+	}
+
+	IEnumerator loadScene()
+	{
+		async = SceneManager.LoadSceneAsync(1);
+		yield return async;
+
 	}
 
 	//===================================connect=================================
@@ -43,6 +63,9 @@ public class LoginController : MonoBehaviour {
 	} 
 
 	public void ConnectServer(){
+		Canvas.transform.Find ("Button").gameObject.SetActive (false);
+		Canvas.transform.Find ("Loading").gameObject.SetActive (true);
+
 		if(!string.IsNullOrEmpty(Common.FB_id) || !string.IsNullOrEmpty(Common.FB_access_token)){
 			protonet.ConnectServer ();
 		}
@@ -70,6 +93,7 @@ public class LoginController : MonoBehaviour {
 				Common.Uid = data.LoginRsp.Uid;
 				Common.FB_name = data.LoginRsp.Name;
 				Common.CRoom_id = data.LoginRsp.RoomId;
+				Common.FB_avatar = data.LoginRsp.Avatar;
 				Loom.QueueOnMainThread(()=>{  
 					GotoLobby ();
 				}); 

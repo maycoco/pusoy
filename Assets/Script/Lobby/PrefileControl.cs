@@ -1,6 +1,9 @@
 ﻿using System;
+
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -77,13 +80,14 @@ public class PrefileControl : MonoBehaviour
 	}
 
 	public void Enter(){
-		UpdateSelfInfo ();
 		m_DList.Clear ();
 		this.gameObject.SetActive (true);
 
 		GetDiamondRecord ();
 		UpdateDiamondRecord ();
 		HideCalendar ();
+
+		UpdateSelfInfo ();
 	}
 
 	public void Exit(){
@@ -96,12 +100,13 @@ public class PrefileControl : MonoBehaviour
 		transform.Find ("SelfInfo/Amount").GetComponent<Text> ().text = Common.DiamondAmount.ToString();
 	
 
-		if (Common.FB_avatar == null) {
+		if (string.IsNullOrEmpty(Common.FB_avatar)) {
 			m_Avatar.UseDefAvatar ();
 		} else {
-			m_Avatar.SetAvatar (Common.FB_avatar.texture);
+			StartCoroutine(Common.Load(m_Avatar, Common.FB_avatar));  
 		}
 	}
+
 
 	public void ShowSendDiamond(){
 		m_UserID 	= "";

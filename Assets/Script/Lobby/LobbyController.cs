@@ -43,7 +43,7 @@ public class LobbyController : MonoBehaviour {
 
 	void Awake(){
 		InitCallbackForNet ();
-		GetUserInfo ();
+		//GetUserInfo ();
 		//GetRoomInfo ();
 		UpdateRoomsInfo ();
 	}
@@ -208,10 +208,11 @@ public class LobbyController : MonoBehaviour {
 				Common.CPokers.Clear ();
 				for(int i = 0; i < data.JoinRoomRsp.Room.Players.Count; i++){
 					PlayerInfo p = new PlayerInfo ();
-					p.Uid = data.JoinRoomRsp.Room.Players[i].Uid;
-					p.SeatID = data.JoinRoomRsp.Room.Players[i].SeatId;
-					p.Name = data.JoinRoomRsp.Room.Players[i].Name;
-					p.Bet = data.JoinRoomRsp.Room.Players[i].Bet;
+					p.Uid 		= data.JoinRoomRsp.Room.Players[i].Uid;
+					p.SeatID 	= data.JoinRoomRsp.Room.Players[i].SeatId;
+					p.Name 		= data.JoinRoomRsp.Room.Players[i].Name;
+					p.Bet 		= data.JoinRoomRsp.Room.Players[i].Bet;
+					p.FB_avatar = data.JoinRoomRsp.Room.Players[i].Avatar;
 
 					Debug.Log (p.Uid + "===" + p.SeatID + "===" +p.Name);
 					Common.CPlayers.Add (p);
@@ -261,17 +262,17 @@ public class LobbyController : MonoBehaviour {
 
 
 	//===================================facebook=================================
-	public void GetUserInfo(){
-		if(FB.IsLoggedIn){
-			FB.API("/me/picture?Type=square&height=128&width=128", HttpMethod.GET, this.ProfilePhotoCallback);
-		}
-	}
-
-	private void ProfilePhotoCallback(IGraphResult result){
-		if (string.IsNullOrEmpty(result.Error) && result.Texture != null){
-			Common.FB_avatar = Sprite.Create (result.Texture, new Rect (0, 0, 128, 128), new Vector2 (0.5f, 0.5f));
-			GameObject.Find ("Canvas").transform.Find ("Avatar").gameObject.GetComponent<Image> ().sprite = Common.FB_avatar;
-		}
-
-	}
+//	public void GetUserInfo(){
+//		if(FB.IsLoggedIn){
+//			FB.API("/me/picture?Type=square&height=128&width=128", HttpMethod.GET, this.ProfilePhotoCallback);
+//		}
+//	}
+//
+//	private void ProfilePhotoCallback(IGraphResult result){
+//		if (string.IsNullOrEmpty(result.Error) && result.Texture != null){
+//			Common.FB_avatar = Sprite.Create (result.Texture, new Rect (0, 0, 128, 128), new Vector2 (0.5f, 0.5f));
+//			GameObject.Find ("Canvas").transform.Find ("Avatar").gameObject.GetComponent<Image> ().sprite = Common.FB_avatar;
+//		}
+//
+//	}
 }

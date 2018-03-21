@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Result{
 	public string user_id;
@@ -26,7 +27,7 @@ public class PlayerInfo{
 	public string 		Name	  = "";
 	public int 			SeatID	  = -1;
 	public string 		FB_id     = "";
-	public Sprite 		FB_avatar = null;
+	public string 		FB_avatar = "";
 	public uint			Bet		  = 0;
 }
 
@@ -40,7 +41,7 @@ public class Common
 	public  static string 	FB_access_token	=	"";
 	public  static string 	FB_name			=	"";
 	public  static uint 	Uid				= 	0;
-	public  static Sprite   FB_avatar		= 	null;
+	public  static string   FB_avatar		= 	"";
 
 	//UserInfo
 	public static int		DiamondAmount	= 0;	
@@ -92,5 +93,35 @@ public class Common
 		}
 	}
 
+//	public static IEnumerator Load(Image img, string url)
+//	{
+//		double startTime = (double) Time.time;
+//
+//		WWW www = new WWW(url);
+//		yield return www;
+//		if (www!=null && string.IsNullOrEmpty(www.error))
+//		{
+//
+//			Texture2D texture = www.texture;
+//			Sprite sprite = Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),new Vector2(0.5f,0.5f) );
+//
+//			img.sprite = sprite;
+//			double time = (double)Time.time - startTime;
+//		} 
+//	}
+
+	public static IEnumerator Load(UICircle av, string url)
+	{
+		double startTime = (double) Time.time;
+
+		WWW www = new WWW(url);
+		yield return www;
+		if (www!=null && string.IsNullOrEmpty(www.error))
+		{
+			av.texture = www.texture as Texture;
+		} 
+	}
+
 	private Common() {}
 }
+

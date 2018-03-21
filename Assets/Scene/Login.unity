@@ -172,7 +172,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
 --- !u!222 &438937098
@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425d479c9f306e744a1c406ce6658f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Canvas: {fileID: 684690734}
 --- !u!1 &1013955555
 GameObject:
   m_ObjectHideFlags: 0

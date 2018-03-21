@@ -111,8 +111,8 @@ public class StateFinish : State {
 			avatar.transform.localPosition = new Vector3 ();
 			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (60, 60);
 
-			if (p.FB_avatar == null) {avatar.UseDefAvatar ();}
-			else {avatar.SetAvatar (p.FB_avatar.texture);}
+			if (string.IsNullOrEmpty(p.FB_avatar)) {avatar.UseDefAvatar ();}
+			else {StartCoroutine(Common.Load(avatar, Common.FB_avatar));}
 
 			PreInfoObj.Find ("Name").GetComponent<Text> ().text = p.Name;
 
