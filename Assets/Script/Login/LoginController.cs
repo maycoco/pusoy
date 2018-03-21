@@ -16,10 +16,10 @@ public class LoginController : MonoBehaviour {
 	}
 
 	void Awake(){
-		int id = Random.Range (100000, 999999);
-		Common.FB_id 			= id.ToString();
-		Common.FB_access_token 	= "dasdasdasndkasndlkasjdlkasjasdasd";
-		Common.FB_name			= "P"+id.ToString();
+//		int id = Random.Range (100000, 999999);
+//		Common.FB_id 			= id.ToString();
+//		Common.FB_access_token 	= "dasdasdasndkasndlkasjdlkasjasdasd";
+//		Common.FB_name			= "P"+id.ToString();
 
 		Loom.Initialize ();
 		InitCallbackForNet ();
@@ -39,11 +39,11 @@ public class LoginController : MonoBehaviour {
 		protonet.SetConnectedCall(Connected);
 		protonet.SetFailConnectedCall(FailedConnect);
 		protonet.SetDisConnectedCall(DisConnect);
-		protonet.SetDataCall(Data);
+		protonet.SetDataCall(Data);	
 	} 
 
 	public void ConnectServer(){
-		if(!string.IsNullOrEmpty(Common.FB_id) || !string.IsNullOrEmpty(Common.FB_access_token) || !string.IsNullOrEmpty(Common.FB_name)){
+		if(!string.IsNullOrEmpty(Common.FB_id) || !string.IsNullOrEmpty(Common.FB_access_token)){
 			protonet.ConnectServer ();
 		}
 	}
@@ -68,6 +68,7 @@ public class LoginController : MonoBehaviour {
 		if(data.Msgid  == MessageID.LoginRsp){
 			if(data.LoginRsp.Ret == 0){
 				Common.Uid = data.LoginRsp.Uid;
+				Common.FB_name = data.LoginRsp.Name;
 				Common.CRoom_id = data.LoginRsp.RoomId;
 				Loom.QueueOnMainThread(()=>{  
 					GotoLobby ();
@@ -84,7 +85,6 @@ public class LoginController : MonoBehaviour {
 		msg.LoginReq.Fb 		= new LoginFBReq();
 		msg.LoginReq.Fb.FbId 	= Common.FB_id;
 		msg.LoginReq.Fb.Token 	= Common.FB_access_token;
-		msg.LoginReq.Fb.Name 	= Common.FB_name;
 		using (var stream = new MemoryStream())
 		{
             msg.WriteTo(stream);
@@ -127,7 +127,8 @@ public class LoginController : MonoBehaviour {
 			Common.FB_access_token   	= res.access_token;
 
 			if(FB.IsLoggedIn){
-				FB.API("/me", HttpMethod.GET, this.InfoHandleResult);
+				//FB.API("/me", HttpMethod.GET, this.InfoHandleResult);
+				ConnectServer ();
 			}
 		}
 	}
