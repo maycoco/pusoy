@@ -60,10 +60,6 @@ public class JoinRoomControl : MonoBehaviour {
 	}
 
 	public void JoinRoom(){
-		//for demo
-		//LobbyControl.PlayGame();
-		//return;
-
 		if(!string.IsNullOrEmpty(Roomnumber)){
 			LobbyControl.JoinRoomServer (Roomnumber);
 		}

@@ -33,6 +33,7 @@ public class StateFinish : State {
 	}
 
 	public override void AdjustUI(){
+		m_StateManage.m_StateSeat.HideAutoBanker ();
 		Transform PreInfoCom = Layer.Find ("PreInfoCom");
 		for(int i = 0; i <PreInfoCom.childCount; i++){
 			
@@ -72,17 +73,8 @@ public class StateFinish : State {
 		} 
 		else {
 			CancelInvoke ();
-
-			//for demo
-			//Next ();
 		}
 		CountDowm--;
-	}
-
-
-	//for Demo
-	public void Next(){
-		m_StateManage.ChangeState (STATE.STATE_SEAT);
 	}
 
 	public void ShowResultInfo(){
@@ -129,7 +121,7 @@ public class StateFinish : State {
 			Transform number = PreInfoObj.Find ("Amount");
 			string	typestr = "";
 
-			if (hInfo.Win <= 0) {typestr = "lost";}
+			if (hInfo.Win < 0) {typestr = "lost";}
 			else {typestr = "win";}
 
 			string amount = Mathf.Abs (hInfo.Win).ToString ();
@@ -142,6 +134,15 @@ public class StateFinish : State {
 				t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (20, 24);
 				t.transform.localPosition = new Vector3 (left,0,0);
 				left = left - 18;
+
+				if(c == 0){
+					GameObject icon = new GameObject ();
+					icon.AddComponent<Image> ();
+					icon.GetComponent<Image>().sprite = Resources.Load ("Image/Game/"+ typestr + "icon" , typeof(Sprite)) as Sprite;
+					icon.transform.SetParent(number);
+					icon.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (20, 24);
+					icon.transform.localPosition = new Vector3 (left,0,0);
+				}
 			}
 
 			float right = number.localPosition.x - 16 * amount.Length;

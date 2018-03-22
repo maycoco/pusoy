@@ -77,10 +77,6 @@ public class StateSeat : State{
 			m_GameController.m_TatgetSeatID = SeatID;
 			m_GameController.SitDownServer (SeatID);
 		}
-
-		//demo
-		//m_GameController.SetSeatID (Common.Uid, SeatID);
-		//m_GameController.UpdateOrderList ();
 	}
 
 	public override void UpdateSeatOrder(){
@@ -104,7 +100,7 @@ public class StateSeat : State{
 				Layer.Find ("LetPlay").gameObject.SetActive (false);
 				Layer.Find ("TipsNoPlayers").gameObject.SetActive (true);
 			}
-			ShowAutoBanker (Common.CAutoBanker);
+			ShowAutoBanker (Common.CAutoBanker, true);
 
 		} else {
 			Layer.Find ("LetPlay").gameObject.SetActive (false);
@@ -153,16 +149,20 @@ public class StateSeat : State{
 		}
 	}
 
-	public void ShowAutoBanker(bool isauto){
+	public void ShowAutoBanker(bool isauto, bool adjust = false){
 		Layer.Find ("AutoBanker/Auto").gameObject.SetActive (true);
+
+
 		if (isauto) {
 			Layer.Find ("AutoBanker/Autot").gameObject.SetActive (true);
 		} else {
 			Layer.Find ("AutoBanker/Autot").gameObject.SetActive (false);
 		}
 
-		Common.CAutoBanker	= isauto;
-		m_GameController.AutoBankServer ();
+		if(!adjust){
+			Common.CAutoBanker	= isauto;
+			m_GameController.AutoBankServer ();
+		}
 	}
 
 	public void HideAutoBanker(){

@@ -120,11 +120,7 @@ public class CreateRoomControl : MonoBehaviour {
 	}
 
 	public void CheckIn(){
-		//for demo
-		//LobbyControl.PlayGame();
-		//return;
-
-
+		
 		string roomname 	= this.transform.Find ("InputName").GetComponent<InputField> ().text;
 
 		if(string.IsNullOrEmpty(roomname)){

@@ -130,9 +130,6 @@ public class StateSorting : State {
 	public override void Exit(){
 		CancelInvoke ();
 
-		//for demo
-		Common.CPokers.Clear ();
-
 		GameObject[] SortHandObjs = GameObject.FindGameObjectsWithTag("SortHand");
 		for(int i = 0; i < SortHandObjs.Length; i++){
 			Destroy (SortHandObjs[i]);
@@ -141,6 +138,7 @@ public class StateSorting : State {
 	}
 
 	 public override void AdjustUI(){
+		m_StateManage.m_StateSeat.HideAutoBanker ();
 		if (Effect_BaoPai != null) {Destroy (Effect_BaoPai);Effect_BaoPai = null;} 
 		if (Effect_DX != null) {Destroy (Effect_DX);Effect_DX = null;} 
 

@@ -55,6 +55,7 @@ public class StateShowHand : State {
 	}
 
 	public override void AdjustUI(){
+		m_StateManage.m_StateSeat.HideAutoBanker ();
 		Layer.gameObject.SetActive (true);
 
 		GameObject[] objs = GameObject.FindGameObjectsWithTag ("Hand");
@@ -69,6 +70,7 @@ public class StateShowHand : State {
 			}
 			HandObj.Find ("Lost").gameObject.SetActive (false);
 			HandObj.Find ("Win").gameObject.SetActive (false);
+			HandObj.Find ("Getlucky").gameObject.SetActive (false);
 		}
 	}
 
@@ -84,11 +86,6 @@ public class StateShowHand : State {
 		for(int i = 0; i < Seats.Count; i++) {
 			ShowPokerFace (Seats[i]);
 		}
-	}
-
-	//for demo
-	public void Next(){
-		m_StateManage.ChangeState (STATE.STATE_FINISH);
 	}
 
 	public void ShowBankerHands(){
@@ -156,6 +153,12 @@ public class StateShowHand : State {
 			if(SeatID == 0){return;}
 			Transform number = null;
 			string	typestr = "";
+
+			if (pinfo.autowin) {
+				HandObj.Find ("Getlucky").gameObject.SetActive (true);
+			} else {
+				HandObj.Find ("Getlucky").gameObject.SetActive (false);
+			}
 
 			if (pinfo.Win < 0) {
 				typestr = "lost";

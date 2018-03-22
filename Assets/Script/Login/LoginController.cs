@@ -63,9 +63,6 @@ public class LoginController : MonoBehaviour {
 	} 
 
 	public void ConnectServer(){
-		Canvas.transform.Find ("Button").gameObject.SetActive (false);
-		Canvas.transform.Find ("Loading").gameObject.SetActive (true);
-
 		if(!string.IsNullOrEmpty(Common.FB_id) || !string.IsNullOrEmpty(Common.FB_access_token)){
 			protonet.ConnectServer ();
 		}

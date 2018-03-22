@@ -123,14 +123,14 @@ public class GameController : MonoBehaviour {
 //		Common.FB_id = "123235234";
 //		Common.FB_access_token = "sd23edasdasdasdasd12easd";
 //		Common.FB_name = "Walter wang";
-//		Common.Uid = 222;
+//		Common.Uid = 888;
 //		Common.CMin_bet 	= 20;
 //		Common.CMax_bet 	= 1000;
 //		Common.CHands 		= 300;
 //		Common.CPlayed_hands= 10;
 //		Common.CIs_share 	= true;
 //		Common.CCredit_points = 1000;
-//		Common.CState 		= Msg.GameState.Ready;
+//		Common.CState 		= Msg.GameState.Result;
 //		if(Common.CState == Msg.GameState.Show){
 //			Common.ConfigBetTime = 5;
 //		}
@@ -156,20 +156,25 @@ public class GameController : MonoBehaviour {
 //
 //		Common.CPlayers.Add (p1);
 //
-//		for(int i = 0; i < 10; i++){
-//			PlayerInfo p3 = new PlayerInfo ();
-//			p3.Uid = 777;
-//			p3.SeatID = 2;
-//			p3.Name = "HAHA";
-//			p3.Bet = 200;
-//			Common.CPlayers.Add (p3);
-//		}
+//		PlayerInfo p3 = new PlayerInfo ();
+//		p3.Uid = 777;
+//		p3.SeatID = 2;
+//		p3.Name = "HAHA";
+//		p3.Bet = 200;
+//		Common.CPlayers.Add (p3);
+//
+//		PlayerInfo p4 = new PlayerInfo ();
+//		p4.Uid = 888;
+//		p4.SeatID = 3;
+//		p4.Name = "gegeg";
+//		p4.Bet = 100;
+//		Common.CPlayers.Add (p4);
 //
 //
 //
-//		int[] s = new int[]{1,13,3,36,5,6,24,8,18,10,38,12,27};
+//		int[] s = new int[]{1,13,3,14,5,6,24,40,18,10,38,12,27};
 //		Common.CPokers = new List<int> (s);
-		//ResultEvent (null);
+//		ResultEvent (null);
 
 		//Bet type
 		m_StateManage.m_StateBetting.UpdateDateBetType ();
@@ -378,9 +383,9 @@ public class GameController : MonoBehaviour {
 //
 //		SeatResult hinfo = new SeatResult ();
 //		hinfo.Bet = 2000;
-//		hinfo.Win = -150;
+//		hinfo.Win = 0;
 //		hinfo.SeatID = 0;
-//		hinfo.autowin = true;
+//		hinfo.autowin = false;
 //		hinfo.foul = false;
 //		hinfo.Pres.Add (arrr);
 //		hinfo.Pres.Add (arrr1);
@@ -394,6 +399,7 @@ public class GameController : MonoBehaviour {
 //		SeatResults.Add (0, hinfo);
 //		SeatResults.Add (1, hinfo);
 //		SeatResults.Add (2, hinfo);
+//		SeatResults.Add (3, hinfo);
 	}
 
 	public void LeaveRoomEvent(uint uid){

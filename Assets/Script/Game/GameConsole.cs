@@ -73,7 +73,7 @@ public class GameConsole : MonoBehaviour
 		string Mvp 			= "";
 		Debug.Log (slist.ToString ());
 		Debug.Log (slist.Count);
-		if(slist.Count > 0){Mvp = slist [0].Uid.ToString();}
+		if(slist.Count > 0){Mvp = slist [0].Name;}
 
 		string Roomfee 		= "";
 		if(Common.CIs_share){Roomfee = "shared";}{Roomfee = "no shared";}
@@ -103,16 +103,15 @@ public class GameConsole : MonoBehaviour
 			pinfo.transform.localPosition = new Vector3 (0, y ,0);
 			pinfo.transform.localScale = new Vector3 (1,1,1);
 
-			pinfo.transform.Find ("Name").GetComponent<Text> ().text = slist [i].Uid.ToString(); //Common.CPlayers [i].Name;
+			pinfo.transform.Find ("Name").GetComponent<Text> ().text = slist [i].Name; 
 
 			UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
 			avatar.transform.SetParent (pinfo.transform.Find ("Avatar"));
 			avatar.transform.localPosition = new Vector3 ();
 			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (70, 70);
 
-//			if (Common.CPlayers [i].FB_avatar != null) {
-//				avatar.SetAvatar (Common.CPlayers [i].FB_avatar.texture);
-//			}
+			if (string.IsNullOrEmpty (slist [i].Avatar)) {avatar.UseDefAvatar ();
+			} else {StartCoroutine(Common.Load(avatar, slist [i].Avatar));}
 
 			string typestr = "";
 			if (slist [i].Score < 0) {typestr = "lost";}
@@ -168,10 +167,9 @@ public class GameConsole : MonoBehaviour
 			avatar.transform.localPosition = new Vector3 ();
 			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (68, 68);
 
-//			if (Common.CPlayers [i].FB_avatar != null) {
-//				avatar.SetAvatar (Common.CPlayers [i].FB_avatar.texture);
-//			}
-//
+			if (string.IsNullOrEmpty (p.FB_avatar)) {avatar.UseDefAvatar ();
+			} else {StartCoroutine(Common.Load(avatar, p.FB_avatar));}
+
 			obleft += (70 + 24);
 		}
 	}
