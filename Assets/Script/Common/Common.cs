@@ -26,9 +26,9 @@ public class PlayerInfo{
 	public uint 		Uid		  = 0;
 	public string 		Name	  = "";
 	public int 			SeatID	  = -1;
-	public string 		FB_id     = "";
 	public string 		FB_avatar = "";
 	public uint			Bet		  = 0;
+	public int			Score	  = 0;
 }
 
 public class Common

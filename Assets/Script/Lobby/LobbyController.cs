@@ -213,6 +213,7 @@ public class LobbyController : MonoBehaviour {
 					p.Name 		= data.JoinRoomRsp.Room.Players[i].Name;
 					p.Bet 		= data.JoinRoomRsp.Room.Players[i].Bet;
 					p.FB_avatar = data.JoinRoomRsp.Room.Players[i].Avatar;
+					p.Score		= data.JoinRoomRsp.Room.Players[i].Score;
 
 					Debug.Log (p.Uid + "===" + p.SeatID + "===" +p.Name);
 					Common.CPlayers.Add (p);
