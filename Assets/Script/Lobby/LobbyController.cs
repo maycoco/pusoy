@@ -34,11 +34,14 @@ public class LobbyController : MonoBehaviour {
 	public PrefileControl		 	PrefileControl;
 	public SettingControl		 	SettingControl;
 
+	public GameObject 				Canvas;
+
 	//Data
 	private List<RoomInfo> 			RoomInfos = new List<RoomInfo>();
 
 	// Use this for initialization
 	void Start () {
+		CheckConnection ();
 	}
 
 	void Awake(){
@@ -82,6 +85,15 @@ public class LobbyController : MonoBehaviour {
 		SceneManager.LoadScene (2);
 	}
 
+	//connecting
+	public void CheckConnection(){
+		Debug.Log (Common.CRoom_number);
+		if(!string.IsNullOrEmpty(Common.CRoom_number)){
+			Canvas.transform.Find ("Connecting").gameObject.SetActive (true);
+			JoinRoomServer (Common.CRoom_number);
+		}
+	}
+
 
 	//===================================Room list=================================
 	public void GetRoomInfo(){
@@ -97,9 +109,9 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void UpdateRoomsInfo(){
-		Transform Content = GameObject.Find ("Canvas").transform.Find("RoomList/Viewport/Content");
+		Transform Content = Canvas.transform.Find("RoomList/Viewport/Content");
 
-		float width = GameObject.Find ("Canvas").transform.Find ("RoomList").GetComponent<RectTransform> ().sizeDelta.x;;
+		float width =Canvas.transform.Find ("RoomList").GetComponent<RectTransform> ().sizeDelta.x;;
 		float left 	= 4;
 
 		if (RoomInfos.Count < 3) {

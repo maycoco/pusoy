@@ -77,7 +77,7 @@ public class LoginController : MonoBehaviour {
 			if(data.LoginRsp.Ret == 0){
 				Common.Uid = data.LoginRsp.Uid;
 				Common.FB_name = data.LoginRsp.Name;
-				Common.CRoom_id = data.LoginRsp.RoomId;
+				Common.CRoom_number = data.LoginRsp.RoomNumber;
 				Common.FB_avatar = data.LoginRsp.Avatar;
 				Loom.QueueOnMainThread(()=>{  
 					GotoLobby ();
