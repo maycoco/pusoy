@@ -20,9 +20,17 @@ public class StateFinish : State {
 
 	public override void Enter(){
 		Layer.gameObject.SetActive (true);
-		AdjustUI ();
+
+		Common.CPlayed_hands++;
 		CountDowm = Common.ConfigFinishTime;
-		BeginCountDown ();
+
+		AdjustUI ();
+
+		if ((Common.CPlayed_hands + 1) < Common.CHands) {
+			BeginCountDown ();
+		} else {
+			Layer.Find ("OK/CountDown").GetComponent<Text> ().text = "OK";
+		}
 	}
 
 	public override void Exit(){
@@ -41,7 +49,7 @@ public class StateFinish : State {
 
 	public void UpdateSortingTime(){
 		if (CountDowm >= 0) {
-			Layer.Find ("OK/CountDown").GetComponent<Text> ().text = "（" + CountDowm + "）";
+			Layer.Find ("OK/CountDown").GetComponent<Text> ().text = "（" + CountDowm + "）OK";
 		} 
 		else {
 			CancelInvoke ();
@@ -49,9 +57,18 @@ public class StateFinish : State {
 		CountDowm--;
 	}
 
+	public void Next(){
+		if ((Common.CPlayed_hands + 1) < Common.CHands) {
+			m_StateManage.ChangeState (STATE.STATE_SEAT);
+		} else {
+			Exit ();
+			m_GameController.m_PlayerListMode = 1;
+			m_GameController.ScoreboardServer ();
+		}
+	}
+
 	public void ShowHandInfo(){
-		Layer.Find ("HandCount").GetComponent<Text>().text = "# " + (Common.CPlayed_hands + 1) + " / " + Common.CHands + " Hand";
-		Common.CPlayed_hands++;
+		Layer.Find ("HandCount").GetComponent<Text>().text = "# " + Common.CPlayed_hands + " / " + Common.CHands + " Hand";
 	}
 
 	public void ClearResultInfo(){
@@ -59,7 +76,7 @@ public class StateFinish : State {
 			Destroy(Layer.Find ("PreInfoCom").GetChild(i).gameObject);
 		}  
 	}
-
+		
 	public void ShowResultInfo(){
 		List<Vector3> poslist = new List<Vector3> ();
 		poslist.Add (new Vector3(0,286,0));
@@ -68,7 +85,6 @@ public class StateFinish : State {
 		poslist.Add (new Vector3(0,-386,0));
 
 		ClearResultInfo ();
-
 
 		List<int> Seats = new List<int> ();
 		foreach (KeyValuePair<int, SeatResult> pair in m_GameController.SeatResults) {

@@ -67,14 +67,27 @@ public class GameConsole : MonoBehaviour
 	///============================== Player list
 	///==============================
 	public void PlayerListReq(){
+		m_GameController.m_PlayerListMode = 0;
 		m_GameController.ScoreboardServer ();
 	}
 
-	public void ShowPlayerList(List<Msg.ScoreboardItem> slist){
+	public void ShowPlayerList(List<Msg.ScoreboardItem> slist, int mode){
 		CLearPlayerList ();
 		ClearObList ();
+		if(slist.Count <= 0){return;}
 
 		Transform layer  = GameObject.Find("Canvas").transform.Find("PlayersListLayer");
+
+		if (mode == 0) {
+			layer.Find ("Close").gameObject.SetActive (true);
+			layer.Find ("Observer").gameObject.SetActive (true);
+			layer.Find ("OK").gameObject.SetActive (false);
+		} else {
+			layer.Find ("Close").gameObject.SetActive (false);
+			layer.Find ("Observer").gameObject.SetActive (false);
+			layer.Find ("OK").gameObject.SetActive (true);
+		}
+
 		layer.gameObject.SetActive (true);
 
 		string BeginTime	= "2018-2-27 11:11";
@@ -82,12 +95,10 @@ public class GameConsole : MonoBehaviour
 		string Hands 		= (Common.CPlayed_hands+1) + " / " + Common.CHands;
 
 		string Mvp 			= "";
-		Debug.Log (slist.ToString ());
-		Debug.Log (slist.Count);
 		if(slist.Count > 0){Mvp = slist [0].Name;}
 
 		string Roomfee 		= "";
-		if(Common.CIs_share){Roomfee = "shared";}{Roomfee = "no shared";}
+		if(Common.CIs_share){Roomfee = "Shared";}{Roomfee = "Individual";}
 
 		string Betsize 		= Common.CMin_bet + "-" + Common.CMax_bet;
 		//layer.Find ("Date/Time").GetComponent<Text> ().text = BeginTime + " ~ " + EndTime;
@@ -152,36 +163,38 @@ public class GameConsole : MonoBehaviour
 		}
 
 		//Ob list
-		List<PlayerInfo> oblist = new List<PlayerInfo>();
-		foreach( PlayerInfo p in Common.CPlayers) {
-			if(p.SeatID == -1){
-				oblist.Add (p);
+		if(mode == 0){
+			List<PlayerInfo> oblist = new List<PlayerInfo>();
+			foreach( PlayerInfo p in Common.CPlayers) {
+				if(p.SeatID == -1){
+					oblist.Add (p);
+				}
 			}
-		}
-			
-		Transform ObContent = layer.Find ("Observer/ObList/Viewport/Content");
-		Vector3 oblistsize = layer.Find ("Observer/ObList").GetComponent<RectTransform> ().sizeDelta;
-		if(oblist.Count > 5){
-			ObContent.GetComponent<RectTransform> ().sizeDelta = new Vector2 (95 * oblist.Count - oblistsize.x, oblistsize.y);
-			ObContent.GetComponent<RectTransform> ().localPosition = new Vector3 (0, 0, 0);
-		}
-			
-		float obleft = 37;
-		foreach(PlayerInfo p in oblist){
-			GameObject obinfo = (GameObject)Instantiate(m_GameController.m_PrefabObInfo);  
-			obinfo.transform.SetParent (ObContent);
-			obinfo.transform.localPosition = new Vector3 (obleft, 0 ,0);
-			obinfo.transform.localScale = new Vector3 (1,1,1);
 
-			UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
-			avatar.transform.SetParent (obinfo.transform.Find ("Avatar"));
-			avatar.transform.localPosition = new Vector3 ();
-			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (68, 68);
+			Transform ObContent = layer.Find ("Observer/ObList/Viewport/Content");
+			Vector3 oblistsize = layer.Find ("Observer/ObList").GetComponent<RectTransform> ().sizeDelta;
+			if(oblist.Count > 5){
+				ObContent.GetComponent<RectTransform> ().sizeDelta = new Vector2 (95 * oblist.Count - oblistsize.x, oblistsize.y);
+				ObContent.GetComponent<RectTransform> ().localPosition = new Vector3 (0, 0, 0);
+			}
 
-			if (string.IsNullOrEmpty (p.FB_avatar)) {avatar.UseDefAvatar ();
-			} else {StartCoroutine(Common.Load(avatar, p.FB_avatar));}
+			float obleft = 37;
+			foreach(PlayerInfo p in oblist){
+				GameObject obinfo = (GameObject)Instantiate(m_GameController.m_PrefabObInfo);  
+				obinfo.transform.SetParent (ObContent);
+				obinfo.transform.localPosition = new Vector3 (obleft, 0 ,0);
+				obinfo.transform.localScale = new Vector3 (1,1,1);
 
-			obleft += (70 + 24);
+				UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
+				avatar.transform.SetParent (obinfo.transform.Find ("Avatar"));
+				avatar.transform.localPosition = new Vector3 ();
+				avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (68, 68);
+
+				if (string.IsNullOrEmpty (p.FB_avatar)) {avatar.UseDefAvatar ();
+				} else {StartCoroutine(Common.Load(avatar, p.FB_avatar));}
+
+				obleft += (70 + 24);
+			}
 		}
 	}
 
@@ -223,6 +236,12 @@ public class GameConsole : MonoBehaviour
 	public void OpenHandReview(){
 		RoundCount = 0;
 		m_GameController.GetRoundHistoryServer (RoundCount);
+	}
+
+	public void CloseHandReview(){
+		ClearHandReview ();
+		Transform Layer  = GameObject.Find("Canvas").transform.Find("HandReview");
+		Layer.gameObject.SetActive (false);
 	}
 
 	public void LastRoundReview(){
