@@ -21,14 +21,13 @@ public class LoginController : MonoBehaviour {
 	void Start () {
 		//for demo
 		Screen.SetResolution(448, 795, false);
-		Canvas.transform.Find ("Button").gameObject.SetActive (true);
 	}
 
 	void Awake(){
-//		int id = Random.Range (100000, 999999);
-//		Common.FB_id 			= id.ToString();
-//		Common.FB_access_token 	= "dasdasdasndkasndlkasjdlkasjasdasd";
-//		Common.FB_name			= "P"+id.ToString();
+		//int id = Random.Range (100000, 999999);
+		Common.FB_id 			= "740176969651533";
+		Common.FB_access_token 	= "EAAY4utOSxIgBAJVCIFacnRuBMMnqzSLq7B35hDHFQDZAxWcuayFfqmZCjsr5Ri17vXX0xJRAp40We6XXG3eRLUMIJ0Ld3lH5wSSv70HhZBOUZCEsYzXtrUnCTZAesx8zq4jrUJC4uSsvKxAHUJNrlBRrozdPHpbacBHO8ZAti6C7Ch9YBmqYmdY17jCnH20NxOGvbXqWjqlSKeE9jWMlnjSocDYLukC70ZD";
+		Common.FB_name			= "123333";
 
 		Loom.Initialize ();
 		InitCallbackForNet ();
@@ -37,21 +36,10 @@ public class LoginController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(async != null){
-			//Debug.Log(async.progress);
-			//Canvas.transform.Find ("Loading/Loading").GetComponent<Image>().fillAmount = async.progress;
-		}
 	}
 
 	public void GotoLobby(){
 		SceneManager.LoadScene (1);
-	}
-
-	IEnumerator loadScene()
-	{
-		async = SceneManager.LoadSceneAsync(1);
-		yield return async;
-
 	}
 
 	//===================================connect=================================
@@ -89,7 +77,7 @@ public class LoginController : MonoBehaviour {
 			if(data.LoginRsp.Ret == 0){
 				Common.Uid = data.LoginRsp.Uid;
 				Common.FB_name = data.LoginRsp.Name;
-				Common.CRoom_id = data.LoginRsp.RoomId;
+				Common.CRoom_number = data.LoginRsp.RoomNumber;
 				Common.FB_avatar = data.LoginRsp.Avatar;
 				Loom.QueueOnMainThread(()=>{  
 					GotoLobby ();
@@ -119,9 +107,10 @@ public class LoginController : MonoBehaviour {
 	}
 
 	public void LoginFacebook(){
-		if(FB.IsInitialized){
-			this.CallFBLogin();
-		}
+//		if(FB.IsInitialized){
+//			this.CallFBLogin();
+//		}
+		ConnectServer();
 	}
 
 	private void CallFBLogin(){

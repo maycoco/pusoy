@@ -163,12 +163,14 @@ public class StateShowHand : State {
 			if (pinfo.Win < 0) {
 				typestr = "lost";
 				HandObj.Find ("Lost").gameObject.SetActive (true);
-				number = HandObj.Find ("Lost/Number");
 			} else {
 				typestr = "win";
 				HandObj.Find ("Win").gameObject.SetActive (true);
-				number = HandObj.Find ("Win/Number");
 			}
+
+			for (int i = HandObj.Find ("Number").childCount - 1; i >= 0; i--) {  
+				Destroy(HandObj.Find ("Number").GetChild(i).gameObject);  
+			}  
 
 			string amount = Mathf.Abs (pinfo.Win).ToString ();
 			float left = 0;
@@ -176,7 +178,7 @@ public class StateShowHand : State {
 				GameObject t = new GameObject ();
 				t.AddComponent<Image> ();
 				t.GetComponent<Image>().sprite = Resources.Load ("Image/Game/"+ typestr + amount[c] , typeof(Sprite)) as Sprite;
-				t.transform.SetParent(number);
+				t.transform.SetParent(HandObj.Find ("Number"));
 				t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (20, 24);
 				t.transform.localPosition = new Vector3 (left,0,0);
 				left = left + 18;
