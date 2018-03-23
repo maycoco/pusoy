@@ -87,7 +87,7 @@ public class LobbyController : MonoBehaviour {
 
 	//connecting
 	public void CheckConnection(){
-		Debug.Log (Common.CRoom_number);
+		Canvas.transform.Find ("Connecting").gameObject.SetActive (false);
 		if(!string.IsNullOrEmpty(Common.CRoom_number)){
 			Canvas.transform.Find ("Connecting").gameObject.SetActive (true);
 			JoinRoomServer (Common.CRoom_number);

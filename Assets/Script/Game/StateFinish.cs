@@ -21,8 +21,6 @@ public class StateFinish : State {
 	public override void Enter(){
 		Layer.gameObject.SetActive (true);
 		AdjustUI ();
-		ShowResultInfo ();
-
 		CountDowm = Common.ConfigFinishTime;
 		BeginCountDown ();
 	}
@@ -33,34 +31,8 @@ public class StateFinish : State {
 	}
 
 	public override void AdjustUI(){
-		m_StateManage.m_StateSeat.HideAutoBanker ();
-		Transform PreInfoCom = Layer.Find ("PreInfoCom");
-		for(int i = 0; i <PreInfoCom.childCount; i++){
-			
-			Transform PreInfoObj = PreInfoCom.Find ("PreInfo" + i).transform;
-
-			PreInfoObj.Find ("Name").GetComponent<Text> ().text = "";
-
-			for (int o = PreInfoObj.Find ("Avatar").childCount - 1; o >= 0; o--) {  
-				Destroy (PreInfoObj.Find ("Avatar").GetChild(o).gameObject);
-			}  
-
-			PreInfoObj.Find ("GetLucky").gameObject.SetActive (false);
-			PreInfoObj.Find ("Foul").gameObject.SetActive (false);
-
-			for(int o = PreInfoObj.Find ("Amount").childCount - 1; o >= 0; o--){
-				Destroy (PreInfoObj.Find ("Amount").GetChild(o).gameObject);
-			}
-
-			PreInfoObj.Find ("Mask0").gameObject.SetActive (false);
-			PreInfoObj.Find ("Mask1").gameObject.SetActive (false);
-			PreInfoObj.Find ("Mask2").gameObject.SetActive (false);
-
-			PreInfoObj.Find ("Type0").GetComponent<Text> ().text = "";
-			PreInfoObj.Find ("Type1").GetComponent<Text> ().text = "";
-			PreInfoObj.Find ("Type2").GetComponent<Text> ().text = "";
-			PreInfoObj.gameObject.SetActive (false);
-		}
+		ShowHandInfo ();
+		ShowResultInfo ();
 	}
 
 	public void BeginCountDown(){
@@ -77,9 +49,26 @@ public class StateFinish : State {
 		CountDowm--;
 	}
 
-	public void ShowResultInfo(){
+	public void ShowHandInfo(){
 		Layer.Find ("HandCount").GetComponent<Text>().text = "# " + (Common.CPlayed_hands + 1) + " / " + Common.CHands + " Hand";
 		Common.CPlayed_hands++;
+	}
+
+	public void ClearResultInfo(){
+		for (int i = Layer.Find ("PreInfoCom").childCount - 1; i >= 0; i--) {  
+			Destroy(Layer.Find ("PreInfoCom").GetChild(i).gameObject);
+		}  
+	}
+
+	public void ShowResultInfo(){
+		List<Vector3> poslist = new List<Vector3> ();
+		poslist.Add (new Vector3(0,286,0));
+		poslist.Add (new Vector3(0,54,0));
+		poslist.Add (new Vector3(0,-165,0));
+		poslist.Add (new Vector3(0,-386,0));
+
+		ClearResultInfo ();
+
 
 		List<int> Seats = new List<int> ();
 		foreach (KeyValuePair<int, SeatResult> pair in m_GameController.SeatResults) {
@@ -91,34 +80,40 @@ public class StateFinish : State {
 		foreach (int seatid in Seats){
 			SeatResult hInfo = m_GameController.SeatResults[seatid];
 
-			Transform PreInfoObj = Layer.Find ("PreInfoCom/PreInfo" + index).transform;
-			PreInfoObj.gameObject.SetActive (true);
-		
-			PlayerInfo p = m_GameController.GetPlayerInfoForSeatID (seatid);
-			if(p == null){return;}
+			GameObject PreInfoObj = (GameObject)Instantiate(m_GameController.m_PrefabPreInfo);
+			PreInfoObj.transform.SetParent (Layer.Find ("PreInfoCom"));
+			PreInfoObj.transform.localPosition = poslist [index];
+			PreInfoObj.transform.localScale = new Vector3 (1, 1, 1);
 
 			UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
-			avatar.transform.SetParent (PreInfoObj.Find ("Avatar"));
+			avatar.transform.SetParent (PreInfoObj.transform.Find ("Avatar"));
 			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 ();
 			avatar.transform.localPosition = new Vector3 ();
 			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (60, 60);
 
-			if (string.IsNullOrEmpty(p.FB_avatar)) {avatar.UseDefAvatar ();}
+			if (string.IsNullOrEmpty(hInfo.Avatar)) {avatar.UseDefAvatar ();}
 			else {StartCoroutine(Common.Load(avatar, Common.FB_avatar));}
 
-			PreInfoObj.Find ("Name").GetComponent<Text> ().text = p.Name;
+			if (seatid == 0) {
+				PreInfoObj.transform.Find ("BBorder").gameObject.SetActive (true);
+				PreInfoObj.transform.Find ("BName").GetComponent<Text> ().text = hInfo.Name;
+			} else {
+				PreInfoObj.transform.Find ("PBorder").gameObject.SetActive (true);
+				PreInfoObj.transform.Find ("PName").GetComponent<Text> ().text = hInfo.Name;
+			}
+
 
 			for(int i = 0; i < hInfo.Pres.Count; i++){
                 RepeatedField<uint> pInfo = hInfo.Pres [i];
 
 				for(int o = 0; o < pInfo.Count; o++){
-					Transform Poker = PreInfoObj.Find ("Hand" + i + "/Poker" + o);
+					Transform Poker = PreInfoObj.transform.Find ("Hand" + i + "/Poker" + o);
 					Image image = Poker.GetComponent<Image>();
 					image.sprite = Resources.Load("Image/Poker/" + pInfo[o], typeof(Sprite)) as Sprite;
 				}
 			}
 
-			Transform number = PreInfoObj.Find ("Amount");
+			Transform number = PreInfoObj.transform.Find ("Amount");
 			string	typestr = "";
 
 			if (hInfo.Win < 0) {typestr = "lost";}
@@ -147,13 +142,13 @@ public class StateFinish : State {
 
 			float right = number.localPosition.x - 16 * amount.Length;
 			if (hInfo.autowin) {
-				PreInfoObj.Find ("GetLucky").gameObject.SetActive (true);
-				PreInfoObj.Find ("GetLucky").localPosition = new Vector3 (right, PreInfoObj.Find ("GetLucky").localPosition.y, 0);
+				PreInfoObj.transform.Find ("GetLucky").gameObject.SetActive (true);
+				PreInfoObj.transform.Find ("GetLucky").localPosition = new Vector3 (right, PreInfoObj.transform.Find ("GetLucky").localPosition.y, 0);
 			}
 
 			if (hInfo.foul) {
-				PreInfoObj.Find ("Foul").gameObject.SetActive (true);
-				PreInfoObj.Find ("Foul").localPosition = new Vector3( right, PreInfoObj.Find ("GetLucky").localPosition.y, 0);
+				PreInfoObj.transform.Find ("Foul").gameObject.SetActive (true);
+				PreInfoObj.transform.Find ("Foul").localPosition = new Vector3( right, PreInfoObj.transform.Find ("GetLucky").localPosition.y, 0);
 			}
 			index++;
 		}

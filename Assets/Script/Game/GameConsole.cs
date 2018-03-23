@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 using Msg;
+using Google.Protobuf.Collections;
 
 using UnityEngine.UI;
 using DG.Tweening;
@@ -9,6 +11,7 @@ using DG.Tweening;
 public class GameConsole : MonoBehaviour
 {
 	private bool			MenuOpen 	= false;
+	private uint 			RoundCount	= 0;
 	public 	GameController 	m_GameController;
 	public  GameObject 		m_ConsoleMenu;
 	public  GameObject		m_ConsoleMenu_Mask;
@@ -29,25 +32,30 @@ public class GameConsole : MonoBehaviour
 
 	public void MenuBTConsole(){
 		if (!MenuOpen) {
-			m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
-			m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_open");
-			m_ConsoleMenu_Mask.SetActive (true);
-			MenuOpen = true;
+			OpenMenu ();
 		} else {
-			m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
-			m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_close");
-			m_ConsoleMenu_Mask.SetActive (false);
-			MenuOpen = false;
+			CloseMenu ();
 		}
 	}
 
 	public void onClickButtonHandler(GameObject obj){
 		if(MenuOpen){
-			m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
-			m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_close");
-			m_ConsoleMenu_Mask.SetActive (false);
-			MenuOpen = false;
+			CloseMenu ();
 		}
+	}
+
+	public void OpenMenu(){
+		m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
+		m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_open");
+		m_ConsoleMenu_Mask.SetActive (true);
+		MenuOpen = true;
+	}
+		
+	public void CloseMenu(){
+		m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
+		m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_close");
+		m_ConsoleMenu_Mask.SetActive (false);
+		MenuOpen = false;
 	}
 
 	public void StandUp(){
@@ -55,6 +63,9 @@ public class GameConsole : MonoBehaviour
 		m_GameController.StandUpServer ();
 	}
 		
+	///==============================
+	///============================== Player list
+	///==============================
 	public void PlayerListReq(){
 		m_GameController.ScoreboardServer ();
 	}
@@ -202,6 +213,156 @@ public class GameConsole : MonoBehaviour
 		}  
 
 		layer.Find ("TablePlayers/Viewport/Content").GetComponent<RectTransform> ().sizeDelta = new Vector2 (0, layer.Find ("TablePlayers").GetComponent<RectTransform> ().sizeDelta.y);
+	}
+
+
+	///==============================
+	///============================== HandReview
+	///==============================
+
+	public void OpenHandReview(){
+		RoundCount = 0;
+		m_GameController.GetRoundHistoryServer (RoundCount);
+	}
+
+	public void LastRoundReview(){
+		if(RoundCount > 0){
+			RoundCount--;
+			m_GameController.GetRoundHistoryServer (RoundCount);
+		}
+	}
+
+	public void NextRoundReview(){
+		if((RoundCount + 1) <= Common.CPlayed_hands){
+			RoundCount++;
+			m_GameController.GetRoundHistoryServer (RoundCount);
+		}
+	}
+
+	public void ShowHandReview(Dictionary<int,  SeatResult> SeatResults){
+		UpdateRoundCount ();
+		ClearHandReview ();
+
+		Transform Layer  = GameObject.Find("Canvas").transform.Find("HandReview");
+		Layer.gameObject.SetActive (true);
+
+		List<Vector3> poslist = new List<Vector3> ();
+		poslist.Add (new Vector3(0,286,0));
+		poslist.Add (new Vector3(0,54,0));
+		poslist.Add (new Vector3(0,-165,0));
+		poslist.Add (new Vector3(0,-386,0));
+
+		List<int> Seats = new List<int> ();
+		foreach (KeyValuePair<int, SeatResult> pair in SeatResults) {
+			Seats.Add (pair.Key);
+		}
+		Seats.Sort ();
+
+		int index = 0;
+		foreach (int seatid in Seats){
+			SeatResult hInfo = SeatResults[seatid];
+		
+			GameObject PreInfoObj = (GameObject)Instantiate(m_GameController.m_PrefabPreInfo);
+			PreInfoObj.transform.SetParent (Layer.Find ("PreInfoCom"));
+			PreInfoObj.transform.localPosition = poslist [index];
+			PreInfoObj.transform.localScale = new Vector3 (1, 1, 1);
+
+			UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
+			avatar.transform.SetParent (PreInfoObj.transform.Find ("Avatar"));
+			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 ();
+			avatar.transform.localPosition = new Vector3 ();
+			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (60, 60);
+
+			if (string.IsNullOrEmpty(hInfo.Avatar)) {avatar.UseDefAvatar ();}
+			else {StartCoroutine(Common.Load(avatar, Common.FB_avatar));}
+
+			if (seatid == 0) {
+				PreInfoObj.transform.Find ("BBorder").gameObject.SetActive (true);
+				PreInfoObj.transform.Find ("BName").GetComponent<Text> ().text = hInfo.Name;
+			} else {
+				PreInfoObj.transform.Find ("PBorder").gameObject.SetActive (true);
+				PreInfoObj.transform.Find ("PName").GetComponent<Text> ().text = hInfo.Name;
+			}
+
+
+			for(int i = 0; i < hInfo.Pres.Count; i++){
+				RepeatedField<uint> pInfo = hInfo.Pres [i];
+
+				for(int o = 0; o < pInfo.Count; o++){
+					Transform Poker = PreInfoObj.transform.Find ("Hand" + i + "/Poker" + o);
+					Image image = Poker.GetComponent<Image>();
+					image.sprite = Resources.Load("Image/Poker/" + pInfo[o], typeof(Sprite)) as Sprite;
+				}
+			}
+
+			Transform number = PreInfoObj.transform.Find ("Amount");
+			string	typestr = "";
+
+			if (hInfo.Win < 0) {typestr = "lost";}
+			else {typestr = "win";}
+
+			string amount = Mathf.Abs (hInfo.Win).ToString ();
+			float left = 0;
+			for (int c = amount.Length - 1; c >= 0; c--) {  
+				GameObject t = new GameObject ();
+				t.AddComponent<Image> ();
+				t.GetComponent<Image>().sprite = Resources.Load ("Image/Game/"+ typestr + amount[c] , typeof(Sprite)) as Sprite;
+				t.transform.SetParent(number);
+				t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (20, 24);
+				t.transform.localPosition = new Vector3 (left,0,0);
+				left = left - 18;
+
+				if(c == 0){
+					GameObject icon = new GameObject ();
+					icon.AddComponent<Image> ();
+					icon.GetComponent<Image>().sprite = Resources.Load ("Image/Game/"+ typestr + "icon" , typeof(Sprite)) as Sprite;
+					icon.transform.SetParent(number);
+					icon.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (20, 24);
+					icon.transform.localPosition = new Vector3 (left,0,0);
+				}
+			}
+
+			float right = number.localPosition.x - 16 * amount.Length;
+			if (hInfo.autowin) {
+				PreInfoObj.transform.Find ("GetLucky").gameObject.SetActive (true);
+				PreInfoObj.transform.Find ("GetLucky").localPosition = new Vector3 (right, PreInfoObj.transform.Find ("GetLucky").localPosition.y, 0);
+			}
+
+			if (hInfo.foul) {
+				PreInfoObj.transform.Find ("Foul").gameObject.SetActive (true);
+				PreInfoObj.transform.Find ("Foul").localPosition = new Vector3( right, PreInfoObj.transform.Find ("GetLucky").localPosition.y, 0);
+			}
+			index++;
+		}
+	}
+
+	public void ClearHandReview(){
+		Transform Layer  = GameObject.Find("Canvas").transform.Find("HandReview");
+		for (int i = Layer.Find ("PreInfoCom").childCount - 1; i >= 0; i--) {  
+			Destroy(Layer.Find ("PreInfoCom").GetChild(i).gameObject);
+		}  
+	}
+
+	public void UpdateRoundCount(){
+		Transform Layer  = GameObject.Find("Canvas").transform.Find("HandReview");
+		Layer.Find ("RoundCount").GetComponent<Text> ().text = "";
+		Layer.Find ("Left").gameObject.SetActive (false);
+		Layer.Find ("Right").gameObject.SetActive (false);
+
+		if (Common.CPlayed_hands > 0) {
+			Layer.Find ("RoundCount").GetComponent<Text> ().text = (RoundCount + 1).ToString () + "/" + (Common.CPlayed_hands).ToString ();
+
+			Layer.Find ("Left").gameObject.SetActive (true);
+			Layer.Find ("Right").gameObject.SetActive (true);
+
+			if(RoundCount <= 0){
+				Layer.Find ("Left").gameObject.SetActive (false);
+			}
+
+			if((RoundCount+1) == Common.CPlayed_hands){
+				Layer.Find ("Right").gameObject.SetActive (false);
+			}
+		} 
 	}
 }
 

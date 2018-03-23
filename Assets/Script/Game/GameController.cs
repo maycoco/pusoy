@@ -20,14 +20,17 @@ public class PreInfo{
 }
 
 public class SeatResult{
-	public int SeatID;
-	public RepeatedField<RepeatedField<uint>> Pres 	= new RepeatedField<RepeatedField<uint>>();
-	public List<int> score		 	= new List<int> ();
-	public RepeatedField<global::Msg.CardRank> Ranks = new RepeatedField<global::Msg.CardRank>();
-	public bool autowin;
-	public bool foul;
-	public int Bet;
-	public int Win;
+	public int 		SeatID;
+	public string	Name;
+	public string 	Avatar;
+	public string 	Uid;
+	public bool 	autowin;
+	public bool 	foul;
+	public int 		Bet;
+	public int 		Win;
+	public List<int> 							score	= new List<int> ();
+	public RepeatedField<RepeatedField<uint>> 	Pres 	= new RepeatedField<RepeatedField<uint>>();
+	public RepeatedField<global::Msg.CardRank> 	Ranks 	= new RepeatedField<global::Msg.CardRank>();
 }
 	
 public class GameController : MonoBehaviour {
@@ -42,6 +45,7 @@ public class GameController : MonoBehaviour {
 	public GameObject			   						m_PrefabRank;
 	public GameObject			   						m_PrefabTPlayer;
 	public GameObject			   						m_PrefabObInfo;
+	public GameObject			   						m_PrefabPreInfo;
 	public UICircle			   							m_PrefabAvatar;
 	public Poker			   							m_PrefabPoker;
 
@@ -127,7 +131,7 @@ public class GameController : MonoBehaviour {
 		Common.CMin_bet 	= 20;
 		Common.CMax_bet 	= 1000;
 		Common.CHands 		= 300;
-		Common.CPlayed_hands= 10;
+		Common.CPlayed_hands= 3;
 		Common.CIs_share 	= true;
 		Common.CCredit_points = 1000;
 		Common.CState 		= Msg.GameState.Show;
@@ -354,8 +358,15 @@ public class GameController : MonoBehaviour {
 //			SeatResult info 	= new SeatResult ();
 //			info.SeatID 		= (int)ResultList [i].SeatId;
 //
-//			if((int)ResultList [i].SeatId != 0){
-//				info.score 			= new List<int> (ResultList [i].Scores);
+//			if((int)ResultList [i].SeatId != 0){info.score 			= new List<int> (ResultList [i].Scores);}
+//
+//			PlayerInfo p = GetPlayerInfoForSeatID (info.SeatID);
+//			if (p == null) {
+//				info.Name = "";
+//				info.Avatar = "";
+//			} else {
+//				info.Name 	= p.Name;
+//				info.Avatar = p.FB_avatar;
 //			}
 //
 //			info.autowin 		= ResultList [i].Autowin;
@@ -381,10 +392,12 @@ public class GameController : MonoBehaviour {
 		RepeatedField<uint> arrr2 = new RepeatedField<uint>{ arr2 };
 
 		SeatResult hinfo = new SeatResult ();
+		hinfo.Name = "walter";
+		hinfo.Avatar = "";
 		hinfo.Bet = 2000;
 		hinfo.Win = 0;
 		hinfo.SeatID = 0;
-		hinfo.autowin = false;
+		hinfo.autowin = true;
 		hinfo.foul = false;
 		hinfo.Pres.Add (arrr);
 		hinfo.Pres.Add (arrr1);
@@ -500,6 +513,36 @@ public class GameController : MonoBehaviour {
 			}
 			break;
 
+		case MessageID.GetRoundHistoryRsp:
+			if (data.GetRoundHistoryRsp.Ret == 0) {
+				Loom.QueueOnMainThread (() => {
+					
+					if(data.GetRoundHistoryRsp.Results.Count <= 0){return;}
+
+					Dictionary<int,  SeatResult> LSeatResults 	= new Dictionary<int, SeatResult>();
+
+					for(int i = 0; i < data.GetRoundHistoryRsp.Results.Count; i++){
+						Msg.PlayerRoundHistory ps = data.GetRoundHistoryRsp.Results[i];
+
+						SeatResult info 	= new SeatResult ();
+						info.SeatID 		= (int)ps.Result.SeatId;
+						info.Name 			= ps.Name;
+						info.Avatar 		= ps.Avatar;
+						info.autowin 		= ps.Result.Autowin;
+						info.foul			= ps.Result.Foul;
+						info.Win 			= ps.Result.Win;
+						info.Ranks 			= ps.Result.Ranks;
+
+						for(int o = 0; o < ps.Result.CardGroups.Count; o++){
+							Msg.CardGroup cg = ps.Result.CardGroups[o];
+							info.Pres.Add (cg.Cards);
+						}
+						LSeatResults.Add (info.SeatID, info);
+					}
+				});
+			}
+			break;
+
 		case MessageID.GameStateNotify:
 			Debug.Log (data.GameStateNotify.State.ToString());
 			switch(data.GameStateNotify.State){
@@ -601,6 +644,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void LeaveRoomServer(){
+		m_GameConsole.CloseMenu ();
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.LeaveRoomReq;
 		msg.LeaveRoomReq 				= new LeaveRoomReq();
@@ -641,6 +686,7 @@ public class GameController : MonoBehaviour {
 	public void StandUpServer(){
 		if(m_SelfSeatID == -1){return;}
 		if(m_StateManage.GetCulState() == STATE.STATE_SEAT || m_StateManage.GetCulState() == STATE.STATE_BETTING){
+			m_GameConsole.CloseMenu ();
 			
 			if(GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){
 				return;
@@ -710,5 +756,22 @@ public class GameController : MonoBehaviour {
 			msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
 		}
+	}
+
+	public void GetRoundHistoryServer(uint round){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.GetRoundHistoryReq;
+		msg.GetRoundHistoryReq 			= new GetRoundHistoryReq();
+		msg.GetRoundHistoryReq.Round 	= round;
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
+	public void Text(){
+		m_GameConsole.ShowHandReview (SeatResults);
 	}
 }
