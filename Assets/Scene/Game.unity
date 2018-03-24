@@ -27888,7 +27888,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabTPlayer: {fileID: 1087233344994452, guid: 985d280bdb645df4eaa9c30d93357913,
     type: 2}
-  m_PrefabObInfo: {fileID: 1287396203463620, guid: c948a7fb6280c524da258de451b57070,
+  m_PrefabObInfo: {fileID: 1554605694919392, guid: c948a7fb6280c524da258de451b57070,
     type: 2}
   m_PrefabPreInfo: {fileID: 1282199104857564, guid: 17f3ebf299693bb46b122641c941e030,
     type: 2}
