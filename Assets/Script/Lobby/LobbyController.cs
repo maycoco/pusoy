@@ -23,6 +23,7 @@ public class LobbyController : MonoBehaviour {
 	//Prefab
 	public GameObject 				PrefabRoomInfo;
 	public GameObject 				PrefabDialog;
+	public UICircle 				PrefabAvatar;
 
 	//Controller
 	public CreateRoomControl 		CreateRoomControl;
@@ -46,8 +47,7 @@ public class LobbyController : MonoBehaviour {
 
 	void Awake(){
 		InitCallbackForNet ();
-		//GetUserInfo ();
-		//GetRoomInfo ();
+		GetRoomInfo ();
 		UpdateRoomsInfo ();
 	}
 	
@@ -97,28 +97,39 @@ public class LobbyController : MonoBehaviour {
 
 	//===================================Room list=================================
 	public void GetRoomInfo(){
-		for(int i = 0; i < 27; i++){
+		for(int i = 0; i < 3; i++){
 			RoomInfo a 		= new RoomInfo ();
 			a.CurRound 		= 10;
 			a.TotalRound 	= 20;
 			a.Name 			= "Room"+i;
 			a.RoomId 		= 123;
 			a.Players 		= new List<int> ();
+			a.Players.Add (1);
+			a.Players.Add (1);
+			a.Players.Add (1);
+			a.Players.Add (1);
 			RoomInfos.Add (a);
 		}
 	}
 
+	public void onCloseRoomHandler(GameObject obj){
+		RoomInfos.RemoveAt (0);
+		UpdateRoomsInfo ();
+	}
+		
+
 	public void UpdateRoomsInfo(){
 		Transform Content = Canvas.transform.Find("RoomList/Viewport/Content");
+
+		for (int i = Content.childCount - 1; i >= 0; i--) {  
+			Destroy(Content.GetChild(i).gameObject);
+		}  
 
 		float width =Canvas.transform.Find ("RoomList").GetComponent<RectTransform> ().sizeDelta.x;;
 		float left 	= 4;
 
-		if (RoomInfos.Count < 3) {
-			width = 0;
-		} else {
-			width = 200 * RoomInfos.Count + 33 * (RoomInfos.Count - 1) - width + 8;
-		}
+		if (RoomInfos.Count < 3) {width = 0;
+		} else {width = 200 * RoomInfos.Count + 33 * (RoomInfos.Count - 1) - width + 8;}
 
 		Content.GetComponent<RectTransform> ().sizeDelta = new Vector2 (width, Content.GetComponent<RectTransform> ().sizeDelta.y);
 
@@ -128,6 +139,15 @@ public class LobbyController : MonoBehaviour {
 			RoomInfo.transform.Find ("Name").GetComponent<Text> ().text = RoomInfos [i].Name;
 			RoomInfo.transform.Find ("Hand").GetComponent<Text> ().text = RoomInfos [i].CurRound + "/" + RoomInfos [i].TotalRound;
 
+			for(int o = 0; o < RoomInfos[i].Players.Count; o++){
+				UICircle avatar = (UICircle)Instantiate(PrefabAvatar);
+				avatar.transform.SetParent (RoomInfo.transform.Find ("Player" + o));
+				avatar.transform.localPosition = new Vector3 ();
+				avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (54, 54);
+
+			}
+
+			EventTriggerListener.Get(RoomInfo).onClick = onCloseRoomHandler;
 			RoomInfo.transform.SetParent (Content);
 			RoomInfo.transform.localScale = new Vector3 (1, 1, 1);
 			RoomInfo.transform.localPosition = new Vector3 (left, 0, 0);
