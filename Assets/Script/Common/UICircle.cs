@@ -9,20 +9,7 @@ public class UICircle : RawImage
 	float thickness = 5;
 
 	[SerializeField][Range(4,360)]
-	int _segments = 36;
-
-	public int segments {
-		get { return _segments;}
-		set	{ 
-			if (_segments != value) {
-				_segments = value; 
-				SetVerticesDirty ();
-				#if UNITY_EDITOR
-				UnityEditor.EditorUtility.SetDirty (transform);
-				#endif
-			}
-		}
-	}
+	int segments = 180;
 
 
 	protected override void OnRectTransformDimensionsChange ()

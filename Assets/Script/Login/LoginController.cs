@@ -25,9 +25,9 @@ public class LoginController : MonoBehaviour {
 
 	void Awake(){
 		//int id = Random.Range (100000, 999999);
-		Common.FB_id 			= "740176969651533";
-		Common.FB_access_token 	= "EAAY4utOSxIgBAJVCIFacnRuBMMnqzSLq7B35hDHFQDZAxWcuayFfqmZCjsr5Ri17vXX0xJRAp40We6XXG3eRLUMIJ0Ld3lH5wSSv70HhZBOUZCEsYzXtrUnCTZAesx8zq4jrUJC4uSsvKxAHUJNrlBRrozdPHpbacBHO8ZAti6C7Ch9YBmqYmdY17jCnH20NxOGvbXqWjqlSKeE9jWMlnjSocDYLukC70ZD";
-		Common.FB_name			= "123333";
+		//Common.FB_id 			= "740176969651533";
+		//Common.FB_access_token 	= "EAAY4utOSxIgBAJVCIFacnRuBMMnqzSLq7B35hDHFQDZAxWcuayFfqmZCjsr5Ri17vXX0xJRAp40We6XXG3eRLUMIJ0Ld3lH5wSSv70HhZBOUZCEsYzXtrUnCTZAesx8zq4jrUJC4uSsvKxAHUJNrlBRrozdPHpbacBHO8ZAti6C7Ch9YBmqYmdY17jCnH20NxOGvbXqWjqlSKeE9jWMlnjSocDYLukC70ZD";
+		//Common.FB_name			= "123333";
 
 		Loom.Initialize ();
 		InitCallbackForNet ();
@@ -94,6 +94,10 @@ public class LoginController : MonoBehaviour {
 		msg.LoginReq.Fb 		= new LoginFBReq();
 		msg.LoginReq.Fb.FbId 	= Common.FB_id;
 		msg.LoginReq.Fb.Token 	= Common.FB_access_token;
+
+
+		Debug.Log (Common.FB_id);
+		Debug.Log (Common.FB_access_token);
 		using (var stream = new MemoryStream())
 		{
             msg.WriteTo(stream);
@@ -107,10 +111,9 @@ public class LoginController : MonoBehaviour {
 	}
 
 	public void LoginFacebook(){
-//		if(FB.IsInitialized){
-//			this.CallFBLogin();
-//		}
-		ConnectServer();
+		if(FB.IsInitialized){
+			this.CallFBLogin();
+		}
 	}
 
 	private void CallFBLogin(){

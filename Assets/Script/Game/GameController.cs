@@ -328,6 +328,9 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void ExitGame(){
+		Common.CRoom_number = "";
+		Common.CPlayers.Clear ();
+		Common.CPokers.Clear ();
 		SceneManager.LoadScene (1);
 	}
 
@@ -452,8 +455,7 @@ public class GameController : MonoBehaviour {
 		if(data == null){
 			return; 
 		}
-
-		Debug.Log (data.ToString ());
+			
 		switch (data.Msgid) {
 
 		case MessageID.LeaveRoomRsp:
@@ -547,7 +549,6 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.GameStateNotify:
-			Debug.Log (data.GameStateNotify.State.ToString());
 			switch(data.GameStateNotify.State){
 	
 			case Msg.GameState.Ready:
@@ -586,7 +587,6 @@ public class GameController : MonoBehaviour {
 
 			case Msg.GameState.Show:
 				Loom.QueueOnMainThread(()=>{
-					Debug.Log(data.GameStateNotify.Result.ToString());
 					ResultEvent(data.GameStateNotify.Result);
 					m_StateManage.ChangeState (STATE.STATE_SHOWHAND);
 				}); 
@@ -620,8 +620,6 @@ public class GameController : MonoBehaviour {
 
 		case MessageID.JoinRoomNotify:
 			Loom.QueueOnMainThread(()=>{
-				Debug.Log(data.JoinRoomNotify.Uid);
-				Debug.Log(GetSeatIDForPlayerID (data.JoinRoomNotify.Uid));
 				if (GetSeatIDForPlayerID (data.JoinRoomNotify.Uid) == 999) {
 					PlayerInfo p = new PlayerInfo ();
 					p.Uid 		= data.JoinRoomNotify.Uid;

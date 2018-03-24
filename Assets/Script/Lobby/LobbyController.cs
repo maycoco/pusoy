@@ -141,9 +141,9 @@ public class LobbyController : MonoBehaviour {
 
 			for(int o = 0; o < RoomInfos[i].Players.Count; o++){
 				UICircle avatar = (UICircle)Instantiate(PrefabAvatar);
-				avatar.transform.SetParent (RoomInfo.transform.Find ("Player" + o));
+				avatar.transform.SetParent (RoomInfo.transform.Find ("Player" + o + "/Avatar"));
 				avatar.transform.localPosition = new Vector3 ();
-				avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (54, 54);
+				avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (56, 56);
 
 			}
 

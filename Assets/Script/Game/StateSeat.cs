@@ -65,7 +65,7 @@ public class StateSeat : State{
 			UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
 			avatar.transform.SetParent (Layer.Find ("SeatCom/Seat" + i + "/Avatar"));
 			avatar.transform.localPosition = new Vector3 ();
-			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (92, 92);
+			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (90, 90);
 			Avatars.Add (avatar);
 		}
 	}

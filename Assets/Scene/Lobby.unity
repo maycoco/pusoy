@@ -2784,8 +2784,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 717388110}
   - {fileID: 822244974}
+  - {fileID: 717388110}
   m_Father: {fileID: 253042948}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8091,7 +8091,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 246519108}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9497,7 +9497,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  _segments: 36
+  segments: 360
 --- !u!222 &814692991
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9625,7 +9625,7 @@ Prefab:
     - target: {fileID: 224893313218067314, guid: 9af53284b99d0d145a6f67254a9c92ea,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224893313218067314, guid: 9af53284b99d0d145a6f67254a9c92ea,
         type: 2}
@@ -9640,12 +9640,12 @@ Prefab:
     - target: {fileID: 224893313218067314, guid: 9af53284b99d0d145a6f67254a9c92ea,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 124
       objectReference: {fileID: 0}
     - target: {fileID: 224893313218067314, guid: 9af53284b99d0d145a6f67254a9c92ea,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 124
       objectReference: {fileID: 0}
     - target: {fileID: 224893313218067314, guid: 9af53284b99d0d145a6f67254a9c92ea,
         type: 2}
@@ -12118,7 +12118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b030fb783dbb448db12801c4fb09726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabRoomInfo: {fileID: 1349472541168610, guid: 08138f929721adf43bed6717df88e270,
+  PrefabRoomInfo: {fileID: 1907860323133494, guid: 08138f929721adf43bed6717df88e270,
     type: 2}
   PrefabDialog: {fileID: 1436015893693766, guid: 6ba7c72446a13554ea2f70fc89eb2db7,
     type: 2}
@@ -13714,7 +13714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Avatar: {fileID: 822244975}
   m_Drecord: {fileID: 1589461707301654, guid: 20c47dc1359f797439984e80ba15d76e, type: 2}
-  m_Precord: {fileID: 1170512694437668, guid: c6e937e69900d2f4596b490526381fe9, type: 2}
+  m_Precord: {fileID: 1269338807054988, guid: c6e937e69900d2f4596b490526381fe9, type: 2}
   m_Date: {fileID: 1271630719674622, guid: f0f50fb2eef0d72428253d0361286dab, type: 2}
 --- !u!1 &1275143784
 GameObject:
@@ -16770,7 +16770,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  _segments: 36
+  segments: 360
 --- !u!222 &1517179456
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17101,7 +17101,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  _segments: 36
+  segments: 360
 --- !u!222 &1537370888
 CanvasRenderer:
   m_ObjectHideFlags: 0
