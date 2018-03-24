@@ -513,6 +513,7 @@ public class GameController : MonoBehaviour {
 					foreach(Msg.ScoreboardItem t in data.GetScoreboardRsp.Items){
 						list.Add(t);
 					}
+					Debug.Log(list.Count);
 					m_GameConsole.ShowPlayerList (list, m_PlayerListMode);
 				});
 			}

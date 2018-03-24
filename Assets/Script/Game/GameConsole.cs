@@ -74,7 +74,6 @@ public class GameConsole : MonoBehaviour
 	public void ShowPlayerList(List<Msg.ScoreboardItem> slist, int mode){
 		CLearPlayerList ();
 		ClearObList ();
-		if(slist.Count <= 0){return;}
 
 		Transform layer  = GameObject.Find("Canvas").transform.Find("PlayersListLayer");
 
