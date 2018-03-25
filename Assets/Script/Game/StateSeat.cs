@@ -127,7 +127,7 @@ public class StateSeat : State{
 				SeatObject.Find ("Border").gameObject.SetActive (true);
 				SeatObject.Find ("Name").GetComponent<Text> ().text = p.Name;
 
-				if(!string.IsNullOrEmpty(p.FB_avatar)){ StartCoroutine(Common.Load(Avatars [p.SeatID], Common.FB_avatar));  }
+				if(!string.IsNullOrEmpty(p.FB_avatar)){ StartCoroutine(Common.Load(Avatars [p.SeatID], p.FB_avatar));  }
 				else{Avatars [p.SeatID].UseDefAvatar ();}
 
 				SeatObject.Find ("Avatar").gameObject.SetActive (true);

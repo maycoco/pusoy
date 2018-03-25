@@ -110,16 +110,32 @@ public class Common
 //		} 
 //	}
 
+	public static Dictionary<string,  Texture> AvatarCache 	= new Dictionary<string, Texture>();
+
+	public static IEnumerator DownAvatar(string url){
+		if(!AvatarCache.ContainsKey(url)){
+			WWW www = new WWW(url);
+			yield return www;
+			if (www!=null && string.IsNullOrEmpty(www.error))
+			{
+				AvatarCache.Add (url, www.texture as Texture);
+			} 
+		}
+	}
+
 	public static IEnumerator Load(UICircle av, string url)
 	{
-		double startTime = (double) Time.time;
-
-		WWW www = new WWW(url);
-		yield return www;
-		if (www!=null && string.IsNullOrEmpty(www.error))
-		{
-			av.texture = www.texture as Texture;
-		} 
+		if (AvatarCache.ContainsKey (url)) {
+			av.texture = AvatarCache [url];
+		} else {
+			WWW www = new WWW(url);
+			yield return www;
+			if (www!=null && string.IsNullOrEmpty(www.error))
+			{
+				AvatarCache.Add (url, www.texture as Texture);
+				av.texture = AvatarCache [url];
+			} 
+		}
 	}
 
 	private Common() {}
