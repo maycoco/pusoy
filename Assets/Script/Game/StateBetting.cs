@@ -32,36 +32,23 @@ public class StateBetting : State {
 		Debug.Log ("==============================state betting===================================");
 		Layer.gameObject.SetActive (true);
 
-		foreach(PlayerInfo p in Common.CPlayers){
-			p.Bet = 0;
-		}
-
 		BettingTime = Common.ConfigBetTime;
+
+		ClearAllChips ();
 		BeginCountDown ();
 		m_Chips.Clear ();
 		m_ChipsPos.Clear ();
 		m_ChipsBeginPos.Clear ();
 		CreateChipPos ();
 
-		if (m_GameController.m_SelfSeatID != -1 && m_GameController.m_SelfSeatID != 0 && m_GameController.GetPlayerInfoForSeatID(m_GameController.m_SelfSeatID).Bet == 0) {
+		if (m_GameController.m_SelfSeatID > 0 && m_GameController.GetPlayerInfoForSeatID(m_GameController.m_SelfSeatID).Bet == 0) {
 			AdjustUI ();
 		}
-	}
 
-	public override void DisEnter (){
-		Layer.gameObject.SetActive (true);
-
-		BettingTime = Common.ConfigBetTime;
-		BeginCountDown ();
-		m_Chips.Clear ();
-		m_ChipsPos.Clear ();
-		m_ChipsBeginPos.Clear ();
-		CreateChipPos ();
-
-		if (m_GameController.m_SelfSeatID != -1 && m_GameController.m_SelfSeatID != 0 && m_GameController.GetPlayerInfoForSeatID(m_GameController.m_SelfSeatID).Bet == 0) {
-			AdjustUI ();
+		if(m_GameController.m_SelfSeatID == 0){
+			m_StateManage.m_StateSeat.ShowAutoBanker ();
+			m_StateManage.m_StateSeat.UpdateAutoBanker ();
 		}
-		UpdatePlayersChips ();
 	}
 
 	public void UpdateDateBetType(){
@@ -97,14 +84,19 @@ public class StateBetting : State {
 	}
 
 	public override void Exit (){
+		ClearChipsButton ();
+		ClearCountDown ();
+
+		foreach(PlayerInfo p in Common.CPlayers){p.Bet = 0;}
+		m_StateManage.m_StateSeat.HideAutoBanker ();
+		Layer.gameObject.SetActive (false);
+	}
+
+	public void ClearAllChips(){
 		UpdateChipsUI (0,0);
 		UpdateChipsUI (1,0);
 		UpdateChipsUI (2,0);
 		UpdateChipsUI (3,0);
-		ClearChipsButton ();
-		ClearCountDown ();
-		Layer.gameObject.SetActive (false);
-		m_StateManage.m_StateSeat.HideAutoBanker ();
 	}
 
 	public void BeginCountDown(){
@@ -207,8 +199,12 @@ public class StateBetting : State {
 		for(int i = 0; i < TableChips.Count; i++){
 			GameObject Chip = (GameObject)Instantiate(m_GameController.m_PrefabChip);  
 			Chip.transform.SetParent (Obj.transform);
-			//Chip.transform.name = TableChips [i].ToString ();
-			Chip.transform.localPosition = RandomChipsPos();
+
+			if (i == 0) {
+				Chip.transform.localPosition = new Vector3 (0, 0, 0);
+			} else {
+				Chip.transform.localPosition = RandomChipsPos();
+			}
 
 			int index  = m_ChipsType.IndexOf (TableChips[i]);
 			Image image = Chip.GetComponent<Image>();

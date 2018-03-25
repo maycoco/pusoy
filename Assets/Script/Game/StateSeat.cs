@@ -35,24 +35,6 @@ public class StateSeat : State{
 		m_GameController.UpdateOrderList();
 	}
 
-	public override void DisEnter(){
-		if(!Initialized){
-			AdjustUI ();
-			Initialized = true;
-		}
-
-		m_GameController.UpdateRooimInfo ();
-		m_GameController.ShowTableInfo ();
-		m_GameController.ShowGameConsole ();
-		m_GameController.UpdateOrderList();
-
-		Layer.Find("LetPlay").gameObject.SetActive(false);
-		Layer.Find("AutoBanker").gameObject.SetActive (false);
-		Layer.Find ("TipsPick").gameObject.SetActive (false);
-		Layer.Find("TipsWaitStart").gameObject.SetActive (false);
-		Layer.Find("TipsNoPlayers").gameObject.SetActive (false);
-	}
-
 	public override void Exit(){
 		Layer.Find("LetPlay").gameObject.SetActive(false);
 		Layer.Find ("TipsPick").gameObject.SetActive (false);
@@ -92,19 +74,23 @@ public class StateSeat : State{
 		Layer.Find ("LetPlay").gameObject.SetActive (false);
 
 		//LetPlay & AutoBanker
-		if (m_GameController.m_SelfSeatID == 0 && m_StateManage.GetCulState() == STATE.STATE_SEAT) {
-			Layer.Find ("AutoBanker").gameObject.SetActive (true);
-			Layer.Find ("LetPlay").gameObject.SetActive (true);
+		if (m_GameController.m_SelfSeatID == 0) {
+			
+			if(m_StateManage.GetCulState() == STATE.STATE_SEAT){
+				ShowAutoBanker ();
+				UpdateAutoBanker ();
 
-			if (m_GameController.GetTablePlayersCount () <= 1) {
-				Layer.Find ("LetPlay").gameObject.SetActive (false);
-				Layer.Find ("TipsNoPlayers").gameObject.SetActive (true);
+				if (m_GameController.GetTablePlayersCount () <= 1) {
+					Layer.Find ("LetPlay").gameObject.SetActive (false);
+					Layer.Find ("TipsNoPlayers").gameObject.SetActive (true);
+				} else {
+					Layer.Find ("LetPlay").gameObject.SetActive (true);
+				}
 			}
-			ShowAutoBanker (Common.CAutoBanker, true);
 
 		} else {
 			Layer.Find ("LetPlay").gameObject.SetActive (false);
-			Layer.Find ("AutoBanker").gameObject.SetActive (false);
+			HideAutoBanker ();
 		}
 			
 		if (m_GameController.m_SelfSeatID > 0 && m_StateManage.GetCulState() == STATE.STATE_SEAT) {
@@ -149,23 +135,24 @@ public class StateSeat : State{
 		}
 	}
 
-	public void ShowAutoBanker(bool isauto, bool adjust = false){
-		Layer.Find ("AutoBanker/Auto").gameObject.SetActive (true);
 
+	public void UpdateAutoBanker(){
+		bool ison = Common.CAutoBanker ? true : false;
+		Layer.Find ("AutoBanker").GetComponent<Toggle> ().isOn = ison;
+	}
 
-		if (isauto) {
-			Layer.Find ("AutoBanker/Autot").gameObject.SetActive (true);
-		} else {
-			Layer.Find ("AutoBanker/Autot").gameObject.SetActive (false);
-		}
-
-		if(!adjust){
-			Common.CAutoBanker	= isauto;
-			m_GameController.AutoBankServer ();
+	public void OnClickAutoBank(){
+		if(Layer.Find ("AutoBanker").GetComponent<Toggle> ().isOn != Common.CAutoBanker){
+			Common.CAutoBanker = Layer.Find ("AutoBanker").GetComponent<Toggle> ().isOn;
+			m_GameController.AutoBankServer (Common.CAutoBanker);
 		}
 	}
 
 	public void HideAutoBanker(){
 		Layer.Find("AutoBanker").gameObject.SetActive (false);
+	}
+
+	public void ShowAutoBanker(){
+		Layer.Find("AutoBanker").gameObject.SetActive (true);
 	}
 }

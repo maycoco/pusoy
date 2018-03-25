@@ -71,6 +71,10 @@ public class StateShowHand : State {
 			HandObj.Find ("Lost").gameObject.SetActive (false);
 			HandObj.Find ("Win").gameObject.SetActive (false);
 			HandObj.Find ("Getlucky").gameObject.SetActive (false);
+
+			for (int o = HandObj.Find ("Number").childCount - 1; o >= 0; o--) {  
+				Destroy(HandObj.Find ("Number").GetChild(o).gameObject);  
+			}  
 		}
 	}
 
@@ -114,7 +118,7 @@ public class StateShowHand : State {
 			HandObj.gameObject.SetActive (true);
 		}
 	}
-
+		
 	public void ShowPokerFace(int SeatID){
 		if(m_GameController.SeatResults.ContainsKey(SeatID)){
 			SeatResult pinfo = m_GameController.SeatResults [SeatID];
@@ -151,7 +155,7 @@ public class StateShowHand : State {
 			}
 				
 			if(SeatID == 0){return;}
-			Transform number = null;
+
 			string	typestr = "";
 
 			if (pinfo.autowin) {
@@ -167,11 +171,7 @@ public class StateShowHand : State {
 				typestr = "win";
 				HandObj.Find ("Win").gameObject.SetActive (true);
 			}
-
-			for (int i = HandObj.Find ("Number").childCount - 1; i >= 0; i--) {  
-				Destroy(HandObj.Find ("Number").GetChild(i).gameObject);  
-			}  
-
+				
 			string amount = Mathf.Abs (pinfo.Win).ToString ();
 			float left = 0;
 			for(int c = 0; c < amount.Length; c++){

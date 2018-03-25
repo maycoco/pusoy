@@ -139,6 +139,7 @@ public class StateSorting : State {
 
 	 public override void AdjustUI(){
 		m_StateManage.m_StateSeat.HideAutoBanker ();
+
 		if (Effect_BaoPai != null) {Destroy (Effect_BaoPai);Effect_BaoPai = null;} 
 		if (Effect_DX != null) {Destroy (Effect_DX);Effect_DX = null;} 
 
@@ -148,6 +149,7 @@ public class StateSorting : State {
 		}
 
 		Layer.gameObject.SetActive (true);
+		CloseHelpLayer ();
 		Layer1.Find ("CountDown").gameObject.SetActive (false);
 		HideConfim ();
 
@@ -739,11 +741,11 @@ public class StateSorting : State {
 	}
 
 	public void ShowHelpLayer(){
-		Layer1.Find ("HelpLayer").gameObject.SetActive (true);
+		Layer.Find ("HelpLayer").gameObject.SetActive (true);
 	}
 
 	public void CloseHelpLayer(){
-		Layer1.Find ("HelpLayer").gameObject.SetActive (false);
+		Layer.Find ("HelpLayer").gameObject.SetActive (false);
 	}
 
 	public Dictionary<Msg.CardRank, List<uint[]>> GetRanks(List<int> pokers){

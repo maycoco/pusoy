@@ -227,8 +227,7 @@ public class PrefileControl : MonoBehaviour
 			Drecord.GetComponent<RectTransform> ().localScale = new Vector3 (1,1,1);
 			Drecord.GetComponent<RectTransform> ().localPosition = new Vector3 (0, top, 0);
 			top -= 40;
-			
-			List<DiamondRecord> precords = new List<DiamondRecord> ();
+
 			foreach(DiamondRecord d in m_DList){
 				if(d.Date == keys[i]){
 					//Time
