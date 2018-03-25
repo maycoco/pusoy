@@ -60,125 +60,146 @@ namespace Msg {
             "EhwKBHR5cGUYASABKA4yDi5tc2cuTG9naW5UeXBlEhsKAmZiGAIgASgLMg8u",
             "bXNnLkxvZ2luRkJSZXEiZQoITG9naW5Sc3ASGQoDcmV0GAEgASgOMgwubXNn",
             "LkVycm9ySUQSCwoDdWlkGAIgASgNEgwKBG5hbWUYAyABKAkSDgoGYXZhdGFy",
-            "GAQgASgJEhMKC3Jvb21fbnVtYmVyGAUgASgJIgwKCktpY2tOb3RpZnkiHwoQ",
-            "RGlzY29ubmVjdE5vdGlmeRILCgN1aWQYASABKA0iHgoPUmVjb25uZWN0Tm90",
-            "aWZ5EgsKA3VpZBgBIAEoDSJ3Cg1DcmVhdGVSb29tUmVxEgwKBG5hbWUYASAB",
-            "KAkSDwoHbWluX2JldBgCIAEoDRIPCgdtYXhfYmV0GAMgASgNEg0KBWhhbmRz",
-            "GAQgASgNEhUKDWNyZWRpdF9wb2ludHMYBSABKA0SEAoIaXNfc2hhcmUYBiAB",
-            "KAgiUAoNQ3JlYXRlUm9vbVJzcBIZCgNyZXQYASABKA4yDC5tc2cuRXJyb3JJ",
-            "RBIPCgdyb29tX2lkGAIgASgNEhMKC3Jvb21fbnVtYmVyGAMgASgJIikKFUNv",
-            "bnN1bWVEaWFtb25kc05vdGlmeRIQCghkaWFtb25kcxgBIAEoDSJgCgZQbGF5",
-            "ZXISCwoDdWlkGAEgASgNEgwKBG5hbWUYAiABKAkSDgoGYXZhdGFyGAMgASgJ",
-            "Eg8KB3NlYXRfaWQYBCABKAUSCwoDYmV0GAUgASgNEg0KBXNjb3JlGAYgASgF",
-            "IqUCCgRSb29tEg8KB3Jvb21faWQYASABKA0SDgoGbnVtYmVyGAIgASgJEgwK",
-            "BG5hbWUYAyABKAkSDwoHbWluX2JldBgEIAEoDRIPCgdtYXhfYmV0GAUgASgN",
-            "Eg0KBWhhbmRzGAYgASgNEhQKDHBsYXllZF9oYW5kcxgHIAEoDRIVCg1jcmVk",
-            "aXRfcG9pbnRzGAggASgNEhAKCGlzX3NoYXJlGAkgASgIEhwKB3BsYXllcnMY",
-            "CiADKAsyCy5tc2cuUGxheWVyEh0KBXN0YXRlGAsgASgOMg4ubXNnLkdhbWVT",
-            "dGF0ZRIRCgljb3VudGRvd24YDCABKAUSDQoFY2FyZHMYDSADKA0SHwoGcmVz",
-            "dWx0GA4gAygLMg8ubXNnLlNlYXRSZXN1bHQiIgoLSm9pblJvb21SZXESEwoL",
-            "cm9vbV9udW1iZXIYASABKAkiQQoLSm9pblJvb21Sc3ASGQoDcmV0GAEgASgO",
-            "MgwubXNnLkVycm9ySUQSFwoEcm9vbRgCIAEoCzIJLm1zZy5Sb29tIjsKDkpv",
-            "aW5Sb29tTm90aWZ5EgsKA3VpZBgBIAEoDRIMCgRuYW1lGAIgASgJEg4KBmF2",
-            "YXRhchgDIAEoCSIOCgxMZWF2ZVJvb21SZXEiKQoMTGVhdmVSb29tUnNwEhkK",
-            "A3JldBgBIAEoDjIMLm1zZy5FcnJvcklEIh4KD0xlYXZlUm9vbU5vdGlmeRIL",
-            "CgN1aWQYASABKA0iHQoKU2l0RG93blJlcRIPCgdzZWF0X2lkGAEgASgNIjsK",
-            "ClNpdERvd25Sc3ASGQoDcmV0GAEgASgOMgwubXNnLkVycm9ySUQSEgoKYXV0",
-            "b2JhbmtlchgCIAEoCCJxCg1TaXREb3duTm90aWZ5Eh4KBHR5cGUYASABKA4y",
-            "EC5tc2cuU2l0RG93blR5cGUSCwoDdWlkGAIgASgNEg8KB3NlYXRfaWQYAyAB",
-            "KA0SEwoLb2xkX3NlYXRfaWQYBCABKAUSDQoFc2NvcmUYBSABKAUiDAoKU3Rh",
-            "bmRVcFJlcSInCgpTdGFuZFVwUnNwEhkKA3JldBgBIAEoDjIMLm1zZy5FcnJv",
-            "cklEIi0KDVN0YW5kVXBOb3RpZnkSCwoDdWlkGAEgASgNEg8KB3NlYXRfaWQY",
-            "AiABKA0iJAoNQXV0b0JhbmtlclJlcRITCgthdXRvX2JhbmtlchgBIAEoCCIq",
-            "Cg1BdXRvQmFua2VyUnNwEhkKA3JldBgBIAEoDjIMLm1zZy5FcnJvcklEIg4K",
-            "DFN0YXJ0R2FtZVJlcSIpCgxTdGFydEdhbWVSc3ASGQoDcmV0GAEgASgOMgwu",
-            "bXNnLkVycm9ySUQiFwoGQmV0UmVxEg0KBWNoaXBzGAEgASgNIiMKBkJldFJz",
-            "cBIZCgNyZXQYASABKA4yDC5tc2cuRXJyb3JJRCIrCglCZXROb3RpZnkSDwoH",
-            "c2VhdF9pZBgBIAEoDRINCgVjaGlwcxgCIAEoDSIaCglDYXJkR3JvdXASDQoF",
-            "Y2FyZHMYASADKA0iQgoKQ29tYmluZVJlcRIjCgtjYXJkX2dyb3VwcxgBIAMo",
-            "CzIOLm1zZy5DYXJkR3JvdXASDwoHYXV0b3dpbhgCIAEoCCInCgpDb21iaW5l",
-            "UnNwEhkKA3JldBgBIAEoDjIMLm1zZy5FcnJvcklEIiAKDUNvbWJpbmVOb3Rp",
-            "ZnkSDwoHc2VhdF9pZBgBIAEoDSLLAQoKU2VhdFJlc3VsdBIPCgdzZWF0X2lk",
-            "GAEgASgNEiMKC2NhcmRfZ3JvdXBzGAIgAygLMg4ubXNnLkNhcmRHcm91cBIP",
-            "CgdhdXRvd2luGAMgASgIEgwKBGZvdWwYBCABKAgSHAoFcmFua3MYBSADKA4y",
-            "DS5tc2cuQ2FyZFJhbmsSDgoGc2NvcmVzGAYgAygFEhMKC3RvdGFsX3Njb3Jl",
-            "GAcgASgFEgsKA3dpbhgIIAEoBRILCgNiZXQYCSABKA0SCwoDdWlkGAogASgN",
-            "Ii0KCURCUmVzdWx0cxIgCgdyZXN1bHRzGAEgAygLMg8ubXNnLlNlYXRSZXN1",
-            "bHQiYAoSUGxheWVyUm91bmRIaXN0b3J5EgsKA3VpZBgBIAEoDRIMCgRuYW1l",
-            "GAIgASgJEg4KBmF2YXRhchgDIAEoCRIfCgZyZXN1bHQYBCABKAsyDy5tc2cu",
-            "U2VhdFJlc3VsdCIjChJHZXRSb3VuZEhpc3RvcnlSZXESDQoFcm91bmQYASAB",
-            "KA0iWQoSR2V0Um91bmRIaXN0b3J5UnNwEhkKA3JldBgBIAEoDjIMLm1zZy5F",
-            "cnJvcklEEigKB3Jlc3VsdHMYAiADKAsyFy5tc2cuUGxheWVyUm91bmRIaXN0",
-            "b3J5IowBCg9HYW1lU3RhdGVOb3RpZnkSHQoFc3RhdGUYASABKA4yDi5tc2cu",
-            "R2FtZVN0YXRlEhEKCWNvdW50ZG93bhgCIAEoDRISCgpkZWFsX2NhcmRzGAMg",
-            "AygNEhIKCmRlYWxfc2VhdHMYBCADKA0SHwoGcmVzdWx0GAUgAygLMg8ubXNn",
-            "LlNlYXRSZXN1bHQiHwoQR2V0U2NvcmVib2FyZFJlcRILCgNwb3MYASABKA0i",
-            "SgoOU2NvcmVib2FyZEl0ZW0SCwoDdWlkGAEgASgNEgwKBG5hbWUYAiABKAkS",
-            "DgoGYXZhdGFyGAMgASgJEg0KBXNjb3JlGAQgASgFImAKEEdldFNjb3JlYm9h",
-            "cmRSc3ASGQoDcmV0GAEgASgOMgwubXNnLkVycm9ySUQSDQoFdG90YWwYAiAB",
-            "KA0SIgoFaXRlbXMYAyADKAsyEy5tc2cuU2NvcmVib2FyZEl0ZW0qwwUKCU1l",
-            "c3NhZ2VJRBINCglMb2dpbl9SZXEQABINCglMb2dpbl9Sc3AQARIPCgtLaWNr",
-            "X05vdGlmeRACEhIKDkNyZWF0ZVJvb21fUmVxEAMSEgoOQ3JlYXRlUm9vbV9S",
-            "c3AQBBIaChZDb25zdW1lRGlhbW9uZHNfTm90aWZ5EAUSEAoMSm9pblJvb21f",
-            "UmVxEAYSEAoMSm9pblJvb21fUnNwEAcSEwoPSm9pblJvb21fTm90aWZ5EAgS",
-            "EQoNTGVhdmVSb29tX1JlcRAJEhEKDUxlYXZlUm9vbV9Sc3AQChIUChBMZWF2",
-            "ZVJvb21fTm90aWZ5EAsSDwoLU2l0RG93bl9SZXEQDBIPCgtTaXREb3duX1Jz",
-            "cBANEhIKDlNpdERvd25fTm90aWZ5EA4SDwoLU3RhbmRVcF9SZXEQDxIPCgtT",
-            "dGFuZFVwX1JzcBAQEhIKDlN0YW5kVXBfTm90aWZ5EBESEgoOQXV0b0Jhbmtl",
-            "cl9SZXEQFRISCg5BdXRvQmFua2VyX1JzcBAWEhEKDVN0YXJ0R2FtZV9SZXEQ",
-            "FxIRCg1TdGFydEdhbWVfUnNwEBgSCwoHQmV0X1JlcRAZEgsKB0JldF9Sc3AQ",
-            "GhIOCgpCZXRfTm90aWZ5EBsSDwoLQ29tYmluZV9SZXEQHBIPCgtDb21iaW5l",
-            "X1JzcBAdEhIKDkNvbWJpbmVfTm90aWZ5EB4SEQoNUmVzdWx0X05vdGlmeRAf",
-            "EhQKEEdhbWVTdGF0ZV9Ob3RpZnkQIBIVChFEaXNjb25uZWN0X05vdGlmeRAh",
-            "EhQKEFJlY29ubmVjdF9Ob3RpZnkQIhIVChFHZXRTY29yZWJvYXJkX1JlcRAj",
-            "EhUKEUdldFNjb3JlYm9hcmRfUnNwECQSFwoTR2V0Um91bmRIaXN0b3J5X1Jl",
-            "cRAlEhcKE0dldFJvdW5kSGlzdG9yeV9Sc3AQJirfCAoHRXJyb3JJRBIGCgJP",
-            "axAAEhIKDkludmFsaWRfUGFyYW1zEAESDAoIREJfRXJyb3IQAhISCg5JbnRl",
-            "cm5hbF9FcnJvchADEhkKFUxvZ2luX0ZhY2Vib29rX0ZhaWxlZBAEEiAKHENy",
-            "ZWF0ZVJvb21fSW52YWxpZF9Sb29tX05hbWUQZBIiCh5DcmVhdGVSb29tX0lu",
-            "dmFsaWRfTWluX01heF9CZXQQZRIkCiBDcmVhdGVSb29tX0ludmFsaWRfQ3Jl",
-            "ZGl0X1BvaW50cxBmEiIKHkNyZWF0ZVJvb21fTm90X0Vub3VnaF9EaWFtb25k",
-            "cxBnEiYKIkNyZWF0ZVJvb21fRXhjZWVkX0xpbWl0YXRpb25fUm9vbXMQaBIc",
-            "ChhDcmVhdGVSb29tX0ludmFsaWRfSGFuZHMQaRIeChpKb2luUm9vbV9Xcm9u",
-            "Z19Sb29tX051bWJlchBuEhEKDUpvaW5Sb29tX0Z1bGwQbxIXChNKb2luUm9v",
-            "bV9BbHJlYWR5X0luEHASFAoQTGVhdmVSb29tX05vdF9JbhB4EhUKEUxlYXZl",
-            "Um9vbV9QbGF5aW5nEHkSHAoXU2l0RG93bl9JbnZhbGlkX1NlYXRfSWQQggES",
-            "IQocU2l0RG93bl9BbHJlYWR5X0V4aXN0X1BsYXllchCDARIYChNTaXREb3du",
-            "X0FscmVhZHlfU2l0EIQBEhQKD1N0YW5kVXBfTm90X1NpdBCMARIcChdTdGFu",
-            "ZFVwX0Nhbm5vdF9TdGFuZF9VcBCNARIaChVBdXRvQmFua2VyX05vdF9CYW5r",
-            "ZXIQlgESHQoYQXV0b0Jhbmtlcl9JbnZhbGlkX1N0YXRlEJcBEhkKFFN0YXJ0",
-            "R2FtZV9Ob3RfQmFua2VyEKABEiEKHFN0YXJ0R2FtZV9Ob3RfRW5vdWdoX1Bs",
-            "YXllcnMQoQESIgodU3RhcnRHYW1lX05vdF9Fbm91Z2hfRGlhbW9uZHMQogES",
-            "HgoZU3RhcnRHYW1lX05vdF9SZWFkeV9TdGF0ZRCjARIWChFCZXRfTm90X0Jl",
-            "dF9TdGF0ZRCqARIaChVCZXRfQmFua2VyX0Nhbm5vdF9CZXQQqwESFgoRQmV0",
-            "X0ludmFsaWRfQ2hpcHMQrAESHQoYQmV0X05vdF9BX1BsYXllcl9Pbl9TZWF0",
-            "EK0BEhQKD0JldF9BbHJlYWR5X0JldBCuARIeChlDb21iaW5lX05vdF9Db21i",
-            "aW5lX1N0YXRlELQBEh4KGUNvbWJpbmVfTm90X0luX1RoaXNfUm91bmQQtQES",
-            "IQocQ29tYmluZV9JbnZhbGlkX1JlcXVlc3RfRGF0YRC2ARIZChRDb21iaW5l",
-            "X0FscmVhZHlfRG9uZRC3ARIWChFDb21iaW5lX05vdF9MdWNreRC4ARIjCh5H",
-            "ZXRTY29yZWJvYXJkX1Bvc19FeGNlZWRfUmFuZ2UQvgESJAofR2V0Um91bmRI",
-            "aXN0b3J5X1JvdW5kX05vdF9FeGlzdBDIASoZCglMb2dpblR5cGUSDAoIRmFj",
-            "ZWJvb2sQACogCgtTaXREb3duVHlwZRIHCgNTaXQQABIICgRTd2FwEAEqXQoJ",
-            "R2FtZVN0YXRlEgkKBVJlYWR5EAASBwoDQmV0EAESDwoLQ29uZmlybV9CZXQQ",
-            "AhIICgREZWFsEAMSCwoHQ29tYmluZRAEEggKBFNob3cQBRIKCgZSZXN1bHQQ",
-            "BiqbAQoIQ2FyZFJhbmsSDQoJSGlnaF9DYXJkEAASDAoIT25lX1BhaXIQARIM",
-            "CghUd29fUGFpchACEhMKD1RocmVlX09mX0FfS2luZBADEgwKCFN0cmFpZ2h0",
-            "EAQSCQoFRmx1c2gQBRIOCgpGdWxsX0hvdXNlEAYSEgoORm91cl9PZl9BX0tp",
-            "bmQQBxISCg5TdHJhaWdodF9GbHVzaBAIKksKDUNhcmRDb2xvclN1aXQSCQoF",
-            "Q2x1YnMQABIKCgZTcGFkZXMQARIKCgZIZWFydHMQAhIMCghEaWFtb25kcxAD",
-            "EgkKBUNvdW50EARiBnByb3RvMw=="));
+            "GAQgASgJEhMKC3Jvb21fbnVtYmVyGAUgASgJIjAKD1NlbmREaWFtb25kc1Jl",
+            "cRILCgN1aWQYASABKA0SEAoIZGlhbW9uZHMYAiABKA0iLAoPU2VuZERpYW1v",
+            "bmRzUnNwEhkKA3JldBgBIAEoDjIMLm1zZy5FcnJvcklEIgwKCktpY2tOb3Rp",
+            "ZnkiHwoQRGlzY29ubmVjdE5vdGlmeRILCgN1aWQYASABKA0iHgoPUmVjb25u",
+            "ZWN0Tm90aWZ5EgsKA3VpZBgBIAEoDSJ3Cg1DcmVhdGVSb29tUmVxEgwKBG5h",
+            "bWUYASABKAkSDwoHbWluX2JldBgCIAEoDRIPCgdtYXhfYmV0GAMgASgNEg0K",
+            "BWhhbmRzGAQgASgNEhUKDWNyZWRpdF9wb2ludHMYBSABKA0SEAoIaXNfc2hh",
+            "cmUYBiABKAgiUAoNQ3JlYXRlUm9vbVJzcBIZCgNyZXQYASABKA4yDC5tc2cu",
+            "RXJyb3JJRBIPCgdyb29tX2lkGAIgASgNEhMKC3Jvb21fbnVtYmVyGAMgASgJ",
+            "Ig4KDExpc3RSb29tc1JlcSIwCgxMaXN0Um9vbXNSc3ASIAoFcm9vbXMYASAD",
+            "KAsyES5tc2cuTGlzdFJvb21JdGVtImwKDExpc3RSb29tSXRlbRIPCgdyb29t",
+            "X2lkGAEgASgNEhMKC3Jvb21fbnVtYmVyGAIgASgJEhEKCXJvb21fbmFtZRgD",
+            "IAEoCRIUCgxwbGF5ZWRfaGFuZHMYBCABKA0SDQoFaGFuZHMYBSABKA0iNgoS",
+            "TGlzdFJvb21zTGlzdGVuUmVxEg4KBmxpc3RlbhgBIAEoCBIQCghyb29tX2lk",
+            "cxgCIAEoDSIvChJMaXN0Um9vbXNMaXN0ZW5Sc3ASGQoDcmV0GAEgASgOMgwu",
+            "bXNnLkVycm9ySUQidgoPTGlzdFJvb21zTm90aWZ5EiUKBHR5cGUYASABKA4y",
+            "Fy5tc2cuTGlzdFJvb21Ob3RpZnlUeXBlEg0KBXJvdW5kGAIgASgNEg8KB3Nl",
+            "YXRfaWQYAyABKA0SDAoEbmFtZRgEIAEoCRIOCgZhdmF0YXIYBSABKAkiKQoV",
+            "Q29uc3VtZURpYW1vbmRzTm90aWZ5EhAKCGRpYW1vbmRzGAEgASgNImAKBlBs",
+            "YXllchILCgN1aWQYASABKA0SDAoEbmFtZRgCIAEoCRIOCgZhdmF0YXIYAyAB",
+            "KAkSDwoHc2VhdF9pZBgEIAEoBRILCgNiZXQYBSABKA0SDQoFc2NvcmUYBiAB",
+            "KAUipQIKBFJvb20SDwoHcm9vbV9pZBgBIAEoDRIOCgZudW1iZXIYAiABKAkS",
+            "DAoEbmFtZRgDIAEoCRIPCgdtaW5fYmV0GAQgASgNEg8KB21heF9iZXQYBSAB",
+            "KA0SDQoFaGFuZHMYBiABKA0SFAoMcGxheWVkX2hhbmRzGAcgASgNEhUKDWNy",
+            "ZWRpdF9wb2ludHMYCCABKA0SEAoIaXNfc2hhcmUYCSABKAgSHAoHcGxheWVy",
+            "cxgKIAMoCzILLm1zZy5QbGF5ZXISHQoFc3RhdGUYCyABKA4yDi5tc2cuR2Ft",
+            "ZVN0YXRlEhEKCWNvdW50ZG93bhgMIAEoBRINCgVjYXJkcxgNIAMoDRIfCgZy",
+            "ZXN1bHQYDiADKAsyDy5tc2cuU2VhdFJlc3VsdCIiCgtKb2luUm9vbVJlcRIT",
+            "Cgtyb29tX251bWJlchgBIAEoCSJBCgtKb2luUm9vbVJzcBIZCgNyZXQYASAB",
+            "KA4yDC5tc2cuRXJyb3JJRBIXCgRyb29tGAIgASgLMgkubXNnLlJvb20iOwoO",
+            "Sm9pblJvb21Ob3RpZnkSCwoDdWlkGAEgASgNEgwKBG5hbWUYAiABKAkSDgoG",
+            "YXZhdGFyGAMgASgJIg4KDExlYXZlUm9vbVJlcSIpCgxMZWF2ZVJvb21Sc3AS",
+            "GQoDcmV0GAEgASgOMgwubXNnLkVycm9ySUQiHgoPTGVhdmVSb29tTm90aWZ5",
+            "EgsKA3VpZBgBIAEoDSIdCgpTaXREb3duUmVxEg8KB3NlYXRfaWQYASABKA0i",
+            "OwoKU2l0RG93blJzcBIZCgNyZXQYASABKA4yDC5tc2cuRXJyb3JJRBISCgph",
+            "dXRvYmFua2VyGAIgASgIInEKDVNpdERvd25Ob3RpZnkSHgoEdHlwZRgBIAEo",
+            "DjIQLm1zZy5TaXREb3duVHlwZRILCgN1aWQYAiABKA0SDwoHc2VhdF9pZBgD",
+            "IAEoDRITCgtvbGRfc2VhdF9pZBgEIAEoBRINCgVzY29yZRgFIAEoBSIMCgpT",
+            "dGFuZFVwUmVxIicKClN0YW5kVXBSc3ASGQoDcmV0GAEgASgOMgwubXNnLkVy",
+            "cm9ySUQiLQoNU3RhbmRVcE5vdGlmeRILCgN1aWQYASABKA0SDwoHc2VhdF9p",
+            "ZBgCIAEoDSIkCg1BdXRvQmFua2VyUmVxEhMKC2F1dG9fYmFua2VyGAEgASgI",
+            "IioKDUF1dG9CYW5rZXJSc3ASGQoDcmV0GAEgASgOMgwubXNnLkVycm9ySUQi",
+            "DgoMU3RhcnRHYW1lUmVxIikKDFN0YXJ0R2FtZVJzcBIZCgNyZXQYASABKA4y",
+            "DC5tc2cuRXJyb3JJRCIXCgZCZXRSZXESDQoFY2hpcHMYASABKA0iIwoGQmV0",
+            "UnNwEhkKA3JldBgBIAEoDjIMLm1zZy5FcnJvcklEIisKCUJldE5vdGlmeRIP",
+            "CgdzZWF0X2lkGAEgASgNEg0KBWNoaXBzGAIgASgNIhoKCUNhcmRHcm91cBIN",
+            "CgVjYXJkcxgBIAMoDSJCCgpDb21iaW5lUmVxEiMKC2NhcmRfZ3JvdXBzGAEg",
+            "AygLMg4ubXNnLkNhcmRHcm91cBIPCgdhdXRvd2luGAIgASgIIicKCkNvbWJp",
+            "bmVSc3ASGQoDcmV0GAEgASgOMgwubXNnLkVycm9ySUQiIAoNQ29tYmluZU5v",
+            "dGlmeRIPCgdzZWF0X2lkGAEgASgNIssBCgpTZWF0UmVzdWx0Eg8KB3NlYXRf",
+            "aWQYASABKA0SIwoLY2FyZF9ncm91cHMYAiADKAsyDi5tc2cuQ2FyZEdyb3Vw",
+            "Eg8KB2F1dG93aW4YAyABKAgSDAoEZm91bBgEIAEoCBIcCgVyYW5rcxgFIAMo",
+            "DjINLm1zZy5DYXJkUmFuaxIOCgZzY29yZXMYBiADKAUSEwoLdG90YWxfc2Nv",
+            "cmUYByABKAUSCwoDd2luGAggASgFEgsKA2JldBgJIAEoDRILCgN1aWQYCiAB",
+            "KA0iLQoJREJSZXN1bHRzEiAKB3Jlc3VsdHMYASADKAsyDy5tc2cuU2VhdFJl",
+            "c3VsdCJgChJQbGF5ZXJSb3VuZEhpc3RvcnkSCwoDdWlkGAEgASgNEgwKBG5h",
+            "bWUYAiABKAkSDgoGYXZhdGFyGAMgASgJEh8KBnJlc3VsdBgEIAEoCzIPLm1z",
+            "Zy5TZWF0UmVzdWx0IiMKEkdldFJvdW5kSGlzdG9yeVJlcRINCgVyb3VuZBgB",
+            "IAEoDSJZChJHZXRSb3VuZEhpc3RvcnlSc3ASGQoDcmV0GAEgASgOMgwubXNn",
+            "LkVycm9ySUQSKAoHcmVzdWx0cxgCIAMoCzIXLm1zZy5QbGF5ZXJSb3VuZEhp",
+            "c3RvcnkijAEKD0dhbWVTdGF0ZU5vdGlmeRIdCgVzdGF0ZRgBIAEoDjIOLm1z",
+            "Zy5HYW1lU3RhdGUSEQoJY291bnRkb3duGAIgASgNEhIKCmRlYWxfY2FyZHMY",
+            "AyADKA0SEgoKZGVhbF9zZWF0cxgEIAMoDRIfCgZyZXN1bHQYBSADKAsyDy5t",
+            "c2cuU2VhdFJlc3VsdCIfChBHZXRTY29yZWJvYXJkUmVxEgsKA3BvcxgBIAEo",
+            "DSJKCg5TY29yZWJvYXJkSXRlbRILCgN1aWQYASABKA0SDAoEbmFtZRgCIAEo",
+            "CRIOCgZhdmF0YXIYAyABKAkSDQoFc2NvcmUYBCABKAUiYAoQR2V0U2NvcmVi",
+            "b2FyZFJzcBIZCgNyZXQYASABKA4yDC5tc2cuRXJyb3JJRBINCgV0b3RhbBgC",
+            "IAEoDRIiCgVpdGVtcxgDIAMoCzITLm1zZy5TY29yZWJvYXJkSXRlbSrDBQoJ",
+            "TWVzc2FnZUlEEg0KCUxvZ2luX1JlcRAAEg0KCUxvZ2luX1JzcBABEg8KC0tp",
+            "Y2tfTm90aWZ5EAISEgoOQ3JlYXRlUm9vbV9SZXEQAxISCg5DcmVhdGVSb29t",
+            "X1JzcBAEEhoKFkNvbnN1bWVEaWFtb25kc19Ob3RpZnkQBRIQCgxKb2luUm9v",
+            "bV9SZXEQBhIQCgxKb2luUm9vbV9Sc3AQBxITCg9Kb2luUm9vbV9Ob3RpZnkQ",
+            "CBIRCg1MZWF2ZVJvb21fUmVxEAkSEQoNTGVhdmVSb29tX1JzcBAKEhQKEExl",
+            "YXZlUm9vbV9Ob3RpZnkQCxIPCgtTaXREb3duX1JlcRAMEg8KC1NpdERvd25f",
+            "UnNwEA0SEgoOU2l0RG93bl9Ob3RpZnkQDhIPCgtTdGFuZFVwX1JlcRAPEg8K",
+            "C1N0YW5kVXBfUnNwEBASEgoOU3RhbmRVcF9Ob3RpZnkQERISCg5BdXRvQmFu",
+            "a2VyX1JlcRAVEhIKDkF1dG9CYW5rZXJfUnNwEBYSEQoNU3RhcnRHYW1lX1Jl",
+            "cRAXEhEKDVN0YXJ0R2FtZV9Sc3AQGBILCgdCZXRfUmVxEBkSCwoHQmV0X1Jz",
+            "cBAaEg4KCkJldF9Ob3RpZnkQGxIPCgtDb21iaW5lX1JlcRAcEg8KC0NvbWJp",
+            "bmVfUnNwEB0SEgoOQ29tYmluZV9Ob3RpZnkQHhIRCg1SZXN1bHRfTm90aWZ5",
+            "EB8SFAoQR2FtZVN0YXRlX05vdGlmeRAgEhUKEURpc2Nvbm5lY3RfTm90aWZ5",
+            "ECESFAoQUmVjb25uZWN0X05vdGlmeRAiEhUKEUdldFNjb3JlYm9hcmRfUmVx",
+            "ECMSFQoRR2V0U2NvcmVib2FyZF9Sc3AQJBIXChNHZXRSb3VuZEhpc3Rvcnlf",
+            "UmVxECUSFwoTR2V0Um91bmRIaXN0b3J5X1JzcBAmKt8ICgdFcnJvcklEEgYK",
+            "Ak9rEAASEgoOSW52YWxpZF9QYXJhbXMQARIMCghEQl9FcnJvchACEhIKDklu",
+            "dGVybmFsX0Vycm9yEAMSGQoVTG9naW5fRmFjZWJvb2tfRmFpbGVkEAQSIAoc",
+            "Q3JlYXRlUm9vbV9JbnZhbGlkX1Jvb21fTmFtZRBkEiIKHkNyZWF0ZVJvb21f",
+            "SW52YWxpZF9NaW5fTWF4X0JldBBlEiQKIENyZWF0ZVJvb21fSW52YWxpZF9D",
+            "cmVkaXRfUG9pbnRzEGYSIgoeQ3JlYXRlUm9vbV9Ob3RfRW5vdWdoX0RpYW1v",
+            "bmRzEGcSJgoiQ3JlYXRlUm9vbV9FeGNlZWRfTGltaXRhdGlvbl9Sb29tcxBo",
+            "EhwKGENyZWF0ZVJvb21fSW52YWxpZF9IYW5kcxBpEh4KGkpvaW5Sb29tX1dy",
+            "b25nX1Jvb21fTnVtYmVyEG4SEQoNSm9pblJvb21fRnVsbBBvEhcKE0pvaW5S",
+            "b29tX0FscmVhZHlfSW4QcBIUChBMZWF2ZVJvb21fTm90X0luEHgSFQoRTGVh",
+            "dmVSb29tX1BsYXlpbmcQeRIcChdTaXREb3duX0ludmFsaWRfU2VhdF9JZBCC",
+            "ARIhChxTaXREb3duX0FscmVhZHlfRXhpc3RfUGxheWVyEIMBEhgKE1NpdERv",
+            "d25fQWxyZWFkeV9TaXQQhAESFAoPU3RhbmRVcF9Ob3RfU2l0EIwBEhwKF1N0",
+            "YW5kVXBfQ2Fubm90X1N0YW5kX1VwEI0BEhoKFUF1dG9CYW5rZXJfTm90X0Jh",
+            "bmtlchCWARIdChhBdXRvQmFua2VyX0ludmFsaWRfU3RhdGUQlwESGQoUU3Rh",
+            "cnRHYW1lX05vdF9CYW5rZXIQoAESIQocU3RhcnRHYW1lX05vdF9Fbm91Z2hf",
+            "UGxheWVycxChARIiCh1TdGFydEdhbWVfTm90X0Vub3VnaF9EaWFtb25kcxCi",
+            "ARIeChlTdGFydEdhbWVfTm90X1JlYWR5X1N0YXRlEKMBEhYKEUJldF9Ob3Rf",
+            "QmV0X1N0YXRlEKoBEhoKFUJldF9CYW5rZXJfQ2Fubm90X0JldBCrARIWChFC",
+            "ZXRfSW52YWxpZF9DaGlwcxCsARIdChhCZXRfTm90X0FfUGxheWVyX09uX1Nl",
+            "YXQQrQESFAoPQmV0X0FscmVhZHlfQmV0EK4BEh4KGUNvbWJpbmVfTm90X0Nv",
+            "bWJpbmVfU3RhdGUQtAESHgoZQ29tYmluZV9Ob3RfSW5fVGhpc19Sb3VuZBC1",
+            "ARIhChxDb21iaW5lX0ludmFsaWRfUmVxdWVzdF9EYXRhELYBEhkKFENvbWJp",
+            "bmVfQWxyZWFkeV9Eb25lELcBEhYKEUNvbWJpbmVfTm90X0x1Y2t5ELgBEiMK",
+            "HkdldFNjb3JlYm9hcmRfUG9zX0V4Y2VlZF9SYW5nZRC+ARIkCh9HZXRSb3Vu",
+            "ZEhpc3RvcnlfUm91bmRfTm90X0V4aXN0EMgBKhkKCUxvZ2luVHlwZRIMCghG",
+            "YWNlYm9vaxAAKkQKEkxpc3RSb29tTm90aWZ5VHlwZRIJCgVSb3VuZBAAEgsK",
+            "B1NpdERvd24QARILCgdTdGFuZFVwEAISCQoFQ2xvc2UQAyogCgtTaXREb3du",
+            "VHlwZRIHCgNTaXQQABIICgRTd2FwEAEqXQoJR2FtZVN0YXRlEgkKBVJlYWR5",
+            "EAASBwoDQmV0EAESDwoLQ29uZmlybV9CZXQQAhIICgREZWFsEAMSCwoHQ29t",
+            "YmluZRAEEggKBFNob3cQBRIKCgZSZXN1bHQQBiqbAQoIQ2FyZFJhbmsSDQoJ",
+            "SGlnaF9DYXJkEAASDAoIT25lX1BhaXIQARIMCghUd29fUGFpchACEhMKD1Ro",
+            "cmVlX09mX0FfS2luZBADEgwKCFN0cmFpZ2h0EAQSCQoFRmx1c2gQBRIOCgpG",
+            "dWxsX0hvdXNlEAYSEgoORm91cl9PZl9BX0tpbmQQBxISCg5TdHJhaWdodF9G",
+            "bHVzaBAIKksKDUNhcmRDb2xvclN1aXQSCQoFQ2x1YnMQABIKCgZTcGFkZXMQ",
+            "ARIKCgZIZWFydHMQAhIMCghEaWFtb25kcxADEgkKBUNvdW50EARiBnByb3Rv",
+            "Mw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Msg.MessageID), typeof(global::Msg.ErrorID), typeof(global::Msg.LoginType), typeof(global::Msg.SitDownType), typeof(global::Msg.GameState), typeof(global::Msg.CardRank), typeof(global::Msg.CardColorSuit), }, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Msg.MessageID), typeof(global::Msg.ErrorID), typeof(global::Msg.LoginType), typeof(global::Msg.ListRoomNotifyType), typeof(global::Msg.SitDownType), typeof(global::Msg.GameState), typeof(global::Msg.CardRank), typeof(global::Msg.CardColorSuit), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.Protocol), global::Msg.Protocol.Parser, new[]{ "Msgid", "LoginReq", "LoginRsp", "KickNotify", "CreateRoomReq", "CreateRoomRsp", "ConsumeDiamondsNotify", "JoinRoomReq", "JoinRoomRsp", "JoinRoomNotify", "LeaveRoomReq", "LeaveRoomRsp", "LeaveRoomNotify", "SitDownReq", "SitDownRsp", "SitDownNotify", "StandUpReq", "StandUpRsp", "StandUpNotify", "AutoBankerReq", "AutoBankerRsp", "StartGameReq", "StartGameRsp", "BetReq", "BetRsp", "BetNotify", "CombineReq", "CombineRsp", "CombineNotify", "GameStateNotify", "DisconnectNotify", "ReconnectNotify", "GetScoreboardReq", "GetScoreboardRsp", "GetRoundHistoryReq", "GetRoundHistoryRsp" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.LoginFBReq), global::Msg.LoginFBReq.Parser, new[]{ "FbId", "Token" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.LoginReq), global::Msg.LoginReq.Parser, new[]{ "Type", "Fb" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.LoginRsp), global::Msg.LoginRsp.Parser, new[]{ "Ret", "Uid", "Name", "Avatar", "RoomNumber" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.SendDiamondsReq), global::Msg.SendDiamondsReq.Parser, new[]{ "Uid", "Diamonds" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.SendDiamondsRsp), global::Msg.SendDiamondsRsp.Parser, new[]{ "Ret" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.KickNotify), global::Msg.KickNotify.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.DisconnectNotify), global::Msg.DisconnectNotify.Parser, new[]{ "Uid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ReconnectNotify), global::Msg.ReconnectNotify.Parser, new[]{ "Uid" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.CreateRoomReq), global::Msg.CreateRoomReq.Parser, new[]{ "Name", "MinBet", "MaxBet", "Hands", "CreditPoints", "IsShare" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.CreateRoomRsp), global::Msg.CreateRoomRsp.Parser, new[]{ "Ret", "RoomId", "RoomNumber" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ListRoomsReq), global::Msg.ListRoomsReq.Parser, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ListRoomsRsp), global::Msg.ListRoomsRsp.Parser, new[]{ "Rooms" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ListRoomItem), global::Msg.ListRoomItem.Parser, new[]{ "RoomId", "RoomNumber", "RoomName", "PlayedHands", "Hands" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ListRoomsListenReq), global::Msg.ListRoomsListenReq.Parser, new[]{ "Listen", "RoomIds" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ListRoomsListenRsp), global::Msg.ListRoomsListenRsp.Parser, new[]{ "Ret" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ListRoomsNotify), global::Msg.ListRoomsNotify.Parser, new[]{ "Type", "Round", "SeatId", "Name", "Avatar" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ConsumeDiamondsNotify), global::Msg.ConsumeDiamondsNotify.Parser, new[]{ "Diamonds" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.Player), global::Msg.Player.Parser, new[]{ "Uid", "Name", "Avatar", "SeatId", "Bet", "Score" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.Room), global::Msg.Room.Parser, new[]{ "RoomId", "Number", "Name", "MinBet", "MaxBet", "Hands", "PlayedHands", "CreditPoints", "IsShare", "Players", "State", "Countdown", "Cards", "Result" }, null, null, null),
@@ -477,6 +498,25 @@ namespace Msg {
     /// facebook
     /// </summary>
     [pbr::OriginalName("Facebook")] Facebook = 0,
+  }
+
+  public enum ListRoomNotifyType {
+    /// <summary>
+    /// 局数变化
+    /// </summary>
+    [pbr::OriginalName("Round")] Round = 0,
+    /// <summary>
+    /// 有人坐下
+    /// </summary>
+    [pbr::OriginalName("SitDown")] SitDown = 1,
+    /// <summary>
+    /// 有人站起
+    /// </summary>
+    [pbr::OriginalName("StandUp")] StandUp = 2,
+    /// <summary>
+    /// 关闭
+    /// </summary>
+    [pbr::OriginalName("Close")] Close = 3,
   }
 
   public enum SitDownType {
@@ -2451,6 +2491,268 @@ namespace Msg {
 
   }
 
+  public sealed partial class SendDiamondsReq : pb::IMessage<SendDiamondsReq> {
+    private static readonly pb::MessageParser<SendDiamondsReq> _parser = new pb::MessageParser<SendDiamondsReq>(() => new SendDiamondsReq());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SendDiamondsReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendDiamondsReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendDiamondsReq(SendDiamondsReq other) : this() {
+      uid_ = other.uid_;
+      diamonds_ = other.diamonds_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendDiamondsReq Clone() {
+      return new SendDiamondsReq(this);
+    }
+
+    /// <summary>Field number for the "uid" field.</summary>
+    public const int UidFieldNumber = 1;
+    private uint uid_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Uid {
+      get { return uid_; }
+      set {
+        uid_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "diamonds" field.</summary>
+    public const int DiamondsFieldNumber = 2;
+    private uint diamonds_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Diamonds {
+      get { return diamonds_; }
+      set {
+        diamonds_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SendDiamondsReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SendDiamondsReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Uid != other.Uid) return false;
+      if (Diamonds != other.Diamonds) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Uid != 0) hash ^= Uid.GetHashCode();
+      if (Diamonds != 0) hash ^= Diamonds.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Uid != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(Uid);
+      }
+      if (Diamonds != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(Diamonds);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Uid != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Uid);
+      }
+      if (Diamonds != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Diamonds);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SendDiamondsReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Uid != 0) {
+        Uid = other.Uid;
+      }
+      if (other.Diamonds != 0) {
+        Diamonds = other.Diamonds;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Uid = input.ReadUInt32();
+            break;
+          }
+          case 16: {
+            Diamonds = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class SendDiamondsRsp : pb::IMessage<SendDiamondsRsp> {
+    private static readonly pb::MessageParser<SendDiamondsRsp> _parser = new pb::MessageParser<SendDiamondsRsp>(() => new SendDiamondsRsp());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SendDiamondsRsp> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[5]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendDiamondsRsp() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendDiamondsRsp(SendDiamondsRsp other) : this() {
+      ret_ = other.ret_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendDiamondsRsp Clone() {
+      return new SendDiamondsRsp(this);
+    }
+
+    /// <summary>Field number for the "ret" field.</summary>
+    public const int RetFieldNumber = 1;
+    private global::Msg.ErrorID ret_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Msg.ErrorID Ret {
+      get { return ret_; }
+      set {
+        ret_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SendDiamondsRsp);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SendDiamondsRsp other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Ret != other.Ret) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Ret != 0) hash ^= Ret.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Ret != 0) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Ret);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Ret != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Ret);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SendDiamondsRsp other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Ret != 0) {
+        Ret = other.Ret;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            ret_ = (global::Msg.ErrorID) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   /// <summary>
   /// kick
   /// </summary>
@@ -2461,7 +2763,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2553,7 +2855,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[7]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2673,7 +2975,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[8]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2793,7 +3095,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[9]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3062,7 +3364,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[8]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[10]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3232,6 +3534,975 @@ namespace Msg {
   }
 
   /// <summary>
+  /// List Rooms 请求房间列表
+  /// </summary>
+  public sealed partial class ListRoomsReq : pb::IMessage<ListRoomsReq> {
+    private static readonly pb::MessageParser<ListRoomsReq> _parser = new pb::MessageParser<ListRoomsReq>(() => new ListRoomsReq());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ListRoomsReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsReq(ListRoomsReq other) : this() {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsReq Clone() {
+      return new ListRoomsReq(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ListRoomsReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ListRoomsReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ListRoomsReq other) {
+      if (other == null) {
+        return;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 返回结果
+  /// </summary>
+  public sealed partial class ListRoomsRsp : pb::IMessage<ListRoomsRsp> {
+    private static readonly pb::MessageParser<ListRoomsRsp> _parser = new pb::MessageParser<ListRoomsRsp>(() => new ListRoomsRsp());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ListRoomsRsp> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[12]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsRsp() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsRsp(ListRoomsRsp other) : this() {
+      rooms_ = other.rooms_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsRsp Clone() {
+      return new ListRoomsRsp(this);
+    }
+
+    /// <summary>Field number for the "rooms" field.</summary>
+    public const int RoomsFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Msg.ListRoomItem> _repeated_rooms_codec
+        = pb::FieldCodec.ForMessage(10, global::Msg.ListRoomItem.Parser);
+    private readonly pbc::RepeatedField<global::Msg.ListRoomItem> rooms_ = new pbc::RepeatedField<global::Msg.ListRoomItem>();
+    /// <summary>
+    /// rooms
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Msg.ListRoomItem> Rooms {
+      get { return rooms_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ListRoomsRsp);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ListRoomsRsp other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!rooms_.Equals(other.rooms_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= rooms_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      rooms_.WriteTo(output, _repeated_rooms_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += rooms_.CalculateSize(_repeated_rooms_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ListRoomsRsp other) {
+      if (other == null) {
+        return;
+      }
+      rooms_.Add(other.rooms_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            rooms_.AddEntriesFrom(input, _repeated_rooms_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ListRoomItem : pb::IMessage<ListRoomItem> {
+    private static readonly pb::MessageParser<ListRoomItem> _parser = new pb::MessageParser<ListRoomItem>(() => new ListRoomItem());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ListRoomItem> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[13]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomItem() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomItem(ListRoomItem other) : this() {
+      roomId_ = other.roomId_;
+      roomNumber_ = other.roomNumber_;
+      roomName_ = other.roomName_;
+      playedHands_ = other.playedHands_;
+      hands_ = other.hands_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomItem Clone() {
+      return new ListRoomItem(this);
+    }
+
+    /// <summary>Field number for the "room_id" field.</summary>
+    public const int RoomIdFieldNumber = 1;
+    private uint roomId_;
+    /// <summary>
+    /// room id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint RoomId {
+      get { return roomId_; }
+      set {
+        roomId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "room_number" field.</summary>
+    public const int RoomNumberFieldNumber = 2;
+    private string roomNumber_ = "";
+    /// <summary>
+    /// room number
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string RoomNumber {
+      get { return roomNumber_; }
+      set {
+        roomNumber_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "room_name" field.</summary>
+    public const int RoomNameFieldNumber = 3;
+    private string roomName_ = "";
+    /// <summary>
+    /// room name
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string RoomName {
+      get { return roomName_; }
+      set {
+        roomName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "played_hands" field.</summary>
+    public const int PlayedHandsFieldNumber = 4;
+    private uint playedHands_;
+    /// <summary>
+    /// 进行了的局数
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint PlayedHands {
+      get { return playedHands_; }
+      set {
+        playedHands_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hands" field.</summary>
+    public const int HandsFieldNumber = 5;
+    private uint hands_;
+    /// <summary>
+    /// 最大局数
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Hands {
+      get { return hands_; }
+      set {
+        hands_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ListRoomItem);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ListRoomItem other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (RoomId != other.RoomId) return false;
+      if (RoomNumber != other.RoomNumber) return false;
+      if (RoomName != other.RoomName) return false;
+      if (PlayedHands != other.PlayedHands) return false;
+      if (Hands != other.Hands) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (RoomId != 0) hash ^= RoomId.GetHashCode();
+      if (RoomNumber.Length != 0) hash ^= RoomNumber.GetHashCode();
+      if (RoomName.Length != 0) hash ^= RoomName.GetHashCode();
+      if (PlayedHands != 0) hash ^= PlayedHands.GetHashCode();
+      if (Hands != 0) hash ^= Hands.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (RoomId != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(RoomId);
+      }
+      if (RoomNumber.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(RoomNumber);
+      }
+      if (RoomName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(RoomName);
+      }
+      if (PlayedHands != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(PlayedHands);
+      }
+      if (Hands != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(Hands);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (RoomId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RoomId);
+      }
+      if (RoomNumber.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(RoomNumber);
+      }
+      if (RoomName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(RoomName);
+      }
+      if (PlayedHands != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PlayedHands);
+      }
+      if (Hands != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Hands);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ListRoomItem other) {
+      if (other == null) {
+        return;
+      }
+      if (other.RoomId != 0) {
+        RoomId = other.RoomId;
+      }
+      if (other.RoomNumber.Length != 0) {
+        RoomNumber = other.RoomNumber;
+      }
+      if (other.RoomName.Length != 0) {
+        RoomName = other.RoomName;
+      }
+      if (other.PlayedHands != 0) {
+        PlayedHands = other.PlayedHands;
+      }
+      if (other.Hands != 0) {
+        Hands = other.Hands;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            RoomId = input.ReadUInt32();
+            break;
+          }
+          case 18: {
+            RoomNumber = input.ReadString();
+            break;
+          }
+          case 26: {
+            RoomName = input.ReadString();
+            break;
+          }
+          case 32: {
+            PlayedHands = input.ReadUInt32();
+            break;
+          }
+          case 40: {
+            Hands = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 请求或者取消监听房间状态变化
+  /// </summary>
+  public sealed partial class ListRoomsListenReq : pb::IMessage<ListRoomsListenReq> {
+    private static readonly pb::MessageParser<ListRoomsListenReq> _parser = new pb::MessageParser<ListRoomsListenReq>(() => new ListRoomsListenReq());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ListRoomsListenReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[14]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsListenReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsListenReq(ListRoomsListenReq other) : this() {
+      listen_ = other.listen_;
+      roomIds_ = other.roomIds_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsListenReq Clone() {
+      return new ListRoomsListenReq(this);
+    }
+
+    /// <summary>Field number for the "listen" field.</summary>
+    public const int ListenFieldNumber = 1;
+    private bool listen_;
+    /// <summary>
+    /// true - 监听, false - 取消监听
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Listen {
+      get { return listen_; }
+      set {
+        listen_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "room_ids" field.</summary>
+    public const int RoomIdsFieldNumber = 2;
+    private uint roomIds_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint RoomIds {
+      get { return roomIds_; }
+      set {
+        roomIds_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ListRoomsListenReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ListRoomsListenReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Listen != other.Listen) return false;
+      if (RoomIds != other.RoomIds) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Listen != false) hash ^= Listen.GetHashCode();
+      if (RoomIds != 0) hash ^= RoomIds.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Listen != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(Listen);
+      }
+      if (RoomIds != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(RoomIds);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Listen != false) {
+        size += 1 + 1;
+      }
+      if (RoomIds != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(RoomIds);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ListRoomsListenReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Listen != false) {
+        Listen = other.Listen;
+      }
+      if (other.RoomIds != 0) {
+        RoomIds = other.RoomIds;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Listen = input.ReadBool();
+            break;
+          }
+          case 16: {
+            RoomIds = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 返回结果
+  /// </summary>
+  public sealed partial class ListRoomsListenRsp : pb::IMessage<ListRoomsListenRsp> {
+    private static readonly pb::MessageParser<ListRoomsListenRsp> _parser = new pb::MessageParser<ListRoomsListenRsp>(() => new ListRoomsListenRsp());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ListRoomsListenRsp> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[15]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsListenRsp() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsListenRsp(ListRoomsListenRsp other) : this() {
+      ret_ = other.ret_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsListenRsp Clone() {
+      return new ListRoomsListenRsp(this);
+    }
+
+    /// <summary>Field number for the "ret" field.</summary>
+    public const int RetFieldNumber = 1;
+    private global::Msg.ErrorID ret_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Msg.ErrorID Ret {
+      get { return ret_; }
+      set {
+        ret_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ListRoomsListenRsp);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ListRoomsListenRsp other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Ret != other.Ret) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Ret != 0) hash ^= Ret.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Ret != 0) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Ret);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Ret != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Ret);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ListRoomsListenRsp other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Ret != 0) {
+        Ret = other.Ret;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            ret_ = (global::Msg.ErrorID) input.ReadEnum();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 房间状态变化时，发送此消息
+  /// </summary>
+  public sealed partial class ListRoomsNotify : pb::IMessage<ListRoomsNotify> {
+    private static readonly pb::MessageParser<ListRoomsNotify> _parser = new pb::MessageParser<ListRoomsNotify>(() => new ListRoomsNotify());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ListRoomsNotify> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[16]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsNotify() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsNotify(ListRoomsNotify other) : this() {
+      type_ = other.type_;
+      round_ = other.round_;
+      seatId_ = other.seatId_;
+      name_ = other.name_;
+      avatar_ = other.avatar_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ListRoomsNotify Clone() {
+      return new ListRoomsNotify(this);
+    }
+
+    /// <summary>Field number for the "type" field.</summary>
+    public const int TypeFieldNumber = 1;
+    private global::Msg.ListRoomNotifyType type_ = 0;
+    /// <summary>
+    /// 状态变化类型
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Msg.ListRoomNotifyType Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "round" field.</summary>
+    public const int RoundFieldNumber = 2;
+    private uint round_;
+    /// <summary>
+    /// 最新的局数
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Round {
+      get { return round_; }
+      set {
+        round_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "seat_id" field.</summary>
+    public const int SeatIdFieldNumber = 3;
+    private uint seatId_;
+    /// <summary>
+    /// 座位号
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint SeatId {
+      get { return seatId_; }
+      set {
+        seatId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 4;
+    private string name_ = "";
+    /// <summary>
+    /// 玩家姓名
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "avatar" field.</summary>
+    public const int AvatarFieldNumber = 5;
+    private string avatar_ = "";
+    /// <summary>
+    /// 玩家头像
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Avatar {
+      get { return avatar_; }
+      set {
+        avatar_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ListRoomsNotify);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ListRoomsNotify other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Type != other.Type) return false;
+      if (Round != other.Round) return false;
+      if (SeatId != other.SeatId) return false;
+      if (Name != other.Name) return false;
+      if (Avatar != other.Avatar) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Type != 0) hash ^= Type.GetHashCode();
+      if (Round != 0) hash ^= Round.GetHashCode();
+      if (SeatId != 0) hash ^= SeatId.GetHashCode();
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (Avatar.Length != 0) hash ^= Avatar.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Type != 0) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Type);
+      }
+      if (Round != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(Round);
+      }
+      if (SeatId != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(SeatId);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Name);
+      }
+      if (Avatar.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Avatar);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
+      }
+      if (Round != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Round);
+      }
+      if (SeatId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(SeatId);
+      }
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (Avatar.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Avatar);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ListRoomsNotify other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Type != 0) {
+        Type = other.Type;
+      }
+      if (other.Round != 0) {
+        Round = other.Round;
+      }
+      if (other.SeatId != 0) {
+        SeatId = other.SeatId;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.Avatar.Length != 0) {
+        Avatar = other.Avatar;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            type_ = (global::Msg.ListRoomNotifyType) input.ReadEnum();
+            break;
+          }
+          case 16: {
+            Round = input.ReadUInt32();
+            break;
+          }
+          case 24: {
+            SeatId = input.ReadUInt32();
+            break;
+          }
+          case 34: {
+            Name = input.ReadString();
+            break;
+          }
+          case 42: {
+            Avatar = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
   /// Consume Diamonds Notify
   /// </summary>
   public sealed partial class ConsumeDiamondsNotify : pb::IMessage<ConsumeDiamondsNotify> {
@@ -3241,7 +4512,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[17]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3361,7 +4632,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[10]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[18]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3636,7 +4907,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[11]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[19]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4136,7 +5407,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[12]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4256,7 +5527,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[13]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4410,7 +5681,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[14]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4586,7 +5857,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[15]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4675,7 +5946,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[16]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4792,7 +6063,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4912,7 +6183,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[26]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5032,7 +6303,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[27]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5180,7 +6451,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[28]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5418,7 +6689,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[21]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[29]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5507,7 +6778,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[22]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[30]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5624,7 +6895,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[23]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[31]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5772,7 +7043,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[24]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[32]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5892,7 +7163,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[25]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[33]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6012,7 +7283,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[26]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[34]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6101,7 +7372,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[27]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[35]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6221,7 +7492,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[28]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[36]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6341,7 +7612,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[29]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[37]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6458,7 +7729,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[30]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[38]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6606,7 +7877,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[31]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[39]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6716,7 +7987,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[32]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[40]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6853,7 +8124,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[33]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[41]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6970,7 +8241,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[34]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[42]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7093,7 +8364,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[35]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[43]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7473,7 +8744,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[36]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[44]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7585,7 +8856,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[37]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[45]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7795,7 +9066,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[38]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[46]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -7915,7 +9186,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[39]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[47]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -8055,7 +9326,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[40]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[48]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -8280,7 +9551,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[41]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[49]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -8400,7 +9671,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[42]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[50]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -8613,7 +9884,7 @@ namespace Msg {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[43]; }
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[51]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
