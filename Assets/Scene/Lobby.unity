@@ -1562,7 +1562,7 @@ MonoBehaviour:
   Smooth: 200
   IsShowPercnet: 0
   IsShowThumbnail: 0
-  BrokenLineWidth: 4
+  BrokenLineWidth: 2
 --- !u!222 &170164596
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1795,13 +1795,7 @@ MonoBehaviour:
   Pie7Day: {fileID: 1690764519}
   Pie30Day: {fileID: 593199070}
   PieAllDay: {fileID: 170164595}
-  Borders:
-  - {fileID: 1277112971}
-  - {fileID: 212065572}
-  - {fileID: 2029045598}
-  - {fileID: 1242553343}
-  - {fileID: 1695322832}
-  - {fileID: 839409957}
+  Borders: []
 --- !u!1 &186525767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2180,8 +2174,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  PieRadius: 116.5
-  HollowWidth: 112.5
+  PieRadius: 112.5
+  HollowWidth: 0
   BoomDegree: 0
   Smooth: 200
   IsShowPercnet: 0
@@ -5502,7 +5496,7 @@ MonoBehaviour:
   - {fileID: 814692990}
   Title: {fileID: 1061227653}
   smooting: 4
-  sensitivity: 0.5
+  sensitivity: 0
 --- !u!1 &513316271
 GameObject:
   m_ObjectHideFlags: 0
@@ -6523,7 +6517,7 @@ MonoBehaviour:
   Smooth: 200
   IsShowPercnet: 0
   IsShowThumbnail: 0
-  BrokenLineWidth: 4
+  BrokenLineWidth: 2
 --- !u!222 &593199071
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9483,7 +9477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.03137255, g: 0.16470589, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -9497,7 +9491,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  segments: 360
+  segments: 180
 --- !u!222 &814692991
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10032,8 +10026,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  PieRadius: 116.5
-  HollowWidth: 112.5
+  PieRadius: 112.5
+  HollowWidth: 0
   BoomDegree: 0
   Smooth: 200
   IsShowPercnet: 0
@@ -12118,7 +12112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b030fb783dbb448db12801c4fb09726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabRoomInfo: {fileID: 1907860323133494, guid: 08138f929721adf43bed6717df88e270,
+  PrefabRoomInfo: {fileID: 1441911639615208, guid: 08138f929721adf43bed6717df88e270,
     type: 2}
   PrefabDialog: {fileID: 1436015893693766, guid: 6ba7c72446a13554ea2f70fc89eb2db7,
     type: 2}
@@ -12791,7 +12785,7 @@ RectTransform:
   m_GameObject: {fileID: 1141810979}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9999955, y: 0.9999955, z: 0.9999955}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1994593098}
   - {fileID: 776856014}
@@ -13416,8 +13410,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  PieRadius: 116.5
-  HollowWidth: 112.5
+  PieRadius: 112.5
+  HollowWidth: 0
   BoomDegree: 0
   Smooth: 200
   IsShowPercnet: 0
@@ -13844,8 +13838,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  PieRadius: 128.5
-  HollowWidth: 126.5
+  PieRadius: 112.5
+  HollowWidth: 0
   BoomDegree: 0
   Smooth: 200
   IsShowPercnet: 0
@@ -16756,7 +16750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.03137255, g: 0.16470589, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -16770,7 +16764,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  segments: 360
+  segments: 180
 --- !u!222 &1517179456
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17087,7 +17081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.53333336, g: 0.8980392, b: 0.9411765, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -17101,7 +17095,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  segments: 360
+  segments: 180
 --- !u!222 &1537370888
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19698,7 +19692,7 @@ MonoBehaviour:
   Smooth: 200
   IsShowPercnet: 0
   IsShowThumbnail: 0
-  BrokenLineWidth: 4
+  BrokenLineWidth: 2
 --- !u!222 &1690764520
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19765,8 +19759,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  PieRadius: 128.5
-  HollowWidth: 126.5
+  PieRadius: 112.5
+  HollowWidth: 0
   BoomDegree: 0
   Smooth: 200
   IsShowPercnet: 0
@@ -23477,8 +23471,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  PieRadius: 128.5
-  HollowWidth: 126.5
+  PieRadius: 112.5
+  HollowWidth: 0
   BoomDegree: 0
   Smooth: 200
   IsShowPercnet: 0

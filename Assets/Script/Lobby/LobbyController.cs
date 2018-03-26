@@ -36,10 +36,9 @@ public class LobbyController : MonoBehaviour {
 	public SettingControl		 	SettingControl;
 
 	public GameObject 				Canvas;
-
-	//Data
-	private List<RoomInfo> 			RoomInfos = new List<RoomInfo>();
-
+	private List<Msg.ListRoomItem>	RoomLists= new List<ListRoomItem>();
+	private List<uint>				RoomIDs = new List<uint>();
+	
 	// Use this for initialization
 	void Start () {
 		CheckConnection ();
@@ -47,8 +46,7 @@ public class LobbyController : MonoBehaviour {
 
 	void Awake(){
 		InitCallbackForNet ();
-		GetRoomInfo ();
-		UpdateRoomsInfo ();
+		RoomListServer ();
 	}
 	
 	// Update is called once per frame
@@ -82,6 +80,7 @@ public class LobbyController : MonoBehaviour {
 	}
 		
 	public void PlayGame(){
+		RoomListListenServer (false);
 		SceneManager.LoadScene (2);
 	}
 
@@ -96,27 +95,16 @@ public class LobbyController : MonoBehaviour {
 
 
 	//===================================Room list=================================
-	public void GetRoomInfo(){
-		for(int i = 0; i < 3; i++){
-			RoomInfo a 		= new RoomInfo ();
-			a.CurRound 		= 10;
-			a.TotalRound 	= 20;
-			a.Name 			= "Room"+i;
-			a.RoomId 		= 123;
-			a.Players 		= new List<int> ();
-			a.Players.Add (1);
-			a.Players.Add (1);
-			a.Players.Add (1);
-			a.Players.Add (1);
-			RoomInfos.Add (a);
-		}
+	public void onCloseRoomHandler(GameObject obj){
+		//UpdateRoomsInfo ();
 	}
 
-	public void onCloseRoomHandler(GameObject obj){
-		RoomInfos.RemoveAt (0);
-		UpdateRoomsInfo ();
+	public void UpdateRoomHand(uint roomid, uint round){
+		if(RoomIDs.BinarySearch(roomid) == 0){
+			Transform Content = Canvas.transform.Find("RoomList/Viewport/Content/" + roomid.ToString());
+			//Content.
+		}
 	}
-		
 
 	public void UpdateRoomsInfo(){
 		Transform Content = Canvas.transform.Find("RoomList/Viewport/Content");
@@ -128,23 +116,24 @@ public class LobbyController : MonoBehaviour {
 		float width =Canvas.transform.Find ("RoomList").GetComponent<RectTransform> ().sizeDelta.x;;
 		float left 	= 4;
 
-		if (RoomInfos.Count < 3) {width = 0;
-		} else {width = 200 * RoomInfos.Count + 33 * (RoomInfos.Count - 1) - width + 8;}
+		if (RoomLists.Count < 3) {width = 0;
+		} else {width = 200 * RoomLists.Count + 33 * (RoomLists.Count - 1) - width + 8;}
 
 		Content.GetComponent<RectTransform> ().sizeDelta = new Vector2 (width, Content.GetComponent<RectTransform> ().sizeDelta.y);
 
-		for(int i = 0; i < RoomInfos.Count; i++){
+		for(int i = 0; i < RoomLists.Count; i++){
 			GameObject RoomInfo = (GameObject)Instantiate(PrefabRoomInfo);
 
-			RoomInfo.transform.Find ("Name").GetComponent<Text> ().text = RoomInfos [i].Name;
-			RoomInfo.transform.Find ("Hand").GetComponent<Text> ().text = RoomInfos [i].CurRound + "/" + RoomInfos [i].TotalRound;
+			RoomInfo.name = RoomLists [i].RoomId.ToString();
+			RoomInfo.transform.Find ("Name").GetComponent<Text> ().text = RoomLists [i].RoomName;
+			RoomInfo.transform.Find ("Hand").GetComponent<Text> ().text = (RoomLists [i].PlayedHands + 1).ToString() + "/" + RoomLists [i].Hands;
 
-			for(int o = 0; o < RoomInfos[i].Players.Count; o++){
+			for(int o = 0; o < RoomLists[i].Players.Count; o++){
 				UICircle avatar = (UICircle)Instantiate(PrefabAvatar);
 				avatar.transform.SetParent (RoomInfo.transform.Find ("Player" + o + "/Avatar"));
 				avatar.transform.localPosition = new Vector3 ();
 				avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (56, 56);
-
+				StartCoroutine(Common.Load(avatar, RoomLists[i].Players[o].Avatar));
 			}
 
 			EventTriggerListener.Get(RoomInfo).onClick = onCloseRoomHandler;
@@ -152,6 +141,12 @@ public class LobbyController : MonoBehaviour {
 			RoomInfo.transform.localScale = new Vector3 (1, 1, 1);
 			RoomInfo.transform.localPosition = new Vector3 (left, 0, 0);
 			left += 200 + 33;
+
+			RoomIDs.Add ( RoomLists [i].RoomId);
+		}
+
+		if(RoomIDs.Count > 0){
+			RoomListListenServer (true);
 		}
 	}
 
@@ -196,6 +191,23 @@ public class LobbyController : MonoBehaviour {
 		}
 
 		switch (data.Msgid) {
+
+		case MessageID.ListRoomsRsp:
+			if(data.ListRoomsRsp.Ret == 0){
+				Loom.QueueOnMainThread(()=>{
+					RoomIDs.Clear();
+					RoomLists.Clear();
+					//RoomLists = data.ListRoomsRsp.Rooms;
+					UpdateRoomsInfo();
+				}); 
+			}
+			break;
+
+		case MessageID.ListRoomsListenRsp:
+			if(data.ListRoomsListenRsp.Ret == 0){
+			}
+			break;
+
 		case MessageID.CreateRoomRsp:
 			if(data.CreateRoomRsp.Ret == 0){
 				Common.CRoom_id 	= data.CreateRoomRsp.RoomId;
@@ -259,6 +271,9 @@ public class LobbyController : MonoBehaviour {
 
 		case MessageID.ConsumeDiamondsNotify:
 			break;
+
+		case MessageID.ListRoomsNotify:
+			break;
 		}
 	}
 		
@@ -285,6 +300,31 @@ public class LobbyController : MonoBehaviour {
 		msg.Msgid 						= MessageID.JoinRoomReq;
 		msg.JoinRoomReq 				= new JoinRoomReq();
 		msg.JoinRoomReq.RoomNumber		= room_number;
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
+	public void RoomListServer(){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.ListRoomsReq;
+		msg.ListRoomsReq 				= new ListRoomsReq();
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
+	public void RoomListListenServer(bool listen){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.ListRoomsListenReq;
+		msg.ListRoomsListenReq 			= new ListRoomsListenReq();
+		//msg.ListRoomsListenReq.RoomIds	= RoomIDs;
 
 		using (var stream = new MemoryStream())
 		{
