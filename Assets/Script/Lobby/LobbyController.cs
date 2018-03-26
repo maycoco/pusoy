@@ -97,7 +97,7 @@ public class LobbyController : MonoBehaviour {
 
 	//===================================Room list=================================
 	public void onCloseRoomHandler(GameObject obj){
-		//UpdateRoomsInfo ();
+		CloseRoomServer ((uint)obj.name);
 	}
 
 	public void UpdateRoomHand(uint roomid, uint round){
@@ -248,6 +248,12 @@ public class LobbyController : MonoBehaviour {
 			}
 			break;
 
+		case MessageID.CloseRoomRsp:
+			if(data.CloseRoomRsp.Ret == 0){
+				UpdateRoomClose (data.CloseRoomRsp.RoomId);
+			}
+			break;
+
 		case MessageID.ListRoomsListenRsp:
 			if(data.ListRoomsListenRsp.Ret == 0){
 			}
@@ -382,6 +388,18 @@ public class LobbyController : MonoBehaviour {
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.ListRoomsReq;
 		msg.ListRoomsReq 				= new ListRoomsReq();
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
+	public void CloseRoomServer(uint roomid){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.CloseRoomReq;
+		msg.CloseRoomReq 				= new CloseRoomReq();
 
 		using (var stream = new MemoryStream())
 		{
