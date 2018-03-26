@@ -12,11 +12,12 @@ using Msg;
 using System.IO;
 
 public class RoomInfo{
-	public int 			RoomId;
-	public int 			TotalRound;
-	public int 			CurRound;
-	public string		Name;
-	public List<int> 	Players;
+	public uint 		RoomId ;
+	public string 		RoomNumber ;
+	public string		RoomName;
+	public uint 		Hands;
+	public uint 		PlayerHands;
+	public List<ListRoomPlayerInfo> Players;
 }
 
 public class LobbyController : MonoBehaviour {
@@ -36,7 +37,7 @@ public class LobbyController : MonoBehaviour {
 	public SettingControl		 	SettingControl;
 
 	public GameObject 				Canvas;
-	private List<Msg.ListRoomItem>	RoomLists= new List<ListRoomItem>();
+	private List<RoomInfo>			RoomLists= new List<RoomInfo>();
 	private List<uint>				RoomIDs = new List<uint>();
 	
 	// Use this for initialization
@@ -80,7 +81,7 @@ public class LobbyController : MonoBehaviour {
 	}
 		
 	public void PlayGame(){
-		RoomListListenServer (false);
+		RoomListListenServer (false, RoomIDs);
 		SceneManager.LoadScene (2);
 	}
 
@@ -101,8 +102,39 @@ public class LobbyController : MonoBehaviour {
 
 	public void UpdateRoomHand(uint roomid, uint round){
 		if(RoomIDs.BinarySearch(roomid) == 0){
-			Transform Content = Canvas.transform.Find("RoomList/Viewport/Content/" + roomid.ToString());
-			//Content.
+			Transform RoomInfo = Canvas.transform.Find("RoomList/Viewport/Content/" + roomid.ToString());
+			RoomInfo.transform.Find ("PHand").GetComponent<Text> ().text = round.ToString();
+		}
+	}
+
+	public void UpdateRoomClose(uint roomid){
+		if(RoomIDs.BinarySearch(roomid) == 0){
+			foreach(RoomInfo room in RoomLists){
+				if(roomid == room.RoomId){
+					RoomLists.Remove (room);
+					UpdateRoomsInfo ();
+					break;
+				}
+			}
+		}
+	}
+
+	public void UpdateRoomSitDown(uint roomid, Msg.ListRoomPlayerInfo player){
+		if(RoomIDs.BinarySearch(roomid) == 0){
+			Transform RoomInfo = Canvas.transform.Find("RoomList/Viewport/Content/" + roomid.ToString());
+
+			UICircle avatar = (UICircle)Instantiate(PrefabAvatar);
+			avatar.transform.SetParent (RoomInfo.Find ("Player/" + player.SeatId + "/Avatar" + player.SeatId));
+			avatar.transform.localPosition = new Vector3 ();
+			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (56, 56);
+			StartCoroutine(Common.Load(avatar, player.Avatar));
+		}
+	}
+
+	public void UpdateRoomStandUp(uint roomid, Msg.ListRoomPlayerInfo player){
+		if(RoomIDs.BinarySearch(roomid) == 0){
+			Transform RoomInfo = Canvas.transform.Find("RoomList/Viewport/Content/" + roomid.ToString());
+			Destroy (RoomInfo.Find("Player/" + player.SeatId + "/Avatar").gameObject);
 		}
 	}
 
@@ -126,7 +158,8 @@ public class LobbyController : MonoBehaviour {
 
 			RoomInfo.name = RoomLists [i].RoomId.ToString();
 			RoomInfo.transform.Find ("Name").GetComponent<Text> ().text = RoomLists [i].RoomName;
-			RoomInfo.transform.Find ("Hand").GetComponent<Text> ().text = (RoomLists [i].PlayedHands + 1).ToString() + "/" + RoomLists [i].Hands;
+			RoomInfo.transform.Find ("PHand").GetComponent<Text> ().text = (RoomLists [i].PlayerHands + 1).ToString();
+			RoomInfo.transform.Find ("Hands").GetComponent<Text> ().text = RoomLists [i].Hands.ToString();
 
 			for(int o = 0; o < RoomLists[i].Players.Count; o++){
 				UICircle avatar = (UICircle)Instantiate(PrefabAvatar);
@@ -141,12 +174,10 @@ public class LobbyController : MonoBehaviour {
 			RoomInfo.transform.localScale = new Vector3 (1, 1, 1);
 			RoomInfo.transform.localPosition = new Vector3 (left, 0, 0);
 			left += 200 + 33;
-
-			RoomIDs.Add ( RoomLists [i].RoomId);
 		}
 
-		if(RoomIDs.Count > 0){
-			RoomListListenServer (true);
+		if(RoomLists.Count > 0){
+			RoomListListenServer (true, RoomIDs);
 		}
 	}
 
@@ -197,7 +228,21 @@ public class LobbyController : MonoBehaviour {
 				Loom.QueueOnMainThread(()=>{
 					RoomIDs.Clear();
 					RoomLists.Clear();
-					//RoomLists = data.ListRoomsRsp.Rooms;
+					foreach(ListRoomItem room in data.ListRoomsRsp.Rooms){
+						RoomInfo r = new RoomInfo();
+						r.RoomId = room.RoomId;
+						r.RoomName = room.RoomName;
+						r.RoomNumber = room.RoomNumber;
+						r.Hands = room.Hands;
+						r.PlayerHands = room.PlayedHands;
+
+						foreach(ListRoomPlayerInfo player in room.Players){
+							r.Players.Add(player);
+						}
+
+						RoomLists.Add(r);
+						RoomIDs.Add (room.RoomId);
+					}
 					UpdateRoomsInfo();
 				}); 
 			}
@@ -273,6 +318,31 @@ public class LobbyController : MonoBehaviour {
 			break;
 
 		case MessageID.ListRoomsNotify:
+			switch(data.ListRoomsNotify.Type){
+			case Msg.ListRoomNotifyType.Round:
+				Loom.QueueOnMainThread(()=>{
+					UpdateRoomHand(data.ListRoomsNotify.RoomId, data.ListRoomsNotify.Round);
+				}); 
+				break;
+
+			case Msg.ListRoomNotifyType.SitDown:
+				Loom.QueueOnMainThread(()=>{
+					UpdateRoomSitDown(data.ListRoomsNotify.RoomId, data.ListRoomsNotify.Player);
+				}); 
+				break;
+
+			case Msg.ListRoomNotifyType.StandUp:
+				Loom.QueueOnMainThread(()=>{
+					UpdateRoomStandUp(data.ListRoomsNotify.RoomId, data.ListRoomsNotify.Player);
+				}); 
+				break;
+
+			case Msg.ListRoomNotifyType.Close:
+				Loom.QueueOnMainThread(()=>{
+					UpdateRoomClose(data.ListRoomsNotify.RoomId);
+				}); 
+				break;
+			}
 			break;
 		}
 	}
@@ -320,11 +390,13 @@ public class LobbyController : MonoBehaviour {
 		}
 	}
 
-	public void RoomListListenServer(bool listen){
+	public void RoomListListenServer(bool listen, List<uint> ids){
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.ListRoomsListenReq;
 		msg.ListRoomsListenReq 			= new ListRoomsListenReq();
-		//msg.ListRoomsListenReq.RoomIds	= RoomIDs;
+		foreach(uint id in ids){
+			msg.ListRoomsListenReq.RoomIds.Add (id);
+		}
 
 		using (var stream = new MemoryStream())
 		{
