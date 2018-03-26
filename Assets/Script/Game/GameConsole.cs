@@ -196,6 +196,10 @@ public class GameConsole : MonoBehaviour
 			}
 		}
 	}
+		
+	public void LeaveRoom(){
+		m_GameController.ExitGame ();
+	}
 
 	public void HidePlayerList(){
 		Transform layer  = GameObject.Find("Canvas").transform.Find("PlayersListLayer");

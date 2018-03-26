@@ -128,64 +128,64 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void initializeRoomData(){
-		Common.FB_id = "123235234";
-		Common.FB_access_token = "sd23edasdasdasdasd12easd";
-		Common.FB_name = "Walter wang";
-		Common.Uid = 111;
-		Common.CMin_bet 	= 20;
-		Common.CMax_bet 	= 1000;
-		Common.CHands 		= 20;
-		Common.CPlayed_hands= 19;
-		Common.CIs_share 	= true;
-		Common.CCredit_points = 1000;
-		Common.CState 		= Msg.GameState.Result;
-		Common.CAutoBanker	= true;
-		if(Common.CState == Msg.GameState.Show){
-			Common.ConfigBetTime = 5;
-		}
-		else if(Common.CState == Msg.GameState.Ready){
-			Common.ConfigSortTime = 45;
-		}
-		else if(Common.CState == Msg.GameState.Result){
-			Common.ConfigFinishTime = 8;
-		}
-
-		PlayerInfo p0 = new PlayerInfo ();
-		p0.Uid = 111;
-		p0.SeatID = -1;
-		p0.Name = "Bruce";
-		p0.Bet = 0;
-		p0.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=21c98377362ac65c6705667bcbf2b21d/a8ca36d12f2eb938801e25e5d6628535e5dd6f67.jpg";
-		Common.CPlayers.Add (p0);
-
-		PlayerInfo p1 = new PlayerInfo ();
-		p1.Uid = 222;
-		p1.SeatID =  -1;
-		p1.Name = "Ali";
-		p1.Bet = 0;
-		p1.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=20bd50a0ea50352ab16125006343fb1a/87c154e736d12f2ea376f1774cc2d56285356867.jpg";
-
-		Common.CPlayers.Add (p1);
-
-		PlayerInfo p2 = new PlayerInfo ();
-		p2.Uid = 777;
-		p2.SeatID =  -1;
-		p2.Name = "HAHA";
-		p2.Bet = 200;
-		p2.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=f51e5f0dc55c1038247ececa8211931c/cafc2f2eb9389b50538cbf458635e5dde7116e67.jpg";
-		Common.CPlayers.Add (p2);
-
-		PlayerInfo p3 = new PlayerInfo ();
-		p3.Uid = 888;
-		p3.SeatID =  -1;
-		p3.Name = "gegeg";
-		p3.Bet = 100;
-		p3.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=2864ac7b133853438ccf8729a313b01f/d303b9389b504fc2c82cef12e6dde71190ef6d67.jpg";
-		Common.CPlayers.Add (p3);
-
-		int[] s = new int[]{1,13,3,14,5,6,24,40,18,10,38,12,27};
-		Common.CPokers = new List<int> (s);
-		ResultEvent (null);
+//		Common.FB_id = "123235234";
+//		Common.FB_access_token = "sd23edasdasdasdasd12easd";
+//		Common.FB_name = "Walter wang";
+//		Common.Uid = 111;
+//		Common.CMin_bet 	= 20;
+//		Common.CMax_bet 	= 1000;
+//		Common.CHands 		= 20;
+//		Common.CPlayed_hands= 19;
+//		Common.CIs_share 	= true;
+//		Common.CCredit_points = 1000;
+//		Common.CState 		= Msg.GameState.Result;
+//		Common.CAutoBanker	= true;
+//		if(Common.CState == Msg.GameState.Show){
+//			Common.ConfigBetTime = 5;
+//		}
+//		else if(Common.CState == Msg.GameState.Ready){
+//			Common.ConfigSortTime = 45;
+//		}
+//		else if(Common.CState == Msg.GameState.Result){
+//			Common.ConfigFinishTime = 8;
+//		}
+//
+//		PlayerInfo p0 = new PlayerInfo ();
+//		p0.Uid = 111;
+//		p0.SeatID = -1;
+//		p0.Name = "Bruce";
+//		p0.Bet = 0;
+//		p0.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=21c98377362ac65c6705667bcbf2b21d/a8ca36d12f2eb938801e25e5d6628535e5dd6f67.jpg";
+//		Common.CPlayers.Add (p0);
+//
+//		PlayerInfo p1 = new PlayerInfo ();
+//		p1.Uid = 222;
+//		p1.SeatID =  -1;
+//		p1.Name = "Ali";
+//		p1.Bet = 0;
+//		p1.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=20bd50a0ea50352ab16125006343fb1a/87c154e736d12f2ea376f1774cc2d56285356867.jpg";
+//
+//		Common.CPlayers.Add (p1);
+//
+//		PlayerInfo p2 = new PlayerInfo ();
+//		p2.Uid = 777;
+//		p2.SeatID =  -1;
+//		p2.Name = "HAHA";
+//		p2.Bet = 200;
+//		p2.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=f51e5f0dc55c1038247ececa8211931c/cafc2f2eb9389b50538cbf458635e5dde7116e67.jpg";
+//		Common.CPlayers.Add (p2);
+//
+//		PlayerInfo p3 = new PlayerInfo ();
+//		p3.Uid = 888;
+//		p3.SeatID =  -1;
+//		p3.Name = "gegeg";
+//		p3.Bet = 100;
+//		p3.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=2864ac7b133853438ccf8729a313b01f/d303b9389b504fc2c82cef12e6dde71190ef6d67.jpg";
+//		Common.CPlayers.Add (p3);
+//
+//		int[] s = new int[]{1,13,3,14,5,6,24,40,18,10,38,12,27};
+//		Common.CPokers = new List<int> (s);
+//		ResultEvent (null);
 
 		//Bet type
 		m_StateManage.m_StateBetting.UpdateDateBetType ();
@@ -361,67 +361,67 @@ public class GameController : MonoBehaviour {
 	}
 
 	 public void ResultEvent(RepeatedField<global::Msg.SeatResult> ResultList){
-//		SeatResults.Clear ();	
+		SeatResults.Clear ();	
+
+		for(int i = 0; i < ResultList.Count; i++){
+			
+			SeatResult info 	= new SeatResult ();
+			info.SeatID 		= (int)ResultList [i].SeatId;
+
+			if((int)ResultList [i].SeatId != 0){info.score 			= new List<int> (ResultList [i].Scores);}
+
+			PlayerInfo p = GetPlayerInfoForSeatID (info.SeatID);
+			if (p == null) {
+				info.Name = "";
+				info.Avatar = "";
+			} else {
+				info.Name 	= p.Name;
+				info.Avatar = p.FB_avatar;
+			}
+
+			info.autowin 		= ResultList [i].Autowin;
+			info.foul			= ResultList [i].Foul;
+			info.Win 			= ResultList [i].Win;
+			info.Ranks 			= ResultList [i].Ranks;
+
+			for(int o = 0; o < ResultList [i].CardGroups.Count; o++){
+				Msg.CardGroup cg = ResultList [i].CardGroups[o];
+				info.Pres.Add (cg.Cards);
+			}
+			SeatResults.Add (info.SeatID, info);
+		}
+
+
+//		uint[] arr = { 1, 2, 3};
+//		RepeatedField<uint> arrr = new RepeatedField<uint>{ arr };
 //
-//		for(int i = 0; i < ResultList.Count; i++){
-//			
-//			SeatResult info 	= new SeatResult ();
-//			info.SeatID 		= (int)ResultList [i].SeatId;
+//		uint[] arr1 = { 4, 5, 6, 7, 8 };
+//		RepeatedField<uint> arrr1 = new RepeatedField<uint>{ arr1 };
 //
-//			if((int)ResultList [i].SeatId != 0){info.score 			= new List<int> (ResultList [i].Scores);}
+//		uint[] arr2 = { 9, 10, 11, 12, 13 };
+//		RepeatedField<uint> arrr2 = new RepeatedField<uint>{ arr2 };
 //
-//			PlayerInfo p = GetPlayerInfoForSeatID (info.SeatID);
-//			if (p == null) {
-//				info.Name = "";
-//				info.Avatar = "";
-//			} else {
-//				info.Name 	= p.Name;
-//				info.Avatar = p.FB_avatar;
-//			}
+//		SeatResult hinfo = new SeatResult ();
+//		hinfo.Name = "walter";
+//		hinfo.Avatar = "";
+//		hinfo.Bet = 2000;
+//		hinfo.Win = 0;
+//		hinfo.SeatID = 0;
+//		hinfo.autowin = true;
+//		hinfo.foul = false;
+//		hinfo.Pres.Add (arrr);
+//		hinfo.Pres.Add (arrr1);
+//		hinfo.Pres.Add (arrr2);
 //
-//			info.autowin 		= ResultList [i].Autowin;
-//			info.foul			= ResultList [i].Foul;
-//			info.Win 			= ResultList [i].Win;
-//			info.Ranks 			= ResultList [i].Ranks;
+//		hinfo.score.Add (1);
+//		hinfo.score.Add (-1);
+//		hinfo.score.Add (-1);
 //
-//			for(int o = 0; o < ResultList [i].CardGroups.Count; o++){
-//				Msg.CardGroup cg = ResultList [i].CardGroups[o];
-//				info.Pres.Add (cg.Cards);
-//			}
-//			SeatResults.Add (info.SeatID, info);
-//		}
-
-
-		uint[] arr = { 1, 2, 3};
-		RepeatedField<uint> arrr = new RepeatedField<uint>{ arr };
-
-		uint[] arr1 = { 4, 5, 6, 7, 8 };
-		RepeatedField<uint> arrr1 = new RepeatedField<uint>{ arr1 };
-
-		uint[] arr2 = { 9, 10, 11, 12, 13 };
-		RepeatedField<uint> arrr2 = new RepeatedField<uint>{ arr2 };
-
-		SeatResult hinfo = new SeatResult ();
-		hinfo.Name = "walter";
-		hinfo.Avatar = "";
-		hinfo.Bet = 2000;
-		hinfo.Win = 0;
-		hinfo.SeatID = 0;
-		hinfo.autowin = true;
-		hinfo.foul = false;
-		hinfo.Pres.Add (arrr);
-		hinfo.Pres.Add (arrr1);
-		hinfo.Pres.Add (arrr2);
-
-		hinfo.score.Add (1);
-		hinfo.score.Add (-1);
-		hinfo.score.Add (-1);
-
-
-		SeatResults.Add (0, hinfo);
-		SeatResults.Add (1, hinfo);
-		SeatResults.Add (2, hinfo);
-		SeatResults.Add (3, hinfo);
+//
+//		SeatResults.Add (0, hinfo);
+//		SeatResults.Add (1, hinfo);
+//		SeatResults.Add (2, hinfo);
+//		SeatResults.Add (3, hinfo);
 	}
 
 	public void LeaveRoomEvent(uint uid){
@@ -525,7 +525,6 @@ public class GameController : MonoBehaviour {
 					foreach(Msg.ScoreboardItem t in data.GetScoreboardRsp.Items){
 						list.Add(t);
 					}
-					Debug.Log(list.Count);
 					m_GameConsole.ShowPlayerList (list, m_PlayerListMode);
 				});
 			}
