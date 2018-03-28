@@ -106,7 +106,7 @@ public class LobbyController : MonoBehaviour {
 
 	public void onJoinRoomHandler(GameObject obj){
 		foreach( RoomInfo room in RoomLists){
-			if(room.RoomId.ToString() == obj.name ){
+			if(room.RoomId.ToString() == obj.transform.parent.name){
 				JoinRoomServer (room.RoomNumber);
 			}
 		}
