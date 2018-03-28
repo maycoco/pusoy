@@ -12,6 +12,7 @@ using Msg;
 using System.IO;
 
 public class RoomInfo{
+	public uint 		Owner;
 	public uint 		RoomId ;
 	public string 		RoomNumber ;
 	public string		RoomName;
@@ -81,7 +82,6 @@ public class LobbyController : MonoBehaviour {
 	}
 		
 	public void PlayGame(){
-		RoomListListenServer (false, RoomIDs);
 		SceneManager.LoadScene (2);
 	}
 
@@ -97,7 +97,19 @@ public class LobbyController : MonoBehaviour {
 
 	//===================================Room list=================================
 	public void onCloseRoomHandler(GameObject obj){
-		CloseRoomServer ((uint)obj.name);
+		foreach( RoomInfo room in RoomLists){
+			if(room.RoomId.ToString() == obj.name && room.Owner == Common.Uid){
+				CloseRoomServer (room.RoomId);
+			}
+		}
+	}
+
+	public void onJoinRoomHandler(GameObject obj){
+		foreach( RoomInfo room in RoomLists){
+			if(room.RoomId.ToString() == obj.name ){
+				JoinRoomServer (room.RoomNumber);
+			}
+		}
 	}
 
 	public void UpdateRoomHand(uint roomid, uint round){
@@ -169,15 +181,18 @@ public class LobbyController : MonoBehaviour {
 				StartCoroutine(Common.Load(avatar, RoomLists[i].Players[o].Avatar));
 			}
 
-			EventTriggerListener.Get(RoomInfo).onClick = onCloseRoomHandler;
+			if (RoomLists [i].Owner == Common.Uid) {
+				RoomInfo.transform.Find ("Close").gameObject.SetActive (true);
+				EventTriggerListener.Get(RoomInfo.transform.Find ("Close").gameObject).onClick = onCloseRoomHandler;
+			} else {
+				RoomInfo.transform.Find ("Close").gameObject.SetActive (false);
+			}
+
+			EventTriggerListener.Get(RoomInfo.transform.Find ("Join").gameObject).onClick = onJoinRoomHandler;
 			RoomInfo.transform.SetParent (Content);
 			RoomInfo.transform.localScale = new Vector3 (1, 1, 1);
 			RoomInfo.transform.localPosition = new Vector3 (left, 0, 0);
 			left += 200 + 33;
-		}
-
-		if(RoomLists.Count > 0){
-			RoomListListenServer (true, RoomIDs);
 		}
 	}
 
@@ -231,6 +246,7 @@ public class LobbyController : MonoBehaviour {
 					foreach(ListRoomItem room in data.ListRoomsRsp.Rooms){
 						RoomInfo r = new RoomInfo();
 						r.RoomId = room.RoomId;
+						r.Owner = room.OwnerUid;
 						r.RoomName = room.RoomName;
 						r.RoomNumber = room.RoomNumber;
 						r.Hands = room.Hands;
@@ -254,11 +270,6 @@ public class LobbyController : MonoBehaviour {
 			}
 			break;
 
-		case MessageID.ListRoomsListenRsp:
-			if(data.ListRoomsListenRsp.Ret == 0){
-			}
-			break;
-
 		case MessageID.CreateRoomRsp:
 			if(data.CreateRoomRsp.Ret == 0){
 				Common.CRoom_id 	= data.CreateRoomRsp.RoomId;
@@ -268,7 +279,6 @@ public class LobbyController : MonoBehaviour {
 				}); 
 			}
 			break;
-
 
 		case MessageID.JoinRoomRsp:
 			if (data.JoinRoomRsp.Ret == 0) {
@@ -320,35 +330,36 @@ public class LobbyController : MonoBehaviour {
 			}
 			break;
 
-		case MessageID.ConsumeDiamondsNotify:
+		case MessageID.GetProfileRsp:
+			if (data.GetProfileRsp.Ret == 0) {
+				Common.Uid 				= data.GetProfileRsp.Uid;
+				Common.FB_name 			= data.GetProfileRsp.Name;
+				Common.FB_avatar 		= data.GetProfileRsp.Avatar;
+				Common.DiamondAmount 	= data.GetProfileRsp.Diamonds;
+				Loom.QueueOnMainThread(()=>{
+					PrefileControl.UpdateSelfInfo();
+				}); 
+			}
 			break;
 
-		case MessageID.ListRoomsNotify:
-			switch(data.ListRoomsNotify.Type){
-			case Msg.ListRoomNotifyType.Round:
-				Loom.QueueOnMainThread(()=>{
-					UpdateRoomHand(data.ListRoomsNotify.RoomId, data.ListRoomsNotify.Round);
-				}); 
-				break;
+		case MessageID.SendDiamondsRsp:
+			if (data.SendDiamondsRsp.Ret == 0) {
 
-			case Msg.ListRoomNotifyType.SitDown:
-				Loom.QueueOnMainThread(()=>{
-					UpdateRoomSitDown(data.ListRoomsNotify.RoomId, data.ListRoomsNotify.Player);
-				}); 
-				break;
-
-			case Msg.ListRoomNotifyType.StandUp:
-				Loom.QueueOnMainThread(()=>{
-					UpdateRoomStandUp(data.ListRoomsNotify.RoomId, data.ListRoomsNotify.Player);
-				}); 
-				break;
-
-			case Msg.ListRoomNotifyType.Close:
-				Loom.QueueOnMainThread(()=>{
-					UpdateRoomClose(data.ListRoomsNotify.RoomId);
-				}); 
-				break;
 			}
+			break;
+
+		case MessageID.DiamondsRecordsRsp:
+			if (data.DiamondsRecordsRsp.Ret == 0) {
+				Loom.QueueOnMainThread(()=>{
+					foreach( Msg.UserNameAvatar use in data.DiamondsRecordsRsp.Users){
+						StartCoroutine(Common.DownAvatar (use.Avatar));
+					}
+					PrefileControl.FormentDiamondRecord (data.DiamondsRecordsRsp.Records, data.DiamondsRecordsRsp.Users);
+				}); 
+			}
+			break;
+
+		case MessageID.ConsumeDiamondsNotify:
 			break;
 		}
 	}
@@ -408,13 +419,10 @@ public class LobbyController : MonoBehaviour {
 		}
 	}
 
-	public void RoomListListenServer(bool listen, List<uint> ids){
+	public void GetProfileServer(){
 		Protocol msg 					= new Protocol();
-		msg.Msgid 						= MessageID.ListRoomsListenReq;
-		msg.ListRoomsListenReq 			= new ListRoomsListenReq();
-		foreach(uint id in ids){
-			msg.ListRoomsListenReq.RoomIds.Add (id);
-		}
+		msg.Msgid 						= MessageID.GetProfileReq;
+		msg.GetProfileReq 				= new GetProfileReq();
 
 		using (var stream = new MemoryStream())
 		{
@@ -423,6 +431,33 @@ public class LobbyController : MonoBehaviour {
 		}
 	}
 
+	public void SendDiamondsServer(uint uid, uint amount){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.SendDiamondsReq;
+		msg.SendDiamondsReq 			= new SendDiamondsReq();
+		msg.SendDiamondsReq.Uid 		= uid;
+		msg.SendDiamondsReq.Diamonds 	= amount;
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
+	public void  DiamondsRecordsServer(string begin_time, string end_time){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.DiamondsRecordsReq;
+		msg.DiamondsRecordsReq 			= new DiamondsRecordsReq();
+		msg.DiamondsRecordsReq.BeginTime = begin_time;
+		msg.DiamondsRecordsReq.EndTime 	= end_time;
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
 
 	//===================================facebook=================================
 //	public void GetUserInfo(){

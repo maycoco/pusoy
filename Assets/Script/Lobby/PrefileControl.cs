@@ -4,19 +4,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
+using Msg;
+using Google.Protobuf;
+using Google.Protobuf.Collections;
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DiamondRecord{
+	public uint 	Uid;
 	public string 	Date;
 	public string 	Time;
 	public string 	Name;
-	public Sprite 	Avatar;
+	public string 	Avatar;
 	public int 		Amount;
 }
 
 public class PrefileControl : MonoBehaviour
 {
+	public LobbyController	LobbyControl;
+
 	public 	UICircle 	m_Avatar;
 	//Prefab
 	public GameObject 	m_Drecord;
@@ -27,7 +34,6 @@ public class PrefileControl : MonoBehaviour
 	private	string		m_Amount;
 	private	string		m_InputType;
 	private	Transform	m_DiamondContent;
-	public List<DiamondRecord> m_DList 	= new List<DiamondRecord>();
 
 
 	//Date
@@ -80,14 +86,12 @@ public class PrefileControl : MonoBehaviour
 	}
 
 	public void Enter(){
-		m_DList.Clear ();
 		this.gameObject.SetActive (true);
 
-		GetDiamondRecord ();
-		UpdateDiamondRecord ();
+		ClearDiamondRecord ();
 		HideCalendar ();
 
-		UpdateSelfInfo ();
+		LobbyControl.GetProfileServer ();
 	}
 
 	public void Exit(){
@@ -111,10 +115,15 @@ public class PrefileControl : MonoBehaviour
 	public void ShowSendDiamond(){
 		m_UserID 	= "";
 		m_Amount 	= "";
-		m_InputType = "";
+
+		m_InputType = "userid";
+		transform.Find ("SendDiamond/UserIDInput/Tag").gameObject.SetActive (true);
+		transform.Find ("SendDiamond/AmountInput/Tag").gameObject.SetActive (false);
+
 
 		transform.Find ("SendDiamond/UserIDInput/InputUser").GetComponent<Text> ().text = "";
 		transform.Find ("SendDiamond/AmountInput/InputAmount").GetComponent<Text> ().text = "";
+
 		transform.Find ("SendDiamond").gameObject.SetActive (true);
 	}
 
@@ -163,47 +172,68 @@ public class PrefileControl : MonoBehaviour
 		}
 	}
 
+	public void SendDiamonds(){
+		if(!string.IsNullOrEmpty(m_UserID) && !string.IsNullOrEmpty(m_Amount)){
+			if(uint.Parse(m_UserID) > 0 && uint.Parse(m_Amount) > 0){
+				LobbyControl.SendDiamondsServer (uint.Parse(m_UserID), uint.Parse(m_Amount));
+			}
+		}
+	}
+
 	public void onClickInputHandler(GameObject obj){
-		if(obj.name == "InputUser"){m_InputType = "userid";}
-		if(obj.name == "InputAmount"){m_InputType = "amount";}
+		if(obj.name == "InputUser"){
+			m_InputType = "userid";
+			transform.Find ("SendDiamond/UserIDInput/Tag").gameObject.SetActive (true);
+			transform.Find ("SendDiamond/AmountInput/Tag").gameObject.SetActive (false);
+		}
+		if(obj.name == "InputAmount"){
+			m_InputType = "amount";
+			transform.Find ("SendDiamond/UserIDInput/Tag").gameObject.SetActive (false);
+			transform.Find ("SendDiamond/AmountInput/Tag").gameObject.SetActive (true);
+		}
 	}
 
 	private void onClickMaskHandler(GameObject obj){
 		HideSendDiamond ();
 	}
 
-	public void GetDiamondRecord(){
-		for(int i = 0; i < 5; i++){
-			DiamondRecord c = new DiamondRecord ();
-			c.Name	= "Walter" + i;
-			c.Date  = "2013-3-6";
-			c.Time	= "13:20:15";
-			c.Amount = 1000;
-			m_DList.Add (c);
-		}
-
-		for(int i = 0; i < 5; i++){
-			DiamondRecord d = new DiamondRecord ();
-			d.Name	= "Walter" + i;
-			d.Date  = "2019-3-5";
-			d.Time	= "13:20:15";
-			d.Amount = 1000;
-			m_DList.Add (d);
-		}
-			
-		for(int i = 0; i < 5; i++){
-			DiamondRecord c = new DiamondRecord ();
-			c.Name	= "Walter" + i;
-			c.Date  = "2017-3-6";
-			c.Time	= "13:20:15";
-			c.Amount = 1000;
-			m_DList.Add (c);
-		}
+	public DateTime ConvertStringToDateTime(string timeStamp)
+	{
+		DateTime dateTimeStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+		long lTime = long.Parse(timeStamp + "0000000");
+		TimeSpan toNow = new TimeSpan(lTime);
+		return dateTimeStart.Add(toNow);
 	}
 
-	public void UpdateDiamondRecord(){
-		AdjustDiamondRecord ();
+	public void FormentDiamondRecord(RepeatedField<Msg.DiamondsRecordsItem> records, RepeatedField<Msg.UserNameAvatar> users){
+		List<DiamondRecord> DList 	= new List<DiamondRecord>();
 
+		foreach(Msg.DiamondsRecordsItem red in records){
+			DiamondRecord c = new DiamondRecord ();
+			c.Uid = red.Uid;
+
+			DateTime date = ConvertStringToDateTime (red.Time.ToString());
+			c.Date = date.Year + "-" + date.Month + "-" + date.Day;
+			c.Time = date.Hour + ":" + date.Minute + ":" + date.Second;
+
+			foreach(Msg.UserNameAvatar use in users){
+				if(red.Uid == use.Uid){
+					c.Name = use.Name;
+					c.Avatar = use.Avatar;
+
+					StartCoroutine(Common.DownAvatar (use.Avatar));
+
+					break;
+				}
+			}
+
+			DList.Add (c);
+		}
+
+		UpdateDiamondRecord (DList);
+	}
+
+	public void UpdateDiamondRecord(List<DiamondRecord> m_DList){
 		if(m_DList.Count <= 0){return;}
 
 		List<string> keys = new List<string>();
@@ -212,7 +242,8 @@ public class PrefileControl : MonoBehaviour
 		}
 
 		HashSet<string> keyst = new HashSet<string>(keys);
-		float height = 40 * keyst.Count + 76 * m_DList.Count;
+		float height = 40 * keyst.Count + 76 * m_DList.Count + ( 10 * keyst.Count - 2);
+
 		m_DiamondContent.GetComponent<RectTransform> ().sizeDelta = new Vector2 (m_DiamondContent.GetComponent<RectTransform> ().sizeDelta.x, height);
 		m_DiamondContent.GetComponent<RectTransform> ().localPosition = new Vector3 (0, -height / 2, 0);
 
@@ -226,6 +257,7 @@ public class PrefileControl : MonoBehaviour
 			Drecord.transform.SetParent (m_DiamondContent);
 			Drecord.GetComponent<RectTransform> ().localScale = new Vector3 (1,1,1);
 			Drecord.GetComponent<RectTransform> ().localPosition = new Vector3 (0, top, 0);
+			Drecord.transform.Find("Date").GetComponent<Text> ().text = keys [i];
 			top -= 40;
 
 			foreach(DiamondRecord d in m_DList){
@@ -235,15 +267,37 @@ public class PrefileControl : MonoBehaviour
 					Precord.transform.SetParent (m_DiamondContent);
 					Precord.GetComponent<RectTransform> ().localScale = new Vector3 (1,1,1);
 					Precord.GetComponent<RectTransform> ().localPosition = new Vector3 (0, top, 0);
+					Precord.transform.Find("Time").GetComponent<Text> ().text = d.Time;
+					Precord.transform.Find("Text").GetComponent<Text> ().text = d.Name;
+					Precord.transform.Find("Amount").GetComponent<Text> ().text = d.Amount.ToString();
+					if (d.Amount >= 0) {
+						Precord.transform.Find ("Amount").GetComponent<Text> ().color = new Color (0, 255.0f / 255, 6.0f / 255);
+					} else {
+						Precord.transform.Find ("Amount").GetComponent<Text> ().color = new Color (254.0f/ 255, 45.0f / 255, 23.0f / 255);
+					}
+
+					UICircle avatar = (UICircle)Instantiate(LobbyControl.PrefabAvatar);
+					avatar.transform.SetParent (Precord.transform.Find("Avatar"));
+					avatar.transform.localPosition = new Vector3 ();
+					avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (61, 61);
+					StartCoroutine(Common.Load(avatar, d.Avatar));
+
 					top -= 76;
 				}
 			}
 
-			//top += 40;
+			top -= 14;
 		}
 	}
 
-	public void AdjustDiamondRecord(){
+	public void ConfirmSearch(){
+		ClearDiamondRecord ();
+		if (!string.IsNullOrEmpty (m_BeginDate) && !string.IsNullOrEmpty (m_EndDate)) {
+			LobbyControl.DiamondsRecordsServer(m_BeginDate, m_EndDate);
+		}
+	}
+
+	public void ClearDiamondRecord(){
 		for (int i = m_DiamondContent.childCount - 1; i >= 0; i--) {  
 			Destroy (m_DiamondContent.GetChild(i).gameObject);
 		}  

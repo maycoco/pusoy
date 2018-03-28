@@ -44,7 +44,7 @@ public class Common
 	public  static string   FB_avatar		= 	"";
 
 	//UserInfo
-	public static int		DiamondAmount	= 0;	
+	public static uint		DiamondAmount	= 0;	
 
 	//Room Data
 	public  static uint 	CRoom_id		=	0;
@@ -137,6 +137,7 @@ public class Common
 			} 
 		}
 	}
+
 
 	private Common() {}
 }
