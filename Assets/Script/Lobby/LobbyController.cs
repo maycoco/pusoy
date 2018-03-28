@@ -98,7 +98,7 @@ public class LobbyController : MonoBehaviour {
 	//===================================Room list=================================
 	public void onCloseRoomHandler(GameObject obj){
 		foreach( RoomInfo room in RoomLists){
-			if(room.RoomId.ToString() == obj.name && room.Owner == Common.Uid){
+			if(room.RoomId.ToString() == obj.transform.parent.name){
 				CloseRoomServer (room.RoomId);
 			}
 		}
@@ -180,7 +180,7 @@ public class LobbyController : MonoBehaviour {
 				avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (56, 56);
 				StartCoroutine(Common.Load(avatar, RoomLists[i].Players[o].Avatar));
 			}
-
+				
 			if (RoomLists [i].Owner == Common.Uid) {
 				RoomInfo.transform.Find ("Close").gameObject.SetActive (true);
 				EventTriggerListener.Get(RoomInfo.transform.Find ("Close").gameObject).onClick = onCloseRoomHandler;
@@ -232,9 +232,7 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void Data(Protocol data){
-		if(data == null){
-			return;
-		}
+		if(data == null){return;}
 
 		switch (data.Msgid) {
 
@@ -243,6 +241,7 @@ public class LobbyController : MonoBehaviour {
 				Loom.QueueOnMainThread(()=>{
 					RoomIDs.Clear();
 					RoomLists.Clear();
+
 					foreach(ListRoomItem room in data.ListRoomsRsp.Rooms){
 						RoomInfo r = new RoomInfo();
 						r.RoomId = room.RoomId;
@@ -251,11 +250,12 @@ public class LobbyController : MonoBehaviour {
 						r.RoomNumber = room.RoomNumber;
 						r.Hands = room.Hands;
 						r.PlayerHands = room.PlayedHands;
+						r.Players =  new List<ListRoomPlayerInfo>();
 
 						foreach(ListRoomPlayerInfo player in room.Players){
 							r.Players.Add(player);
 						}
-
+							
 						RoomLists.Add(r);
 						RoomIDs.Add (room.RoomId);
 					}
@@ -266,7 +266,9 @@ public class LobbyController : MonoBehaviour {
 
 		case MessageID.CloseRoomRsp:
 			if(data.CloseRoomRsp.Ret == 0){
-				UpdateRoomClose (data.CloseRoomRsp.RoomId);
+				Loom.QueueOnMainThread(()=>{
+					UpdateRoomClose (data.CloseRoomRsp.RoomId);
+				}); 
 			}
 			break;
 
@@ -344,16 +346,15 @@ public class LobbyController : MonoBehaviour {
 
 		case MessageID.SendDiamondsRsp:
 			if (data.SendDiamondsRsp.Ret == 0) {
-
+				Loom.QueueOnMainThread(()=>{
+					PrefileControl.HideSendDiamond ();
+				}); 
 			}
 			break;
 
 		case MessageID.DiamondsRecordsRsp:
 			if (data.DiamondsRecordsRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
-					foreach( Msg.UserNameAvatar use in data.DiamondsRecordsRsp.Users){
-						StartCoroutine(Common.DownAvatar (use.Avatar));
-					}
 					PrefileControl.FormentDiamondRecord (data.DiamondsRecordsRsp.Records, data.DiamondsRecordsRsp.Users);
 				}); 
 			}
@@ -411,6 +412,7 @@ public class LobbyController : MonoBehaviour {
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CloseRoomReq;
 		msg.CloseRoomReq 				= new CloseRoomReq();
+		msg.CloseRoomReq.RoomId 		= roomid;
 
 		using (var stream = new MemoryStream())
 		{

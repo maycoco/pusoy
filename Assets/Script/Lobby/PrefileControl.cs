@@ -173,6 +173,8 @@ public class PrefileControl : MonoBehaviour
 	}
 
 	public void SendDiamonds(){
+		Debug.Log (m_UserID);
+		Debug.Log (m_Amount);
 		if(!string.IsNullOrEmpty(m_UserID) && !string.IsNullOrEmpty(m_Amount)){
 			if(uint.Parse(m_UserID) > 0 && uint.Parse(m_Amount) > 0){
 				LobbyControl.SendDiamondsServer (uint.Parse(m_UserID), uint.Parse(m_Amount));
@@ -215,6 +217,7 @@ public class PrefileControl : MonoBehaviour
 			DateTime date = ConvertStringToDateTime (red.Time.ToString());
 			c.Date = date.Year + "-" + date.Month + "-" + date.Day;
 			c.Time = date.Hour + ":" + date.Minute + ":" + date.Second;
+			c.Amount = red.Diamonds;
 
 			foreach(Msg.UserNameAvatar use in users){
 				if(red.Uid == use.Uid){
@@ -234,6 +237,8 @@ public class PrefileControl : MonoBehaviour
 	}
 
 	public void UpdateDiamondRecord(List<DiamondRecord> m_DList){
+		ClearDiamondRecord ();
+
 		if(m_DList.Count <= 0){return;}
 
 		List<string> keys = new List<string>();
@@ -243,6 +248,7 @@ public class PrefileControl : MonoBehaviour
 
 		HashSet<string> keyst = new HashSet<string>(keys);
 		float height = 40 * keyst.Count + 76 * m_DList.Count + ( 10 * keyst.Count - 2);
+		if(height < 530){height = 530;}
 
 		m_DiamondContent.GetComponent<RectTransform> ().sizeDelta = new Vector2 (m_DiamondContent.GetComponent<RectTransform> ().sizeDelta.x, height);
 		m_DiamondContent.GetComponent<RectTransform> ().localPosition = new Vector3 (0, -height / 2, 0);
@@ -291,8 +297,11 @@ public class PrefileControl : MonoBehaviour
 	}
 
 	public void ConfirmSearch(){
-		ClearDiamondRecord ();
+		HideCalendar ();
 		if (!string.IsNullOrEmpty (m_BeginDate) && !string.IsNullOrEmpty (m_EndDate)) {
+			m_BeginDate = m_BeginDate.Replace ("/", "-");
+			m_EndDate = m_EndDate.Replace ("/", "-");
+
 			LobbyControl.DiamondsRecordsServer(m_BeginDate, m_EndDate);
 		}
 	}
