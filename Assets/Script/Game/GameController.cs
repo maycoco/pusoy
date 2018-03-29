@@ -556,6 +556,8 @@ public class GameController : MonoBehaviour {
 						}
 						LSeatResults.Add (info.SeatID, info);
 					}
+
+					m_GameConsole.ShowHandReview(LSeatResults);
 				});
 			}
 			break;
