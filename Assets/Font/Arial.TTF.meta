@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 623cb1025bc77354a8ec8629e7a40855
-timeCreated: 1522304666
+timeCreated: 1522317781
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
@@ -13,7 +13,8 @@ TrueTypeFontImporter:
   fontName: Arial
   fontNames:
   - Arial
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: affbff6dac050a54095ca7a94c84e49f, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
