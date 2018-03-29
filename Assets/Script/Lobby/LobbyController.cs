@@ -171,7 +171,7 @@ public class LobbyController : MonoBehaviour {
 			RoomInfo.name = RoomLists [i].RoomId.ToString();
 			RoomInfo.transform.Find ("Name").GetComponent<Text> ().text = RoomLists [i].RoomName;
 			RoomInfo.transform.Find ("PHand").GetComponent<Text> ().text = (RoomLists [i].PlayerHands + 1).ToString();
-			RoomInfo.transform.Find ("Hands").GetComponent<Text> ().text = RoomLists [i].Hands.ToString();
+			RoomInfo.transform.Find ("Hands").GetComponent<Text> ().text = "/" + RoomLists [i].Hands.ToString();
 
 			for(int o = 0; o < RoomLists[i].Players.Count; o++){
 				UICircle avatar = (UICircle)Instantiate(PrefabAvatar);

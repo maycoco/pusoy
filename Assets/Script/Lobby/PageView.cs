@@ -34,6 +34,7 @@ public class PageView : MonoBehaviour, IBeginDragHandler, IEndDragHandler {
             posList.Add (GetComponent<RectTransform> ().rect.width * i / horizontalLength);
         }
         posList.Add (1);
+		setLight (0);
     }
 
     void Update () {

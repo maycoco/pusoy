@@ -173,8 +173,6 @@ public class PrefileControl : MonoBehaviour
 	}
 
 	public void SendDiamonds(){
-		Debug.Log (m_UserID);
-		Debug.Log (m_Amount);
 		if(!string.IsNullOrEmpty(m_UserID) && !string.IsNullOrEmpty(m_Amount)){
 			if(uint.Parse(m_UserID) > 0 && uint.Parse(m_Amount) > 0){
 				LobbyControl.SendDiamondsServer (uint.Parse(m_UserID), uint.Parse(m_Amount));

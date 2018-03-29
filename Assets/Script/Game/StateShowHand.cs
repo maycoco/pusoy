@@ -74,7 +74,9 @@ public class StateShowHand : State {
 
 			for (int o = HandObj.Find ("Number").childCount - 1; o >= 0; o--) {  
 				Destroy(HandObj.Find ("Number").GetChild(o).gameObject);  
-			}  
+			}
+
+			HandObj.gameObject.SetActive (false);
 		}
 	}
 

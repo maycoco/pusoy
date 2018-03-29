@@ -255,7 +255,7 @@ public class GameConsole : MonoBehaviour
 	}
 
 	public void NextRoundReview(){
-		if((RoundCount + 1) <= Common.CPlayed_hands){
+		if(RoundCount < Common.CPlayed_hands){
 			RoundCount++;
 			m_GameController.GetRoundHistoryServer (RoundCount);
 		}
