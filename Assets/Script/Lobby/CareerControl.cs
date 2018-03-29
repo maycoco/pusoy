@@ -15,8 +15,6 @@ public class CareerControl : MonoBehaviour {
 	public PieGraph			Pie7Day;
 	public PieGraph			Pie30Day;
 	public PieGraph			PieAllDay;
-	public List<PieGraph>	WBorders;
-	public List<PieGraph>	NBorders;
 	public List<Wol>		WolData = new List<Wol>();
 
 	// Use this for initialization
@@ -64,19 +62,5 @@ public class CareerControl : MonoBehaviour {
 		Pie7Day.SetPie (70, 30, LostColor, WinColor);
 		Pie30Day.SetPie (80, 20, LostColor, WinColor);
 		PieAllDay.SetPie (10, 90, LostColor, WinColor);
-
-		for(int i = 0; i < WBorders.Count; i++){
-			Color Border = new Color (74.0f / 255, 184.0f / 255, 197.0f / 255);
-			WBorders[i].SetPie (100, 100, Border, Border);
-			WBorders [i].PieRadius = 128;
-			WBorders [i].HollowWidth = 125;
-		}
-
-		for(int i = 0; i < NBorders.Count; i++){
-			Color Border = new Color (74.0f / 255, 184.0f / 255, 197.0f / 255);
-			NBorders[i].SetPie (100, 100, Border, Border);
-			NBorders [i].PieRadius = 118;
-			NBorders [i].HollowWidth = 112.5f;
-		}
 	}
 }
