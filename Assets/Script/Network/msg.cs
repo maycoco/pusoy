@@ -148,68 +148,79 @@ namespace Msg {
             "YXJkSXRlbRILCgN1aWQYASABKA0SDAoEbmFtZRgCIAEoCRIOCgZhdmF0YXIY",
             "AyABKAkSDQoFc2NvcmUYBCABKAUiYAoQR2V0U2NvcmVib2FyZFJzcBIZCgNy",
             "ZXQYASABKA4yDC5tc2cuRXJyb3JJRBINCgV0b3RhbBgCIAEoDRIiCgVpdGVt",
-            "cxgDIAMoCzITLm1zZy5TY29yZWJvYXJkSXRlbSqVBwoJTWVzc2FnZUlEEg0K",
-            "CUxvZ2luX1JlcRAAEg0KCUxvZ2luX1JzcBABEg8KC0tpY2tfTm90aWZ5EAIS",
-            "EgoOQ3JlYXRlUm9vbV9SZXEQAxISCg5DcmVhdGVSb29tX1JzcBAEEhoKFkNv",
-            "bnN1bWVEaWFtb25kc19Ob3RpZnkQBRIQCgxKb2luUm9vbV9SZXEQBhIQCgxK",
-            "b2luUm9vbV9Sc3AQBxITCg9Kb2luUm9vbV9Ob3RpZnkQCBIRCg1MZWF2ZVJv",
-            "b21fUmVxEAkSEQoNTGVhdmVSb29tX1JzcBAKEhQKEExlYXZlUm9vbV9Ob3Rp",
-            "ZnkQCxIPCgtTaXREb3duX1JlcRAMEg8KC1NpdERvd25fUnNwEA0SEgoOU2l0",
-            "RG93bl9Ob3RpZnkQDhIPCgtTdGFuZFVwX1JlcRAPEg8KC1N0YW5kVXBfUnNw",
-            "EBASEgoOU3RhbmRVcF9Ob3RpZnkQERISCg5BdXRvQmFua2VyX1JlcRAVEhIK",
-            "DkF1dG9CYW5rZXJfUnNwEBYSEQoNU3RhcnRHYW1lX1JlcRAXEhEKDVN0YXJ0",
-            "R2FtZV9Sc3AQGBILCgdCZXRfUmVxEBkSCwoHQmV0X1JzcBAaEg4KCkJldF9O",
-            "b3RpZnkQGxIPCgtDb21iaW5lX1JlcRAcEg8KC0NvbWJpbmVfUnNwEB0SEgoO",
-            "Q29tYmluZV9Ob3RpZnkQHhIRCg1SZXN1bHRfTm90aWZ5EB8SFAoQR2FtZVN0",
-            "YXRlX05vdGlmeRAgEhUKEURpc2Nvbm5lY3RfTm90aWZ5ECESFAoQUmVjb25u",
-            "ZWN0X05vdGlmeRAiEhUKEUdldFNjb3JlYm9hcmRfUmVxECMSFQoRR2V0U2Nv",
-            "cmVib2FyZF9Sc3AQJBIXChNHZXRSb3VuZEhpc3RvcnlfUmVxECUSFwoTR2V0",
-            "Um91bmRIaXN0b3J5X1JzcBAmEhEKDUxpc3RSb29tc19SZXEQJxIRCg1MaXN0",
-            "Um9vbXNfUnNwECgSEQoNQ2xvc2VSb29tX1JlcRApEhEKDUNsb3NlUm9vbV9S",
-            "c3AQKhISCg5HZXRQcm9maWxlX1JlcRArEhIKDkdldFByb2ZpbGVfUnNwECwS",
-            "FwoTRGlhbW9uZHNSZWNvcmRzX1JlcRAtEhcKE0RpYW1vbmRzUmVjb3Jkc19S",
-            "c3AQLhIUChBTZW5kRGlhbW9uZHNfUmVxEC8SFAoQU2VuZERpYW1vbmRzX1Jz",
-            "cBAwKvgKCgdFcnJvcklEEgYKAk9rEAASEgoOSW52YWxpZF9QYXJhbXMQARIM",
-            "CghEQl9FcnJvchACEhIKDkludGVybmFsX0Vycm9yEAMSDwoLU3lzdGVtX0J1",
-            "c3kQBBIZChVMb2dpbl9GYWNlYm9va19GYWlsZWQQWhIgChxDcmVhdGVSb29t",
-            "X0ludmFsaWRfUm9vbV9OYW1lEGQSIgoeQ3JlYXRlUm9vbV9JbnZhbGlkX01p",
-            "bl9NYXhfQmV0EGUSJAogQ3JlYXRlUm9vbV9JbnZhbGlkX0NyZWRpdF9Qb2lu",
-            "dHMQZhIiCh5DcmVhdGVSb29tX05vdF9Fbm91Z2hfRGlhbW9uZHMQZxImCiJD",
-            "cmVhdGVSb29tX0V4Y2VlZF9MaW1pdGF0aW9uX1Jvb21zEGgSHAoYQ3JlYXRl",
-            "Um9vbV9JbnZhbGlkX0hhbmRzEGkSHgoaSm9pblJvb21fV3JvbmdfUm9vbV9O",
-            "dW1iZXIQbhIRCg1Kb2luUm9vbV9GdWxsEG8SFwoTSm9pblJvb21fQWxyZWFk",
-            "eV9JbhBwEhMKD0pvaW5Sb29tX0Nsb3NlZBBxEhQKEExlYXZlUm9vbV9Ob3Rf",
-            "SW4QeBIVChFMZWF2ZVJvb21fUGxheWluZxB5EhwKF1NpdERvd25fSW52YWxp",
-            "ZF9TZWF0X0lkEIIBEiEKHFNpdERvd25fQWxyZWFkeV9FeGlzdF9QbGF5ZXIQ",
-            "gwESGAoTU2l0RG93bl9BbHJlYWR5X1NpdBCEARIUCg9TdGFuZFVwX05vdF9T",
-            "aXQQjAESHAoXU3RhbmRVcF9DYW5ub3RfU3RhbmRfVXAQjQESGgoVQXV0b0Jh",
-            "bmtlcl9Ob3RfQmFua2VyEJYBEh0KGEF1dG9CYW5rZXJfSW52YWxpZF9TdGF0",
-            "ZRCXARIZChRTdGFydEdhbWVfTm90X0JhbmtlchCgARIhChxTdGFydEdhbWVf",
-            "Tm90X0Vub3VnaF9QbGF5ZXJzEKEBEiIKHVN0YXJ0R2FtZV9Ob3RfRW5vdWdo",
-            "X0RpYW1vbmRzEKIBEh4KGVN0YXJ0R2FtZV9Ob3RfUmVhZHlfU3RhdGUQowES",
-            "FgoRQmV0X05vdF9CZXRfU3RhdGUQqgESGgoVQmV0X0Jhbmtlcl9DYW5ub3Rf",
-            "QmV0EKsBEhYKEUJldF9JbnZhbGlkX0NoaXBzEKwBEh0KGEJldF9Ob3RfQV9Q",
-            "bGF5ZXJfT25fU2VhdBCtARIUCg9CZXRfQWxyZWFkeV9CZXQQrgESHgoZQ29t",
-            "YmluZV9Ob3RfQ29tYmluZV9TdGF0ZRC0ARIeChlDb21iaW5lX05vdF9Jbl9U",
-            "aGlzX1JvdW5kELUBEiEKHENvbWJpbmVfSW52YWxpZF9SZXF1ZXN0X0RhdGEQ",
-            "tgESGQoUQ29tYmluZV9BbHJlYWR5X0RvbmUQtwESFgoRQ29tYmluZV9Ob3Rf",
-            "THVja3kQuAESIwoeR2V0U2NvcmVib2FyZF9Qb3NfRXhjZWVkX1JhbmdlEL4B",
-            "EiQKH0dldFJvdW5kSGlzdG9yeV9Sb3VuZF9Ob3RfRXhpc3QQyAESGwoWQ2xv",
-            "c2VSb29tX0Nhbm5vdF9DbG9zZRDSARIoCiNEaWFtb25kc1JlY29yZHNfSW52",
-            "YWxpZF9EYXRlX0Zvcm1hdBDcARIlCiBEaWFtb25kc1JlY29yZHNfSW52YWxp",
-            "ZF9FbmRfVGltZRDdARIiCh1EaWFtb25kc1JlY29yZHNfRXhjZWVkXzMwRGF5",
-            "cxDeARIlCiBTZW5kRGlhbW9uZHNfTm90X0Vub3VnaF9EaWFtb25kcxDmARIZ",
-            "ChRTZW5kRGlhbW9uZHNfTm9fVXNlchDnARIdChhTZW5kRGlhbW9uZHNfQ2Fu",
-            "bm90X1NlbGYQ6AEqGQoJTG9naW5UeXBlEgwKCEZhY2Vib29rEAAqIAoLU2l0",
-            "RG93blR5cGUSBwoDU2l0EAASCAoEU3dhcBABKmwKCUdhbWVTdGF0ZRIJCgVS",
-            "ZWFkeRAAEgcKA0JldBABEg8KC0NvbmZpcm1fQmV0EAISCAoERGVhbBADEgsK",
-            "B0NvbWJpbmUQBBIICgRTaG93EAUSCgoGUmVzdWx0EAYSDQoJQ2xvc2VSb29t",
-            "EAcqmwEKCENhcmRSYW5rEg0KCUhpZ2hfQ2FyZBAAEgwKCE9uZV9QYWlyEAES",
-            "DAoIVHdvX1BhaXIQAhITCg9UaHJlZV9PZl9BX0tpbmQQAxIMCghTdHJhaWdo",
-            "dBAEEgkKBUZsdXNoEAUSDgoKRnVsbF9Ib3VzZRAGEhIKDkZvdXJfT2ZfQV9L",
-            "aW5kEAcSEgoOU3RyYWlnaHRfRmx1c2gQCCpLCg1DYXJkQ29sb3JTdWl0EgkK",
-            "BUNsdWJzEAASCgoGU3BhZGVzEAESCgoGSGVhcnRzEAISDAoIRGlhbW9uZHMQ",
-            "AxIJCgVDb3VudBAEYgZwcm90bzM="));
+            "cxgDIAMoCzITLm1zZy5TY29yZWJvYXJkSXRlbSIkChRDYXJlZXJXaW5Mb3Nl",
+            "RGF0YVJlcRIMCgRkYXlzGAEgAygNIlsKFENhcmVlcldpbkxvc2VEYXRhUnNw",
+            "EhkKA3JldBgBIAEoDjIMLm1zZy5FcnJvcklEEigKBGRhdGEYAiADKAsyGi5t",
+            "c2cuQ2FyZWVyV2luTG9zZURhdGFJdGVtIjIKFUNhcmVlcldpbkxvc2VEYXRh",
+            "SXRlbRILCgN3aW4YASABKA0SDAoEbG9zZRgCIAEoDSIkChRDYXJlZXJSb29t",
+            "UmVjb3Jkc1JlcRIMCgRkYXlzGAEgASgNIlkKFENhcmVlclJvb21SZWNvcmRz",
+            "UnNwEhkKA3JldBgBIAEoDjIMLm1zZy5FcnJvcklEEiYKB3JlY29yZHMYAiAD",
+            "KAsyFS5tc2cuQ2FyZWVyUm9vbVJlY29yZCLDAQoQQ2FyZWVyUm9vbVJlY29y",
+            "ZBIMCgRuYW1lGAEgASgJEhIKCmJlZ2luX3RpbWUYAiABKA0SEAoIZW5kX3Rp",
+            "bWUYAyABKA0SFAoMcGxheWVkX2hhbmRzGAQgASgNEg0KBWhhbmRzGAUgASgN",
+            "EhAKCGlzX3NoYXJlGAYgASgIEg8KB21pbl9iZXQYByABKA0SDwoHbWF4X2Jl",
+            "dBgIIAEoDRIiCgVpdGVtcxgJIAMoCzITLm1zZy5TY29yZWJvYXJkSXRlbSqV",
+            "BwoJTWVzc2FnZUlEEg0KCUxvZ2luX1JlcRAAEg0KCUxvZ2luX1JzcBABEg8K",
+            "C0tpY2tfTm90aWZ5EAISEgoOQ3JlYXRlUm9vbV9SZXEQAxISCg5DcmVhdGVS",
+            "b29tX1JzcBAEEhoKFkNvbnN1bWVEaWFtb25kc19Ob3RpZnkQBRIQCgxKb2lu",
+            "Um9vbV9SZXEQBhIQCgxKb2luUm9vbV9Sc3AQBxITCg9Kb2luUm9vbV9Ob3Rp",
+            "ZnkQCBIRCg1MZWF2ZVJvb21fUmVxEAkSEQoNTGVhdmVSb29tX1JzcBAKEhQK",
+            "EExlYXZlUm9vbV9Ob3RpZnkQCxIPCgtTaXREb3duX1JlcRAMEg8KC1NpdERv",
+            "d25fUnNwEA0SEgoOU2l0RG93bl9Ob3RpZnkQDhIPCgtTdGFuZFVwX1JlcRAP",
+            "Eg8KC1N0YW5kVXBfUnNwEBASEgoOU3RhbmRVcF9Ob3RpZnkQERISCg5BdXRv",
+            "QmFua2VyX1JlcRAVEhIKDkF1dG9CYW5rZXJfUnNwEBYSEQoNU3RhcnRHYW1l",
+            "X1JlcRAXEhEKDVN0YXJ0R2FtZV9Sc3AQGBILCgdCZXRfUmVxEBkSCwoHQmV0",
+            "X1JzcBAaEg4KCkJldF9Ob3RpZnkQGxIPCgtDb21iaW5lX1JlcRAcEg8KC0Nv",
+            "bWJpbmVfUnNwEB0SEgoOQ29tYmluZV9Ob3RpZnkQHhIRCg1SZXN1bHRfTm90",
+            "aWZ5EB8SFAoQR2FtZVN0YXRlX05vdGlmeRAgEhUKEURpc2Nvbm5lY3RfTm90",
+            "aWZ5ECESFAoQUmVjb25uZWN0X05vdGlmeRAiEhUKEUdldFNjb3JlYm9hcmRf",
+            "UmVxECMSFQoRR2V0U2NvcmVib2FyZF9Sc3AQJBIXChNHZXRSb3VuZEhpc3Rv",
+            "cnlfUmVxECUSFwoTR2V0Um91bmRIaXN0b3J5X1JzcBAmEhEKDUxpc3RSb29t",
+            "c19SZXEQJxIRCg1MaXN0Um9vbXNfUnNwECgSEQoNQ2xvc2VSb29tX1JlcRAp",
+            "EhEKDUNsb3NlUm9vbV9Sc3AQKhISCg5HZXRQcm9maWxlX1JlcRArEhIKDkdl",
+            "dFByb2ZpbGVfUnNwECwSFwoTRGlhbW9uZHNSZWNvcmRzX1JlcRAtEhcKE0Rp",
+            "YW1vbmRzUmVjb3Jkc19Sc3AQLhIUChBTZW5kRGlhbW9uZHNfUmVxEC8SFAoQ",
+            "U2VuZERpYW1vbmRzX1JzcBAwKvgKCgdFcnJvcklEEgYKAk9rEAASEgoOSW52",
+            "YWxpZF9QYXJhbXMQARIMCghEQl9FcnJvchACEhIKDkludGVybmFsX0Vycm9y",
+            "EAMSDwoLU3lzdGVtX0J1c3kQBBIZChVMb2dpbl9GYWNlYm9va19GYWlsZWQQ",
+            "WhIgChxDcmVhdGVSb29tX0ludmFsaWRfUm9vbV9OYW1lEGQSIgoeQ3JlYXRl",
+            "Um9vbV9JbnZhbGlkX01pbl9NYXhfQmV0EGUSJAogQ3JlYXRlUm9vbV9JbnZh",
+            "bGlkX0NyZWRpdF9Qb2ludHMQZhIiCh5DcmVhdGVSb29tX05vdF9Fbm91Z2hf",
+            "RGlhbW9uZHMQZxImCiJDcmVhdGVSb29tX0V4Y2VlZF9MaW1pdGF0aW9uX1Jv",
+            "b21zEGgSHAoYQ3JlYXRlUm9vbV9JbnZhbGlkX0hhbmRzEGkSHgoaSm9pblJv",
+            "b21fV3JvbmdfUm9vbV9OdW1iZXIQbhIRCg1Kb2luUm9vbV9GdWxsEG8SFwoT",
+            "Sm9pblJvb21fQWxyZWFkeV9JbhBwEhMKD0pvaW5Sb29tX0Nsb3NlZBBxEhQK",
+            "EExlYXZlUm9vbV9Ob3RfSW4QeBIVChFMZWF2ZVJvb21fUGxheWluZxB5EhwK",
+            "F1NpdERvd25fSW52YWxpZF9TZWF0X0lkEIIBEiEKHFNpdERvd25fQWxyZWFk",
+            "eV9FeGlzdF9QbGF5ZXIQgwESGAoTU2l0RG93bl9BbHJlYWR5X1NpdBCEARIU",
+            "Cg9TdGFuZFVwX05vdF9TaXQQjAESHAoXU3RhbmRVcF9DYW5ub3RfU3RhbmRf",
+            "VXAQjQESGgoVQXV0b0Jhbmtlcl9Ob3RfQmFua2VyEJYBEh0KGEF1dG9CYW5r",
+            "ZXJfSW52YWxpZF9TdGF0ZRCXARIZChRTdGFydEdhbWVfTm90X0JhbmtlchCg",
+            "ARIhChxTdGFydEdhbWVfTm90X0Vub3VnaF9QbGF5ZXJzEKEBEiIKHVN0YXJ0",
+            "R2FtZV9Ob3RfRW5vdWdoX0RpYW1vbmRzEKIBEh4KGVN0YXJ0R2FtZV9Ob3Rf",
+            "UmVhZHlfU3RhdGUQowESFgoRQmV0X05vdF9CZXRfU3RhdGUQqgESGgoVQmV0",
+            "X0Jhbmtlcl9DYW5ub3RfQmV0EKsBEhYKEUJldF9JbnZhbGlkX0NoaXBzEKwB",
+            "Eh0KGEJldF9Ob3RfQV9QbGF5ZXJfT25fU2VhdBCtARIUCg9CZXRfQWxyZWFk",
+            "eV9CZXQQrgESHgoZQ29tYmluZV9Ob3RfQ29tYmluZV9TdGF0ZRC0ARIeChlD",
+            "b21iaW5lX05vdF9Jbl9UaGlzX1JvdW5kELUBEiEKHENvbWJpbmVfSW52YWxp",
+            "ZF9SZXF1ZXN0X0RhdGEQtgESGQoUQ29tYmluZV9BbHJlYWR5X0RvbmUQtwES",
+            "FgoRQ29tYmluZV9Ob3RfTHVja3kQuAESIwoeR2V0U2NvcmVib2FyZF9Qb3Nf",
+            "RXhjZWVkX1JhbmdlEL4BEiQKH0dldFJvdW5kSGlzdG9yeV9Sb3VuZF9Ob3Rf",
+            "RXhpc3QQyAESGwoWQ2xvc2VSb29tX0Nhbm5vdF9DbG9zZRDSARIoCiNEaWFt",
+            "b25kc1JlY29yZHNfSW52YWxpZF9EYXRlX0Zvcm1hdBDcARIlCiBEaWFtb25k",
+            "c1JlY29yZHNfSW52YWxpZF9FbmRfVGltZRDdARIiCh1EaWFtb25kc1JlY29y",
+            "ZHNfRXhjZWVkXzMwRGF5cxDeARIlCiBTZW5kRGlhbW9uZHNfTm90X0Vub3Vn",
+            "aF9EaWFtb25kcxDmARIZChRTZW5kRGlhbW9uZHNfTm9fVXNlchDnARIdChhT",
+            "ZW5kRGlhbW9uZHNfQ2Fubm90X1NlbGYQ6AEqGQoJTG9naW5UeXBlEgwKCEZh",
+            "Y2Vib29rEAAqIAoLU2l0RG93blR5cGUSBwoDU2l0EAASCAoEU3dhcBABKmwK",
+            "CUdhbWVTdGF0ZRIJCgVSZWFkeRAAEgcKA0JldBABEg8KC0NvbmZpcm1fQmV0",
+            "EAISCAoERGVhbBADEgsKB0NvbWJpbmUQBBIICgRTaG93EAUSCgoGUmVzdWx0",
+            "EAYSDQoJQ2xvc2VSb29tEAcqmwEKCENhcmRSYW5rEg0KCUhpZ2hfQ2FyZBAA",
+            "EgwKCE9uZV9QYWlyEAESDAoIVHdvX1BhaXIQAhITCg9UaHJlZV9PZl9BX0tp",
+            "bmQQAxIMCghTdHJhaWdodBAEEgkKBUZsdXNoEAUSDgoKRnVsbF9Ib3VzZRAG",
+            "EhIKDkZvdXJfT2ZfQV9LaW5kEAcSEgoOU3RyYWlnaHRfRmx1c2gQCCpLCg1D",
+            "YXJkQ29sb3JTdWl0EgkKBUNsdWJzEAASCgoGU3BhZGVzEAESCgoGSGVhcnRz",
+            "EAISDAoIRGlhbW9uZHMQAxIJCgVDb3VudBAEYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Msg.MessageID), typeof(global::Msg.ErrorID), typeof(global::Msg.LoginType), typeof(global::Msg.SitDownType), typeof(global::Msg.GameState), typeof(global::Msg.CardRank), typeof(global::Msg.CardColorSuit), }, new pbr::GeneratedClrTypeInfo[] {
@@ -270,7 +281,13 @@ namespace Msg {
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.GameStateNotify), global::Msg.GameStateNotify.Parser, new[]{ "State", "Countdown", "DealCards", "DealSeats", "Result" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.GetScoreboardReq), global::Msg.GetScoreboardReq.Parser, new[]{ "Pos" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Msg.ScoreboardItem), global::Msg.ScoreboardItem.Parser, new[]{ "Uid", "Name", "Avatar", "Score" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.GetScoreboardRsp), global::Msg.GetScoreboardRsp.Parser, new[]{ "Ret", "Total", "Items" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.GetScoreboardRsp), global::Msg.GetScoreboardRsp.Parser, new[]{ "Ret", "Total", "Items" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.CareerWinLoseDataReq), global::Msg.CareerWinLoseDataReq.Parser, new[]{ "Days" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.CareerWinLoseDataRsp), global::Msg.CareerWinLoseDataRsp.Parser, new[]{ "Ret", "Data" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.CareerWinLoseDataItem), global::Msg.CareerWinLoseDataItem.Parser, new[]{ "Win", "Lose" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.CareerRoomRecordsReq), global::Msg.CareerRoomRecordsReq.Parser, new[]{ "Days" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.CareerRoomRecordsRsp), global::Msg.CareerRoomRecordsRsp.Parser, new[]{ "Ret", "Records" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Msg.CareerRoomRecord), global::Msg.CareerRoomRecord.Parser, new[]{ "Name", "BeginTime", "EndTime", "PlayedHands", "Hands", "IsShare", "MinBet", "MaxBet", "Items" }, null, null, null)
           }));
     }
     #endregion
@@ -11460,6 +11477,1015 @@ namespace Msg {
             break;
           }
           case 26: {
+            items_.AddEntriesFrom(input, _repeated_items_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 生涯
+  /// </summary>
+  public sealed partial class CareerWinLoseDataReq : pb::IMessage<CareerWinLoseDataReq> {
+    private static readonly pb::MessageParser<CareerWinLoseDataReq> _parser = new pb::MessageParser<CareerWinLoseDataReq>(() => new CareerWinLoseDataReq());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CareerWinLoseDataReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[58]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerWinLoseDataReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerWinLoseDataReq(CareerWinLoseDataReq other) : this() {
+      days_ = other.days_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerWinLoseDataReq Clone() {
+      return new CareerWinLoseDataReq(this);
+    }
+
+    /// <summary>Field number for the "days" field.</summary>
+    public const int DaysFieldNumber = 1;
+    private static readonly pb::FieldCodec<uint> _repeated_days_codec
+        = pb::FieldCodec.ForUInt32(10);
+    private readonly pbc::RepeatedField<uint> days_ = new pbc::RepeatedField<uint>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<uint> Days {
+      get { return days_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CareerWinLoseDataReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CareerWinLoseDataReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!days_.Equals(other.days_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= days_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      days_.WriteTo(output, _repeated_days_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += days_.CalculateSize(_repeated_days_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CareerWinLoseDataReq other) {
+      if (other == null) {
+        return;
+      }
+      days_.Add(other.days_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10:
+          case 8: {
+            days_.AddEntriesFrom(input, _repeated_days_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CareerWinLoseDataRsp : pb::IMessage<CareerWinLoseDataRsp> {
+    private static readonly pb::MessageParser<CareerWinLoseDataRsp> _parser = new pb::MessageParser<CareerWinLoseDataRsp>(() => new CareerWinLoseDataRsp());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CareerWinLoseDataRsp> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[59]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerWinLoseDataRsp() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerWinLoseDataRsp(CareerWinLoseDataRsp other) : this() {
+      ret_ = other.ret_;
+      data_ = other.data_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerWinLoseDataRsp Clone() {
+      return new CareerWinLoseDataRsp(this);
+    }
+
+    /// <summary>Field number for the "ret" field.</summary>
+    public const int RetFieldNumber = 1;
+    private global::Msg.ErrorID ret_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Msg.ErrorID Ret {
+      get { return ret_; }
+      set {
+        ret_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "data" field.</summary>
+    public const int DataFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Msg.CareerWinLoseDataItem> _repeated_data_codec
+        = pb::FieldCodec.ForMessage(18, global::Msg.CareerWinLoseDataItem.Parser);
+    private readonly pbc::RepeatedField<global::Msg.CareerWinLoseDataItem> data_ = new pbc::RepeatedField<global::Msg.CareerWinLoseDataItem>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Msg.CareerWinLoseDataItem> Data {
+      get { return data_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CareerWinLoseDataRsp);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CareerWinLoseDataRsp other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Ret != other.Ret) return false;
+      if(!data_.Equals(other.data_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Ret != 0) hash ^= Ret.GetHashCode();
+      hash ^= data_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Ret != 0) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Ret);
+      }
+      data_.WriteTo(output, _repeated_data_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Ret != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Ret);
+      }
+      size += data_.CalculateSize(_repeated_data_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CareerWinLoseDataRsp other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Ret != 0) {
+        Ret = other.Ret;
+      }
+      data_.Add(other.data_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            ret_ = (global::Msg.ErrorID) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            data_.AddEntriesFrom(input, _repeated_data_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CareerWinLoseDataItem : pb::IMessage<CareerWinLoseDataItem> {
+    private static readonly pb::MessageParser<CareerWinLoseDataItem> _parser = new pb::MessageParser<CareerWinLoseDataItem>(() => new CareerWinLoseDataItem());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CareerWinLoseDataItem> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[60]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerWinLoseDataItem() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerWinLoseDataItem(CareerWinLoseDataItem other) : this() {
+      win_ = other.win_;
+      lose_ = other.lose_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerWinLoseDataItem Clone() {
+      return new CareerWinLoseDataItem(this);
+    }
+
+    /// <summary>Field number for the "win" field.</summary>
+    public const int WinFieldNumber = 1;
+    private uint win_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Win {
+      get { return win_; }
+      set {
+        win_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "lose" field.</summary>
+    public const int LoseFieldNumber = 2;
+    private uint lose_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Lose {
+      get { return lose_; }
+      set {
+        lose_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CareerWinLoseDataItem);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CareerWinLoseDataItem other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Win != other.Win) return false;
+      if (Lose != other.Lose) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Win != 0) hash ^= Win.GetHashCode();
+      if (Lose != 0) hash ^= Lose.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Win != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(Win);
+      }
+      if (Lose != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(Lose);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Win != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Win);
+      }
+      if (Lose != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Lose);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CareerWinLoseDataItem other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Win != 0) {
+        Win = other.Win;
+      }
+      if (other.Lose != 0) {
+        Lose = other.Lose;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Win = input.ReadUInt32();
+            break;
+          }
+          case 16: {
+            Lose = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CareerRoomRecordsReq : pb::IMessage<CareerRoomRecordsReq> {
+    private static readonly pb::MessageParser<CareerRoomRecordsReq> _parser = new pb::MessageParser<CareerRoomRecordsReq>(() => new CareerRoomRecordsReq());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CareerRoomRecordsReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[61]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerRoomRecordsReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerRoomRecordsReq(CareerRoomRecordsReq other) : this() {
+      days_ = other.days_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerRoomRecordsReq Clone() {
+      return new CareerRoomRecordsReq(this);
+    }
+
+    /// <summary>Field number for the "days" field.</summary>
+    public const int DaysFieldNumber = 1;
+    private uint days_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Days {
+      get { return days_; }
+      set {
+        days_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CareerRoomRecordsReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CareerRoomRecordsReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Days != other.Days) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Days != 0) hash ^= Days.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Days != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(Days);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Days != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Days);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CareerRoomRecordsReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Days != 0) {
+        Days = other.Days;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Days = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CareerRoomRecordsRsp : pb::IMessage<CareerRoomRecordsRsp> {
+    private static readonly pb::MessageParser<CareerRoomRecordsRsp> _parser = new pb::MessageParser<CareerRoomRecordsRsp>(() => new CareerRoomRecordsRsp());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CareerRoomRecordsRsp> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[62]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerRoomRecordsRsp() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerRoomRecordsRsp(CareerRoomRecordsRsp other) : this() {
+      ret_ = other.ret_;
+      records_ = other.records_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerRoomRecordsRsp Clone() {
+      return new CareerRoomRecordsRsp(this);
+    }
+
+    /// <summary>Field number for the "ret" field.</summary>
+    public const int RetFieldNumber = 1;
+    private global::Msg.ErrorID ret_ = 0;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Msg.ErrorID Ret {
+      get { return ret_; }
+      set {
+        ret_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "records" field.</summary>
+    public const int RecordsFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Msg.CareerRoomRecord> _repeated_records_codec
+        = pb::FieldCodec.ForMessage(18, global::Msg.CareerRoomRecord.Parser);
+    private readonly pbc::RepeatedField<global::Msg.CareerRoomRecord> records_ = new pbc::RepeatedField<global::Msg.CareerRoomRecord>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Msg.CareerRoomRecord> Records {
+      get { return records_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CareerRoomRecordsRsp);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CareerRoomRecordsRsp other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Ret != other.Ret) return false;
+      if(!records_.Equals(other.records_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Ret != 0) hash ^= Ret.GetHashCode();
+      hash ^= records_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Ret != 0) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Ret);
+      }
+      records_.WriteTo(output, _repeated_records_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Ret != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Ret);
+      }
+      size += records_.CalculateSize(_repeated_records_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CareerRoomRecordsRsp other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Ret != 0) {
+        Ret = other.Ret;
+      }
+      records_.Add(other.records_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            ret_ = (global::Msg.ErrorID) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            records_.AddEntriesFrom(input, _repeated_records_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class CareerRoomRecord : pb::IMessage<CareerRoomRecord> {
+    private static readonly pb::MessageParser<CareerRoomRecord> _parser = new pb::MessageParser<CareerRoomRecord>(() => new CareerRoomRecord());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CareerRoomRecord> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Msg.MsgReflection.Descriptor.MessageTypes[63]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerRoomRecord() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerRoomRecord(CareerRoomRecord other) : this() {
+      name_ = other.name_;
+      beginTime_ = other.beginTime_;
+      endTime_ = other.endTime_;
+      playedHands_ = other.playedHands_;
+      hands_ = other.hands_;
+      isShare_ = other.isShare_;
+      minBet_ = other.minBet_;
+      maxBet_ = other.maxBet_;
+      items_ = other.items_.Clone();
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CareerRoomRecord Clone() {
+      return new CareerRoomRecord(this);
+    }
+
+    /// <summary>Field number for the "name" field.</summary>
+    public const int NameFieldNumber = 1;
+    private string name_ = "";
+    /// <summary>
+    /// room name
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Name {
+      get { return name_; }
+      set {
+        name_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "begin_time" field.</summary>
+    public const int BeginTimeFieldNumber = 2;
+    private uint beginTime_;
+    /// <summary>
+    /// 开始时间
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint BeginTime {
+      get { return beginTime_; }
+      set {
+        beginTime_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "end_time" field.</summary>
+    public const int EndTimeFieldNumber = 3;
+    private uint endTime_;
+    /// <summary>
+    /// 结束时间
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint EndTime {
+      get { return endTime_; }
+      set {
+        endTime_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "played_hands" field.</summary>
+    public const int PlayedHandsFieldNumber = 4;
+    private uint playedHands_;
+    /// <summary>
+    /// 已经玩过的局数
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint PlayedHands {
+      get { return playedHands_; }
+      set {
+        playedHands_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hands" field.</summary>
+    public const int HandsFieldNumber = 5;
+    private uint hands_;
+    /// <summary>
+    /// 总局数
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint Hands {
+      get { return hands_; }
+      set {
+        hands_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "is_share" field.</summary>
+    public const int IsShareFieldNumber = 6;
+    private bool isShare_;
+    /// <summary>
+    /// aa制
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsShare {
+      get { return isShare_; }
+      set {
+        isShare_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "min_bet" field.</summary>
+    public const int MinBetFieldNumber = 7;
+    private uint minBet_;
+    /// <summary>
+    /// min bet
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint MinBet {
+      get { return minBet_; }
+      set {
+        minBet_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "max_bet" field.</summary>
+    public const int MaxBetFieldNumber = 8;
+    private uint maxBet_;
+    /// <summary>
+    /// max bet
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint MaxBet {
+      get { return maxBet_; }
+      set {
+        maxBet_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "items" field.</summary>
+    public const int ItemsFieldNumber = 9;
+    private static readonly pb::FieldCodec<global::Msg.ScoreboardItem> _repeated_items_codec
+        = pb::FieldCodec.ForMessage(74, global::Msg.ScoreboardItem.Parser);
+    private readonly pbc::RepeatedField<global::Msg.ScoreboardItem> items_ = new pbc::RepeatedField<global::Msg.ScoreboardItem>();
+    /// <summary>
+    /// 积分榜
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Msg.ScoreboardItem> Items {
+      get { return items_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CareerRoomRecord);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CareerRoomRecord other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Name != other.Name) return false;
+      if (BeginTime != other.BeginTime) return false;
+      if (EndTime != other.EndTime) return false;
+      if (PlayedHands != other.PlayedHands) return false;
+      if (Hands != other.Hands) return false;
+      if (IsShare != other.IsShare) return false;
+      if (MinBet != other.MinBet) return false;
+      if (MaxBet != other.MaxBet) return false;
+      if(!items_.Equals(other.items_)) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (BeginTime != 0) hash ^= BeginTime.GetHashCode();
+      if (EndTime != 0) hash ^= EndTime.GetHashCode();
+      if (PlayedHands != 0) hash ^= PlayedHands.GetHashCode();
+      if (Hands != 0) hash ^= Hands.GetHashCode();
+      if (IsShare != false) hash ^= IsShare.GetHashCode();
+      if (MinBet != 0) hash ^= MinBet.GetHashCode();
+      if (MaxBet != 0) hash ^= MaxBet.GetHashCode();
+      hash ^= items_.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Name.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Name);
+      }
+      if (BeginTime != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(BeginTime);
+      }
+      if (EndTime != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(EndTime);
+      }
+      if (PlayedHands != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(PlayedHands);
+      }
+      if (Hands != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(Hands);
+      }
+      if (IsShare != false) {
+        output.WriteRawTag(48);
+        output.WriteBool(IsShare);
+      }
+      if (MinBet != 0) {
+        output.WriteRawTag(56);
+        output.WriteUInt32(MinBet);
+      }
+      if (MaxBet != 0) {
+        output.WriteRawTag(64);
+        output.WriteUInt32(MaxBet);
+      }
+      items_.WriteTo(output, _repeated_items_codec);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Name.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (BeginTime != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(BeginTime);
+      }
+      if (EndTime != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(EndTime);
+      }
+      if (PlayedHands != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PlayedHands);
+      }
+      if (Hands != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Hands);
+      }
+      if (IsShare != false) {
+        size += 1 + 1;
+      }
+      if (MinBet != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MinBet);
+      }
+      if (MaxBet != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(MaxBet);
+      }
+      size += items_.CalculateSize(_repeated_items_codec);
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CareerRoomRecord other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Name.Length != 0) {
+        Name = other.Name;
+      }
+      if (other.BeginTime != 0) {
+        BeginTime = other.BeginTime;
+      }
+      if (other.EndTime != 0) {
+        EndTime = other.EndTime;
+      }
+      if (other.PlayedHands != 0) {
+        PlayedHands = other.PlayedHands;
+      }
+      if (other.Hands != 0) {
+        Hands = other.Hands;
+      }
+      if (other.IsShare != false) {
+        IsShare = other.IsShare;
+      }
+      if (other.MinBet != 0) {
+        MinBet = other.MinBet;
+      }
+      if (other.MaxBet != 0) {
+        MaxBet = other.MaxBet;
+      }
+      items_.Add(other.items_);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            Name = input.ReadString();
+            break;
+          }
+          case 16: {
+            BeginTime = input.ReadUInt32();
+            break;
+          }
+          case 24: {
+            EndTime = input.ReadUInt32();
+            break;
+          }
+          case 32: {
+            PlayedHands = input.ReadUInt32();
+            break;
+          }
+          case 40: {
+            Hands = input.ReadUInt32();
+            break;
+          }
+          case 48: {
+            IsShare = input.ReadBool();
+            break;
+          }
+          case 56: {
+            MinBet = input.ReadUInt32();
+            break;
+          }
+          case 64: {
+            MaxBet = input.ReadUInt32();
+            break;
+          }
+          case 74: {
             items_.AddEntriesFrom(input, _repeated_items_codec);
             break;
           }
