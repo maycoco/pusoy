@@ -155,16 +155,46 @@ public class CareerControl : MonoBehaviour {
 		if(pie == 0){
 			Pie7Day.gameObject.SetActive (true);
 			Pie7Day.SetPie (lost, win, LostColor, WinColor);
+			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScroll7/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScroll7/Win"), win, lost);
 		}
 
 		if(pie == 1){
 			Pie30Day.gameObject.SetActive (true);
 			Pie30Day.SetPie (lost, win, LostColor, WinColor);
+			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScroll30/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScroll30/Win"), win, lost);
 		}
 
 		if(pie == 2){
 			PieAllDay.gameObject.SetActive (true);
 			PieAllDay.SetPie (lost, win, LostColor, WinColor);
+			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScrollAll/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScrollAll/Win"), win, lost);
+		}
+	}
+
+	public void UpdatePieTips(GameObject winobj, GameObject lostobj, int win, int lost){
+		string winstr = win.ToString();
+		string loststr = lost.ToString();
+
+		float left = 0;
+		for (int c = winstr.Length - 1; c >= 0; c--) {  
+			GameObject t = new GameObject ();
+			t.AddComponent<Image> ();
+			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/win" + winstr[c] , typeof(Sprite)) as Sprite;
+			t.transform.SetParent(winobj);
+			t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
+			t.transform.localPosition = new Vector3 (left,0,0);
+			left -= 20;
+		}
+
+		left = 0;
+		for (int c = 0;  c < loststr.Length; c++) {  
+			GameObject t = new GameObject ();
+			t.AddComponent<Image> ();
+			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/"+ loststr[c] , typeof(Sprite)) as Sprite;
+			t.transform.SetParent(lostobj);
+			t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
+			t.transform.localPosition = new Vector3 (left,0,0);
+			left += 20;
 		}
 	}
 
