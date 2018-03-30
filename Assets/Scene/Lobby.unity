@@ -1865,7 +1865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &185764622
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3768,7 +3768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 330848465}
   m_Layer: 5
-  m_Name: PieScroll
+  m_Name: PieScroll30
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7590,7 +7590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 664954109}
   m_Layer: 5
-  m_Name: PieScroll
+  m_Name: PieScroll7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12330,7 +12330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1042150290}
   m_Layer: 5
-  m_Name: PieScroll
+  m_Name: PieScrollAll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

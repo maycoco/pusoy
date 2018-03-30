@@ -155,23 +155,23 @@ public class CareerControl : MonoBehaviour {
 		if(pie == 0){
 			Pie7Day.gameObject.SetActive (true);
 			Pie7Day.SetPie (lost, win, LostColor, WinColor);
-			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScroll7/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScroll7/Win"), win, lost);
+			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScroll7/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScroll7/Lost"), win, lost);
 		}
 
 		if(pie == 1){
 			Pie30Day.gameObject.SetActive (true);
 			Pie30Day.SetPie (lost, win, LostColor, WinColor);
-			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScroll30/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScroll30/Win"), win, lost);
+			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScroll30/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScroll30/Lost"), win, lost);
 		}
 
 		if(pie == 2){
 			PieAllDay.gameObject.SetActive (true);
 			PieAllDay.SetPie (lost, win, LostColor, WinColor);
-			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScrollAll/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScrollAll/Win"), win, lost);
+			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScrollAll/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScrollAll/Lost"), win, lost);
 		}
 	}
 
-	public void UpdatePieTips(GameObject winobj, GameObject lostobj, int win, int lost){
+	public void UpdatePieTips(Transform winobj, Transform lostobj, int win, int lost){
 		string winstr = win.ToString();
 		string loststr = lost.ToString();
 
@@ -238,8 +238,8 @@ public class CareerControl : MonoBehaviour {
 				Drecord.transform.Find ("Day").GetComponent<Text> ().text = day.ToString();
 			}
 
-			string hour = time.Hour >= 10 ? time.Hour : "0" + time.Hour;
-			string min =  time.Minute >= 10 ? time.Minute : "0" + time.Minute;
+			string hour = time.Hour >= 10 ? time.Hour.ToString() : "0" + time.Hour.ToString();
+			string min =  time.Minute >= 10 ? time.Minute.ToString() : "0" + time.Minute.ToString();
 
 			Drecord.transform.Find ("RoomName").GetComponent<Text> ().text = hour.ToString () + " : " + min.ToString () + " " + room.Name;
 			if(room.Items.Count > 4){Drecord.transform.Find ("More").gameObject.SetActive (true);}
