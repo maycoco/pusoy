@@ -107,6 +107,11 @@ public class CareerControl : MonoBehaviour {
 		this.gameObject.SetActive (true);
 		CloseRoomInfo ();
 
+		Pie7Day.gameObject.SetActive (false);
+		Pie30Day.gameObject.SetActive (false);
+		PieAllDay.gameObject.SetActive (false);
+
+
 		List<uint> days = new List<uint> ();
 		days.Add (7);
 		days.Add (30);
@@ -120,7 +125,7 @@ public class CareerControl : MonoBehaviour {
 		this.gameObject.SetActive (false);
 	}
 
-	public void UpdateRecordPie(List<CareerWinLoseDataItem> winlost){
+	public void UpdateRecordPie(RepeatedField<CareerWinLoseDataItem> winlost){
 		Common.CareerWins.Clear ();
 		for(int i = 0; i < winlost.Count; i++){
 			uint Win = winlost [i].Win;
@@ -148,14 +153,17 @@ public class CareerControl : MonoBehaviour {
 		Color WinColor = new Color (27.0f / 255, 116.0f / 255, 126.0f / 255);
 
 		if(pie == 0){
+			Pie7Day.gameObject.SetActive (true);
 			Pie7Day.SetPie (lost, win, LostColor, WinColor);
 		}
 
 		if(pie == 1){
+			Pie30Day.gameObject.SetActive (true);
 			Pie30Day.SetPie (lost, win, LostColor, WinColor);
 		}
 
 		if(pie == 2){
+			PieAllDay.gameObject.SetActive (true);
 			PieAllDay.SetPie (lost, win, LostColor, WinColor);
 		}
 	}
@@ -210,13 +218,14 @@ public class CareerControl : MonoBehaviour {
 				if(room.Items[i].Uid == Common.Uid){score = room.Items[i].Score;}
 
 				if(i < 4){
+					Drecord.transform.Find ("Players/Player" + i.ToString ()).gameObject.SetActive (true);
 					Drecord.transform.Find ("Players/Player" + i.ToString() + "/Name").GetComponent<Text> ().text = room.Items[i].Name;
 
 					UICircle avatar = (UICircle)Instantiate(m_LobbyController.PrefabAvatar);
 					avatar.transform.SetParent (Drecord.transform.Find ("Players/Player" + i.ToString() + "/Avatar"));
 					avatar.transform.localPosition = new Vector3 ();
 					avatar.transform.localScale = new Vector3 (1,1,1);
-					avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (48, 48);
+					avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (52, 52);
 					StartCoroutine(Common.Load(avatar, room.Items[i].Avatar));
 				}
 			}
@@ -225,6 +234,14 @@ public class CareerControl : MonoBehaviour {
 			string amount = Mathf.Abs (score).ToString ();
 			float left = 0;
 
+			GameObject icon = new GameObject ();
+			icon.AddComponent<Image> ();
+			icon.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/"+ typestr + "icon" , typeof(Sprite)) as Sprite;
+			icon.transform.SetParent(Drecord.transform.Find ("Score"));
+			icon.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
+			icon.transform.localPosition = new Vector3 (left,0,0);
+
+			left += 20;
 			for (int c = amount.Length - 1; c >= 0; c--) {  
 				GameObject t = new GameObject ();
 				t.AddComponent<Image> ();
@@ -232,16 +249,7 @@ public class CareerControl : MonoBehaviour {
 				t.transform.SetParent(Drecord.transform.Find ("Score"));
 				t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
 				t.transform.localPosition = new Vector3 (left,0,0);
-				left = left - 20;
-
-				if(c == 0){
-					GameObject icon = new GameObject ();
-					icon.AddComponent<Image> ();
-					icon.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/"+ typestr + "icon" , typeof(Sprite)) as Sprite;
-					icon.transform.SetParent(Drecord.transform.Find ("Score"));
-					icon.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
-					icon.transform.localPosition = new Vector3 (left,0,0);
-				}
+				left += 20;
 			}
 
 			EventTriggerListener.Get(Drecord).onClick = onClickButtonHandler;
@@ -313,7 +321,7 @@ public class CareerControl : MonoBehaviour {
 			avatar.transform.SetParent (CareerPlayer.transform.Find ("Avatar"));
 			avatar.transform.localPosition = new Vector3 ();
 			avatar.transform.localScale = new Vector3 (1,1,1);
-			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (48, 48);
+			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (68, 68);
 			StartCoroutine(Common.Load(avatar, room.Items[i].Avatar));
 
 			string typestr = "";

@@ -1832,7 +1832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &185764622
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1872,7 +1872,7 @@ MonoBehaviour:
   Pie30Day: {fileID: 899723219}
   PieAllDay: {fileID: 1138302448}
   PageView: {fileID: 502130820}
-  m_CareerRecord: {fileID: 1630380027347764, guid: 502135f4f1fbfd248b3d048b549b9b3d,
+  m_CareerRecord: {fileID: 1044292650174454, guid: 502135f4f1fbfd248b3d048b549b9b3d,
     type: 2}
   m_CareerPlayer: {fileID: 1191985509500920, guid: 8efb1b4ac6599ef4fa8b5f5356514da0,
     type: 2}
@@ -11046,7 +11046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &899723218
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13748,7 +13748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1138302447
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18483,7 +18483,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -256.2, y: -52.5}
+  m_AnchoredPosition: {x: -10, y: 133}
   m_SizeDelta: {x: 8, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1537370887
@@ -21213,7 +21213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1690764518
 RectTransform:
   m_ObjectHideFlags: 0
