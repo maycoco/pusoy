@@ -360,6 +360,26 @@ public class LobbyController : MonoBehaviour {
 			}
 			break;
 
+		case MessageID.CareerWinLoseDataRsp:
+			if (data.CareerWinLoseDataRsp.Ret == 0) {
+				Loom.QueueOnMainThread(()=>{
+					List<Msg.CareerWinLoseDataItem> items =  new List<CareerWinLoseDataItem>();
+					foreach(Msg.CareerWinLoseDataItem t in data.CareerWinLoseDataRsp.Data){
+						items.Add(t);
+					}
+					CareerControl.UpdateRecordPie(items);
+				}); 
+			}
+			break;
+
+		case MessageID.CareerRoomRecordsRsp:
+			if (data.CareerRoomRecordsRsp.Ret == 0) {
+				Loom.QueueOnMainThread(()=>{
+					CareerControl.SetCareerRecordData(data.CareerRoomRecordsRsp.Records);
+				}); 
+			}
+			break;
+
 		case MessageID.ConsumeDiamondsNotify:
 			break;
 		}
@@ -453,6 +473,34 @@ public class LobbyController : MonoBehaviour {
 		msg.DiamondsRecordsReq 			= new DiamondsRecordsReq();
 		msg.DiamondsRecordsReq.BeginTime = begin_time;
 		msg.DiamondsRecordsReq.EndTime 	= end_time;
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
+	public void  CareerWinLostServer(List<uint> days){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.CareerWinLoseDataReq;
+		msg.CareerWinLoseDataReq 		= new CareerWinLoseDataReq();
+		foreach(uint d in days){
+			msg.CareerWinLoseDataReq.Days.Add (d);
+		}
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
+	public void  CareerRecordsServer(uint days){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.CareerRoomRecordsReq;
+		msg.CareerRoomRecordsReq 		= new CareerRoomRecordsReq();
+		msg.CareerRoomRecordsReq.Days	= days;
 
 		using (var stream = new MemoryStream())
 		{

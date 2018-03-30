@@ -70,7 +70,7 @@ public class PrefileControl : MonoBehaviour
 		m_months.Add ("FEBRUARY");
 		m_months.Add ("MARCH");
 
-		m_months.Add ("MARCH");
+		m_months.Add ("APRIL");
 		m_months.Add ("MAY");
 		m_months.Add ("JUNE");
 

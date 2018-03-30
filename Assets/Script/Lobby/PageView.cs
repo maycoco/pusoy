@@ -56,20 +56,20 @@ public class PageView : MonoBehaviour, IBeginDragHandler, IEndDragHandler {
         }
     }
 
-    private void SetPageIndex (int index) {
+	public  void SetPageIndex (int index) {
         if(currentPageIndex != index) {
             currentPageIndex = index;
             if(OnPageChanged != null)
                 OnPageChanged (index);
 
 			if(index == 0){
-				Title.text = "7 Days winning +1000";
+				Title.text = "7 Days winning +" + Common.CareerWins[index];
 			}
 			else if(index == 1){
-				Title.text = "30 Days winning +1000";
+				Title.text = "30 Days winning +" + Common.CareerWins[index];;
 			}
 			else if(index == 2){
-				Title.text = "all Days winning +1000";
+				Title.text = "all Days winning +" + Common.CareerWins[index];;
 			}
         }
     }

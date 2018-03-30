@@ -62,6 +62,8 @@ public class Common
 	public static List<int>	CPokers			= new List<int>();
 	public static List<int>	CSeats			= new List<int>();
 
+	//Career
+	public static List<uint> CareerWins 	= new List<uint>();
 
 	//Room Config
 	public 	static uint[] 	ConfigMinBet 	= new uint[]{5, 20, 100, 500};
@@ -76,6 +78,9 @@ public class Common
 	//Chips Config
 	public static int[] 	ConfigChips 	= {1, 2 ,10, 20};
 	public static int 		ConfigMaxChips	= 20;
+
+	//CareerReqDays
+	public static uint 		ConfigCareerDays = 30;
 
 	public static Common Instance
 	{
@@ -135,8 +140,12 @@ public class Common
 				yield return www;
 				if (www!=null && string.IsNullOrEmpty(www.error))
 				{
-					AvatarCache.Add (url, www.texture as Texture);
-					av.texture = AvatarCache [url];
+					if (AvatarCache.ContainsKey (url)) {
+						av.texture = AvatarCache [url];
+					} else {
+						AvatarCache.Add (url, www.texture as Texture);
+						av.texture = www.texture as Texture;
+					}
 				} 
 			}
 		}
