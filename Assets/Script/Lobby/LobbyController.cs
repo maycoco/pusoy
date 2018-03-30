@@ -363,11 +363,7 @@ public class LobbyController : MonoBehaviour {
 		case MessageID.CareerWinLoseDataRsp:
 			if (data.CareerWinLoseDataRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
-					List<Msg.CareerWinLoseDataItem> items =  new List<CareerWinLoseDataItem>();
-					foreach(Msg.CareerWinLoseDataItem t in data.CareerWinLoseDataRsp.Data){
-						items.Add(t);
-					}
-					CareerControl.UpdateRecordPie(items);
+					CareerControl.UpdateRecordPie( data.CareerWinLoseDataRsp.Data);
 				}); 
 			}
 			break;
