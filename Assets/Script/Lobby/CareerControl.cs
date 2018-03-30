@@ -187,7 +187,7 @@ public class CareerControl : MonoBehaviour {
 		}
 	}
 
-	public void UpdatePieTips(Transform winobj, Transform lostobj, int win, int lost){
+	public void UpdatePieTips(Transform winobj, Transform lostobj, uint win, uint lost){
 		string winstr = win.ToString();
 		string loststr = lost.ToString();
 
