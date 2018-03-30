@@ -51,6 +51,8 @@ public class CareerControl : MonoBehaviour {
 		m_months.Add ("Nov");
 		m_months.Add ("Dec");
 
+		UpdateRecordData (0, 55,50);
+
 
 //		for(int i = 0; i < 3; i++){
 //			Msg.CareerRoomRecord room = new CareerRoomRecord ();
@@ -127,6 +129,21 @@ public class CareerControl : MonoBehaviour {
 
 	public void UpdateRecordPie(RepeatedField<CareerWinLoseDataItem> winlost){
 		Common.CareerWins.Clear ();
+
+		Transform Content = transform.Find ("Pies/Scroll View/Viewport/Content");
+
+		for (int i = Content.Find("PieScroll7/Win").childCount - 1; i >= 0; i--) {  
+			Destroy(Content.Find("PieScroll7/Win").GetChild(i).gameObject);
+		} 
+
+		for (int i = Content.Find("PieScroll30/Win").childCount - 1; i >= 0; i--) {  
+			Destroy(Content.Find("PieScroll30/Win").GetChild(i).gameObject);
+		} 
+
+		for (int i = Content.Find("PieScrollAll/Win").childCount - 1; i >= 0; i--) {  
+			Destroy(Content.Find("PieScrollAll/Win").GetChild(i).gameObject);
+		} 
+
 		for(int i = 0; i < winlost.Count; i++){
 			uint Win = winlost [i].Win;
 			uint Lose = winlost [i].Lose;
@@ -151,23 +168,25 @@ public class CareerControl : MonoBehaviour {
 	public void UpdateRecordData(int pie, int win, int lost){
 		Color LostColor = new Color (0.0f / 255, 0.0f / 255, 0.0f / 255, 0.2f);
 		Color WinColor = new Color (27.0f / 255, 116.0f / 255, 126.0f / 255);
+		Transform Content = transform.Find ("Pies/Scroll View/Viewport/Content");
+
 
 		if(pie == 0){
 			Pie7Day.gameObject.SetActive (true);
 			Pie7Day.SetPie (lost, win, LostColor, WinColor);
-			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScroll7/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScroll7/Lost"), win, lost);
+			UpdatePieTips (Content.Find("PieScroll7/Win"), Content.Find("PieScroll7/Lost"), win, lost);
 		}
 
 		if(pie == 1){
 			Pie30Day.gameObject.SetActive (true);
 			Pie30Day.SetPie (lost, win, LostColor, WinColor);
-			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScroll30/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScroll30/Lost"), win, lost);
+			UpdatePieTips (Content.Find("PieScroll30/Win"), Content.Find("PieScroll30/Lost"), win, lost);
 		}
 
 		if(pie == 2){
 			PieAllDay.gameObject.SetActive (true);
 			PieAllDay.SetPie (lost, win, LostColor, WinColor);
-			UpdatePieTips (transform.Find("Pies/Scroll View/Viewport/Content/PieScrollAll/Win"), transform.Find("Pies/Scroll View/Viewport/Content/PieScrollAll/Lost"), win, lost);
+			UpdatePieTips (Content.Find("PieScrollAll/Win"), Content.Find("PieScrollAll/Lost"), win, lost);
 		}
 	}
 
@@ -176,24 +195,26 @@ public class CareerControl : MonoBehaviour {
 		string loststr = lost.ToString();
 
 		float left = 0;
-		for (int c = winstr.Length - 1; c >= 0; c--) {  
+		for (int c = loststr.Length - 1; c >= 0; c--) {  
 			GameObject t = new GameObject ();
 			t.AddComponent<Image> ();
-			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/win" + winstr[c] , typeof(Sprite)) as Sprite;
-			t.transform.SetParent(winobj);
+			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/win" + loststr[c] , typeof(Sprite)) as Sprite;
+			t.transform.SetParent(lostobj);
 			t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
 			t.transform.localPosition = new Vector3 (left,0,0);
+			t.transform.localScale = new Vector3 (1,1,1);
 			left -= 20;
 		}
 
 		left = 0;
-		for (int c = 0;  c < loststr.Length; c++) {  
+		for (int c = 0;  c < winstr.Length; c++) {  
 			GameObject t = new GameObject ();
 			t.AddComponent<Image> ();
-			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/"+ loststr[c] , typeof(Sprite)) as Sprite;
-			t.transform.SetParent(lostobj);
+			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/Lost"+ winstr[c] , typeof(Sprite)) as Sprite;
+			t.transform.SetParent(winobj);
 			t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
 			t.transform.localPosition = new Vector3 (left,0,0);
+			t.transform.localScale = new Vector3 (1,1,1);
 			left += 20;
 		}
 	}
