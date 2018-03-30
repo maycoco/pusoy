@@ -208,7 +208,10 @@ public class CareerControl : MonoBehaviour {
 				Drecord.transform.Find ("Day").GetComponent<Text> ().text = day.ToString();
 			}
 
-			Drecord.transform.Find ("RoomName").GetComponent<Text> ().text = time.Hour.ToString () + ":" + time.Minute.ToString () + " " + room.Name;
+			string hour = time.Hour >= 10 ? time.Hour : "0" + time.Hour;
+			string min =  time.Minute >= 10 ? time.Minute : "0" + time.Minute;
+
+			Drecord.transform.Find ("RoomName").GetComponent<Text> ().text = hour.ToString () + " : " + min.ToString () + " " + room.Name;
 			if(room.Items.Count > 4){Drecord.transform.Find ("More").gameObject.SetActive (true);}
 
 			int score = 0;
@@ -242,7 +245,7 @@ public class CareerControl : MonoBehaviour {
 			icon.transform.localPosition = new Vector3 (left,0,0);
 
 			left += 20;
-			for (int c = amount.Length - 1; c >= 0; c--) {  
+			for (int c = 0;  c < amount.Length; c++) {  
 				GameObject t = new GameObject ();
 				t.AddComponent<Image> ();
 				t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/"+ typestr + amount[c] , typeof(Sprite)) as Sprite;
@@ -284,10 +287,8 @@ public class CareerControl : MonoBehaviour {
 		Transform RoomInfo = transform.Find ("RoomInfo");
 
 		RoomInfo.gameObject.SetActive (true);
-
-
 		RoomInfo.Find ("Top/Title").GetComponent<Text> ().text = room.Name;
-		RoomInfo.Find ("Time").GetComponent<Text> ().text = ConvertStringToDateTime (room.BeginTime.ToString()).ToString() + "~"+ConvertStringToDateTime (room.EndTime.ToString()).ToString();
+		RoomInfo.Find ("Time").GetComponent<Text> ().text = ConvertStringToDateTime (room.BeginTime.ToString()).ToString() + " ~ "+ConvertStringToDateTime (room.EndTime.ToString()).ToString();
 		RoomInfo.Find ("Totalhands/Text").GetComponent<Text> ().text = room.PlayedHands.ToString() + "/" + room.Hands.ToString();
 		if(room.Items.Count > 0){RoomInfo.Find ("MVP/Text").GetComponent<Text> ().text = room.Items [0].Name;}
 		RoomInfo.Find ("Roomfee/Text").GetComponent<Text> ().text = room.IsShare?"Shared":"Individual";
