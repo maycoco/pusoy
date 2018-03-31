@@ -96,6 +96,8 @@ public class CareerControl : MonoBehaviour {
 //
 //			CareerRooms.Add (room);
 //		}
+//
+//		UpdateCareerRecord ();
 	}
 	
 	// Update is called once per frame

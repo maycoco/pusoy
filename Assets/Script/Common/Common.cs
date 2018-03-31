@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Result{
 	public string user_id;
@@ -31,7 +33,7 @@ public class PlayerInfo{
 	public int			Score	  = 0;
 }
 
-public class Common
+public class Common: MonoBehaviour
 {
 	private static volatile Common _instance;
 	private static object _lock = new object();
@@ -151,7 +153,47 @@ public class Common
 		}
 	}
 
+	public static void Calling(GameObject Obj){
+		EndCalling (Obj);
+
+		GameObject Calling = new GameObject ();
+		Calling.AddComponent<RectTransform>();
+		Calling.GetComponent<RectTransform> ().sizeDelta = new Vector2 (640, 1136);
+		Calling.name = "Calling";
+		Calling.transform.SetParent (Obj.transform);
+
+
+		GameObject Mask = new GameObject ();
+		Mask.AddComponent<Image> ();
+		Mask.GetComponent<Image> ().color = new Color (0,0,0, 25.0f / 255);
+		Mask.GetComponent<RectTransform> ().sizeDelta = new Vector2 (640, 1136);
+		Mask.transform.SetParent (Calling.transform);
+
+
+		GameObject Anime = new GameObject ();
+		Anime.AddComponent<Image> ();
+		Anime.GetComponent<Image>().sprite =  Resources.Load("Image/Common/calling", typeof(Sprite)) as Sprite;
+		Anime.GetComponent<RectTransform> ().sizeDelta = new Vector2 (100, 100);
+		Anime.transform.SetParent (Calling.transform);
+
+
+		Calling.transform.localScale = new Vector3 (1,1,1);
+		Calling.transform.localPosition = new Vector3 (0,0,0);
+
+		Mask.transform.localScale = new Vector3 (1,1,1);
+		Mask.transform.localPosition = new Vector3 (0,0,0);
+
+		Anime.transform.localScale = new Vector3 (1,1,1);
+		Anime.transform.localPosition = new Vector3 (0,0,0);
+
+		Anime.transform.DOBlendableLocalRotateBy (new Vector3 (0, 0, -180), 0.8f).SetLoops(-1, LoopType.Incremental);
+	}
+
+	public static void EndCalling(GameObject Obj){
+		if(Obj.transform.Find("Calling") != null){
+			Destroy(Obj.transform.Find("Calling"));
+		}
+	}
 
 	private Common() {}
 }
-

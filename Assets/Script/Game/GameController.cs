@@ -456,10 +456,13 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void Data(Protocol data){
-		if(data == null){
-			return; 
-		}
-			
+		Loom.QueueOnMainThread(()=>{  
+			Common.EndCalling (Canvas);
+		}); 
+
+
+		if(data == null){return; }
+
 		switch (data.Msgid) {
 
 		case MessageID.LeaveRoomRsp:
@@ -659,6 +662,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void LeaveRoomServer(){
+		Common.Calling (Canvas);
+
 		m_GameConsole.CloseMenu ();
 
 		Protocol msg 					= new Protocol();
@@ -673,6 +678,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void SitDownServer(int seatID){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.SitDownReq;
 		msg.SitDownReq 					= new SitDownReq();
@@ -686,6 +693,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void AutoBankServer(bool auto){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.AutoBankerReq;
 		msg.AutoBankerReq 				= new AutoBankerReq();
@@ -699,6 +708,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void StandUpServer(){
+		Common.Calling (Canvas);
+
 		if(m_SelfSeatID == -1){return;}
 		if(m_StateManage.GetCulState() == STATE.STATE_SEAT || m_StateManage.GetCulState() == STATE.STATE_BETTING){
 			m_GameConsole.CloseMenu ();
@@ -720,6 +731,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void StartGameServer(){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.StartGameReq;
 		msg.StartGameReq 				= new StartGameReq();
@@ -732,6 +745,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void BetServer(uint chips){
+		Common.Calling (Canvas);
+
 		m_StateManage.m_StateBetting.ClearChipsButton ();
 
 		Protocol msg 					= new Protocol();
@@ -747,6 +762,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void CombineServer(List<Msg.CardGroup> cards, bool autowin){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CombineReq;
 		msg.CombineReq 					= new CombineReq();
@@ -761,6 +778,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void ScoreboardServer(){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.GetScoreboardReq;
 		msg.GetScoreboardReq 			= new GetScoreboardReq();
@@ -774,6 +793,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GetRoundHistoryServer(uint round){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.GetRoundHistoryReq;
 		msg.GetRoundHistoryReq 			= new GetRoundHistoryReq();
@@ -784,15 +805,5 @@ public class GameController : MonoBehaviour {
 			msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
 		}
-	}
-
-	public void Test1(){
-		SetSeatID (111, 0);
-		UpdateOrderList ();
-	}
-
-	public void Test2(){
-		SetSeatID (777, 1);
-		UpdateOrderList ();
 	}
 }

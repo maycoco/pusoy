@@ -44,11 +44,11 @@ public class LobbyController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		CheckConnection ();
+		RoomListServer ();
 	}
 
 	void Awake(){
 		InitCallbackForNet ();
-		RoomListServer ();
 	}
 	
 	// Update is called once per frame
@@ -232,6 +232,10 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void Data(Protocol data){
+		Loom.QueueOnMainThread(()=>{  
+			Common.EndCalling (Canvas);
+		}); 
+
 		if(data == null){return;}
 
 		switch (data.Msgid) {
@@ -382,6 +386,8 @@ public class LobbyController : MonoBehaviour {
 	}
 		
 	public void CreatRoomServer(string roomname, uint min_bet, uint max_bet, uint hands, uint credit_points, bool is_share){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CreateRoomReq;
 		msg.CreateRoomReq 				= new CreateRoomReq();
@@ -400,6 +406,8 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	 public void JoinRoomServer(string room_number){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.JoinRoomReq;
 		msg.JoinRoomReq 				= new JoinRoomReq();
@@ -413,6 +421,8 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void RoomListServer(){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.ListRoomsReq;
 		msg.ListRoomsReq 				= new ListRoomsReq();
@@ -425,6 +435,8 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void CloseRoomServer(uint roomid){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CloseRoomReq;
 		msg.CloseRoomReq 				= new CloseRoomReq();
@@ -438,6 +450,8 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void GetProfileServer(){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.GetProfileReq;
 		msg.GetProfileReq 				= new GetProfileReq();
@@ -450,6 +464,8 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void SendDiamondsServer(uint uid, uint amount){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.SendDiamondsReq;
 		msg.SendDiamondsReq 			= new SendDiamondsReq();
@@ -464,6 +480,8 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void  DiamondsRecordsServer(string begin_time, string end_time){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.DiamondsRecordsReq;
 		msg.DiamondsRecordsReq 			= new DiamondsRecordsReq();
@@ -478,6 +496,8 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void  CareerWinLostServer(List<uint> days){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CareerWinLoseDataReq;
 		msg.CareerWinLoseDataReq 		= new CareerWinLoseDataReq();
@@ -493,6 +513,8 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void  CareerRecordsServer(uint days){
+		Common.Calling (Canvas);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CareerRoomRecordsReq;
 		msg.CareerRoomRecordsReq 		= new CareerRoomRecordsReq();

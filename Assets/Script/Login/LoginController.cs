@@ -70,9 +70,11 @@ public class LoginController : MonoBehaviour {
 	}
 
 	public void Data(Protocol data){
-		if(data == null){
-			return;
-		}
+		Loom.QueueOnMainThread(()=>{  
+			Common.EndCalling (Canvas);
+		}); 
+
+		if(data == null){return;}
 
 		if(data.Msgid  == MessageID.LoginRsp){
 			if(data.LoginRsp.Ret == 0){
@@ -88,6 +90,7 @@ public class LoginController : MonoBehaviour {
 	}
 
 	public void LoginServer(){
+		Common.Calling (Canvas);
 		Protocol msg 			= new Protocol();
 		msg.Msgid 				= MessageID.LoginReq;
 		msg.LoginReq = new LoginReq();
