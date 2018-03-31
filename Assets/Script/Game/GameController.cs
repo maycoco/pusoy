@@ -457,7 +457,7 @@ public class GameController : MonoBehaviour {
 
 	public void Data(Protocol data){
 		Loom.QueueOnMainThread(()=>{  
-			Common.EndCalling (Canvas);
+			Common.EndCalling (Canvas.gameObject);
 		}); 
 
 
@@ -662,7 +662,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void LeaveRoomServer(){
-		Common.Calling (Canvas);
+		Common.Calling (Canvas.gameObject);
 
 		m_GameConsole.CloseMenu ();
 
@@ -678,7 +678,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void SitDownServer(int seatID){
-		Common.Calling (Canvas);
+		Common.Calling (Canvas.gameObject);
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.SitDownReq;
@@ -693,7 +693,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void AutoBankServer(bool auto){
-		Common.Calling (Canvas);
+		Common.Calling (Canvas.gameObject);
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.AutoBankerReq;
@@ -708,7 +708,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void StandUpServer(){
-		Common.Calling (Canvas);
+		Common.Calling (Canvas.gameObject);
 
 		if(m_SelfSeatID == -1){return;}
 		if(m_StateManage.GetCulState() == STATE.STATE_SEAT || m_StateManage.GetCulState() == STATE.STATE_BETTING){
@@ -731,7 +731,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void StartGameServer(){
-		Common.Calling (Canvas);
+		Common.Calling (Canvas.gameObject);
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.StartGameReq;
@@ -745,7 +745,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void BetServer(uint chips){
-		Common.Calling (Canvas);
+		Common.Calling (Canvas.gameObject);
 
 		m_StateManage.m_StateBetting.ClearChipsButton ();
 
@@ -762,7 +762,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void CombineServer(List<Msg.CardGroup> cards, bool autowin){
-		Common.Calling (Canvas);
+		Common.Calling (Canvas.gameObject);
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CombineReq;
@@ -778,7 +778,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void ScoreboardServer(){
-		Common.Calling (Canvas);
+		Common.Calling (Canvas.gameObject);
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.GetScoreboardReq;
@@ -793,7 +793,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GetRoundHistoryServer(uint round){
-		Common.Calling (Canvas);
+		Common.Calling (Canvas.gameObject);
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.GetRoundHistoryReq;
