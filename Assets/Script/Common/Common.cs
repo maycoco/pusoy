@@ -191,7 +191,7 @@ public class Common: MonoBehaviour
 
 	public static void EndCalling(GameObject Obj){
 		if(Obj.transform.Find("Calling") != null){
-			Destroy(Obj.transform.Find("Calling"));
+			Destroy(Obj.transform.Find("Calling").gameObject);
 		}
 	}
 
