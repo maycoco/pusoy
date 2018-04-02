@@ -124,7 +124,6 @@ public class CreateRoomControl : MonoBehaviour {
 		string roomname 	= this.transform.Find ("InputName").GetComponent<InputField> ().text;
 
 		if(string.IsNullOrEmpty(roomname)){
-			Dialog ();
 			return;
 		}
 
@@ -147,21 +146,4 @@ public class CreateRoomControl : MonoBehaviour {
 			LobbyControl.CreatRoomServer (roomname, min_bet, max_bet, hands, creditpoints, is_share);
 		}
 	}
-
-	public void Dialog(){
-		GameObject Dialog = (GameObject)Instantiate(LobbyControl.PrefabDialog);
-		Dialog.transform.Find("Title").GetComponent<Text>().text = "Unlipoker";
-		Dialog.transform.Find("Conten").GetComponent<Text>().text = "Input Room name Please...";
-		Dialog.transform.Find ("Yes").gameObject.SetActive (false);
-		Dialog.transform.Find ("No").gameObject.SetActive (false);
-		Dialog.transform.SetParent (GameObject.Find ("Canvas").transform);
-		Dialog.transform.localPosition = new Vector3 (0,0,0);
-		Dialog.gameObject.SetActive (true);
-		EventTriggerListener.Get(Dialog.transform.Find ("Close").gameObject).onClick = CloseDialog;
-	}
-
-	public void CloseDialog(GameObject obj){
-		Destroy (obj.transform.parent.gameObject);
-	}
-
 }

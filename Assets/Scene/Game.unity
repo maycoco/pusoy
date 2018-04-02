@@ -27799,6 +27799,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GameConsole: {fileID: 608673516}
   m_StateManage: {fileID: 1367642931}
+  PrefabDialog: {fileID: 1678114731079740, guid: 6ba7c72446a13554ea2f70fc89eb2db7,
+    type: 2}
+  PrefabTips: {fileID: 1585707637974460, guid: f892e31d2722fe34d94a5e1a8128143b, type: 2}
   m_PrefabChip: {fileID: 1419921545350870, guid: f84c8b8cbeda44805b1813b8de06e4f5,
     type: 2}
   m_PrefabRank: {fileID: 1001066624668130, guid: 4e6534c9a93687345ac4539d5d5d0752,

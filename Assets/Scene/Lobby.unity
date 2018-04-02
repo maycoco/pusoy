@@ -13122,10 +13122,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PrefabRoomInfo: {fileID: 1341490630238756, guid: 08138f929721adf43bed6717df88e270,
     type: 2}
-  PrefabDialog: {fileID: 1436015893693766, guid: 6ba7c72446a13554ea2f70fc89eb2db7,
+  PrefabDialog: {fileID: 1678114731079740, guid: 6ba7c72446a13554ea2f70fc89eb2db7,
     type: 2}
   PrefabAvatar: {fileID: 114181347771996772, guid: 9af53284b99d0d145a6f67254a9c92ea,
     type: 2}
+  PrefabTips: {fileID: 1585707637974460, guid: f892e31d2722fe34d94a5e1a8128143b, type: 2}
   CreateRoomControl: {fileID: 1670155776}
   JoinRoomControl: {fileID: 1608508388}
   CareerControl: {fileID: 185764625}

@@ -84,6 +84,19 @@ public class Common: MonoBehaviour
 	//CareerReqDays
 	public static uint 		ConfigCareerDays = 30;
 
+	//DialogText
+	public static string	TipsCreareRoom 		= "Failed to create room";
+	public static string	TipsJoinRoom 		= "Failed to joining room";
+	public static string 	TipsCantLeave 		= "On going ation, can't quit the room";
+	public static string	TipsCantCloseRoom 	= "Failed to disband room:On going action";
+	public static string	TipsInvalidUserID 	= "Invalid user ID";
+	public static string	TipsCantSendSelf 	= "Can't send diamond to yourself";
+	public static string	TipsInsufficient 	= "Insufficient diamonds,please require to your agent";
+
+	public static string    ErrorLogin			= "Login failed";
+	public static string    ErrorInsufficient	= "Insufficient diamonds,please require to your agent";
+	public static string    ErrorCantGame		= "Failed to continue the game: Player has insufficient diamond";
+
 	public static Common Instance
 	{
 		get
@@ -193,6 +206,38 @@ public class Common: MonoBehaviour
 		if(Obj.transform.Find("Calling") != null){
 			Destroy(Obj.transform.Find("Calling").gameObject);
 		}
+	}
+
+	public static void ErrorDialog(GameObject Obj, GameObject Parent, string text){
+		GameObject Dialog = Instantiate(Obj) as GameObject;
+		Dialog.transform.Find ("Conten").GetComponent<Text> ().text = text;
+		Dialog.transform.SetParent (Parent.transform);
+		Dialog.transform.localScale = new Vector3 (1,1,1);
+		Dialog.transform.localPosition = new Vector3 (0,0,0);
+
+		EventTriggerListener.Get(Dialog.transform.Find("Close").gameObject).onClick = CloseErrorDialog;
+		EventTriggerListener.Get(Dialog.transform.Find("OK").gameObject).onClick = CloseErrorDialog;
+	}
+
+	public static void CloseErrorDialog(GameObject Obj){
+		Destroy (Obj.transform.parent.gameObject);
+	}
+
+	public static void TipsOn(GameObject Obj, GameObject Parent, string text){
+		GameObject Dialog = Instantiate(Obj) as GameObject;
+		Dialog.transform.Find ("Text").GetComponent<Text> ().text = text;
+		Dialog.transform.SetParent (Parent.transform);
+		Dialog.transform.localScale = new Vector3 (1,1,1);
+		Dialog.transform.localPosition = new Vector3 (0,-568,0);
+
+		Sequence s = DOTween.Sequence ();
+		s.Append (Dialog.transform.DOLocalMoveY (-480, 0.3f));
+		s.Append (Dialog.transform.GetComponent<Image>().DOFade(0, 2f));
+		Dialog.transform.Find ("Text").GetComponent<Text> ().DOFade (0, 2.2f).OnComplete(()=>TipsOff(Dialog));
+	}
+
+	public static void TipsOff(GameObject d){
+		Destroy (d);
 	}
 
 	private Common() {}

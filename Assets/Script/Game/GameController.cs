@@ -41,6 +41,9 @@ public class GameController : MonoBehaviour {
 	public StateManage									m_StateManage;
 
 	//Prefab
+	public GameObject									PrefabDialog;
+	public GameObject									PrefabTips;
+
 	public GameObject			   						m_PrefabChip;
 	public GameObject			   						m_PrefabRank;
 	public GameObject			   						m_PrefabTPlayer;
@@ -466,9 +469,13 @@ public class GameController : MonoBehaviour {
 		switch (data.Msgid) {
 
 		case MessageID.LeaveRoomRsp:
-			if(data.LeaveRoomRsp.Ret == 0){
-				Loom.QueueOnMainThread(()=>{
-					ExitGame();
+			if (data.LeaveRoomRsp.Ret == 0) {
+				Loom.QueueOnMainThread (() => {
+					ExitGame ();
+				}); 
+			} else {
+				Loom.QueueOnMainThread (() => {  
+					Common.TipsOn (PrefabTips, Canvas.gameObject, Common.TipsCantLeave);
 				}); 
 			}
 			break;
@@ -503,7 +510,10 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.StartGameRsp:
-			if (data.StartGameRsp.Ret == 0) {
+			if(data.StartGameRsp.Ret == ErrorID.StartGameNotEnoughDiamonds){
+				Loom.QueueOnMainThread (() => {  
+					Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorCantGame);
+				}); 
 			}
 			break;
 

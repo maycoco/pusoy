@@ -14,14 +14,15 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LoginController : MonoBehaviour { 
-	public GameObject 		Canvas;
-	private AsyncOperation 	async = null;
-	private int 			progress = 0;
+	public GameObject 				Canvas;
+	private AsyncOperation 			async = null;
+	private int 					progress = 0;
+	public GameObject 				PrefabDialog;
 
 	// Use this for initialization
 	void Start () {
 		//for demo
-		Screen.SetResolution(448, 795, false);
+		//Screen.SetResolution(448, 795, false);
 	}
 
 	void Awake(){
@@ -77,13 +78,17 @@ public class LoginController : MonoBehaviour {
 		if(data == null){return;}
 
 		if(data.Msgid  == MessageID.LoginRsp){
-			if(data.LoginRsp.Ret == 0){
+			if (data.LoginRsp.Ret == 0) {
 				Common.Uid = data.LoginRsp.Uid;
 				Common.FB_name = data.LoginRsp.Name;
 				Common.CRoom_number = data.LoginRsp.RoomNumber;
 				Common.FB_avatar = data.LoginRsp.Avatar;
-				Loom.QueueOnMainThread(()=>{  
+				Loom.QueueOnMainThread (() => {  
 					GotoLobby ();
+				}); 
+			} else {
+				Loom.QueueOnMainThread (() => {  
+					Common.ErrorDialog (PrefabDialog, Canvas, Common.ErrorLogin);
 				}); 
 			}
 		}

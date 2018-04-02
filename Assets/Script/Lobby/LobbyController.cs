@@ -26,6 +26,7 @@ public class LobbyController : MonoBehaviour {
 	public GameObject 				PrefabRoomInfo;
 	public GameObject 				PrefabDialog;
 	public UICircle 				PrefabAvatar;
+	public GameObject 				PrefabTips;
 
 	//Controller
 	public CreateRoomControl 		CreateRoomControl;
@@ -196,23 +197,6 @@ public class LobbyController : MonoBehaviour {
 		}
 	}
 
-	public void ComingSoon(){
-		GameObject Dialog = (GameObject)Instantiate(PrefabDialog);
-		Dialog.transform.Find("Title").GetComponent<Text>().text = "Unlipoker";
-		Dialog.transform.Find("Conten").GetComponent<Text>().text = "Coming soon...";
-		Dialog.transform.Find ("Yes").gameObject.SetActive (false);
-		Dialog.transform.Find ("No").gameObject.SetActive (false);
-		Dialog.transform.SetParent (GameObject.Find ("Canvas").transform);
-		Dialog.transform.localPosition = new Vector3 (0,0,0);
-		Dialog.gameObject.SetActive (true);
-		EventTriggerListener.Get(Dialog.transform.Find ("Close").gameObject).onClick = CloseDialog;
-	}
-
-	public void CloseDialog(GameObject obj){
-		Destroy (obj.transform.parent.gameObject);
-	}
-
-
 	//===================================connect=================================
 	public void InitCallbackForNet(){
 		protonet.SetConnectedCall(Connected);
@@ -269,69 +253,82 @@ public class LobbyController : MonoBehaviour {
 			break;
 
 		case MessageID.CloseRoomRsp:
-			if(data.CloseRoomRsp.Ret == 0){
-				Loom.QueueOnMainThread(()=>{
+			if (data.CloseRoomRsp.Ret == 0) {
+				Loom.QueueOnMainThread (() => {
 					UpdateRoomClose (data.CloseRoomRsp.RoomId);
+				}); 
+			} else {
+				Loom.QueueOnMainThread (() => {  
+					Common.TipsOn (PrefabTips, Canvas, Common.TipsCantCloseRoom);
 				}); 
 			}
 			break;
 
 		case MessageID.CreateRoomRsp:
-			if(data.CreateRoomRsp.Ret == 0){
-				Common.CRoom_id 	= data.CreateRoomRsp.RoomId;
+			if (data.CreateRoomRsp.Ret == 0) {
+				Common.CRoom_id = data.CreateRoomRsp.RoomId;
 				Common.CRoom_number	= data.CreateRoomRsp.RoomNumber;
-				Loom.QueueOnMainThread(()=>{
-					JoinRoomServer(Common.CRoom_number);
+				Loom.QueueOnMainThread (() => {
+					JoinRoomServer (Common.CRoom_number);
+				}); 
+			} else if (data.CreateRoomRsp.Ret == ErrorID.CreateRoomNotEnoughDiamonds) {
+				Loom.QueueOnMainThread (() => {  
+					Common.ErrorDialog (PrefabDialog, Canvas, Common.ErrorInsufficient);
+				}); 
+			} else {
+				Loom.QueueOnMainThread (() => {  
+					Common.TipsOn (PrefabTips, Canvas, Common.TipsCreareRoom);
 				}); 
 			}
 			break;
 
 		case MessageID.JoinRoomRsp:
 			if (data.JoinRoomRsp.Ret == 0) {
-				Common.CRoom_id 	= data.JoinRoomRsp.Room.RoomId;
+				Common.CRoom_id = data.JoinRoomRsp.Room.RoomId;
 				Common.CRoom_number = data.JoinRoomRsp.Room.Number;
 				Common.CRoom_name	= data.JoinRoomRsp.Room.Name;
-				Common.CMin_bet 	= data.JoinRoomRsp.Room.MinBet;
-				Common.CMax_bet 	= data.JoinRoomRsp.Room.MaxBet;
-				Common.CHands 		= data.JoinRoomRsp.Room.Hands;
-				Common.CPlayed_hands= data.JoinRoomRsp.Room.PlayedHands;
-				Common.CIs_share 	= data.JoinRoomRsp.Room.IsShare;
+				Common.CMin_bet = data.JoinRoomRsp.Room.MinBet;
+				Common.CMax_bet = data.JoinRoomRsp.Room.MaxBet;
+				Common.CHands = data.JoinRoomRsp.Room.Hands;
+				Common.CPlayed_hands = data.JoinRoomRsp.Room.PlayedHands;
+				Common.CIs_share = data.JoinRoomRsp.Room.IsShare;
 				Common.CCredit_points = data.JoinRoomRsp.Room.CreditPoints;
-				Common.CState 		= data.JoinRoomRsp.Room.State;
+				Common.CState = data.JoinRoomRsp.Room.State;
 
-				if(Common.CState == Msg.GameState.Bet){
+				if (Common.CState == Msg.GameState.Bet) {
 					Common.ConfigBetTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
-				}
-				else if(Common.CState == Msg.GameState.Combine){
+				} else if (Common.CState == Msg.GameState.Combine) {
 					Common.ConfigSortTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
-				}
-				else if(Common.CState == Msg.GameState.Result){
+				} else if (Common.CState == Msg.GameState.Result) {
 					Common.ConfigFinishTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
-				}
-				else if(Common.CState == Msg.GameState.Deal){
+				} else if (Common.CState == Msg.GameState.Deal) {
 					Common.CPokers.Clear ();
-					for(int i = 0; i < data.JoinRoomRsp.Room.Cards.Count; i++){
-						Common.CPokers.Add ( (int)data.JoinRoomRsp.Room.Cards[i] );
+					for (int i = 0; i < data.JoinRoomRsp.Room.Cards.Count; i++) {
+						Common.CPokers.Add ((int)data.JoinRoomRsp.Room.Cards [i]);
 					}
 				}
 					
 				Common.CPlayers.Clear ();
 				Common.CPokers.Clear ();
-				for(int i = 0; i < data.JoinRoomRsp.Room.Players.Count; i++){
+				for (int i = 0; i < data.JoinRoomRsp.Room.Players.Count; i++) {
 					PlayerInfo p = new PlayerInfo ();
-					p.Uid 		= data.JoinRoomRsp.Room.Players[i].Uid;
-					p.SeatID 	= data.JoinRoomRsp.Room.Players[i].SeatId;
-					p.Name 		= data.JoinRoomRsp.Room.Players[i].Name;
-					p.Bet 		= data.JoinRoomRsp.Room.Players[i].Bet;
-					p.FB_avatar = data.JoinRoomRsp.Room.Players[i].Avatar;
-					p.Score		= data.JoinRoomRsp.Room.Players[i].Score;
+					p.Uid = data.JoinRoomRsp.Room.Players [i].Uid;
+					p.SeatID = data.JoinRoomRsp.Room.Players [i].SeatId;
+					p.Name = data.JoinRoomRsp.Room.Players [i].Name;
+					p.Bet = data.JoinRoomRsp.Room.Players [i].Bet;
+					p.FB_avatar = data.JoinRoomRsp.Room.Players [i].Avatar;
+					p.Score = data.JoinRoomRsp.Room.Players [i].Score;
 
-					Debug.Log (p.Uid + "===" + p.SeatID + "===" +p.Name);
+					Debug.Log (p.Uid + "===" + p.SeatID + "===" + p.Name);
 					Common.CPlayers.Add (p);
 				}
 
-				Loom.QueueOnMainThread(()=>{
-					PlayGame();
+				Loom.QueueOnMainThread (() => {
+					PlayGame ();
+				}); 
+			} else {
+				Loom.QueueOnMainThread (() => {  
+					Common.TipsOn (PrefabTips, Canvas, Common.TipsJoinRoom);
 				}); 
 			}
 			break;
@@ -352,6 +349,21 @@ public class LobbyController : MonoBehaviour {
 			if (data.SendDiamondsRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
 					PrefileControl.HideSendDiamond ();
+				}); 
+			}
+			else if(data.SendDiamondsRsp.Ret == ErrorID.SendDiamondsNoUser){
+				Loom.QueueOnMainThread (() => {  
+					Common.TipsOn (PrefabTips, Canvas, Common.TipsInvalidUserID);
+				}); 
+			}
+			else if(data.SendDiamondsRsp.Ret == ErrorID.SendDiamondsCannotSelf){
+				Loom.QueueOnMainThread (() => {  
+					Common.TipsOn (PrefabTips, Canvas, Common.TipsCantSendSelf);
+				}); 
+			}
+			else if(data.SendDiamondsRsp.Ret == ErrorID.SendDiamondsNotEnoughDiamonds){
+				Loom.QueueOnMainThread (() => {  
+					Common.TipsOn (PrefabTips, Canvas, Common.TipsInsufficient);
 				}); 
 			}
 			break;

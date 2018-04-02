@@ -387,6 +387,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Canvas: {fileID: 684690734}
+  PrefabDialog: {fileID: 1678114731079740, guid: 6ba7c72446a13554ea2f70fc89eb2db7,
+    type: 2}
 --- !u!1 &1013955555
 GameObject:
   m_ObjectHideFlags: 0
