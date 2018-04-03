@@ -38,6 +38,10 @@ public class LobbyController : MonoBehaviour {
 	public PrefileControl		 	PrefileControl;
 	public SettingControl		 	SettingControl;
 
+	//Audio
+	public AudioSource 				Music;
+	public List<AudioClip> 			BGMs;
+
 	public GameObject 				Canvas;
 	private List<RoomInfo>			RoomLists= new List<RoomInfo>();
 	private List<uint>				RoomIDs = new List<uint>();
@@ -50,6 +54,7 @@ public class LobbyController : MonoBehaviour {
 
 	void Awake(){
 		InitCallbackForNet ();
+		OnMusic ();
 	}
 	
 	// Update is called once per frame
@@ -539,18 +544,9 @@ public class LobbyController : MonoBehaviour {
 		}
 	}
 
-	//===================================facebook=================================
-//	public void GetUserInfo(){
-//		if(FB.IsLoggedIn){
-//			FB.API("/me/picture?Type=square&height=128&width=128", HttpMethod.GET, this.ProfilePhotoCallback);
-//		}
-//	}
-//
-//	private void ProfilePhotoCallback(IGraphResult result){
-//		if (string.IsNullOrEmpty(result.Error) && result.Texture != null){
-//			Common.FB_avatar = Sprite.Create (result.Texture, new Rect (0, 0, 128, 128), new Vector2 (0.5f, 0.5f));
-//			GameObject.Find ("Canvas").transform.Find ("Avatar").gameObject.GetComponent<Image> ().sprite = Common.FB_avatar;
-//		}
-//
-//	}
+	public void OnMusic(){
+		Music.Stop ();
+		Music.clip = BGMs [Random.Range (0, 2)];
+		Music.Play ();
+	}
 }

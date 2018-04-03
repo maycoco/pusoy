@@ -81,6 +81,9 @@ public class Common: MonoBehaviour
 	public static int[] 	ConfigChips 	= {1, 2 ,10, 20};
 	public static int 		ConfigMaxChips	= 20;
 
+	//Music Config
+	public static bool 	 	ConfigMusicOn	= true;
+
 	//CareerReqDays
 	public static uint 		ConfigCareerDays = 30;
 
