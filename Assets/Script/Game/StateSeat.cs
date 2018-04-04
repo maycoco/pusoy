@@ -53,6 +53,8 @@ public class StateSeat : State{
 	}
 
 	public void AddSeat(int SeatID){
+		m_GameController.PlayEffect (Effect.BUTTON);
+
 		if(m_GameController.m_SelfSeatID >= 0){return;}
 		if(m_StateManage.GetCulState() == STATE.STATE_SEAT || m_StateManage.GetCulState() == STATE.STATE_BETTING){
 			if(m_GameController.GetPlayerIDForSeatID(SeatID) != 0){return;}

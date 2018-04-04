@@ -218,10 +218,15 @@ public class StateSorting : State {
 			Layer1.Find ("CountDown/Clock").GetComponent<Image> ().fillAmount = CountDownTime * temp;
 
 			if(CountDownTime == 5){
+				m_GameController.PlayEffect (Effect.EIDA);
 				Effect_DX = Instantiate(m_GameController.m_PrefabEffectED) as GameObject;
 				Effect_DX.transform.SetParent (Layer.Find("EffectDX").transform);
 				Effect_DX.transform.localScale = new Vector3 (1, 1, 1);
 				Effect_DX.transform.localPosition = new Vector3 (0, 0, 0);
+			}
+
+			if(CountDownTime == 3){
+				m_GameController.PlayEffect (Effect.CLOCK);
 			}
 		} 
 		else {
@@ -233,7 +238,7 @@ public class StateSorting : State {
 	}
 
 	public void AdjustPokers(bool ini = false){
-		float iv = 0.03f;
+		float iv = 0.05f;
 		for (int i = 0; i <HandPokers.Count; i++) {
 			Poker Poker = Instantiate(m_GameController.m_PrefabPoker) as Poker;
 			Poker.canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
@@ -263,7 +268,8 @@ public class StateSorting : State {
 	}
 		
 	public void RoateAni(){
-		Pokers[HandPokers[RoateAniIndex]].transform.DORotate (new Vector3 (0, 180, 0), 0.08f).OnComplete(RoateAniCallBack);
+		m_GameController.PlayEffect (Effect.FAN);
+		Pokers[HandPokers[RoateAniIndex]].transform.DORotate (new Vector3 (0, 180, 0), 0.1f).OnComplete(RoateAniCallBack);
 		RoateAniIndex++;
 	}
 
@@ -476,6 +482,7 @@ public class StateSorting : State {
 	}
 
 	public void AddPokerToTag(string tag, int[] pokers){
+		
 		switch (tag) {
 		case "Upper":
 			foreach(int p in pokers){
@@ -503,7 +510,7 @@ public class StateSorting : State {
 			break;
 		}
 
-		//UpdateRanks ();
+		m_GameController.PlayEffect (Effect.SEKECT);
 	}
 
 	 public void DeletePokerFromTag(string tag, int[] pokers){
@@ -562,6 +569,7 @@ public class StateSorting : State {
 		}
 
 		SelectedPokers.Add (PokerID);
+		m_GameController.PlayEffect (Effect.SEKECT);
 		Pokers [PokerID].Selected ();
 	}
 
@@ -943,6 +951,7 @@ public class StateSorting : State {
 				Effect_BaoPai = null;
 			} 
 
+			m_GameController.PlayEffect (Effect.BOLI);
 			Effect_BaoPai = Instantiate(m_GameController.m_PrefabEffectSL) as GameObject;
 			Effect_BaoPai.transform.SetParent (Layer);
 			Effect_BaoPai.transform.localScale = new Vector3 (1, 1, 1);

@@ -39,6 +39,7 @@ public class CreateRoomControl : MonoBehaviour {
 	}
 
 	public void Exit(){
+		LobbyControl.PlayerButtonEffect ();
 		this.gameObject.SetActive (false);
 	}
 
@@ -69,6 +70,8 @@ public class CreateRoomControl : MonoBehaviour {
 	}
 
 	public void CreditPointsControl(int type){
+		LobbyControl.PlayerButtonEffect ();
+
 		if(type == 0){
 			if(CurCreditPoints > 0){
 				CurCreditPoints--;
@@ -120,7 +123,8 @@ public class CreateRoomControl : MonoBehaviour {
 	}
 
 	public void CheckIn(){
-		
+		LobbyControl.PlayerButtonEffect ();
+
 		string roomname 	= this.transform.Find ("InputName").GetComponent<InputField> ().text;
 
 		if(string.IsNullOrEmpty(roomname)){

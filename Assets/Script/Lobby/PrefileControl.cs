@@ -95,6 +95,7 @@ public class PrefileControl : MonoBehaviour
 	}
 
 	public void Exit(){
+		LobbyControl.PlayerButtonEffect ();
 		this.gameObject.SetActive (false);
 	}
 
@@ -113,6 +114,8 @@ public class PrefileControl : MonoBehaviour
 
 
 	public void ShowSendDiamond(){
+		LobbyControl.PlayerButtonEffect ();
+
 		m_UserID 	= "";
 		m_Amount 	= "";
 
@@ -311,6 +314,8 @@ public class PrefileControl : MonoBehaviour
 	}
 
 	public void ShowCalendar(){
+		LobbyControl.PlayerButtonEffect ();
+
 		m_CurDate = DateTime.Now;
 		UpdateCalendar ();
 		transform.Find ("Date").gameObject.SetActive (true);
@@ -410,6 +415,8 @@ public class PrefileControl : MonoBehaviour
 	}
 
 	public void onClickButtonHandler(GameObject obj){
+		LobbyControl.PlayerButtonEffect ();
+
 		if (string.IsNullOrEmpty (obj.name)) {
 			return;
 		}

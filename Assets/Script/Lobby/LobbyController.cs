@@ -40,7 +40,9 @@ public class LobbyController : MonoBehaviour {
 
 	//Audio
 	public AudioSource 				Music;
+	public AudioSource 				ButtonEffects;
 	public List<AudioClip> 			BGMs;
+
 
 	public GameObject 				Canvas;
 	private List<RoomInfo>			RoomLists= new List<RoomInfo>();
@@ -65,25 +67,31 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void CreateRoom(){
+		PlayerButtonEffect ();
 		CreateRoomControl.Enter();
 	}
 
 	public void JoinRoom(){
+		PlayerButtonEffect ();
 		JoinRoomControl.Enter ();
 	}
 
 	public void GoToCareer(){
+		PlayerButtonEffect ();
 		CareerControl.Enter ();
 	}
 
 	public void GoToConter(){
+		PlayerButtonEffect ();
 	}
 
 	public void GoToPrefile(){
+		PlayerButtonEffect ();
 		PrefileControl.Enter ();
 	}
 
 	public void GoToSetting(){
+		PlayerButtonEffect ();
 		SettingControl.Enter ();
 	}
 		
@@ -546,7 +554,26 @@ public class LobbyController : MonoBehaviour {
 
 	public void OnMusic(){
 		Music.Stop ();
-		Music.clip = BGMs [Random.Range (0, 2)];
+		if(Common.ConfigMusicOn){
+			Music.clip = BGMs [Random.Range (0, 2)];
+			Music.Play ();
+		}
+	}
+
+	public void StopMusic(){
+		Music.Pause ();
+	}
+
+	public void PlayMusic(){
 		Music.Play ();
+	}
+
+	public void PlaySoundEffect(string effect){
+	}
+
+	public void PlayerButtonEffect(){
+		if(Common.ConfigMusicOn){
+			ButtonEffects.Play ();
+		}
 	}
 }

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -17,6 +17,18 @@ public class PreInfo{
 	public List<int> Hand = new List<int>();
 	public int Result;
 	public int Type;
+}
+
+public enum Effect:int{
+	BEGIN,
+	BET,
+	BOLI,
+	BUTTON,
+	CLOCK,
+	EIDA,
+	FAN,
+	SEKECT,
+	TUOZHUAI
 }
 
 public class SeatResult{
@@ -57,6 +69,13 @@ public class GameController : MonoBehaviour {
 	public GameObject 									m_PrefabEffectDeal;
 	public GameObject 									m_PrefabEffectED;
 
+	//Audio
+	public AudioSource 									Music;
+	public AudioSource 									SoundEffect;
+	public List<AudioClip> 								Effects;
+	public List<AudioClip> 								BGMs;
+
+
 	//Self Info
 	[HideInInspector] public int 						m_SelfSeatID 	= -1;
 	[HideInInspector] public int 						m_TatgetSeatID	= -1;
@@ -79,6 +98,7 @@ public class GameController : MonoBehaviour {
 
 	void Awake(){
 		Canvas = GameObject.Find ("Canvas").transform;
+		OnMusic ();
 		AdjustUI ();
 
 		InitCallbackForNet ();
@@ -814,6 +834,21 @@ public class GameController : MonoBehaviour {
 		{
 			msg.WriteTo(stream);
 			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
+	public void OnMusic(){
+		Music.Stop ();
+		if(Common.ConfigMusicOn){
+			Music.clip = BGMs [Random.Range (0, 2)];
+			Music.Play ();
+		}
+	}
+
+	public void PlayEffect(Effect ect){
+		if(Common.ConfigMusicOn){
+			SoundEffect.clip = Effects [(int)ect];
+			SoundEffect.Play ();
 		}
 	}
 }

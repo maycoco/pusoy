@@ -158,6 +158,8 @@ public class StateBetting : State {
 
 		m_Chips.Add(BettingAmount);
 
+		m_GameController.PlayEffect (Effect.BET);
+
 		//anime
 		GameObject Chip = (GameObject)Instantiate(m_GameController.m_PrefabChip);  
 		Chip.transform.SetParent (Layer.Find ("SeatCom/Seat" + m_GameController.m_SelfSeatID + "/ChipsAssets"));

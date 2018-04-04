@@ -33,6 +33,8 @@ public class GameConsole : MonoBehaviour
 	}
 
 	public void MenuBTConsole(){
+		m_GameController.PlayEffect (Effect.BUTTON);
+
 		if (!MenuOpen) {
 			OpenMenu ();
 		} else {
@@ -61,6 +63,7 @@ public class GameConsole : MonoBehaviour
 	}
 
 	public void StandUp(){
+		m_GameController.PlayEffect (Effect.BUTTON);
 		MenuBTConsole ();
 		m_GameController.StandUpServer ();
 	}
@@ -200,7 +203,8 @@ public class GameConsole : MonoBehaviour
 	}
 		
 	public void LeaveRoom(){
-		m_GameController.ExitGame ();
+		m_GameController.PlayEffect (Effect.BUTTON);
+		m_GameController.LeaveRoomServer ();
 	}
 
 	public void HidePlayerList(){
@@ -239,6 +243,7 @@ public class GameConsole : MonoBehaviour
 	///==============================
 
 	public void OpenHandReview(){
+		m_GameController.PlayEffect (Effect.BUTTON);
 		RoundCount = 0;
 		m_GameController.GetRoundHistoryServer (RoundCount);
 	}
@@ -250,6 +255,7 @@ public class GameConsole : MonoBehaviour
 	}
 
 	public void LastRoundReview(){
+		m_GameController.PlayEffect (Effect.BUTTON);
 		if(RoundCount > 0){
 			RoundCount--;
 			m_GameController.GetRoundHistoryServer (RoundCount);
@@ -257,6 +263,7 @@ public class GameConsole : MonoBehaviour
 	}
 
 	public void NextRoundReview(){
+		m_GameController.PlayEffect (Effect.BUTTON);
 		if(RoundCount < Common.CPlayed_hands){
 			RoundCount++;
 			m_GameController.GetRoundHistoryServer (RoundCount);

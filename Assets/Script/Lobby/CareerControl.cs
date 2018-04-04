@@ -18,7 +18,7 @@ public class Wol{
 }
 
 public class CareerControl : MonoBehaviour {
-	public LobbyController	m_LobbyController;
+	public LobbyController	LobbyController;
 	public PieGraph			Pie7Day;
 	public PieGraph			Pie30Day;
 	public PieGraph			PieAllDay;
@@ -132,11 +132,12 @@ public class CareerControl : MonoBehaviour {
 		days.Add (30);
 		days.Add (365);
 
-		m_LobbyController.CareerWinLostServer (days);
-		m_LobbyController.CareerRecordsServer (Common.ConfigCareerDays);
+		LobbyController.CareerWinLostServer (days);
+		LobbyController.CareerRecordsServer (Common.ConfigCareerDays);
 	}
 
 	public void Exit(){
+		LobbyController.PlayerButtonEffect ();
 		this.gameObject.SetActive (false);
 	}
 
@@ -274,7 +275,7 @@ public class CareerControl : MonoBehaviour {
 					Drecord.transform.Find ("Players/Player" + i.ToString ()).gameObject.SetActive (true);
 					Drecord.transform.Find ("Players/Player" + i.ToString() + "/Name").GetComponent<Text> ().text = room.Items[i].Name;
 
-					UICircle avatar = (UICircle)Instantiate(m_LobbyController.PrefabAvatar);
+					UICircle avatar = (UICircle)Instantiate(LobbyController.PrefabAvatar);
 					avatar.transform.SetParent (Drecord.transform.Find ("Players/Player" + i.ToString() + "/Avatar"));
 					avatar.transform.localPosition = new Vector3 ();
 					avatar.transform.localScale = new Vector3 (1,1,1);
@@ -368,7 +369,7 @@ public class CareerControl : MonoBehaviour {
 				CareerPlayer.transform.Find ("Mine").gameObject.SetActive (true);
 			}
 
-			UICircle avatar = (UICircle)Instantiate(m_LobbyController.PrefabAvatar);
+			UICircle avatar = (UICircle)Instantiate(LobbyController.PrefabAvatar);
 			avatar.transform.SetParent (CareerPlayer.transform.Find ("Avatar"));
 			avatar.transform.localPosition = new Vector3 ();
 			avatar.transform.localScale = new Vector3 (1,1,1);

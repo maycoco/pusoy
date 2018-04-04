@@ -26,10 +26,13 @@ public class JoinRoomControl : MonoBehaviour {
 	}
 
 	public void Exit(){
+		LobbyControl.PlayerButtonEffect ();
 		this.gameObject.SetActive (false);
 	}
 
 	public void InputPassword(int Pword){
+		LobbyControl.PlayerButtonEffect ();
+
 		if (Roomnumber.Length < 4) {
 			Roomnumber = Roomnumber + Pword.ToString();
 		}
