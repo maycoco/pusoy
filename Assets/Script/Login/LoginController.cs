@@ -59,7 +59,9 @@ public class LoginController : MonoBehaviour {
 	}
 
 	public void Connected(){
-		LoginServer ();
+		Loom.QueueOnMainThread(()=>{  
+			LoginServer ();
+		}); 
 	}
 
 	public void FailedConnect(){
