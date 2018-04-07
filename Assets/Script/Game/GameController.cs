@@ -158,7 +158,7 @@ public class GameController : MonoBehaviour {
 //		Common.CMin_bet 	= 20;
 //		Common.CMax_bet 	= 1000;
 //		Common.CHands 		= 20;
-//		Common.CPlayed_hands= 19;
+//		Common.CPlayed_hands= 16;
 //		Common.CIs_share 	= true;
 //		Common.CCredit_points = 1000;
 //		Common.CState 		= Msg.GameState.Result;
@@ -167,7 +167,7 @@ public class GameController : MonoBehaviour {
 //			Common.ConfigBetTime = 5;
 //		}
 //		else if(Common.CState == Msg.GameState.Ready){
-//			Common.ConfigSortTime = 45;
+//			Common.ConfigSortTime = 15;
 //		}
 //		else if(Common.CState == Msg.GameState.Result){
 //			Common.ConfigFinishTime = 8;
@@ -175,7 +175,7 @@ public class GameController : MonoBehaviour {
 //
 //		PlayerInfo p0 = new PlayerInfo ();
 //		p0.Uid = 111;
-//		p0.SeatID = -1;
+//		p0.SeatID = 0;
 //		p0.Name = "Bruce";
 //		p0.Bet = 0;
 //		p0.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=21c98377362ac65c6705667bcbf2b21d/a8ca36d12f2eb938801e25e5d6628535e5dd6f67.jpg";
@@ -183,7 +183,7 @@ public class GameController : MonoBehaviour {
 //
 //		PlayerInfo p1 = new PlayerInfo ();
 //		p1.Uid = 222;
-//		p1.SeatID =  -1;
+//		p1.SeatID =  1;
 //		p1.Name = "Ali";
 //		p1.Bet = 0;
 //		p1.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=20bd50a0ea50352ab16125006343fb1a/87c154e736d12f2ea376f1774cc2d56285356867.jpg";
@@ -191,16 +191,16 @@ public class GameController : MonoBehaviour {
 //		Common.CPlayers.Add (p1);
 //
 //		PlayerInfo p2 = new PlayerInfo ();
-//		p2.Uid = 777;
-//		p2.SeatID =  -1;
+//		p2.Uid = 333;
+//		p2.SeatID =  2;
 //		p2.Name = "HAHA";
 //		p2.Bet = 200;
 //		p2.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=f51e5f0dc55c1038247ececa8211931c/cafc2f2eb9389b50538cbf458635e5dde7116e67.jpg";
 //		Common.CPlayers.Add (p2);
 //
 //		PlayerInfo p3 = new PlayerInfo ();
-//		p3.Uid = 888;
-//		p3.SeatID =  -1;
+//		p3.Uid = 444;
+//		p3.SeatID =  3;
 //		p3.Name = "gegeg";
 //		p3.Bet = 100;
 //		p3.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=2864ac7b133853438ccf8729a313b01f/d303b9389b504fc2c82cef12e6dde71190ef6d67.jpg";
@@ -214,9 +214,9 @@ public class GameController : MonoBehaviour {
 		m_StateManage.m_StateBetting.UpdateDateBetType ();
 
 		//Begin Download
-		foreach(PlayerInfo p in Common.CPlayers){
-			StartCoroutine(Common.DownAvatar (p.FB_avatar));
-		}
+//		foreach(PlayerInfo p in Common.CPlayers){
+//			StartCoroutine(Common.DownAvatar (p.FB_avatar));
+//		}
 
 		if (GetSeatIDForPlayerID (Common.Uid) == 999) {
 			PlayerInfo p = new PlayerInfo ();
@@ -392,6 +392,12 @@ public class GameController : MonoBehaviour {
 			info.SeatID 		= (int)ResultList [i].SeatId;
 
 			if((int)ResultList [i].SeatId != 0){info.score 			= new List<int> (ResultList [i].Scores);}
+
+			foreach(PlayerInfo player in Common.CPlayers){
+				if(player.Uid == ResultList [i].Uid){
+					player.Score += ResultList [i].Win;
+				}
+			}
 
 			PlayerInfo p = GetPlayerInfoForSeatID (info.SeatID);
 			if (p == null) {
@@ -635,6 +641,7 @@ public class GameController : MonoBehaviour {
 			case Msg.GameState.Show:
 				Loom.QueueOnMainThread(()=>{
 					ResultEvent(data.GameStateNotify.Result);
+					m_StateManage.m_StateSeat.UpdateSeatScore();
 					m_StateManage.ChangeState (STATE.STATE_SHOWHAND);
 				}); 
 				break;
@@ -850,5 +857,15 @@ public class GameController : MonoBehaviour {
 			SoundEffect.clip = Effects [(int)ect];
 			SoundEffect.Play ();
 		}
+	}
+
+	public void Test1(){
+		Common.CPlayers [0].Score = 123;
+		m_StateManage.m_StateSeat.UpdateSeatScore ();
+	}
+
+	public void Test2(){
+		SetSeatID (222, -1);
+		UpdateOrderList ();
 	}
 }

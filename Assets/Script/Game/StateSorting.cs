@@ -238,7 +238,7 @@ public class StateSorting : State {
 	}
 
 	public void AdjustPokers(bool ini = false){
-		float iv = 0.05f;
+		float iv = 0.16f;
 		for (int i = 0; i <HandPokers.Count; i++) {
 			Poker Poker = Instantiate(m_GameController.m_PrefabPoker) as Poker;
 			Poker.canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
@@ -269,7 +269,7 @@ public class StateSorting : State {
 		
 	public void RoateAni(){
 		m_GameController.PlayEffect (Effect.FAN);
-		Pokers[HandPokers[RoateAniIndex]].transform.DORotate (new Vector3 (0, 180, 0), 0.1f).OnComplete(RoateAniCallBack);
+		Pokers[HandPokers[RoateAniIndex]].transform.DORotate (new Vector3 (0, 180, 0), 0.08f).OnComplete(RoateAniCallBack);
 		RoateAniIndex++;
 	}
 
@@ -824,7 +824,11 @@ public class StateSorting : State {
 			Rank.transform.Find("Text").GetComponent<Text> ().text = RanksText[(int)ranks[i]];
 			Rank.transform.SetParent (Layer2.Find("Types/PokerType"));
 			Rank.transform.localScale = new Vector3 (0,0,0);
-			Rank.transform.DOScale (new Vector3(1,1,1), 0.09f);
+			Sequence mySequence = DOTween.Sequence();  
+			mySequence.Append (Rank.transform.DOScale (new Vector3 (1.2f, 1.2f, 1.2f), 0.13f));
+			mySequence.Append (Rank.transform.DOScale (new Vector3 (1, 1, 1), 0.05f));
+			mySequence.Play ();
+			//Rank.transform.DOScale (new Vector3 (1, 1, 1), 0.13f);
 			Rank.transform.localPosition = pos [posindex];
 			Rank.name = ((int)(ranks[i])).ToString();
 			EventTriggerListener.Get(Rank).onClick = onClickRanksHandler;

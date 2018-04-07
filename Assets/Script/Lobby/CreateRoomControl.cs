@@ -122,6 +122,11 @@ public class CreateRoomControl : MonoBehaviour {
 		UpdateHands ();
 	}
 
+	public void OnChangeHands(int index){
+		transform.Find ("MaxHands/Slider").GetComponent<Slider> ().value = index;
+		UpdateHands ();
+	}
+
 	public void CheckIn(){
 		LobbyControl.PlayerButtonEffect ();
 

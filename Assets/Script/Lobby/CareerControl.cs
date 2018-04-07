@@ -159,7 +159,11 @@ public class CareerControl : MonoBehaviour {
 			int LosePro = Convert.ToInt32( Math.Round ((decimal)loseper , 2, MidpointRounding.AwayFromZero) * 100 );
 
 			Common.CareerWins.Add (Win);
-			UpdateRecordData (i, WinPro, LosePro, Win, Lose);
+			if (winlost [i].Win == 0 && winlost [i].Lose == 0) {
+				UpdateRecordData (i, WinPro, LosePro, 0, 0);
+			} else {
+				UpdateRecordData (i, WinPro, LosePro, Win, Lose);
+			}
 		}
 
 		PageView.SetPageIndex (0);
@@ -174,19 +178,25 @@ public class CareerControl : MonoBehaviour {
 		if(pie == 0){
 			Pie7Day.gameObject.SetActive (true);
 			Pie7Day.SetPie (lost, win, LostColor, WinColor);
-			UpdatePieTips (Content.Find("PieScroll7/Win"), Content.Find("PieScroll7/Lost"), wins, losts);
+			if (wins != 0 && losts != 0) {
+				UpdatePieTips (Content.Find ("PieScroll7/Win"), Content.Find ("PieScroll7/Lost"), wins, losts);
+			}
 		}
 
 		if(pie == 1){
 			Pie30Day.gameObject.SetActive (true);
 			Pie30Day.SetPie (lost, win, LostColor, WinColor);
-			UpdatePieTips (Content.Find("PieScroll30/Win"), Content.Find("PieScroll30/Lost"), wins, losts);
+			if (wins != 0 && losts != 0) {
+				UpdatePieTips (Content.Find("PieScroll30/Win"), Content.Find("PieScroll30/Lost"), wins, losts);
+			}
 		}
 
 		if(pie == 2){
 			PieAllDay.gameObject.SetActive (true);
 			PieAllDay.SetPie (lost, win, LostColor, WinColor);
-			UpdatePieTips (Content.Find("PieScrollAll/Win"), Content.Find("PieScrollAll/Lost"), wins, losts);
+			if (wins != 0 && losts != 0) {
+				UpdatePieTips (Content.Find ("PieScrollAll/Win"), Content.Find ("PieScrollAll/Lost"), wins, losts);
+			}
 		}
 	}
 

@@ -107,7 +107,7 @@ public class StateFinish : State {
 			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (60, 60);
 
 			if (string.IsNullOrEmpty(hInfo.Avatar)) {avatar.UseDefAvatar ();}
-			else {StartCoroutine(Common.Load(avatar, Common.FB_avatar));}
+			else {StartCoroutine(Common.Load(avatar, hInfo.Avatar));}
 
 			if (seatid == 0) {
 				PreInfoObj.transform.Find ("BBorder").gameObject.SetActive (true);

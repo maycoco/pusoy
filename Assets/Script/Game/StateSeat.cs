@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class StateSeat : State{
 	private Transform 		Layer = null;
-	private bool			Initialized = false;
-	private List<UICircle> 	Avatars = new List<UICircle>();
 
 	// Use this for initialization
 	void Start () {
@@ -24,11 +22,6 @@ public class StateSeat : State{
 	public override void Enter(){
 		Debug.Log ("==============================state seat===================================");
 
-		if(!Initialized){
-			AdjustUI ();
-			Initialized = true;
-		}
-
 		m_GameController.UpdateRooimInfo ();
 		m_GameController.ShowTableInfo ();
 		m_GameController.ShowGameConsole ();
@@ -42,16 +35,6 @@ public class StateSeat : State{
 		Layer.Find("TipsNoPlayers").gameObject.SetActive (false);
 	}
 		
-	public override void AdjustUI(){
-		for(int i = 0; i < Layer.Find("SeatCom").childCount; i++){
-			UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
-			avatar.transform.SetParent (Layer.Find ("SeatCom/Seat" + i + "/Avatar"));
-			avatar.transform.localPosition = new Vector3 ();
-			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (90, 90);
-			Avatars.Add (avatar);
-		}
-	}
-
 	public void AddSeat(int SeatID){
 		m_GameController.PlayEffect (Effect.BUTTON);
 
@@ -111,32 +94,64 @@ public class StateSeat : State{
 		//HandUI
 		for(int i = 0; i < Layer.Find ("SeatCom").childCount; i++){
 			Transform SeatObj = Layer.Find ("SeatCom").GetChild (i);
-			SeatObj.Find ("AddSeat").gameObject.SetActive (true);
 
-			SeatObj.Find ("Name").gameObject.SetActive (false);
-			SeatObj.Find ("Name").GetComponent<Text> ().text = "";
+			PlayerInfo player = m_GameController.GetPlayerInfoForSeatID (i);
+			if (player != null) {
+				
+				SeatObj.Find ("AddSeat").gameObject.SetActive (false);
 
-			Avatars [i].UseDefAvatar ();
-			SeatObj.Find ("Avatar").gameObject.SetActive (false);
-			SeatObj.Find ("Border").gameObject.SetActive (false);
-		}
+				SeatObj.Find ("Name").GetComponent<Text> ().text = player.Name;
+				SeatObj.Find ("Name").gameObject.SetActive (true);
 
-		foreach(PlayerInfo p in Common.CPlayers){
-			if(p.SeatID != -1){
-				Transform SeatObject = Layer.Find ("SeatCom/Seat" + p.SeatID);
-				SeatObject.Find ("AddSeat").gameObject.SetActive (false);
-				SeatObject.Find ("Name").gameObject.SetActive (true);
-				SeatObject.Find ("Border").gameObject.SetActive (true);
-				SeatObject.Find ("Name").GetComponent<Text> ().text = p.Name;
+				SeatObj.Find ("Border").gameObject.SetActive (true);
+				SeatObj.Find ("Avatar").gameObject.SetActive (true);
 
-				if(!string.IsNullOrEmpty(p.FB_avatar)){ StartCoroutine(Common.Load(Avatars [p.SeatID], p.FB_avatar));  }
-				else{Avatars [p.SeatID].UseDefAvatar ();}
+				SeatObj.Find ("Tips").gameObject.SetActive (false);
 
-				SeatObject.Find ("Avatar").gameObject.SetActive (true);
+				SeatObj.Find ("Amount").GetComponent<Text> ().text = player.Score.ToString();
+				SeatObj.Find ("Amount").gameObject.SetActive (true);
+
+				UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
+				avatar.transform.SetParent (SeatObj.Find("Avatar"));
+				avatar.transform.localPosition = new Vector3 ();
+				avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (90, 90);
+
+				if(!string.IsNullOrEmpty(player.FB_avatar)){ 
+					StartCoroutine(Common.Load(avatar, player.FB_avatar));  }
+				else{
+					avatar.UseDefAvatar ();
+				}
+
+			} else {
+				SeatObj.Find ("Tips").gameObject.SetActive (true);
+
+				SeatObj.Find ("Amount").GetComponent<Text> ().text = "";
+				SeatObj.Find ("Amount").gameObject.SetActive (false);
+
+				SeatObj.Find ("Name").GetComponent<Text> ().text = "";
+				SeatObj.Find ("Name").gameObject.SetActive (false);
+
+				SeatObj.Find ("Border").gameObject.SetActive (false);
+
+				for (int c = SeatObj.Find ("Avatar").childCount - 1; c >= 0; c--) {  
+					Destroy(SeatObj.Find ("Avatar").GetChild(c).gameObject);
+				} 
+
+				SeatObj.Find ("AddSeat").gameObject.SetActive (true);
 			}
 		}
 	}
 
+	public void UpdateSeatScore(){
+		for (int i = 0; i < Layer.Find ("SeatCom").childCount; i++) {
+			Transform SeatObj = Layer.Find ("SeatCom").GetChild (i);
+
+			PlayerInfo player = m_GameController.GetPlayerInfoForSeatID (i);
+			if (player != null) {
+				SeatObj.Find ("Amount").GetComponent<Text> ().text = player.Score.ToString ();
+			}
+		}
+	}
 
 	public void UpdateAutoBanker(){
 		bool ison = Common.CAutoBanker ? true : false;

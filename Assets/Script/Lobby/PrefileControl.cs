@@ -225,7 +225,7 @@ public class PrefileControl : MonoBehaviour
 					c.Name = use.Name;
 					c.Avatar = use.Avatar;
 
-					StartCoroutine(Common.DownAvatar (use.Avatar));
+					//StartCoroutine(Common.DownAvatar (use.Avatar));
 
 					break;
 				}
