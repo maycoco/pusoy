@@ -9,7 +9,7 @@ namespace Pusoy
 {
     using CardRankDictionary = Dictionary<CardRank, List<uint[]>>;
 
-    class Card : IComparable
+    public class Card : IComparable
     {
         public Card(uint card)
         {
@@ -30,6 +30,26 @@ namespace Pusoy
             return Value == card.Value ? (Color > card.Color ? -1 : 1) : (Value > card.Value ? -1 : 1);
         }
     }
+
+    public class CardAIsSmallestComparer : IComparer<Card>
+    {
+        public int Compare(Card x, Card y)
+        {
+            if (x.Value==12 && y.Value!=12)
+            {
+                return 1;
+            }
+            else if (x.Value!=12 && y.Value==12)
+            {
+                return -1;
+            }
+            else
+            {
+                return x.CompareTo(y);
+            }
+        }
+    }
+
     class CardRankFinder
     {
         public const uint Card_A = 12;
@@ -120,6 +140,20 @@ namespace Pusoy
                             if (cards[found - 1].Value != 5 - found && cards[found - 1].Value != 13 - found)
                                 return false;
 
+                            for (int i=1;i<found-1;i++)
+                            {
+                                if (cards[i].Value != cards[i + 1].Value + 1)
+                                {
+                                    return false;
+                                }
+                            }
+
+                            if (found== cardsNum[(int)rank] && cards[found-1].Value==Card_2)
+                            {
+                                // 5 4 3 2 A重新排序
+                                Array.Sort(cards, new CardAIsSmallestComparer());
+                            }
+
                             return true;
                         }
                         if (found > 1 && cards[0].Value - cards[found - 1].Value > found - 1)
@@ -209,7 +243,14 @@ namespace Pusoy
                                 if (cards[i].Value != cards[i + 1].Value+1)
                                     return false;
                             }
-    
+
+
+                            if (found == cardsNum[(int)rank] && cards[found - 1].Value == Card_2)
+                            {
+                                // 5 4 3 2 A重新排序
+                                Array.Sort(cards, new CardAIsSmallestComparer());
+                            }
+
                             return true;
                         }
                         if (found > 1 && cards[0].Value - cards[found - 1].Value > found - 1)
