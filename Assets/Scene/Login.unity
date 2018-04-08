@@ -217,7 +217,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ID2
+  m_Text: A
 --- !u!222 &49041623
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -564,7 +564,6 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -806,7 +805,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ID4
+  m_Text: B
 --- !u!222 &1291995073
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1001,7 +1000,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ID1
+  m_Text: W
 --- !u!222 &1493760652
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1503,7 +1502,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ID3
+  m_Text: P
 --- !u!222 &1829610645
 CanvasRenderer:
   m_ObjectHideFlags: 0

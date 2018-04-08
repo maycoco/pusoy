@@ -45,28 +45,28 @@ public class LoginController : MonoBehaviour {
 	}
 
 	public void Test1(){
-		Common.FB_id 			= "740176969651111";
+		Common.FB_id 			= "W";
 		Common.FB_access_token 	= "EAAY4u0bsgXPsnZBHcIztcgDybpAI1ua2yKoYDoukx8nbRWg0GUxKaLWZCOKUQ2A6x4psVEu4JLvLuRZCYf7EjmmwnZCW41kljPsEVREsnGx2MUefBrZAFsFLop1rp26s59EjaXiaVEiS3av3U3unglcx73Xf6bGuETEAPZBzSrj697m2XrZBPgpfOHlgSAAlJ73oRclYGHPL4ZD";
 		Common.FB_name			= "Test1";
 		ConnectServer ();
 	}
 
 	public void Test2(){
-		Common.FB_id 			= "740176969652222";
+		Common.FB_id 			= "A";
 		Common.FB_access_token 	= "EAAY4utOSxIgBemjfkEu6rKKZCr0bsgXPsnZBHcIztcgDybpAI1uKUQ2A6x4psVEu4JLvLuRZCYf7EjmmwnZCW41kljPsEVREsnGx2MUefBrZAFsFLop1rp26s59EjaXiaVEiS3av3U3unglcx73Xf6bGuETEAPZBzSrj697m2XrZBPgpfOHlgSAAlJ73oRclYGHPL4ZD";
 		Common.FB_name			= "Test2";
 		ConnectServer ();
 	}
 
 	public void Test3(){
-		Common.FB_id 			= "740176969653333";
+		Common.FB_id 			= "P";
 		Common.FB_access_token 	= "EAAY4utOSxIgBemjfkEu6rKKZCr0bsgXPsnZBHcKoYDoukx8nbRWg0GUxKaLWZCOKUQ2A6x4psVEu4JLvLuRZCYf7EjmmwnZCW41kljPsEVREsnGx2MUefBrZAFsFLop1rp26s59EjaXiaVEiS3av3U3unglcx73Xf6bGuETEAPZBzSrj697m2XrZBPgpfOHlgSAAlJ73oRclYGHPL4ZD";
 		Common.FB_name			= "Test3";
 		ConnectServer ();
 	}
 
 	public void Test4(){
-		Common.FB_id 			= "740176969654444";
+		Common.FB_id 			= "B";
 		Common.FB_access_token 	= "EAAY4utOSxIgBemjfkEu6rKKZCr0bsgXPsnZBHcIztcgDybpUxKaLWZCOKUQ2A6x4psVEu4JLvLuRZCYf7EjmmwnZCW41kljPsEVREsnGx2MUefBrZAFsFLop1rp26s59EjaXiaVEiS3av3U3unglcx73Xf6bGuETEAPZBzSrj697m2XrZBPgpfOHlgSAAlJ73oRclYGHPL4ZD";
 		Common.FB_name			= "Test4";
 		ConnectServer ();
