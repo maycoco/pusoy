@@ -9,11 +9,6 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public static class VersionInfo
-{
-    public static readonly string version = "0.0.1";
-    public static readonly int version_code = 0;
-}
 
 public class UpdateVersion : MonoBehaviour {
     public ProgressBar progressbar;
