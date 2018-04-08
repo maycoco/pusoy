@@ -15,9 +15,4 @@ public class Version : MonoBehaviour {
 	void Start () {
         GetComponent<Text>().text = VersionInfo.version;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
