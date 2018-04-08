@@ -15,8 +15,6 @@ using UnityEngine.SceneManagement;
 
 public class LoginController : MonoBehaviour { 
 	public GameObject 				Canvas;
-	private AsyncOperation 			async = null;
-	private int 					progress = 0;
 	public GameObject 				PrefabDialog;
 
 	// Use this for initialization

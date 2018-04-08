@@ -94,8 +94,8 @@ public class GameConsole : MonoBehaviour
 
 		layer.gameObject.SetActive (true);
 
-		string BeginTime	= "2018-2-27 11:11";
-		string EndTime 		= "Now";
+		//string BeginTime	= "2018-2-27 11:11";
+		//string EndTime 		= "Now";
 		string Hands 		= (Common.CPlayed_hands+1) + " / " + Common.CHands;
 
 		string Mvp 			= "";
@@ -134,7 +134,7 @@ public class GameConsole : MonoBehaviour
 			UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
 			avatar.transform.SetParent (pinfo.transform.Find ("Avatar"));
 			avatar.transform.localPosition = new Vector3 ();
-			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (70, 70);
+			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (65, 65);
 
 			if (string.IsNullOrEmpty (slist [i].Avatar)) {avatar.UseDefAvatar ();
 			} else {StartCoroutine(Common.Load(avatar, slist [i].Avatar));}

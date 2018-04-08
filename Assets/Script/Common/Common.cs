@@ -69,7 +69,7 @@ public class Common: MonoBehaviour
 
 	//Room Config
 	public 	static uint[] 	ConfigMinBet 	= new uint[]{5, 20, 100, 500};
-	public 	static uint[] 	ConfigHands 	= new uint[]{20, 50, 100, 200, 500, 0};
+	public 	static uint[] 	ConfigHands 	= new uint[]{20, 50, 100, 200, 500};
 	public 	static uint[] 	ConfigCredit 	= new uint[]{0, 20, 40, 60, 80, 100};
 	public  static List<int> ConfigSeatOrder= new List<int> ();
 

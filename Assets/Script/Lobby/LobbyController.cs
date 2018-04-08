@@ -134,7 +134,7 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void UpdateRoomClose(uint roomid){
-		if(RoomIDs.BinarySearch(roomid) == 0){
+		if(RoomIDs.BinarySearch(roomid) != 0){
 			foreach(RoomInfo room in RoomLists){
 				if(roomid == room.RoomId){
 					RoomLists.Remove (room);

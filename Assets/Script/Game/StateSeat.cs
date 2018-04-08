@@ -116,6 +116,7 @@ public class StateSeat : State{
 				avatar.transform.localPosition = new Vector3 ();
 				avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (90, 90);
 
+				Debug.Log (player.FB_avatar);
 				if(!string.IsNullOrEmpty(player.FB_avatar)){ 
 					StartCoroutine(Common.Load(avatar, player.FB_avatar));  }
 				else{
