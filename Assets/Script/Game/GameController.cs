@@ -633,8 +633,11 @@ public class GameController : MonoBehaviour {
 
 			case Msg.GameState.Combine:
 				Loom.QueueOnMainThread(()=>{
-					Common.ConfigSortTime = (int)data.GameStateNotify.Countdown / 1000;
-					m_StateManage.ChangeState (STATE.STATE_SORTING);
+					m_StateManage.m_StateBetting.RealExit();
+					if(m_SelfSeatID >= 0 && GetPlayerInfoForSeatID(m_SelfSeatID).Bet != 0){
+						Common.ConfigSortTime = (int)data.GameStateNotify.Countdown / 1000;
+						m_StateManage.ChangeState (STATE.STATE_SORTING);
+					}
 				}); 
 				break;
 

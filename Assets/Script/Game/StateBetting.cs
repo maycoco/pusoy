@@ -86,9 +86,11 @@ public class StateBetting : State {
 	public override void Exit (){
 		ClearChipsButton ();
 		ClearCountDown ();
-
-		foreach(PlayerInfo p in Common.CPlayers){p.Bet = 0;}
 		m_StateManage.m_StateSeat.HideAutoBanker ();
+	}
+
+	public void RealExit(){
+		foreach(PlayerInfo p in Common.CPlayers){p.Bet = 0;}
 		Layer.gameObject.SetActive (false);
 	}
 
