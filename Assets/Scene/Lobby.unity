@@ -1984,7 +1984,7 @@ MonoBehaviour:
   Pie30Day: {fileID: 899723219}
   PieAllDay: {fileID: 1138302448}
   PageView: {fileID: 502130820}
-  m_CareerRecord: {fileID: 1453834112821288, guid: 502135f4f1fbfd248b3d048b549b9b3d,
+  m_CareerRecord: {fileID: 1458688084697410, guid: 502135f4f1fbfd248b3d048b549b9b3d,
     type: 2}
   m_CareerPlayer: {fileID: 1191985509500920, guid: 8efb1b4ac6599ef4fa8b5f5356514da0,
     type: 2}
@@ -16718,7 +16718,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Connecting...
+  m_Text: Reconnecting
 --- !u!222 &1340806073
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17165,7 +17165,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pusoy
+  m_Text: Tong it
 --- !u!222 &1373870123
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23218,7 +23218,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pusoy
+  m_Text: Pusoy2
 --- !u!222 &1743185062
 CanvasRenderer:
   m_ObjectHideFlags: 0
