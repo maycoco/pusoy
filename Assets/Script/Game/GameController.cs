@@ -678,6 +678,7 @@ public class GameController : MonoBehaviour {
 					PlayerInfo p = new PlayerInfo ();
 					p.Uid 		= data.JoinRoomNotify.Uid;
 					p.Name 		= data.JoinRoomNotify.Name;
+					p.FB_avatar	= data.JoinRoomNotify.Avatar;
 					p.SeatID 	= -1;
 					Common.CPlayers.Add (p);
 				} 
