@@ -41,7 +41,7 @@ public class LoginController : MonoBehaviour {
 	}
 
 	public void GotoLobby(){
-		SceneManager.LoadScene (1);
+		SceneManager.LoadScene ("Scene/Lobby");
 	}
 
 	//===================================connect=================================

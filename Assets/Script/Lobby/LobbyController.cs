@@ -96,7 +96,7 @@ public class LobbyController : MonoBehaviour {
 	}
 		
 	public void PlayGame(){
-		SceneManager.LoadScene (2);
+		SceneManager.LoadScene ("Scene/Game");
 	}
 
 	//connecting

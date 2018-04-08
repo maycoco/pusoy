@@ -358,7 +358,7 @@ public class GameController : MonoBehaviour {
 		Common.CRoom_number = "";
 		Common.CPlayers.Clear ();
 		Common.CPokers.Clear ();
-		SceneManager.LoadScene (1);
+		SceneManager.LoadScene ("Scene/Lobby");
 	}
 
 	public void UpdateRooimInfo(){
