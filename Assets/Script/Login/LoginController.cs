@@ -95,7 +95,7 @@ public class LoginController : MonoBehaviour {
 	}
 
 	public void DisConnect(){
-		Debug.Log ("DisConnect");
+		Common.IsOnline = false;
 	}
 
 	public void Data(Protocol data){
@@ -111,7 +111,8 @@ public class LoginController : MonoBehaviour {
 				Common.FB_name = data.LoginRsp.Name;
 				Common.CRoom_number = data.LoginRsp.RoomNumber;
 				Common.FB_avatar = data.LoginRsp.Avatar;
-				Loom.QueueOnMainThread (() => {  
+				Loom.QueueOnMainThread (() => {
+					Common.IsOnline = true;
 					GotoLobby ();
 				}); 
 			} else {

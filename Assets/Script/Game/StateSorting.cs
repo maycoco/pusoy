@@ -655,7 +655,6 @@ public class StateSorting : State {
 		}
 
 		UpdateControlButton ();
-		//UpdateRanks ();
 		UpdatePokerTips ();
 	}
 
@@ -672,7 +671,6 @@ public class StateSorting : State {
 		}
 
 		UpdateControlButton ();
-		//UpdateRanks ();
 		UpdatePokerTips ();
 	}
 
@@ -879,21 +877,12 @@ public class StateSorting : State {
 	}
 
 	public Msg.CardRank GetRanksType(List<int> pokers){
-
-		Dictionary<Msg.CardRank, List<uint[]>> result = GetRanks (pokers);
-	
-		if(result.Count <= 0){
-			return  Msg.CardRank.HighCard;
+		List<uint> t = new List<uint> ();
+		foreach(int p in pokers){
+			t.Add ((uint)p);
 		}
-
-		List<Msg.CardRank> ranks = new List<Msg.CardRank> ();
-		foreach (KeyValuePair<Msg.CardRank, List<uint[]>> pair in result){
-			ranks.Add (pair.Key);
-		}
-
-		ranks.Sort ();
-
-		return ranks[ranks.Count - 1];
+			
+		return Pusoy.CardRankFinder.GetCardRank (t.ToArray());
 	}
 
 	public void UpdatePokerTips(){
@@ -938,13 +927,33 @@ public class StateSorting : State {
 		bool baopai = false;
 
 		if (UpperPokers.Count > 0 && MiddlePokers.Count > 0) {
-			if((int)GetRanksType (UpperPokers) > (int)GetRanksType (MiddlePokers)){
+			List<uint> t = new List<uint> ();
+			foreach(int p in UpperPokers){
+				t.Add ((uint)p);
+			}
+
+			List<uint> t1 = new List<uint> ();
+			foreach(int p in MiddlePokers){
+				t1.Add ((uint)p);
+			}
+
+			if(Pusoy.CardRankFinder.Compare (t.ToArray(), t1.ToArray()) > 0){
 				baopai = true;
 			}
 		}
 
 		if (MiddlePokers.Count > 0 && UnderPokers.Count > 0) {
-			if((int)GetRanksType (MiddlePokers) > (int)GetRanksType (UnderPokers)){
+			List<uint> t = new List<uint> ();
+			foreach(int p in MiddlePokers){
+				t.Add ((uint)p);
+			}
+
+			List<uint> t1 = new List<uint> ();
+			foreach(int p in UnderPokers){
+				t1.Add ((uint)p);
+			}
+
+			if(Pusoy.CardRankFinder.Compare (t.ToArray(), t1.ToArray()) > 0){
 				baopai = true;
 			}
 		}

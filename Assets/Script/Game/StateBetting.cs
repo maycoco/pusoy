@@ -137,6 +137,7 @@ public class StateBetting : State {
 			CanBet = false;
 			ClearCountDown ();
 			ClearChipsButton ();
+			BetConfim ();
 		}
 		BettingTime--;
 	}

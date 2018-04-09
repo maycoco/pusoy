@@ -37,6 +37,10 @@ public class Common: MonoBehaviour
 {
 	private static volatile Common _instance;
 	private static object _lock = new object();
+	//online state
+	public 	static bool		IsOnline		= false;
+	public  static int 		MaxTrying 		= 2;
+	public 	static int      Trying			= 0;
 
 	// Data
 	public 	static string 	FB_id			=	"";

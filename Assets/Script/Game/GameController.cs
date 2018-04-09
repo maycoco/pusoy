@@ -481,7 +481,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void DisConnect(){
-		Debug.Log ("DisConnect");
+		Common.IsOnline = false;
+		ExitGame ();
 	}
 
 	public void Data(Protocol data){

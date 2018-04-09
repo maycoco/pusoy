@@ -55,7 +55,7 @@ public class Loom : MonoBehaviour
 
 	public static void QueueOnMainThread(Action action)  
 	{
-		Debug.Log ("Loom QueueOnMainThread()");
+		//Debug.Log ("Loom QueueOnMainThread()");
 		QueueOnMainThread( action, 0f);  
 	}  
 	public static void QueueOnMainThread(Action action, float time)  

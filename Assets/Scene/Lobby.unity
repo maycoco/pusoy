@@ -13967,6 +13967,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9246211361b7a4541a6897a76b7bb524, type: 3}
   - {fileID: 8300000, guid: be5eead9b23e1a243a112410382e96f6, type: 3}
   - {fileID: 8300000, guid: bb49b84492bae764aa6112c4ec0c8ac3, type: 3}
+  Conneting: {fileID: 1937848502}
   Canvas: {fileID: 1920627644}
 --- !u!1 &1077502819
 GameObject:
@@ -16718,7 +16719,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Reconnecting
+  m_Text: Reconnecting...
 --- !u!222 &1340806073
 CanvasRenderer:
   m_ObjectHideFlags: 0

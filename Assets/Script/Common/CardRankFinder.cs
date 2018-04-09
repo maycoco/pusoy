@@ -113,7 +113,7 @@ namespace Pusoy
             return 0;
         }
 
-        private static CardRank GetCardRank(uint[] cards)
+		public static CardRank GetCardRank(uint[] cards)
         {
             Card[] sortCards = new Card[cards.Length];
             for (int i = 0; i < cards.Length; i++)

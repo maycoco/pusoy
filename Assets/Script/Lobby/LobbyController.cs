@@ -43,13 +43,14 @@ public class LobbyController : MonoBehaviour {
 	public AudioSource 				ButtonEffects;
 	public List<AudioClip> 			BGMs;
 
-
+	public GameObject 				Conneting;
 	public GameObject 				Canvas;
 	private List<RoomInfo>			RoomLists= new List<RoomInfo>();
 	private List<uint>				RoomIDs = new List<uint>();
 	
 	// Use this for initialization
 	void Start () {
+		Common.Trying = 0;
 		CheckConnection ();
 		RoomListServer ();
 	}
@@ -62,10 +63,7 @@ public class LobbyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	}
-
-	public void AdjustUI(){
-	}
-
+		
 	public void CreateRoom(){
 		PlayerButtonEffect ();
 		CreateRoomControl.Enter();
@@ -99,12 +97,17 @@ public class LobbyController : MonoBehaviour {
 		SceneManager.LoadScene ("Scene/Game");
 	}
 
+	public void GoLogin(){
+		SceneManager.LoadScene ("Scene/Login");
+	}
+
 	//connecting
 	public void CheckConnection(){
-		Canvas.transform.Find ("Connecting").gameObject.SetActive (false);
-		if(!string.IsNullOrEmpty(Common.CRoom_number)){
-			Canvas.transform.Find ("Connecting").gameObject.SetActive (true);
-			JoinRoomServer (Common.CRoom_number);
+		Conneting.SetActive (false);
+			
+		if(!Common.IsOnline){
+			Conneting.SetActive (true);
+			protonet.ConnectServer ();
 		}
 	}
 
@@ -218,14 +221,44 @@ public class LobbyController : MonoBehaviour {
 		protonet.SetDataCall(Data);
 	}
 
+	public void LoginServer(){
+		Protocol msg 			= new Protocol();
+		msg.Msgid 				= MessageID.LoginReq;
+		msg.LoginReq = new LoginReq();
+		msg.LoginReq.Type		= LoginType.Facebook;
+		msg.LoginReq.Fb 		= new LoginFBReq();
+		msg.LoginReq.Fb.FbId 	= Common.FB_id;
+		msg.LoginReq.Fb.Token 	= Common.FB_access_token;
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
 	public void Connected(){
+		Loom.QueueOnMainThread(()=>{  
+			Common.Trying = 0;
+			LoginServer ();
+		}); 
 	}
 
 	public void FailedConnect(){
+		Common.Trying++;
+		if (Common.Trying > Common.MaxTrying) {
+			Loom.QueueOnMainThread(()=>{  
+				GoLogin();
+			}); 
+
+		} else {
+			protonet.ConnectServer ();
+		}
 	}
 
 	public void DisConnect(){
-		Debug.Log ("DisConnect");
+		Common.IsOnline = false;
+		CheckConnection ();
 	}
 
 	public void Data(Protocol data){
@@ -236,6 +269,29 @@ public class LobbyController : MonoBehaviour {
 		if(data == null){return;}
 
 		switch (data.Msgid) {
+
+		case MessageID.LoginRsp:
+			if (data.LoginRsp.Ret == 0) {
+				Common.Uid = data.LoginRsp.Uid;
+				Common.FB_name = data.LoginRsp.Name;
+				Common.CRoom_number = data.LoginRsp.RoomNumber;
+				Common.FB_avatar = data.LoginRsp.Avatar;
+				Common.IsOnline = true;
+
+				Loom.QueueOnMainThread (() => {
+					if(!string.IsNullOrEmpty(Common.CRoom_number)){
+						JoinRoomServer (Common.CRoom_number);
+					}
+					else{
+						Conneting.SetActive (false);
+					}
+				}); 
+			} else {
+				Loom.QueueOnMainThread (() => {  
+					Common.ErrorDialog (PrefabDialog, Canvas, Common.ErrorLogin);
+				}); 
+			}
+			break;
 
 		case MessageID.ListRoomsRsp:
 			if(data.ListRoomsRsp.Ret == 0){
