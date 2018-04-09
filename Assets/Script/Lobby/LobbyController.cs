@@ -392,7 +392,6 @@ public class LobbyController : MonoBehaviour {
 		case MessageID.CareerWinLoseDataRsp:
 			if (data.CareerWinLoseDataRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
-					Debug.Log(data.CareerWinLoseDataRsp.Data.ToString());
 					CareerControl.UpdateRecordPie( data.CareerWinLoseDataRsp.Data);
 				}); 
 			}
