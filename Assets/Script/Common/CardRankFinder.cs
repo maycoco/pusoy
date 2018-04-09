@@ -35,11 +35,11 @@ namespace Pusoy
     {
         public int Compare(Card x, Card y)
         {
-            if (x.Value==12 && y.Value!=12)
+            if (x.Value == 12 && y.Value != 12)
             {
                 return 1;
             }
-            else if (x.Value!=12 && y.Value==12)
+            else if (x.Value != 12 && y.Value == 12)
             {
                 return -1;
             }
@@ -75,6 +75,63 @@ namespace Pusoy
             }
 
             return ret;
+        }
+
+        public static int Compare(uint[] cards1, uint[] cards2)
+        {
+            if (cards1.Length > 5 || cards2.Length > 5)
+            {
+                throw new Exception("Invalid Cards.");
+            }
+
+            CardRank rank1 = GetCardRank(cards1);
+            CardRank rank2 = GetCardRank(cards2);
+            if (rank1 > rank2)
+            {
+                return 1;
+            }
+            else if (rank1 < rank2)
+            {
+                return -1;
+            }
+
+            int n = Math.Min(cards1.Length, cards2.Length);
+            for (int i = 0; i < n; i++)
+            {
+                uint v1 = cards1[i] % 13;
+                uint v2 = cards2[i] % 13;
+                if (v1 < v2)
+                {
+                    return -1;
+                }
+                else if (v1 > v2)
+                {
+                    return 1;
+                }
+            }
+
+            return 0;
+        }
+
+        private static CardRank GetCardRank(uint[] cards)
+        {
+            Card[] sortCards = new Card[cards.Length];
+            for (int i = 0; i < cards.Length; i++)
+            {
+                sortCards[i] = new Card(cards[i]);
+            }
+
+            Array.Sort(sortCards);
+
+            for (CardRank rank = CardRank.StraightFlush; rank > CardRank.HighCard; rank--)
+            {
+                if (match(rank, ref sortCards, cards.Length))
+                {
+                    return rank;
+                }
+            }
+
+            return CardRank.HighCard;
         }
 
         private static void find(CardRank rank, ref Card[] cards, ref CardRankDictionary result)
@@ -140,7 +197,7 @@ namespace Pusoy
                             if (cards[found - 1].Value != 5 - found && cards[found - 1].Value != 13 - found)
                                 return false;
 
-                            for (int i=1;i<found-1;i++)
+                            for (int i = 1; i < found - 1; i++)
                             {
                                 if (cards[i].Value != cards[i + 1].Value + 1)
                                 {
@@ -148,7 +205,7 @@ namespace Pusoy
                                 }
                             }
 
-                            if (found== cardsNum[(int)rank] && cards[found-1].Value==Card_2)
+                            if (found == cardsNum[(int)rank] && cards[found - 1].Value == Card_2)
                             {
                                 // 5 4 3 2 A重新排序
                                 Array.Sort(cards, new CardAIsSmallestComparer());
@@ -219,7 +276,7 @@ namespace Pusoy
                                 return false;
                         }
                         if (found == cardsNum[(int)CardRank.Flush] && match(CardRank.StraightFlush, ref cards, found)) return false;
-                        
+
 
                         return true;
                     }
@@ -240,7 +297,7 @@ namespace Pusoy
 
                             for (int i = 1; i < found - 1; i++)
                             {
-                                if (cards[i].Value != cards[i + 1].Value+1)
+                                if (cards[i].Value != cards[i + 1].Value + 1)
                                     return false;
                             }
 
@@ -256,7 +313,7 @@ namespace Pusoy
                         if (found > 1 && cards[0].Value - cards[found - 1].Value > found - 1)
                             return false;
 
-                        
+
                         return true;
                     }
 
@@ -264,7 +321,7 @@ namespace Pusoy
                     {
                         int same = 0;
                         int diff = 0;
-                        for(int i = 0; i < found - 1; i++)
+                        for (int i = 0; i < found - 1; i++)
                         {
                             if (cards[i].Value != cards[i + 1].Value)
                             {
@@ -301,7 +358,7 @@ namespace Pusoy
                                 if (same == 1)
                                 {
                                     sametime++;
-                                    if (sametime == 2 && !match(CardRank.FourOfAKind,ref cards,found)) return true;
+                                    if (sametime == 2 && !match(CardRank.FourOfAKind, ref cards, found)) return true;
                                 }
                             }
                         }
