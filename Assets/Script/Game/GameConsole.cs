@@ -12,11 +12,14 @@ using DG.Tweening;
 
 public class GameConsole : MonoBehaviour
 {
-	private bool			MenuOpen 	= false;
-	private uint 			RoundCount	= 0;
-	public 	GameController 	m_GameController;
-	public  GameObject 		m_ConsoleMenu;
-	public  GameObject		m_ConsoleMenu_Mask;
+	private bool				MenuOpen 	= false;
+	private uint 				RoundCount	= 0;
+	private Sequence		 	m_Sequence;
+
+	public 	GameController 		m_GameController;
+	public  GameObject 			m_ConsoleMenu;
+	public  GameObject			m_ConsoleMenu_Mask;
+	public  List<GameObject> 	m_Pokers;
 
 	void Start (){
 	}
@@ -394,6 +397,30 @@ public class GameConsole : MonoBehaviour
 				Layer.Find ("Right").gameObject.SetActive (false);
 			}
 		} 
+	}
+
+	public void ShowWaitingAnime(){
+		transform.Find ("WaitingSort").gameObject.SetActive (true);
+		m_Sequence = DOTween.Sequence ();
+		m_Sequence.Append (m_Pokers[0].transform.DOLocalMoveY (20, 0.2f));
+		m_Sequence.Append (m_Pokers[1].transform.DOLocalMoveY (20, 0.2f));
+		m_Sequence.Append (m_Pokers[2].transform.DOLocalMoveY (20, 0.2f));
+		m_Sequence.Append (m_Pokers[3].transform.DOLocalMoveY (20, 0.2f));
+		m_Sequence.Append (m_Pokers[4].transform.DOLocalMoveY (20, 0.2f));
+		m_Sequence.Append (m_Pokers[0].transform.DOLocalMoveY (0, 0.2f));
+		m_Sequence.Append (m_Pokers[1].transform.DOLocalMoveY (0, 0.2f));
+		m_Sequence.Append (m_Pokers[2].transform.DOLocalMoveY (0, 0.2f));
+		m_Sequence.Append (m_Pokers[3].transform.DOLocalMoveY (0, 0.2f));
+		m_Sequence.Append (m_Pokers[4].transform.DOLocalMoveY (0, 0.2f));
+		m_Sequence.Play ().SetLoops (-1);
+	}
+
+	public void HideWaitAnime(){
+		m_Sequence.Kill ();
+		foreach(GameObject pok in m_Pokers){
+			pok.transform.localPosition = new Vector3 (pok.transform.localPosition.x, 0, 0);
+		}
+		transform.Find ("WaitingSort").gameObject.SetActive (false);
 	}
 }
 

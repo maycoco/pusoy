@@ -288,12 +288,12 @@ public class StateSorting : State {
 		for (int i = 0; i < HandPokers.Count; i++) {
 			int PokerID = HandPokers [i];
 			if(Pokers.ContainsKey (PokerID)){
-				//Pokers[PokerID].AnimeMove(m_GameController.DefaultHandPisitions [i], Time);
 				Pokers[PokerID].ReseatSelected ();
 				Pokers[PokerID].Belong = "Hand";
 				Pokers[PokerID].SetBelongPos (m_GameController.DefaultHandPisitions [i]);
 				Pokers[PokerID].SiblingIndex = i;
 				Pokers[PokerID].transform.SetSiblingIndex(i);
+				//Pokers[PokerID].AnimeMove(m_GameController.DefaultHandPisitions [i], Time);
 				Pokers[PokerID].transform.localPosition = m_GameController.DefaultHandPisitions [i];
 				Pokers[PokerID].transform.localScale = new Vector3 (1, 1, 1);
 			}
@@ -396,11 +396,12 @@ public class StateSorting : State {
 		switch (tag) {
 		case "Other":
 			for (int i = 0; i < pokers.Length; i++) {
-				Pokers[pokers[i]].transform.SetSiblingIndex (Pokers [pokers[i]].SiblingIndex);
-				Pokers[pokers[i]].ResetBelongPos();
-				Pokers[pokers[i]].RiwerSelected ();
+				Pokers [pokers [i]].transform.SetSiblingIndex (Pokers [pokers [i]].SiblingIndex);
+				Pokers [pokers [i]].ResetBelongPos ();
+				Pokers [pokers [i]].RiwerSelected ();
 			}
 			break;
+
 
 		case "Upper":
 			if (UpperPokers.Count >= 3) {
@@ -451,9 +452,10 @@ public class StateSorting : State {
 			if(HandPokers.Count + pokers.Length <= 13){
 				DeletePokerFromTag (belong, pokers);
 				AddPokerToTag (tag, pokers);
-				UpdateHandPokers (0.2f);
+				UpdateHandPokers (0.1f);
 				UpdateBelongPokets (belong);
 				UpdateControlButton ();
+				UpdatePokerTips ();
 			}
 			break;
 		}
@@ -476,7 +478,7 @@ public class StateSorting : State {
 			break;
 
 		case "Hand":
-			UpdateHandPokers (0.2f);
+			UpdateHandPokers (0.1f);
 			break;
 		}
 	}
@@ -710,17 +712,14 @@ public class StateSorting : State {
 		Msg.CardGroup middle_pokers = new Msg.CardGroup();
 		Msg.CardGroup under_pokers = new Msg.CardGroup();
 
-		//upper_pokers.Cards = new uint[UpperPokers.Count];
 		for(int i = 0; i < UpperPokers.Count; i++){
 			upper_pokers.Cards.Add((uint)UpperPokers[i]);
 		}
-
-		//middle_pokers.Cards = new uint[MiddlePokers.Count];
+			
 		for(int i = 0; i < MiddlePokers.Count; i++){
 			middle_pokers.Cards.Add((uint)MiddlePokers[i]);
 		}
-
-		//under_pokers.Cards = new uint[UnderPokers.Count];
+			
 		for(int i = 0; i < UnderPokers.Count; i++){
 			under_pokers.Cards.Add((uint)UnderPokers[i]);
 		}
@@ -794,6 +793,7 @@ public class StateSorting : State {
 		RanksIndexs.Clear ();
 		RankResult.Clear ();
 		RankResult = GetRanks (HandPokers);
+
 		if (RankResult.Count <= 0) {
 			Layer2.Find ("Types/Line").gameObject.SetActive (false);
 			return;
@@ -836,6 +836,7 @@ public class StateSorting : State {
 	}
 
 	private List<int> RanksIndexs = new List<int>();
+
 	public void onClickRanksHandler(GameObject obj){
 		if(AlreadyComfim){return;}
 
@@ -859,6 +860,7 @@ public class StateSorting : State {
 				if(RanksIndexs.Count > 0){
 					SelectPokers (pair.Value [RanksIndexs.Count - 1]);
 				}
+				return;
 			}
 		}
 	}
@@ -881,7 +883,6 @@ public class StateSorting : State {
 		foreach(int p in pokers){
 			t.Add ((uint)p);
 		}
-			
 		return Pusoy.CardRankFinder.GetCardRank (t.ToArray());
 	}
 

@@ -123,12 +123,12 @@ public class Poker : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDra
 		else {
 			tag = "Other";
 		}
-
-
+			
 		if (IsSelected) {
 			StateSorting.EndDragSelects ();
 			StateSorting.DragMovePokers (Belong, tag, new int[]{PokerID});
 		} else {
+			if(tag == "Other"){tag = "Hand";}
 			StateSorting.MovePokers (Belong, tag, new int[]{PokerID});
 		}
 	}

@@ -114,25 +114,25 @@ namespace Pusoy
         }
 
 		public static CardRank GetCardRank(uint[] cards)
-        {
-            Card[] sortCards = new Card[cards.Length];
-            for (int i = 0; i < cards.Length; i++)
-            {
-                sortCards[i] = new Card(cards[i]);
-            }
+		{
+			Card[] sortCards = new Card[cards.Length];
+			for (int i = 0; i < cards.Length; i++)
+			{
+				sortCards[i] = new Card(cards[i]);
+			}
 
-            Array.Sort(sortCards);
+			Array.Sort(sortCards);
 
-            for (CardRank rank = CardRank.StraightFlush; rank > CardRank.HighCard; rank--)
-            {
-                if (match(rank, ref sortCards, cards.Length))
-                {
-                    return rank;
-                }
-            }
+			CardRankDictionary ret = new CardRankDictionary();
+			for (CardRank rank = CardRank.StraightFlush; rank > CardRank.HighCard; rank--)
+			{
+				find(rank, ref sortCards, ref ret);
+				if (ret.Count > 0)
+					return rank;
+			}
 
-            return CardRank.HighCard;
-        }
+			return CardRank.HighCard;
+		}
 
         private static void find(CardRank rank, ref Card[] cards, ref CardRankDictionary result)
         {

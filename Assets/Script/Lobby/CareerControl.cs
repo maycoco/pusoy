@@ -182,7 +182,7 @@ public class CareerControl : MonoBehaviour {
 	}
 
 	public void UpdateRecordData(int pie, int win, int lost, uint wins, uint losts){
-		Color LostColor = new Color (0.0f / 255, 0.0f / 255, 0.0f / 255, 0.2f);
+		Color LostColor = new Color (8.0f / 255, 42.0f / 255, 50.0f / 255);
 		Color WinColor = new Color (27.0f / 255, 116.0f / 255, 126.0f / 255);
 		Transform Content = transform.Find ("Pies/Scroll View/Viewport/Content");
 
@@ -212,50 +212,52 @@ public class CareerControl : MonoBehaviour {
 	}
 
 	public void UpdatePieTips(Transform winobj, Transform lostobj, uint win, uint lost){
-		string winstr = win.ToString();
-		string loststr = lost.ToString();
-
-		float left = 0;
-
-		for (int c = loststr.Length - 1; c >= 0; c--) {  
-			GameObject t = new GameObject ();
-			t.AddComponent<Image> ();
-			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/lost" + loststr[c] , typeof(Sprite)) as Sprite;
-			t.transform.SetParent(lostobj);
-			t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
-			t.transform.localPosition = new Vector3 (left,0,0);
-			t.transform.localScale = new Vector3 (1,1,1);
-			left -= 20;
-		}
-
-		GameObject licon = new GameObject ();
-		licon.AddComponent<Image> ();
-		licon.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/losticon", typeof(Sprite)) as Sprite;
-		licon.transform.SetParent(lostobj);
-		licon.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
-		licon.transform.localPosition = new Vector3 (left,0,0);
-		licon.transform.localScale = new Vector3 (1,1,1);
-
-		left = 0;
-		GameObject wicon = new GameObject ();
-		wicon.AddComponent<Image> ();
-		wicon.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/winicon", typeof(Sprite)) as Sprite;
-		wicon.transform.SetParent(winobj);
-		wicon.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
-		wicon.transform.localPosition = new Vector3 (left,0,0);
-		wicon.transform.localScale = new Vector3 (1,1,1);
-		left += 20;
-
-		for (int c = 0;  c < winstr.Length; c++) {  
-			GameObject t = new GameObject ();
-			t.AddComponent<Image> ();
-			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/win"+ winstr[c] , typeof(Sprite)) as Sprite;
-			t.transform.SetParent(winobj);
-			t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
-			t.transform.localPosition = new Vector3 (left,0,0);
-			t.transform.localScale = new Vector3 (1,1,1);
-			left += 20;
-		}
+		winobj.GetComponent<Text> ().text = "Win +" + win.ToString ();
+		lostobj.GetComponent<Text> ().text = "Lose -" + lost.ToString ();
+//		string winstr = win.ToString();
+//		string loststr = lost.ToString();
+//
+//		float left = 0;
+//
+//		for (int c = loststr.Length - 1; c >= 0; c--) {  
+//			GameObject t = new GameObject ();
+//			t.AddComponent<Image> ();
+//			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/lost" + loststr[c] , typeof(Sprite)) as Sprite;
+//			t.transform.SetParent(lostobj);
+//			t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
+//			t.transform.localPosition = new Vector3 (left,0,0);
+//			t.transform.localScale = new Vector3 (1,1,1);
+//			left -= 20;
+//		}
+//
+//		GameObject licon = new GameObject ();
+//		licon.AddComponent<Image> ();
+//		licon.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/losticon", typeof(Sprite)) as Sprite;
+//		licon.transform.SetParent(lostobj);
+//		licon.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
+//		licon.transform.localPosition = new Vector3 (left,0,0);
+//		licon.transform.localScale = new Vector3 (1,1,1);
+//
+//		left = 0;
+//		GameObject wicon = new GameObject ();
+//		wicon.AddComponent<Image> ();
+//		wicon.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/winicon", typeof(Sprite)) as Sprite;
+//		wicon.transform.SetParent(winobj);
+//		wicon.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
+//		wicon.transform.localPosition = new Vector3 (left,0,0);
+//		wicon.transform.localScale = new Vector3 (1,1,1);
+//		left += 20;
+//
+//		for (int c = 0;  c < winstr.Length; c++) {  
+//			GameObject t = new GameObject ();
+//			t.AddComponent<Image> ();
+//			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/win"+ winstr[c] , typeof(Sprite)) as Sprite;
+//			t.transform.SetParent(winobj);
+//			t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
+//			t.transform.localPosition = new Vector3 (left,0,0);
+//			t.transform.localScale = new Vector3 (1,1,1);
+//			left += 20;
+//		}
 	}
 
 	public DateTime ConvertStringToDateTime(string timeStamp)

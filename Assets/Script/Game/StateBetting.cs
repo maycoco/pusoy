@@ -91,6 +91,7 @@ public class StateBetting : State {
 
 	public void RealExit(){
 		foreach(PlayerInfo p in Common.CPlayers){p.Bet = 0;}
+		ClearAllChips ();
 		Layer.gameObject.SetActive (false);
 	}
 

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class CreateRoomControl : MonoBehaviour {
 	public LobbyController	LobbyControl;
+	public GameObject 		Commingsoon;
 
 	private List<uint>	MinBetArray 		= new List<uint>();
 	private List<uint>	HandsArray 			= new List<uint>();
@@ -154,5 +155,13 @@ public class CreateRoomControl : MonoBehaviour {
 
 			LobbyControl.CreatRoomServer (roomname, min_bet, max_bet, hands, creditpoints, is_share);
 		}
+	}
+
+	public void OpenCommingSoon(){
+		Commingsoon.SetActive (true);
+	}
+
+	public void CloseCommingSoon(){
+		Commingsoon.SetActive (false);
 	}
 }
