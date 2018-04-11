@@ -64,6 +64,8 @@ public class GameController : MonoBehaviour {
 	public UICircle			   							m_PrefabAvatar;
 	public Poker			   							m_PrefabPoker;
 
+	public GameObject 									m_LastDialog;
+									
 	//effect
 	public GameObject									m_PrefabEffectSL;
 	public GameObject 									m_PrefabEffectDeal;
@@ -91,6 +93,8 @@ public class GameController : MonoBehaviour {
 
 	//PlayerListMode
 	[HideInInspector] public int 						m_PlayerListMode = 0;
+
+	[HideInInspector] public bool m_FirstSetBanker 		= false;
 
 	// Use this for initialization
 	void Start () {
@@ -519,8 +523,9 @@ public class GameController : MonoBehaviour {
 				Loom.QueueOnMainThread(()=>{
 					if(m_TatgetSeatID == 0){
 						Common.CAutoBanker = data.SitDownRsp.Autobanker;
-						m_StateManage.m_StateSeat.ShowLetPlay();
+						m_FirstSetBanker = true;
 					}
+
 					SetSeatID (Common.Uid, m_TatgetSeatID);
 					UpdateOrderList ();
 
@@ -534,7 +539,7 @@ public class GameController : MonoBehaviour {
 		case MessageID.StandUpRsp:
 			if (data.StandUpRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
-					m_StateManage.m_StateSeat.HideLetPlay();
+					m_FirstSetBanker = false;
 					m_StateManage.m_StateBetting.CancelBet();
 					SetSeatID (Common.Uid, -1);
 					UpdateOrderList ();
@@ -668,12 +673,25 @@ public class GameController : MonoBehaviour {
 					m_StateManage.ChangeState (STATE.STATE_FINISH);
 				}); 
 				break;
+
+			case Msg.GameState.CloseRoom:
+				Loom.QueueOnMainThread(()=>{
+					m_LastDialog.SetActive(true);
+				}); 
+				break;
 			}
 			break;
 
 		case MessageID.SitDownNotify:
 			if(data.SitDownNotify.Type == Msg.SitDownType.Sit){
 				Loom.QueueOnMainThread(()=>{
+
+					foreach(PlayerInfo p in Common.CPlayers){
+						if(p.Uid == data.SitDownNotify.Uid){
+							p.Score = data.SitDownNotify.Score;
+						}
+					}
+
 					SetSeatID (data.SitDownNotify.Uid, (int)data.SitDownNotify.SeatId);
 					UpdateOrderList ();
 				}); 
@@ -690,14 +708,12 @@ public class GameController : MonoBehaviour {
 
 		case MessageID.JoinRoomNotify:
 			Loom.QueueOnMainThread(()=>{
-				if (GetSeatIDForPlayerID (data.JoinRoomNotify.Uid) == 999) {
-					PlayerInfo p = new PlayerInfo ();
-					p.Uid 		= data.JoinRoomNotify.Uid;
-					p.Name 		= data.JoinRoomNotify.Name;
-					p.FB_avatar	= data.JoinRoomNotify.Avatar;
-					p.SeatID 	= -1;
-					Common.CPlayers.Add (p);
-				} 
+				PlayerInfo p = new PlayerInfo ();
+				p.Uid 		= data.JoinRoomNotify.Uid;
+				p.Name 		= data.JoinRoomNotify.Name;
+				p.FB_avatar	= data.JoinRoomNotify.Avatar;
+				p.SeatID 	= -1;
+				Common.CPlayers.Add (p);
 			}); 
 			break;
 

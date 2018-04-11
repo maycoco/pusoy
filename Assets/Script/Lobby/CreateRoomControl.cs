@@ -140,7 +140,6 @@ public class CreateRoomControl : MonoBehaviour {
 		uint min_bet 		= MinBetArray [CurMinBet];
 		uint max_bet 		= min_bet * 20;
 		uint hands 			= HandsArray [CurHands];
-		//uint creditpoints 	= CreditPointsArray [CurCreditPoints];
 		uint creditpoints = Common.ConfigCredit[CurCreditPoints];
 		bool is_share 		= this.transform.Find ("RoomRate/Shared").GetComponent<Toggle> ().isOn;
 

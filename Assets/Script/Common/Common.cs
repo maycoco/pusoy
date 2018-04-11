@@ -62,8 +62,8 @@ public class Common: MonoBehaviour
 	public static uint 		CPlayed_hands	= 	0;
 	public static uint 		CCredit_points	= 	0;
 	public static bool 		CIs_share		= 	true;
-	public static bool		CAutoBanker 	= true;
-	public static Msg.GameState CState			= Msg.GameState.Ready;
+	public static bool		CAutoBanker 	= 	true;
+	public static Msg.GameState CState		= 	Msg.GameState.Ready;
 	public static List<PlayerInfo> CPlayers	= new List<PlayerInfo>();
 	public static List<int>	CPokers			= new List<int>();
 	public static List<int>	CSeats			= new List<int>();

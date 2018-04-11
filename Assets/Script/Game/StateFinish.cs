@@ -24,8 +24,7 @@ public class StateFinish : State {
 		CountDowm = Common.ConfigFinishTime;
 		AdjustUI ();
 
-		Common.CPlayed_hands++;
-		if ((Common.CPlayed_hands) < Common.CHands) {
+		if ((Common.CPlayed_hands + 1) < Common.CHands) {
 			BeginCountDown ();
 		} else {
 			Layer.Find ("OK/CountDown").GetComponent<Text> ().text = "OK";
@@ -33,6 +32,7 @@ public class StateFinish : State {
 	}
 
 	public override void Exit(){
+		Common.CPlayed_hands++;
 		CancelInvoke ();
 		Layer.gameObject.SetActive (false);
 	}
@@ -58,11 +58,10 @@ public class StateFinish : State {
 
 	public void Next(){
 		if ((Common.CPlayed_hands + 1) < Common.CHands) {
-			m_StateManage.ChangeState (STATE.STATE_SEAT);
+			CancelInvoke ();
+			Layer.gameObject.SetActive (false);
 		} else {
-			Exit ();
-			m_GameController.m_PlayerListMode = 1;
-			m_GameController.ScoreboardServer ();
+			m_GameController.m_LastDialog.SetActive (true);
 		}
 	}
 

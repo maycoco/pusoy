@@ -64,6 +64,7 @@ public class StateSeat : State{
 	}
 
 	public void UpdatePlayerUI(){
+		HideLetPlay ();
 		Layer.Find ("TipsNoPlayers").gameObject.SetActive (false);
 
 		//LetPlay & AutoBanker
@@ -75,6 +76,11 @@ public class StateSeat : State{
 
 				if (m_GameController.GetTablePlayersCount () <= 1) {
 					Layer.Find ("TipsNoPlayers").gameObject.SetActive (true);
+				} else {
+					if(m_GameController.m_FirstSetBanker){
+						ShowLetPlay ();
+						m_GameController.m_FirstSetBanker = false;
+					}
 				}
 			}
 

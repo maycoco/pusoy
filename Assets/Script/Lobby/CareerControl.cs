@@ -291,7 +291,7 @@ public class CareerControl : MonoBehaviour {
 			GameObject Drecord = Instantiate (m_CareerRecord) as GameObject;
 
 			DateTime time = ConvertStringToDateTime (room.BeginTime.ToString());
-			if (time.Month != month && time.Day != day) {
+			if (time.Month != month || time.Day != day) {
 
 				month 	= time.Month;
 				day 	= time.Day;
@@ -465,8 +465,5 @@ public class CareerControl : MonoBehaviour {
 		for (int i = Content.childCount - 1; i >= 0; i--) {  
 			Destroy(Content.GetChild(i).gameObject);
 		} 
-	}
-
-	public void GoBack(){
 	}
 }

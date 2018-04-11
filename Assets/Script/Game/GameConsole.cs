@@ -248,8 +248,11 @@ public class GameConsole : MonoBehaviour
 
 	public void OpenHandReview(){
 		m_GameController.PlayEffect (Effect.BUTTON);
-		RoundCount = 0;
-		m_GameController.GetRoundHistoryServer (RoundCount);
+
+		if(Common.CPlayed_hands > 0){
+			RoundCount = Common.CPlayed_hands - 1;
+			m_GameController.GetRoundHistoryServer (RoundCount);
+		}
 	}
 
 	public void CloseHandReview(){
