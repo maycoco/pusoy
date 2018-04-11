@@ -84,8 +84,8 @@ namespace Pusoy
                 throw new Exception("Invalid Cards.");
             }
 
-            CardRank rank1 = GetCardRank(cards1);
-            CardRank rank2 = GetCardRank(cards2);
+            CardRank rank1 = GetCardRank(ref cards1);
+            CardRank rank2 = GetCardRank(ref cards2);
             if (rank1 > rank2)
             {
                 return 1;
@@ -98,13 +98,22 @@ namespace Pusoy
             int n = Math.Min(cards1.Length, cards2.Length);
             for (int i = 0; i < n; i++)
             {
-                uint v1 = cards1[i] % 13;
-                uint v2 = cards2[i] % 13;
-                if (v1 < v2)
+                //uint v1 = cards1[i] % 13;
+                //uint v2 = cards2[i] % 13;
+                //if (v1 < v2)
+                //{
+                //    return -1;
+                //}
+                //else if (v1 > v2)
+                //{
+                //    return 1;
+                //}
+
+                if (cards1[i] < cards2[i])
                 {
                     return -1;
                 }
-                else if (v1 > v2)
+                else if (cards1[i] > cards2[i])
                 {
                     return 1;
                 }
@@ -113,26 +122,50 @@ namespace Pusoy
             return 0;
         }
 
-		public static CardRank GetCardRank(uint[] cards)
-		{
-			Card[] sortCards = new Card[cards.Length];
-			for (int i = 0; i < cards.Length; i++)
-			{
-				sortCards[i] = new Card(cards[i]);
-			}
+        public static CardRank GetCardRank(ref uint[] cards)
+        {
+            Card[] sortCards = new Card[cards.Length];
+            for (int i = 0; i < cards.Length; i++)
+            {
+                sortCards[i] = new Card(cards[i]);
+            }
 
-			Array.Sort(sortCards);
+            Array.Sort(sortCards);
 
-			CardRankDictionary ret = new CardRankDictionary();
-			for (CardRank rank = CardRank.StraightFlush; rank > CardRank.HighCard; rank--)
-			{
-				find(rank, ref sortCards, ref ret);
-				if (ret.Count > 0)
-					return rank;
-			}
-
-			return CardRank.HighCard;
-		}
+            CardRankDictionary ret = new CardRankDictionary();
+            for (CardRank rank = CardRank.StraightFlush; rank > CardRank.HighCard; rank--)
+            {
+                find(rank, ref sortCards, ref ret);
+                if (ret.Count > 0)
+                {
+                    var c = ret[rank].First<uint[]>();
+                    if (c.Length == cards.Length)
+                        cards = c;
+                    else
+                    {
+                        var diff = new uint[cards.Length - c.Length];
+                        int i = 0;
+                        foreach (var card in cards)
+                        {
+                            if (Array.IndexOf(c, card) == -1)
+                            {
+                                diff[i++] = card;
+                            }
+                            if (i >= diff.Length)
+                                break;
+                        }
+                        Array.Copy(c, cards, c.Length);
+                        Array.Copy(diff, 0, cards, c.Length, diff.Length);
+                    }
+                    return rank;
+                }
+            }
+            for (int j = 0; j < sortCards.Length; j++)
+            {
+                cards[j] = sortCards[j].CardValue();
+            }
+            return CardRank.HighCard;
+        }
 
         private static void find(CardRank rank, ref Card[] cards, ref CardRankDictionary result)
         {
