@@ -25,7 +25,7 @@ public class StateSorting : State {
 	private	GameObject Effect_DX			= null;
 
 	private Dictionary<int, Poker> Pokers	= new Dictionary<int, Poker>();
-	private bool AlreadyComfim				= true;
+	private bool AlreadyComfim				= false;
 	private bool GetLuckyConfim				= false;
 
 	Dictionary<Msg.CardRank, List<uint[]>> RankResult = new Dictionary<Msg.CardRank, List<uint[]>> ();
@@ -150,6 +150,7 @@ public class StateSorting : State {
 
 		Layer.gameObject.SetActive (true);
 		CloseHelpLayer ();
+		Layer.Find ("Waiting").gameObject.SetActive (false);
 		Layer1.Find ("CountDown").gameObject.SetActive (false);
 		HideConfim ();
 
@@ -217,7 +218,7 @@ public class StateSorting : State {
 			Layer1.Find ("CountDown/Clock/Text").GetComponent<Text> ().text = CountDownTime.ToString() + "s";
 			Layer1.Find ("CountDown/Clock").GetComponent<Image> ().fillAmount = CountDownTime * temp;
 
-			if(CountDownTime == 5){
+			if(CountDownTime == 5 && !AlreadyComfim){
 				m_GameController.PlayEffect (Effect.EIDA);
 				Effect_DX = Instantiate(m_GameController.m_PrefabEffectED) as GameObject;
 				Effect_DX.transform.SetParent (Layer.Find("EffectDX").transform);
@@ -238,7 +239,7 @@ public class StateSorting : State {
 	}
 
 	public void AdjustPokers(bool ini = false){
-		float iv = 0.16f;
+		float iv = 0.15f;
 		for (int i = 0; i <HandPokers.Count; i++) {
 			Poker Poker = Instantiate(m_GameController.m_PrefabPoker) as Poker;
 			Poker.canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
@@ -269,7 +270,7 @@ public class StateSorting : State {
 		
 	public void RoateAni(){
 		m_GameController.PlayEffect (Effect.FAN);
-		Pokers[HandPokers[RoateAniIndex]].transform.DORotate (new Vector3 (0, 180, 0), 0.08f).OnComplete(RoateAniCallBack);
+		Pokers[HandPokers[RoateAniIndex]].transform.DORotate (new Vector3 (0, 180, 0), 0.12f).OnComplete(RoateAniCallBack);
 		RoateAniIndex++;
 	}
 
@@ -385,6 +386,8 @@ public class StateSorting : State {
 	}
 
 	 public void MovePokers(string belong, string tag, int[] pokers){
+		if(pokers.Length <= 0){return;}
+
 		if(belong == tag){
 			for(int i = 0; i < pokers.Length; i++){
 				Pokers [pokers[i]].ResetBelongPos ();
@@ -459,8 +462,23 @@ public class StateSorting : State {
 			}
 			break;
 		}
-			
+
+		AutoSelected ();
 		UpdateRanks ();
+	}
+
+	public void AutoSelected(){
+		if(HandPokers.Count <= 3 && (UpperPokers.Count + HandPokers.Count) <= 3 ){
+			List<uint> temp = new List<uint> ();
+
+			foreach(int p in HandPokers){
+				if(!Pokers[p].IsSelected){
+					temp.Add ((uint)p);
+				}
+			}
+
+			SelectPokers (temp.ToArray());
+		}
 	}
 
 	public void UpdateBelongPokets(string belong){
@@ -696,6 +714,7 @@ public class StateSorting : State {
 
 	public void SortConfrm(){
 		AlreadyComfim = true;
+		Layer.Find ("Waiting").gameObject.SetActive (true);
 		DisPokers ();
 		HideConfim ();
 		if (TweenColor != null) {TweenColor.Kill ();}

@@ -22,6 +22,7 @@ public class StateSeat : State{
 	public override void Enter(){
 		Debug.Log ("==============================state seat===================================");
 
+		HideLetPlay ();
 		m_GameController.UpdateRooimInfo ();
 		m_GameController.ShowTableInfo ();
 		m_GameController.ShowGameConsole ();
@@ -29,7 +30,7 @@ public class StateSeat : State{
 	}
 
 	public override void Exit(){
-		Layer.Find("LetPlay").gameObject.SetActive(false);
+		HideLetPlay ();
 		Layer.Find ("TipsPick").gameObject.SetActive (false);
 		Layer.Find("TipsWaitStart").gameObject.SetActive (false);
 		Layer.Find("TipsNoPlayers").gameObject.SetActive (false);
@@ -54,9 +55,16 @@ public class StateSeat : State{
 		UpdatePlayerUI ();
 	}
 
+	public void ShowLetPlay(){
+		Layer.Find ("LetPlay").gameObject.SetActive (true);
+	}
+
+	public void HideLetPlay(){
+		Layer.Find ("LetPlay").gameObject.SetActive (false);
+	}
+
 	public void UpdatePlayerUI(){
 		Layer.Find ("TipsNoPlayers").gameObject.SetActive (false);
-		Layer.Find ("LetPlay").gameObject.SetActive (false);
 
 		//LetPlay & AutoBanker
 		if (m_GameController.m_SelfSeatID == 0) {
@@ -66,15 +74,11 @@ public class StateSeat : State{
 				UpdateAutoBanker ();
 
 				if (m_GameController.GetTablePlayersCount () <= 1) {
-					Layer.Find ("LetPlay").gameObject.SetActive (false);
 					Layer.Find ("TipsNoPlayers").gameObject.SetActive (true);
-				} else {
-					Layer.Find ("LetPlay").gameObject.SetActive (true);
 				}
 			}
 
 		} else {
-			Layer.Find ("LetPlay").gameObject.SetActive (false);
 			HideAutoBanker ();
 		}
 			

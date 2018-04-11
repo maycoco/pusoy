@@ -22,6 +22,7 @@ public class GameConsole : MonoBehaviour
 	public  List<GameObject> 	m_Pokers;
 
 	void Start (){
+		HideWaitAnime();
 	}
 
 	void Update (){

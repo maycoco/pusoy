@@ -43,12 +43,14 @@ public class Poker : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDra
 	public void Selected(){
 		IsSelected = true;
 		Vector3 pos = transform.localPosition;
-		transform.localPosition = new Vector3 (pos.x, pos.y + 30, pos.z);
+		//transform.localPosition = new Vector3 (pos.x, pos.y + 30, pos.z);
+		transform.DOLocalMoveY(pos.y + 30, 0.03f).SetEase(Ease.OutQuad);
 	}
 
 	public void CancelSelect(){
 		IsSelected = false;
-		transform.localPosition = BelongPos;
+		//transform.localPosition = BelongPos;
+		transform.DOLocalMoveY(BelongPos.y, 0.03f);
 	}
 
 	public void RiwerSelected(){
