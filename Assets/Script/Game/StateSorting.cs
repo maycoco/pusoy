@@ -902,7 +902,8 @@ public class StateSorting : State {
 		foreach(int p in pokers){
 			t.Add ((uint)p);
 		}
-		return Pusoy.CardRankFinder.GetCardRank (t.ToArray());
+        var arr = t.ToArray();
+        return Pusoy.CardRankFinder.GetCardRank(ref arr);
 	}
 
 	public void UpdatePokerTips(){
