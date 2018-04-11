@@ -263,6 +263,7 @@ public class LobbyController : MonoBehaviour {
 
 	public void Data(Protocol data){
 		Loom.QueueOnMainThread(()=>{  
+			Common.Sumbiting = false;
 			Common.EndCalling (Canvas);
 		}); 
 
@@ -467,7 +468,7 @@ public class LobbyController : MonoBehaviour {
 	}
 		
 	public void CreatRoomServer(string roomname, uint min_bet, uint max_bet, uint hands, uint credit_points, bool is_share){
-		Common.Calling (Canvas);
+		if(!Common.Sumbit (PrefabTips ,Canvas)){return;}
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CreateRoomReq;
@@ -487,7 +488,7 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	 public void JoinRoomServer(string room_number){
-		Common.Calling (Canvas);
+		if(!Common.Sumbit (PrefabTips ,Canvas)){return;}
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.JoinRoomReq;
@@ -516,7 +517,7 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void CloseRoomServer(uint roomid){
-		Common.Calling (Canvas);
+		if(!Common.Sumbit (PrefabTips ,Canvas)){return;}
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CloseRoomReq;
@@ -545,7 +546,7 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void SendDiamondsServer(uint uid, uint amount){
-		Common.Calling (Canvas);
+		if(!Common.Sumbit (PrefabTips ,Canvas)){return;}
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.SendDiamondsReq;

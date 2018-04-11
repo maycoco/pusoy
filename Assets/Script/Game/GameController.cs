@@ -98,6 +98,7 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Common.Sumbiting = false;
 	}
 
 	void Awake(){
@@ -163,10 +164,10 @@ public class GameController : MonoBehaviour {
 //		Common.CMin_bet 	= 20;
 //		Common.CMax_bet 	= 1000;
 //		Common.CHands 		= 20;
-//		Common.CPlayed_hands= 16;
+//		Common.CPlayed_hands= 19;
 //		Common.CIs_share 	= true;
 //		Common.CCredit_points = 1000;
-//		Common.CState 		= Msg.GameState.Combine;
+//		Common.CState 		= Msg.GameState.Result;
 //		Common.CAutoBanker	= true;
 //		if(Common.CState == Msg.GameState.Show){
 //			Common.ConfigBetTime = 5;
@@ -492,6 +493,7 @@ public class GameController : MonoBehaviour {
 
 	public void Data(Protocol data){
 		Loom.QueueOnMainThread(()=>{  
+			Common.Sumbiting = false;
 			Common.EndCalling (Canvas.gameObject);
 		}); 
 
@@ -732,7 +734,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void LeaveRoomServer(){
-		Common.Calling (Canvas.gameObject);
+		if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
 
 		m_GameConsole.CloseMenu ();
 
@@ -748,7 +750,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void SitDownServer(int seatID){
-		Common.Calling (Canvas.gameObject);
+		if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.SitDownReq;
@@ -763,7 +765,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void AutoBankServer(bool auto){
-		Common.Calling (Canvas.gameObject);
+		if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.AutoBankerReq;
@@ -778,30 +780,25 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void StandUpServer(){
-		Common.Calling (Canvas.gameObject);
-
 		if(m_SelfSeatID == -1){return;}
-		if(m_StateManage.GetCulState() == STATE.STATE_SEAT || m_StateManage.GetCulState() == STATE.STATE_BETTING){
-			m_GameConsole.CloseMenu ();
-			
-			if(GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){
-				return;
-			}
-				
-			Protocol msg 					= new Protocol();
-			msg.Msgid 						= MessageID.StandUpReq;
-			msg.StandUpReq 					= new StandUpReq();
+		if (m_StateManage.GetCulState () != STATE.STATE_SEAT || m_StateManage.GetCulState () != STATE.STATE_BETTING) {return;}
+		if(GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){return;}
+		if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
+		m_GameConsole.CloseMenu ();
 
-			using (var stream = new MemoryStream())
-			{
-				msg.WriteTo(stream);
-				Client.Instance.Send(stream.ToArray());
-			}
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.StandUpReq;
+		msg.StandUpReq 					= new StandUpReq();
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
 		}
 	}
 
 	public void StartGameServer(){
-		Common.Calling (Canvas.gameObject);
+		if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.StartGameReq;
@@ -815,7 +812,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void BetServer(uint chips){
-		Common.Calling (Canvas.gameObject);
+		if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
 
 		m_StateManage.m_StateBetting.ClearChipsButton ();
 
@@ -832,7 +829,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void CombineServer(List<Msg.CardGroup> cards, bool autowin){
-		Common.Calling (Canvas.gameObject);
+		if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CombineReq;
@@ -890,15 +887,5 @@ public class GameController : MonoBehaviour {
 			SoundEffect.clip = Effects [(int)ect];
 			SoundEffect.Play ();
 		}
-	}
-
-	public void Test1(){
-		m_StateManage.ChangeState (STATE.STATE_DEAL);
-		m_StateManage.ChangeState (STATE.STATE_SORTING);
-	}
-
-	public void Test2(){
-		SetSeatID (222, -1);
-		UpdateOrderList ();
 	}
 }

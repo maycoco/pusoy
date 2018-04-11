@@ -91,6 +91,8 @@ public class Common: MonoBehaviour
 	//CareerReqDays
 	public static uint 		ConfigCareerDays = 30;
 
+	public static bool	 	Sumbiting = false;
+
 	//DialogText
 	public static string	TipsCreareRoom 		= "Failed to create room";
 	public static string	TipsJoinRoom 		= "Failed to joining room";
@@ -172,6 +174,15 @@ public class Common: MonoBehaviour
 				} 
 			}
 		}
+	}
+
+	public static bool Sumbit(GameObject Tips,  GameObject Obj){
+		if(Sumbiting){
+			TipsOn(Tips, Obj, "Please wait.");
+			return false;
+		}
+		Sumbiting = true;
+		return true;
 	}
 
 	public static void Calling(GameObject Obj){
