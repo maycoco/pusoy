@@ -378,21 +378,33 @@ public class LobbyController : MonoBehaviour {
 				Common.CCredit_points = data.JoinRoomRsp.Room.CreditPoints;
 				Common.CState = data.JoinRoomRsp.Room.State;
 
-				if (Common.CState == Msg.GameState.Bet) {
+				Common.CPokers.Clear ();
+				Common.CPlayers.Clear ();
+
+				switch (Common.CState) {
+
+				case Msg.GameState.Bet:
 					Common.ConfigBetTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
-				} else if (Common.CState == Msg.GameState.Combine) {
+					break;
+
+				case Msg.GameState.Combine:
 					Common.ConfigSortTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
-				} else if (Common.CState == Msg.GameState.Result) {
-					Common.ConfigFinishTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
-				} else if (Common.CState == Msg.GameState.Deal) {
-					Common.CPokers.Clear ();
 					for (int i = 0; i < data.JoinRoomRsp.Room.Cards.Count; i++) {
 						Common.CPokers.Add ((int)data.JoinRoomRsp.Room.Cards [i]);
 					}
+					break;
+
+				case  Msg.GameState.Result:
+					Common.ConfigFinishTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
+					break;
+
+				case Msg.GameState.Deal:
+					for (int i = 0; i < data.JoinRoomRsp.Room.Cards.Count; i++) {
+						Common.CPokers.Add ((int)data.JoinRoomRsp.Room.Cards [i]);
+					}
+					break;
 				}
-					
-				Common.CPlayers.Clear ();
-				Common.CPokers.Clear ();
+
 				for (int i = 0; i < data.JoinRoomRsp.Room.Players.Count; i++) {
 					PlayerInfo p = new PlayerInfo ();
 					p.Uid = data.JoinRoomRsp.Room.Players [i].Uid;
