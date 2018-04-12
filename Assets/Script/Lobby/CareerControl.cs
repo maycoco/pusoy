@@ -41,9 +41,9 @@ public class CareerControl : MonoBehaviour {
 
 		m_months.Add ("Apr");
 		m_months.Add ("May");
-		m_months.Add ("Jun");
+		m_months.Add ("June");
 
-		m_months.Add ("Jul");
+		m_months.Add ("July");
 		m_months.Add ("Aug");
 		m_months.Add ("Sept");
 

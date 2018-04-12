@@ -30,10 +30,16 @@ public class PrefileControl : MonoBehaviour
 	public GameObject 	m_Precord;
 	public GameObject   m_Date;
 
+	public Toggle		m_TogSent;
+	public Toggle		m_TogReceived;
+
 	private string 		m_UserID;
 	private	string		m_Amount;
 	private	string		m_InputType;
 	private	Transform	m_DiamondContent;
+
+	private Vector3 	m_UseridTagPos = new Vector3();
+	private Vector3 	m_AmountTagPos = new Vector3();
 
 
 	//Date
@@ -57,6 +63,9 @@ public class PrefileControl : MonoBehaviour
 		EventTriggerListener.Get (transform.Find ("SendDiamond/UserIDInput/InputUser").gameObject).onClick = onClickInputHandler;
 		EventTriggerListener.Get (transform.Find ("SendDiamond/AmountInput/InputAmount").gameObject).onClick = onClickInputHandler;
 
+
+		m_UseridTagPos = transform.Find ("SendDiamond/UserIDInput/Tag").localPosition;
+		m_AmountTagPos = transform.Find ("SendDiamond/AmountInput/Tag").localPosition;
 
 		m_weeks.Add (DayOfWeek.Sunday);
 		m_weeks.Add (DayOfWeek.Monday);
@@ -88,6 +97,10 @@ public class PrefileControl : MonoBehaviour
 	public void Enter(){
 		this.gameObject.SetActive (true);
 
+		m_TogSent.isOn = true;
+		m_TogReceived.isOn = true;
+
+
 		ClearDiamondRecord ();
 		HideCalendar ();
 
@@ -115,6 +128,9 @@ public class PrefileControl : MonoBehaviour
 
 	public void ShowSendDiamond(){
 		LobbyControl.PlayerButtonEffect ();
+
+		transform.Find ("SendDiamond/UserIDInput/Tag").localPosition = m_UseridTagPos;
+		transform.Find ("SendDiamond/AmountInput/Tag").localPosition = m_AmountTagPos;
 
 		m_UserID 	= "";
 		m_Amount 	= "";
@@ -169,9 +185,11 @@ public class PrefileControl : MonoBehaviour
 	public void UpdateNumber(){
 		if(m_InputType == "userid"){
 			transform.Find ("SendDiamond/UserIDInput/InputUser").GetComponent<Text> ().text = m_UserID;
+			transform.Find ("SendDiamond/UserIDInput/Tag").localPosition = new Vector3 (m_UseridTagPos.x + (18 * m_UserID.Length) - (3.5f * (m_UserID.Length - 1)), m_UseridTagPos.y, m_UseridTagPos.z);
 		}
 		if(m_InputType == "amount"){
 			transform.Find ("SendDiamond/AmountInput/InputAmount").GetComponent<Text> ().text = m_Amount;
+			transform.Find ("SendDiamond/AmountInput/Tag").localPosition = new Vector3 (m_AmountTagPos.x + (18 * m_Amount.Length) - (3.5f * (m_Amount.Length - 1)), m_AmountTagPos.y, m_AmountTagPos.z);
 		}
 	}
 
@@ -241,6 +259,16 @@ public class PrefileControl : MonoBehaviour
 		ClearDiamondRecord ();
 
 		if(m_DList.Count <= 0){return;}
+
+		foreach (DiamondRecord d in m_DList) {
+			if(!m_TogSent.isOn && d.Amount < 0){
+				m_DList.Remove (d);
+			}
+
+			if(!m_TogReceived.isOn && d.Amount > 0){
+				m_DList.Remove (d);
+			}
+		}
 
 		List<string> keys = new List<string>();
 		foreach (DiamondRecord d in m_DList) {

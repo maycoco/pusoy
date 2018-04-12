@@ -50,6 +50,7 @@ public class LobbyController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		Common.Sumbiting = false;
 		Common.Trying = 0;
 		CheckConnection ();
 		RoomListServer ();
@@ -137,12 +138,15 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void UpdateRoomClose(uint roomid){
-		if(RoomIDs.BinarySearch(roomid) != 0){
-			foreach(RoomInfo room in RoomLists){
-				if(roomid == room.RoomId){
-					RoomLists.Remove (room);
-					UpdateRoomsInfo ();
-					break;
+		
+		foreach(int id in RoomIDs){
+			if(id == roomid){
+				foreach(RoomInfo room in RoomLists){
+					if(roomid == room.RoomId){
+						RoomLists.Remove (room);
+						UpdateRoomsInfo ();
+						break;
+					}
 				}
 			}
 		}

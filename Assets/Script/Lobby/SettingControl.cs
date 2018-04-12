@@ -25,6 +25,14 @@ public class SettingControl : MonoBehaviour
 		transform.Find ("Content").localPosition = new Vector3 (-640, 0,  0);
 		transform.Find ("LanguageConsole").gameObject.SetActive (false);
 		transform.Find ("LanguageConsole").localPosition = new Vector3 (0, -275,  0);
+
+		if (Common.ConfigMusicOn) {
+			transform.Find ("Consoles/Music/Button").GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/select_on", typeof(Sprite)) as Sprite;
+			transform.Find ("Consoles/Music/Button/Image").localPosition = new Vector3 (19, 0, 0);
+		} else {
+			transform.Find ("Consoles/Music/Button").GetComponent<Image>().sprite =  Resources.Load ("Image/Lobby/select_off", typeof(Sprite)) as Sprite;
+			transform.Find ("Consoles/Music/Button/Image").localPosition = new Vector3 (-19, 0, 0);
+		}
 		this.gameObject.SetActive (true);
 	}
 
