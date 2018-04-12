@@ -58,8 +58,9 @@ public class StateFinish : State {
 
 	public void Next(){
 		if ((Common.CPlayed_hands + 1) < Common.CHands) {
-			CancelInvoke ();
-			Layer.gameObject.SetActive (false);
+			//CancelInvoke ();
+			//Layer.gameObject.SetActive (false);
+			m_StateManage.ChangeState(STATE.STATE_SEAT);
 		} else {
 			m_GameController.m_LastDialog.SetActive (true);
 		}

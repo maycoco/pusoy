@@ -487,8 +487,10 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void DisConnect(){
-		Common.IsOnline = false;
-		ExitGame ();
+		Loom.QueueOnMainThread(()=>{
+			Common.IsOnline = false;
+			ExitGame ();
+		}); 
 	}
 
 	public void Data(Protocol data){

@@ -53,7 +53,6 @@ public class LobbyController : MonoBehaviour {
 		Common.Sumbiting = false;
 		Common.Trying = 0;
 		CheckConnection ();
-		RoomListServer ();
 	}
 
 	void Awake(){
@@ -106,9 +105,16 @@ public class LobbyController : MonoBehaviour {
 	public void CheckConnection(){
 		Conneting.SetActive (false);
 			
-		if(!Common.IsOnline){
+		if (!Common.IsOnline) {
 			Conneting.SetActive (true);
 			protonet.ConnectServer ();
+		} else {
+			if (!string.IsNullOrEmpty (Common.CRoom_number)) {
+				Conneting.SetActive (true);
+				JoinRoomServer (Common.CRoom_number);
+			} else {
+				RoomListServer ();
+			}
 		}
 	}
 
@@ -261,8 +267,11 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	public void DisConnect(){
-		Common.IsOnline = false;
-		CheckConnection ();
+		Loom.QueueOnMainThread(()=>{  
+			Common.IsOnline = false;
+			CheckConnection ();
+		}); 
+
 	}
 
 	public void Data(Protocol data){
