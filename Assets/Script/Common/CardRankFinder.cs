@@ -98,22 +98,13 @@ namespace Pusoy
             int n = Math.Min(cards1.Length, cards2.Length);
             for (int i = 0; i < n; i++)
             {
-                //uint v1 = cards1[i] % 13;
-                //uint v2 = cards2[i] % 13;
-                //if (v1 < v2)
-                //{
-                //    return -1;
-                //}
-                //else if (v1 > v2)
-                //{
-                //    return 1;
-                //}
-
-                if (cards1[i] < cards2[i])
+                uint v1 = cards1[i] % 13;
+                uint v2 = cards2[i] % 13;
+                if (v1 < v2)
                 {
                     return -1;
                 }
-                else if (cards1[i] > cards2[i])
+                else if (v1 > v2)
                 {
                     return 1;
                 }
