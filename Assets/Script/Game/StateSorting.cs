@@ -890,7 +890,7 @@ public class StateSorting : State {
 
 		foreach(uint p in pokers){
 			int id = (int)p;
-			if(Pokers[id]){
+			if(Pokers[id] && !Pokers[id].IsSelected){
 				SelectedPokers.Add (id);
 				Pokers [id].Selected ();
 			}

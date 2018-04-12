@@ -260,15 +260,17 @@ public class PrefileControl : MonoBehaviour
 
 		if(m_DList.Count <= 0){return;}
 
-		foreach (DiamondRecord d in m_DList) {
-			if(!m_TogSent.isOn && d.Amount < 0){
-				m_DList.Remove (d);
+		for (int i = m_DList.Count - 1; i >= 0; i--) {  
+			if(!m_TogSent.isOn && m_DList[i].Amount < 0){
+				m_DList.Remove (m_DList[i]);
 			}
+		} 
 
-			if(!m_TogReceived.isOn && d.Amount > 0){
-				m_DList.Remove (d);
+		for (int i = m_DList.Count - 1; i >= 0; i--) {  
+			if(!m_TogReceived.isOn && m_DList[i].Amount > 0){
+				m_DList.Remove (m_DList[i]);
 			}
-		}
+		} 
 
 		List<string> keys = new List<string>();
 		foreach (DiamondRecord d in m_DList) {

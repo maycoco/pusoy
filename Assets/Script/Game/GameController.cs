@@ -152,6 +152,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	void AdjustUI(){
+		m_LastDialog.SetActive (false);
 		UpdateRooimInfo ();
 	}
 
@@ -499,6 +500,7 @@ public class GameController : MonoBehaviour {
 		}); 
 
 
+		Debug.Log (data.ToString());
 		if(data == null){return; }
 
 		switch (data.Msgid) {
