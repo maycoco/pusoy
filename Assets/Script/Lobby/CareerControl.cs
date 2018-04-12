@@ -262,7 +262,7 @@ public class CareerControl : MonoBehaviour {
 
 	public DateTime ConvertStringToDateTime(string timeStamp)
 	{
-		DateTime dateTimeStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+		DateTime dateTimeStart = TimeZone.CurrentTimeZone.ToUniversalTime(new DateTime(1970, 1, 1));
 		long lTime = long.Parse(timeStamp + "0000000");
 		TimeSpan toNow = new TimeSpan(lTime);
 		return dateTimeStart.Add(toNow);
