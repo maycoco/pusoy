@@ -133,8 +133,7 @@ public class GameController : MonoBehaviour {
 			
 		if(Common.CState == Msg.GameState.Combine){
 			m_StateManage.SetState (STATE.STATE_SEAT);
-			//m_StateManage.ChangeState (STATE.STATE_SORTING, true);
-			m_StateManage.ChangeState (STATE.STATE_SORTING);
+			m_StateManage.ChangeState (STATE.STATE_SORTING, true);
 		}
 
 		if(Common.CState == Msg.GameState.Show){
