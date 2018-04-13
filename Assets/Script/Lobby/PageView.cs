@@ -62,14 +62,17 @@ public class PageView : MonoBehaviour, IBeginDragHandler, IEndDragHandler {
             if(OnPageChanged != null)
                 OnPageChanged (index);
 
+			string type = "";
+			if (Common.CareerWins [index] >= 0) {type = "+";}
+
 			if(index == 0){
-				Title.text = "7 Days winning +" + Common.CareerWins[index];
+				Title.text = "7 Days result " + type + Common.CareerWins[index];
 			}
 			else if(index == 1){
-				Title.text = "30 Days winning +" + Common.CareerWins[index];;
+				Title.text = "30 Days result "  + type + Common.CareerWins[index];;
 			}
 			else if(index == 2){
-				Title.text = "all Days winning +" + Common.CareerWins[index];;
+				Title.text = "all Days result "  + type + Common.CareerWins[index];;
 			}
         }
     }

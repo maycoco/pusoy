@@ -258,12 +258,16 @@ public class LobbyController : MonoBehaviour {
 		Common.Trying++;
 		if (Common.Trying > Common.MaxTrying) {
 			Loom.QueueOnMainThread(()=>{  
-				GoLogin();
+				Common.ErrorDialog (PrefabDialog, Canvas, Common.ErrorNoConnect, GoLoginCall);
 			}); 
 
 		} else {
 			protonet.ConnectServer ();
 		}
+	}
+
+	public void GoLoginCall(GameObject Obj){
+		GoLogin ();
 	}
 
 	public void DisConnect(){

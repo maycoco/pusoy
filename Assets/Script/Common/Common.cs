@@ -69,7 +69,7 @@ public class Common: MonoBehaviour
 	public static List<int>	CSeats			= new List<int>();
 
 	//Career
-	public static List<uint> CareerWins 	= new List<uint>();
+	public static List<int> CareerWins 	= new List<int>();
 
 	//Room Config
 	public 	static uint[] 	ConfigMinBet 	= new uint[]{5, 20, 100, 500};
@@ -236,7 +236,7 @@ public class Common: MonoBehaviour
 		}
 	}
 
-	public static void ErrorDialog(GameObject Obj, GameObject Parent, string text){
+	public static void ErrorDialog(GameObject Obj, GameObject Parent, string text, EventTriggerListener.VoidDelegate call = null){
 		GameObject Dialog = Instantiate(Obj) as GameObject;
 		Dialog.transform.Find ("Conten").GetComponent<Text> ().text = text;
 		Dialog.transform.SetParent (Parent.transform);
@@ -244,7 +244,12 @@ public class Common: MonoBehaviour
 		Dialog.transform.localPosition = new Vector3 (0,0,0);
 
 		EventTriggerListener.Get(Dialog.transform.Find("Close").gameObject).onClick = CloseErrorDialog;
-		EventTriggerListener.Get(Dialog.transform.Find("OK").gameObject).onClick = CloseErrorDialog;
+
+		if (call != null) {
+			EventTriggerListener.Get (Dialog.transform.Find ("OK").gameObject).onClick = call;
+		} else {
+			EventTriggerListener.Get(Dialog.transform.Find("OK").gameObject).onClick = CloseErrorDialog;
+		}
 	}
 
 	public static void CloseErrorDialog(GameObject Obj){

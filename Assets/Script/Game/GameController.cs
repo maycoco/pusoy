@@ -684,6 +684,7 @@ public class GameController : MonoBehaviour {
 
 			case Msg.GameState.CloseRoom:
 				Loom.QueueOnMainThread(()=>{
+					m_StateManage.m_StateFinish.HideLayer();
 					m_LastDialog.SetActive(true);
 				}); 
 				break;

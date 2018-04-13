@@ -60,10 +60,14 @@ public class StateFinish : State {
 		if ((Common.CPlayed_hands + 1) < Common.CHands) {
 			m_StateManage.ChangeState(STATE.STATE_SEAT);
 		} else {
-			CancelInvoke ();
-			Layer.gameObject.SetActive (false);
+			HideLayer ();
 			m_GameController.m_LastDialog.SetActive (true);
 		}
+	}
+
+	public void HideLayer(){
+		CancelInvoke ();
+		Layer.gameObject.SetActive (false);
 	}
 
 	public void ShowHandInfo(){

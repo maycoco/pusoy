@@ -5,6 +5,7 @@ using SpringFramework.UI;
 using System;
 
 using UnityEngine.UI;
+using DG.Tweening;
 
 using Msg;
 using Google.Protobuf;
@@ -107,11 +108,15 @@ public class CareerControl : MonoBehaviour {
 	public void Enter(){
 		this.gameObject.SetActive (true);
 		CloseRoomInfo ();
+		ClearCareerRecord ();
 
 		Pie7Day.gameObject.SetActive (false);
 		Pie30Day.gameObject.SetActive (false);
 		PieAllDay.gameObject.SetActive (false);
 
+		Pie7Day.transform.DORotate (new Vector3 (0, 0, 0), 0);
+		Pie30Day.transform.DORotate (new Vector3 (0, 0, 0), 0);
+		PieAllDay.transform.DORotate (new Vector3 (0, 0, 0), 0);
 
 		Transform Content = transform.Find ("Pies/Scroll View/Viewport/Content");
 
@@ -170,7 +175,9 @@ public class CareerControl : MonoBehaviour {
 			int WinPro = Convert.ToInt32( Math.Round ((decimal)winper , 2, MidpointRounding.AwayFromZero) * 100 );
 			int LosePro = Convert.ToInt32( Math.Round ((decimal)loseper , 2, MidpointRounding.AwayFromZero) * 100 );
 
-			Common.CareerWins.Add (Win);
+			int Wintemp = (int)Win;
+			int Losetemp = -(int)Lose;
+			Common.CareerWins.Add (Wintemp + Losetemp);
 			if (winlost [i].Win == 0 && winlost [i].Lose == 0) {
 				UpdateRecordData (i, WinPro, LosePro, 0, 0);
 			} else {
@@ -178,7 +185,7 @@ public class CareerControl : MonoBehaviour {
 			}
 		}
 
-		PageView.SetPageIndex (0);
+		PageView.pageTo (0);
 	}
 
 	public void UpdateRecordData(int pie, int win, int lost, uint wins, uint losts){
@@ -189,31 +196,44 @@ public class CareerControl : MonoBehaviour {
 		if(pie == 0){
 			Pie7Day.gameObject.SetActive (true);
 			Pie7Day.SetPie (lost, win, LostColor, WinColor);
+		
+			float rot = (win / 2) * 3.6f;
+			Pie7Day.transform.DORotate (new Vector3 (0, 0, 180.0f + rot), 1.0f);
+
+
 			if (wins > 0 || losts > 0) {
-				UpdatePieTips (Content.Find ("PieScroll7/Win"), Content.Find ("PieScroll7/Lost"), wins, losts);
+				UpdatePieTips (Content.Find ("PieScroll7/Win"), Content.Find ("PieScroll7/Lost"), win, lost);
 			}
 		}
 
 		if(pie == 1){
 			Pie30Day.gameObject.SetActive (true);
 			Pie30Day.SetPie (lost, win, LostColor, WinColor);
+
+			float rot = (win / 2) * 3.6f;
+			Pie30Day.transform.DORotate (new Vector3 (0, 0, 180.0f + rot), 1.0f);
+
 			if (wins > 0 || losts > 0) {
-				UpdatePieTips (Content.Find("PieScroll30/Win"), Content.Find("PieScroll30/Lost"), wins, losts);
+				UpdatePieTips (Content.Find("PieScroll30/Win"), Content.Find("PieScroll30/Lost"), win, lost);
 			}
 		}
 
 		if(pie == 2){
 			PieAllDay.gameObject.SetActive (true);
 			PieAllDay.SetPie (lost, win, LostColor, WinColor);
+
+			float rot = (win / 2) * 3.6f;
+			PieAllDay.transform.DORotate (new Vector3 (0, 0, 180.0f + rot), 1.0f);
+
 			if (wins > 0 || losts > 0) {
-				UpdatePieTips (Content.Find ("PieScrollAll/Win"), Content.Find ("PieScrollAll/Lost"), wins, losts);
+				UpdatePieTips (Content.Find ("PieScrollAll/Win"), Content.Find ("PieScrollAll/Lost"), win, lost);
 			}
 		}
 	}
 
-	public void UpdatePieTips(Transform winobj, Transform lostobj, uint win, uint lost){
-		winobj.GetComponent<Text> ().text = "Win +" + win.ToString ();
-		lostobj.GetComponent<Text> ().text = "Lose -" + lost.ToString ();
+	public void UpdatePieTips(Transform winobj, Transform lostobj, int win, int lost){
+		winobj.GetComponent<Text> ().text = "Win" + win.ToString () + "%";
+		lostobj.GetComponent<Text> ().text = "Lost" + lost.ToString () + "%";
 //		string winstr = win.ToString();
 //		string loststr = lost.ToString();
 //
