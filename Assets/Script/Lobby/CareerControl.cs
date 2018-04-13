@@ -260,13 +260,12 @@ public class CareerControl : MonoBehaviour {
 //		}
 	}
 
-	public DateTime ConvertStringToDateTime(string timeStamp)
-	{
-		DateTime dateTimeStart = TimeZone.CurrentTimeZone.ToUniversalTime(new DateTime(1970, 1, 1));
-		long lTime = long.Parse(timeStamp + "0000000");
-		TimeSpan toNow = new TimeSpan(lTime);
-		return dateTimeStart.Add(toNow);
-	}
+	public DateTime ConvertStringToDateTime(int timeStamp)
+    {
+		DateTime dateTimeStart = new DateTime(1970, 1, 1, 8, 0, 0, DateTimeKind.Utc);
+		dateTimeStart = dateTimeStart.Add(new TimeSpan(0,0,timeStamp));
+		return dateTimeStart;
+    }
 
 	public void SetCareerRecordData(RepeatedField<CareerRoomRecord> temp){
 		CareerRooms.Clear ();
@@ -290,7 +289,7 @@ public class CareerControl : MonoBehaviour {
 		foreach(CareerRoomRecord room in CareerRooms){
 			GameObject Drecord = Instantiate (m_CareerRecord) as GameObject;
 
-			DateTime time = ConvertStringToDateTime (room.BeginTime.ToString());
+			DateTime time = ConvertStringToDateTime ((int)room.BeginTime);
 			if (time.Month != month || time.Day != day) {
 
 				month 	= time.Month;
@@ -380,7 +379,7 @@ public class CareerControl : MonoBehaviour {
 
 		RoomInfo.gameObject.SetActive (true);
 		RoomInfo.Find ("Top/Title").GetComponent<Text> ().text = room.Name;
-		RoomInfo.Find ("Time").GetComponent<Text> ().text = ConvertStringToDateTime (room.BeginTime.ToString()).ToString() + " ~ "+ConvertStringToDateTime (room.EndTime.ToString()).ToString();
+		RoomInfo.Find ("Time").GetComponent<Text> ().text = ConvertStringToDateTime ((int)room.BeginTime).ToString() + " ~ "+ConvertStringToDateTime ((int)room.EndTime).ToString();
 		RoomInfo.Find ("Totalhands/Text").GetComponent<Text> ().text = room.PlayedHands.ToString() + "/" + room.Hands.ToString();
 		if(room.Items.Count > 0){RoomInfo.Find ("MVP/Text").GetComponent<Text> ().text = room.Items [0].Name;}
 		RoomInfo.Find ("Roomfee/Text").GetComponent<Text> ().text = room.IsShare?"Shared":"Individual";
