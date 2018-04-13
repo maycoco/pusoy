@@ -158,7 +158,10 @@ public class StateBetting : State {
 
 		int BettingAmount = m_ChipsType[Index];
 
-		if(GetChipsAmoun() + BettingAmount > m_MaxChips){return;}
+		if(GetChipsAmoun() + BettingAmount > m_MaxChips){
+			Common.TipsOn (m_GameController.PrefabTips, m_GameController.Canvas.gameObject, Common.TipsMaxBet + m_MaxChips.ToString());
+			return;
+		}
 
 		m_Chips.Add(BettingAmount);
 

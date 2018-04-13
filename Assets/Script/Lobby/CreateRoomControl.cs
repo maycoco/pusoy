@@ -157,10 +157,11 @@ public class CreateRoomControl : MonoBehaviour {
 	}
 
 	public void OpenCommingSoon(){
-		Commingsoon.SetActive (true);
+		//Commingsoon.SetActive (true);
+		Common.TipsOn (LobbyControl.PrefabTips, LobbyControl.Canvas, Common.TipsComingSoon);
 	}
 
 	public void CloseCommingSoon(){
-		Commingsoon.SetActive (false);
+		//Commingsoon.SetActive (false);
 	}
 }

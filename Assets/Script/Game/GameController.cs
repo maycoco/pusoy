@@ -46,7 +46,7 @@ public class SeatResult{
 }
 	
 public class GameController : MonoBehaviour {
-	private Transform									Canvas;
+	[HideInInspector] public  Transform									Canvas;
 	public  GameConsole									m_GameConsole;
 
 	//State Manage
@@ -525,8 +525,9 @@ public class GameController : MonoBehaviour {
 
 		case MessageID.SitDownRsp:
 			if (data.SitDownRsp.Ret == 0) {
-				Loom.QueueOnMainThread(()=>{
-					if(m_TatgetSeatID == 0){
+				Loom.QueueOnMainThread (() => {
+					
+					if (m_TatgetSeatID == 0) {
 						Common.CAutoBanker = data.SitDownRsp.Autobanker;
 						m_FirstSetBanker = true;
 					}
@@ -534,10 +535,12 @@ public class GameController : MonoBehaviour {
 					SetSeatID (Common.Uid, m_TatgetSeatID);
 					UpdateOrderList ();
 
-					if(m_StateManage.GetCulState() == STATE.STATE_BETTING){
-						m_StateManage.m_StateBetting.SitDown();
+					if (m_StateManage.GetCulState () == STATE.STATE_BETTING) {
+						m_StateManage.m_StateBetting.SitDown ();
 					}
 				}); 
+			} else {
+				Common.TipsOn (PrefabTips, Canvas.gameObject, Common.TipsSeatWasToken);
 			}
 			break;
 

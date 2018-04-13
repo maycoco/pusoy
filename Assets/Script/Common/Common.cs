@@ -102,6 +102,15 @@ public class Common: MonoBehaviour
 	public static string	TipsCantSendSelf 	= "Can't send diamond to yourself";
 	public static string	TipsInsufficient 	= "Insufficient diamonds,please require to your agent";
 
+	public static string	TipsCreateRoomMax	= "You can’t create more then 10 rooms";
+	public static string	TipsComingSoon		= "Coming Soon";
+	public static string 	TipsSeatWasToken	= "Seat was taken";
+	public static string 	TipsMaxBet			= "Maximum bet is ";
+
+	public static string 	ErrorGameCreditMax	= "Game credit max out";
+	public static string	ErrorOutdue			= "Out due to no action for 3 hands";
+	public static string    ErrorNoConnect		= "Connection Failed, Please check Your Network";
+
 	public static string    ErrorLogin			= "Login failed";
 	public static string    ErrorInsufficient	= "Insufficient diamonds,please require to your agent";
 	public static string    ErrorCantGame		= "Failed to continue the game: Player has insufficient diamond";
@@ -251,8 +260,8 @@ public class Common: MonoBehaviour
 
 		Sequence s = DOTween.Sequence ();
 		s.Append (Dialog.transform.DOLocalMoveY (-480, 0.3f));
-		s.Append (Dialog.transform.GetComponent<Image>().DOFade(0, 2f));
-		Dialog.transform.Find ("Text").GetComponent<Text> ().DOFade (0, 2.2f).OnComplete(()=>TipsOff(Dialog));
+		s.Append (Dialog.transform.GetComponent<Image>().DOFade(0, 5f));
+		Dialog.transform.Find ("Text").GetComponent<Text> ().DOFade (0, 2.5f).OnComplete(()=>TipsOff(Dialog));
 	}
 
 	public static void TipsOff(GameObject d){

@@ -358,7 +358,10 @@ public class LobbyController : MonoBehaviour {
 				Loom.QueueOnMainThread (() => {  
 					Common.ErrorDialog (PrefabDialog, Canvas, Common.ErrorInsufficient);
 				}); 
-			} else {
+			} 
+			else if(data.CreateRoomRsp.Ret == ErrorID.CreateRoomExceedLimitationRooms){
+				Common.TipsOn (PrefabTips, Canvas, Common.TipsCreateRoomMax);
+			}else {
 				Loom.QueueOnMainThread (() => {  
 					Common.TipsOn (PrefabTips, Canvas, Common.TipsCreareRoom);
 				}); 
