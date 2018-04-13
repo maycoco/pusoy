@@ -100,6 +100,8 @@ public class PrefileControl : MonoBehaviour
 		m_TogSent.isOn = true;
 		m_TogReceived.isOn = true;
 
+		transform.Find ("SelfInfo/Diamonds/Icon").gameObject.SetActive (false);
+		transform.Find ("SelfInfo/Diamonds/Amount").gameObject.SetActive (false);
 
 		ClearDiamondRecord ();
 		HideCalendar ();
@@ -115,8 +117,15 @@ public class PrefileControl : MonoBehaviour
 	public void UpdateSelfInfo(){
 		transform.Find ("SelfInfo/ID").GetComponent<Text> ().text 	= Common.Uid.ToString();
 		transform.Find ("SelfInfo/Name").GetComponent<Text> ().text = Common.FB_name;
-		transform.Find ("SelfInfo/Amount").GetComponent<Text> ().text = Common.DiamondAmount.ToString();
-	
+
+		float width = Common.DiamondAmount.ToString ().Length * 12 + 45;
+		float left = (640 - width) / 2;
+		transform.Find ("SelfInfo/Diamonds/Icon").gameObject.SetActive (true);
+		transform.Find ("SelfInfo/Diamonds/Amount").gameObject.SetActive (true);
+		transform.Find ("SelfInfo/Diamonds/Amount").GetComponent<Text> ().text = Common.DiamondAmount.ToString();
+
+		transform.Find ("SelfInfo/Diamonds/Icon").localPosition = new Vector3 (left, 0, 0);
+		transform.Find ("SelfInfo/Diamonds/Amount").localPosition = new Vector3 (left + 45, 0, 0);
 
 		if (string.IsNullOrEmpty(Common.FB_avatar)) {
 			m_Avatar.UseDefAvatar ();
