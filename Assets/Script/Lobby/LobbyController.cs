@@ -665,4 +665,9 @@ public class LobbyController : MonoBehaviour {
 			ButtonEffects.Play ();
 		}
 	}
+
+	public void Logout(){
+		FB.LogOut ();
+		GoLogin ();
+	}
 }

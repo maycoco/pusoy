@@ -708,11 +708,19 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.StandUpNotify:
-			Loom.QueueOnMainThread(()=>{
-				m_StateManage.m_StateBetting.UpdateChipsUI(GetSeatIDForPlayerID(data.StandUpNotify.Uid), 0);
+			if(data.StandUpNotify.Reason == StandUpReason.NoActionFor3Hands){
+				Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorOutdue);
+			}
+			else if(data.StandUpNotify.Reason == StandUpReason.CreditPointsOut){
+				Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorGameCreditMax);
+			}
+
+			Loom.QueueOnMainThread (() => {
+				m_StateManage.m_StateBetting.UpdateChipsUI (GetSeatIDForPlayerID (data.StandUpNotify.Uid), 0);
 				SetSeatID (data.StandUpNotify.Uid, -1);
 				UpdateOrderList ();
 			}); 
+
 			break;
 
 		case MessageID.JoinRoomNotify:
