@@ -629,6 +629,7 @@ public class GameController : MonoBehaviour {
 	
 			case Msg.GameState.Ready:
 				Loom.QueueOnMainThread(()=>{
+					Debug.Log(1111);
 					m_StateManage.ChangeState (STATE.STATE_SEAT);
 					if(m_SelfSeatID == 0 && GetTablePlayersCount() > 1 ){m_Letplay.SetActive(true);}
 				}); 
@@ -705,8 +706,10 @@ public class GameController : MonoBehaviour {
 							p.Score = data.SitDownNotify.Score;
 						}
 					}
+						
 					SetSeatID (data.SitDownNotify.Uid, (int)data.SitDownNotify.SeatId);
 					UpdateOrderList ();
+
 
 					if(GetTablePlayersCount() > 1 && Common.CState == Msg.GameState.Ready){m_Letplay.SetActive(true);}
 				}); 
@@ -811,7 +814,6 @@ public class GameController : MonoBehaviour {
 		if(m_SelfSeatID == -1){return;}
 
 		if (m_StateManage.GetCulState () == STATE.STATE_SEAT || m_StateManage.GetCulState () == STATE.STATE_BETTING) {
-			if(m_SelfSeatID == 0){return;}
 			if(GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){return;}
 			if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
 			m_GameConsole.CloseMenu ();
