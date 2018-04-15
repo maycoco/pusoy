@@ -286,13 +286,14 @@ public class LobbyController : MonoBehaviour {
 
 		if(data == null){return;}
 
+		Debug.Log (data.ToString ());
 		switch (data.Msgid) {
 
 		case MessageID.LoginRsp:
 			if (data.LoginRsp.Ret == 0) {
 				Common.Uid = data.LoginRsp.Uid;
 				Common.FB_name = data.LoginRsp.Name;
-				Common.CRoom_number = data.LoginRsp.RoomNumber;
+				//Common.CRoom_number = data.LoginRsp.RoomNumber;
 				Common.FB_avatar = data.LoginRsp.Avatar;
 				Common.IsOnline = true;
 
@@ -364,7 +365,9 @@ public class LobbyController : MonoBehaviour {
 				}); 
 			} 
 			else if(data.CreateRoomRsp.Ret == ErrorID.CreateRoomExceedLimitationRooms){
-				Common.TipsOn (PrefabTips, Canvas, Common.TipsCreateRoomMax);
+				Loom.QueueOnMainThread (() => {  
+					Common.TipsOn (PrefabTips, Canvas, Common.TipsCreateRoomMax);
+				}); 
 			}else {
 				Loom.QueueOnMainThread (() => {  
 					Common.TipsOn (PrefabTips, Canvas, Common.TipsCreareRoom);

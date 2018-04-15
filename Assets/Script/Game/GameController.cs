@@ -48,6 +48,7 @@ public class SeatResult{
 public class GameController : MonoBehaviour {
 	[HideInInspector] public  Transform									Canvas;
 	public  GameConsole									m_GameConsole;
+	public 	GameObject 									m_Letplay;
 
 	//State Manage
 	public StateManage									m_StateManage;
@@ -508,7 +509,6 @@ public class GameController : MonoBehaviour {
 		case MessageID.LeaveRoomRsp:
 			if (data.LeaveRoomRsp.Ret == 0) {
 				Loom.QueueOnMainThread (() => {
-					m_StateManage.m_StateSeat.HideLetPlay();
 					ExitGame ();
 				}); 
 			} else {
@@ -526,14 +526,14 @@ public class GameController : MonoBehaviour {
 		case MessageID.SitDownRsp:
 			if (data.SitDownRsp.Ret == 0) {
 				Loom.QueueOnMainThread (() => {
-					
-					if (m_TatgetSeatID == 0) {
-						Common.CAutoBanker = data.SitDownRsp.Autobanker;
-						m_FirstSetBanker = true;
-					}
 
 					SetSeatID (Common.Uid, m_TatgetSeatID);
 					UpdateOrderList ();
+
+					if (m_TatgetSeatID == 0) {
+						if(GetTablePlayersCount() > 1 && Common.CState == Msg.GameState.Ready){m_Letplay.SetActive(true);}
+						Common.CAutoBanker = data.SitDownRsp.Autobanker;
+					}
 
 					if (m_StateManage.GetCulState () == STATE.STATE_BETTING) {
 						m_StateManage.m_StateBetting.SitDown ();
@@ -549,10 +549,10 @@ public class GameController : MonoBehaviour {
 		case MessageID.StandUpRsp:
 			if (data.StandUpRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
-					m_FirstSetBanker = false;
 					m_StateManage.m_StateBetting.CancelBet();
 					SetSeatID (Common.Uid, -1);
 					UpdateOrderList ();
+					m_Letplay.SetActive(false);
 				}); 
 			}
 			break;
@@ -624,16 +624,19 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.GameStateNotify:
+			Common.CState = data.GameStateNotify.State;
 			switch(data.GameStateNotify.State){
 	
 			case Msg.GameState.Ready:
 				Loom.QueueOnMainThread(()=>{
 					m_StateManage.ChangeState (STATE.STATE_SEAT);
+					if(m_SelfSeatID == 0 && GetTablePlayersCount() > 1 ){m_Letplay.SetActive(true);}
 				}); 
 				break;
 
 			case Msg.GameState.Bet:
 				Loom.QueueOnMainThread(()=>{
+					m_Letplay.SetActive(false);
 					Common.ConfigBetTime = (int)data.GameStateNotify.Countdown / 1000;
 					m_StateManage.ChangeState (STATE.STATE_BETTING);
 				}); 
@@ -655,7 +658,7 @@ public class GameController : MonoBehaviour {
 
 			case Msg.GameState.Combine:
 				Loom.QueueOnMainThread(()=>{
-					if(m_SelfSeatID >= 0 || GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){
+					if(m_SelfSeatID == 0 || GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){
 						m_StateManage.m_StateBetting.RealExit();
 						Common.ConfigSortTime = (int)data.GameStateNotify.Countdown / 1000;
 						m_StateManage.ChangeState (STATE.STATE_SORTING);
@@ -702,25 +705,32 @@ public class GameController : MonoBehaviour {
 							p.Score = data.SitDownNotify.Score;
 						}
 					}
-
 					SetSeatID (data.SitDownNotify.Uid, (int)data.SitDownNotify.SeatId);
 					UpdateOrderList ();
+
+					if(GetTablePlayersCount() > 1 && Common.CState == Msg.GameState.Ready){m_Letplay.SetActive(true);}
 				}); 
 			}
 			break;
 
 		case MessageID.StandUpNotify:
 			if(data.StandUpNotify.Reason == StandUpReason.NoActionFor3Hands){
-				Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorOutdue);
+				Loom.QueueOnMainThread (() => {
+					if(m_SelfSeatID == 0){m_FirstSetBanker =false;}
+					Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorOutdue);
+				});
 			}
 			else if(data.StandUpNotify.Reason == StandUpReason.CreditPointsOut){
-				Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorGameCreditMax);
+				Loom.QueueOnMainThread (() => {
+					Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorGameCreditMax);
+				});
 			}
 
 			Loom.QueueOnMainThread (() => {
 				m_StateManage.m_StateBetting.UpdateChipsUI (GetSeatIDForPlayerID (data.StandUpNotify.Uid), 0);
 				SetSeatID (data.StandUpNotify.Uid, -1);
 				UpdateOrderList ();
+				if(GetTablePlayersCount() <= 1 && Common.CState == Msg.GameState.Ready){m_Letplay.SetActive(false);}
 			}); 
 
 			break;
@@ -739,6 +749,7 @@ public class GameController : MonoBehaviour {
 		case MessageID.LeaveRoomNotify:
 			Loom.QueueOnMainThread (() => {
 				LeaveRoomEvent (data.LeaveRoomNotify.Uid);
+				if(GetTablePlayersCount() <= 1 && Common.CState == Msg.GameState.Ready){m_Letplay.SetActive(false);}
 			}); 
 			break;
 
@@ -798,19 +809,22 @@ public class GameController : MonoBehaviour {
 
 	public void StandUpServer(){
 		if(m_SelfSeatID == -1){return;}
-		if (m_StateManage.GetCulState () != STATE.STATE_SEAT || m_StateManage.GetCulState () != STATE.STATE_BETTING) {return;}
-		if(GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){return;}
-		if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
-		m_GameConsole.CloseMenu ();
 
-		Protocol msg 					= new Protocol();
-		msg.Msgid 						= MessageID.StandUpReq;
-		msg.StandUpReq 					= new StandUpReq();
+		if (m_StateManage.GetCulState () == STATE.STATE_SEAT || m_StateManage.GetCulState () == STATE.STATE_BETTING) {
+			if(m_SelfSeatID == 0){return;}
+			if(GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){return;}
+			if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
+			m_GameConsole.CloseMenu ();
 
-		using (var stream = new MemoryStream())
-		{
-			msg.WriteTo(stream);
-			Client.Instance.Send(stream.ToArray());
+			Protocol msg 					= new Protocol();
+			msg.Msgid 						= MessageID.StandUpReq;
+			msg.StandUpReq 					= new StandUpReq();
+
+			using (var stream = new MemoryStream())
+			{
+				msg.WriteTo(stream);
+				Client.Instance.Send(stream.ToArray());
+			}
 		}
 	}
 

@@ -110,7 +110,7 @@ public class LoginController : MonoBehaviour {
 				Loom.QueueOnMainThread (() => {
 					Common.Uid = data.LoginRsp.Uid;
 					Common.FB_name = data.LoginRsp.Name;
-					Common.CRoom_number = data.LoginRsp.RoomNumber;
+					//Common.CRoom_number = data.LoginRsp.RoomNumber;
 					Common.FB_avatar = data.LoginRsp.Avatar;
 					Common.IsOnline = true;
 					GotoLobby ();

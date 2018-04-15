@@ -438,8 +438,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 507490994}
-  m_Father: {fileID: 102529633}
-  m_RootOrder: 4
+  m_Father: {fileID: 199560448}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1310,7 +1310,6 @@ RectTransform:
   - {fileID: 2075090011}
   - {fileID: 640638125}
   - {fileID: 1802173711}
-  - {fileID: 28345313}
   - {fileID: 1687189954}
   m_Father: {fileID: 199560448}
   m_RootOrder: 2
@@ -2855,6 +2854,7 @@ RectTransform:
   - {fileID: 1882393948}
   - {fileID: 674843865}
   - {fileID: 102529633}
+  - {fileID: 28345313}
   - {fileID: 608673515}
   - {fileID: 1603598186}
   - {fileID: 766931235}
@@ -4320,7 +4320,7 @@ RectTransform:
   - {fileID: 1457768386}
   - {fileID: 263208187}
   m_Father: {fileID: 199560448}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5703,7 +5703,7 @@ RectTransform:
   - {fileID: 1072988485}
   - {fileID: 163451663}
   m_Father: {fileID: 199560448}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9095,7 +9095,7 @@ RectTransform:
   - {fileID: 1112188792}
   - {fileID: 21218372}
   m_Father: {fileID: 199560448}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9166,7 +9166,7 @@ RectTransform:
   m_Children:
   - {fileID: 1780252051}
   m_Father: {fileID: 199560448}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11285,7 +11285,7 @@ RectTransform:
   - {fileID: 940920839}
   - {fileID: 2127340711}
   m_Father: {fileID: 199560448}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15022,7 +15022,7 @@ RectTransform:
   - {fileID: 1047229612}
   - {fileID: 1553425979}
   m_Father: {fileID: 199560448}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18022,7 +18022,7 @@ RectTransform:
   - {fileID: 661391843}
   - {fileID: 277348298}
   m_Father: {fileID: 199560448}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -20188,7 +20188,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 199560448}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22900,7 +22900,7 @@ RectTransform:
   - {fileID: 1897112972}
   - {fileID: 838707391}
   m_Father: {fileID: 199560448}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -23444,7 +23444,7 @@ RectTransform:
   m_Children:
   - {fileID: 1742887619}
   m_Father: {fileID: 199560448}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24275,7 +24275,7 @@ RectTransform:
   - {fileID: 468533551}
   - {fileID: 1080183634}
   m_Father: {fileID: 102529633}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -28327,7 +28327,7 @@ RectTransform:
   - {fileID: 1171559273}
   - {fileID: 1491011750}
   m_Father: {fileID: 199560448}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -29457,6 +29457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Canvas: {fileID: 0}
   m_GameConsole: {fileID: 608673516}
+  m_Letplay: {fileID: 28345312}
   m_StateManage: {fileID: 1367642931}
   PrefabDialog: {fileID: 1678114731079740, guid: 6ba7c72446a13554ea2f70fc89eb2db7,
     type: 2}
