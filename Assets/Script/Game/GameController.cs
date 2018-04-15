@@ -540,7 +540,9 @@ public class GameController : MonoBehaviour {
 					}
 				}); 
 			} else {
-				Common.TipsOn (PrefabTips, Canvas.gameObject, Common.TipsSeatWasToken);
+				Loom.QueueOnMainThread (() => {
+					Common.TipsOn (PrefabTips, Canvas.gameObject, Common.TipsSeatWasToken);
+				});
 			}
 			break;
 
@@ -902,5 +904,9 @@ public class GameController : MonoBehaviour {
 			SoundEffect.clip = Effects [(int)ect];
 			SoundEffect.Play ();
 		}
+	}
+
+	public void test(){
+		Common.TipsOn (PrefabTips, Canvas.gameObject, Common.TipsSeatWasToken);
 	}
 }
