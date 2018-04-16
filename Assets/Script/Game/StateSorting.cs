@@ -468,7 +468,29 @@ public class StateSorting : State {
 	}
 
 	public void AutoSelected(){
-		if(HandPokers.Count <= 3 && (UpperPokers.Count + HandPokers.Count) <= 3 ){
+		if(UpperPokers.Count + HandPokers.Count <= 3 ){
+			List<uint> temp = new List<uint> ();
+
+			foreach(int p in HandPokers){
+				if(!Pokers[p].IsSelected){
+					temp.Add ((uint)p);
+				}
+			}
+
+			SelectPokers (temp.ToArray());
+		}
+		else if(MiddlePokers.Count + HandPokers.Count <= 5 ){
+			List<uint> temp = new List<uint> ();
+
+			foreach(int p in HandPokers){
+				if(!Pokers[p].IsSelected){
+					temp.Add ((uint)p);
+				}
+			}
+
+			SelectPokers (temp.ToArray());
+		}
+		else if(UnderPokers.Count + HandPokers.Count <= 5 ){
 			List<uint> temp = new List<uint> ();
 
 			foreach(int p in HandPokers){
@@ -932,13 +954,35 @@ public class StateSorting : State {
 		}
 
 		if (UpperPokers.Count > 0 && MiddlePokers.Count > 0) {
-			if((int)GetRanksType (UpperPokers) > (int)GetRanksType (MiddlePokers)){
+			List<uint> t = new List<uint> ();
+			foreach(int p in UpperPokers){
+				t.Add ((uint)p);
+			}
+
+			List<uint> t1 = new List<uint> ();
+			foreach(int p in MiddlePokers){
+				t1.Add ((uint)p);
+			}
+
+			if(Pusoy.CardRankFinder.Compare (t.ToArray(), t1.ToArray()) > 0){
 				Layer1.Find ("UpperTips").GetComponent<Text> ().color = rcolor;
 			}
 		}
 
 		if (MiddlePokers.Count > 0 && UnderPokers.Count > 0) {
-			if((int)GetRanksType (MiddlePokers) > (int)GetRanksType (UnderPokers)){
+			
+			List<uint> t = new List<uint> ();
+			foreach(int p in MiddlePokers){
+				t.Add ((uint)p);
+			}
+
+			List<uint> t1 = new List<uint> ();
+			foreach(int p in UnderPokers){
+				t1.Add ((uint)p);
+			}
+
+
+			if(Pusoy.CardRankFinder.Compare (t.ToArray(), t1.ToArray()) > 0){
 				Layer1.Find ("MiddleTips").GetComponent<Text> ().color = rcolor;
 			}
 		}

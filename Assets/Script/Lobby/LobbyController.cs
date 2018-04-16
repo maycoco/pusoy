@@ -52,6 +52,7 @@ public class LobbyController : MonoBehaviour {
 	void Start () {
 		Common.Sumbiting = false;
 		Common.Trying = 0;
+		Conneting.SetActive (false);
 		CheckConnection ();
 	}
 
@@ -103,18 +104,10 @@ public class LobbyController : MonoBehaviour {
 
 	//connecting
 	public void CheckConnection(){
-		Conneting.SetActive (false);
-			
 		if (!Common.IsOnline) {
-			Conneting.SetActive (true);
 			protonet.ConnectServer ();
 		} else {
-			if (!string.IsNullOrEmpty (Common.CRoom_number)) {
-				Conneting.SetActive (true);
-				JoinRoomServer (Common.CRoom_number);
-			} else {
-				RoomListServer ();
-			}
+			GetPlayingRoomServer ();
 		}
 	}
 
@@ -281,7 +274,7 @@ public class LobbyController : MonoBehaviour {
 	public void Data(Protocol data){
 		Loom.QueueOnMainThread(()=>{  
 			Common.Sumbiting = false;
-			Common.EndCalling (Canvas);
+			Common.EndCalling ();
 		}); 
 
 		if(data == null){return;}
@@ -290,23 +283,18 @@ public class LobbyController : MonoBehaviour {
 		switch (data.Msgid) {
 
 		case MessageID.LoginRsp:
+			
 			if (data.LoginRsp.Ret == 0) {
 				Common.Uid = data.LoginRsp.Uid;
 				Common.FB_name = data.LoginRsp.Name;
-				//Common.CRoom_number = data.LoginRsp.RoomNumber;
 				Common.FB_avatar = data.LoginRsp.Avatar;
 				Common.IsOnline = true;
 
 				Loom.QueueOnMainThread (() => {
-					if(!string.IsNullOrEmpty(Common.CRoom_number)){
-						JoinRoomServer (Common.CRoom_number);
-					}
-					else{
-						Conneting.SetActive (false);
-					}
+					GetPlayingRoomServer ();
 				}); 
 			} else {
-				Loom.QueueOnMainThread (() => {  
+				Loom.QueueOnMainThread (() => { 
 					Common.ErrorDialog (PrefabDialog, Canvas, Common.ErrorLogin);
 				}); 
 			}
@@ -352,6 +340,21 @@ public class LobbyController : MonoBehaviour {
 			}
 			break;
 
+		case MessageID.GetPlayingRoomRsp:
+			if (data.GetPlayingRoomRsp.Ret == 0) {
+				Loom.QueueOnMainThread (() => {
+					Common.CRoom_number = data.GetPlayingRoomRsp.RoomNumber;
+
+					if(string.IsNullOrEmpty(Common.CRoom_number)){
+						RoomListServer ();
+					}
+					else{
+						JoinRoomServer (Common.CRoom_number);
+					}
+				}); 
+			} 
+			break;
+
 		case MessageID.CreateRoomRsp:
 			if (data.CreateRoomRsp.Ret == 0) {
 				Loom.QueueOnMainThread (() => {
@@ -376,6 +379,10 @@ public class LobbyController : MonoBehaviour {
 			break;
 
 		case MessageID.JoinRoomRsp:
+			Loom.QueueOnMainThread (() => {
+				Conneting.SetActive (false);
+			}); 
+
 			if (data.JoinRoomRsp.Ret == 0) {
 				Common.CRoom_id = data.JoinRoomRsp.Room.RoomId;
 				Common.CRoom_number = data.JoinRoomRsp.Room.Number;
@@ -523,6 +530,7 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	 public void JoinRoomServer(string room_number){
+		Conneting.SetActive (true);
 		if(!Common.Sumbit (PrefabTips ,Canvas)){return;}
 
 		Protocol msg 					= new Protocol();
@@ -643,6 +651,19 @@ public class LobbyController : MonoBehaviour {
 			Client.Instance.Send(stream.ToArray());
 		}
 	}
+
+	public void  GetPlayingRoomServer(){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.GetPlayingRoomReq;
+		msg.GetPlayingRoomReq 			= new GetPlayingRoomReq();
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
 
 	public void OnMusic(){
 		Music.Stop ();

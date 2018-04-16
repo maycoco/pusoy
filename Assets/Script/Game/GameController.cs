@@ -497,7 +497,7 @@ public class GameController : MonoBehaviour {
 	public void Data(Protocol data){
 		Loom.QueueOnMainThread(()=>{  
 			Common.Sumbiting = false;
-			Common.EndCalling (Canvas.gameObject);
+			Common.EndCalling ();
 		}); 
 
 

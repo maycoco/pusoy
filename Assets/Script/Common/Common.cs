@@ -68,6 +68,10 @@ public class Common: MonoBehaviour
 	public static List<int>	CPokers			= new List<int>();
 	public static List<int>	CSeats			= new List<int>();
 
+	//GameObject
+	public static GameObject CallingObj		= null;		
+	public static GameObject TipsOnObj		= null;
+
 	//Career
 	public static List<int> CareerWins 	= new List<int>();
 
@@ -196,31 +200,31 @@ public class Common: MonoBehaviour
 	}
 
 	public static void Calling(GameObject Obj){
-		EndCalling (Obj);
+		EndCalling ();
 
-		GameObject Calling = new GameObject ();
-		Calling.AddComponent<RectTransform>();
-		Calling.GetComponent<RectTransform> ().sizeDelta = new Vector2 (640, 1136);
-		Calling.name = "Calling";
-		Calling.transform.SetParent (Obj.transform);
+		CallingObj = new GameObject ();
+		CallingObj.AddComponent<RectTransform>();
+		CallingObj.GetComponent<RectTransform> ().sizeDelta = new Vector2 (640, 1136);
+		CallingObj.name = "Calling";
+		CallingObj.transform.SetParent (Obj.transform);
 
 
 		GameObject Mask = new GameObject ();
 		Mask.AddComponent<Image> ();
 		Mask.GetComponent<Image> ().color = new Color (0,0,0, 25.0f / 255);
 		Mask.GetComponent<RectTransform> ().sizeDelta = new Vector2 (640, 1136);
-		Mask.transform.SetParent (Calling.transform);
+		Mask.transform.SetParent (CallingObj.transform);
 
 
 		GameObject Anime = new GameObject ();
 		Anime.AddComponent<Image> ();
 		Anime.GetComponent<Image>().sprite =  Resources.Load("Image/Common/calling", typeof(Sprite)) as Sprite;
 		Anime.GetComponent<RectTransform> ().sizeDelta = new Vector2 (100, 100);
-		Anime.transform.SetParent (Calling.transform);
+		Anime.transform.SetParent (CallingObj.transform);
 
 
-		Calling.transform.localScale = new Vector3 (1,1,1);
-		Calling.transform.localPosition = new Vector3 (0,0,0);
+		CallingObj.transform.localScale = new Vector3 (1,1,1);
+		CallingObj.transform.localPosition = new Vector3 (0,0,0);
 
 		Mask.transform.localScale = new Vector3 (1,1,1);
 		Mask.transform.localPosition = new Vector3 (0,0,0);
@@ -231,9 +235,10 @@ public class Common: MonoBehaviour
 		Anime.transform.DOBlendableLocalRotateBy (new Vector3 (0, 0, -180), 0.8f).SetLoops(-1, LoopType.Incremental);
 	}
 
-	public static void EndCalling(GameObject Obj){
-		if(Obj.transform.Find("Calling") != null){
-			Destroy(Obj.transform.Find("Calling").gameObject);
+	public static void EndCalling(){
+		if(CallingObj != null){
+			Destroy(CallingObj);
+			CallingObj = null;
 		}
 	}
 

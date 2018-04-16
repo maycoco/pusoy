@@ -100,7 +100,7 @@ public class LoginController : MonoBehaviour {
 
 	public void Data(Protocol data){
 		Loom.QueueOnMainThread(()=>{  
-			Common.EndCalling (Canvas);
+			Common.EndCalling ();
 		}); 
 
 		if(data == null){return;}
@@ -110,7 +110,6 @@ public class LoginController : MonoBehaviour {
 				Loom.QueueOnMainThread (() => {
 					Common.Uid = data.LoginRsp.Uid;
 					Common.FB_name = data.LoginRsp.Name;
-					//Common.CRoom_number = data.LoginRsp.RoomNumber;
 					Common.FB_avatar = data.LoginRsp.Avatar;
 					Common.IsOnline = true;
 					GotoLobby ();
