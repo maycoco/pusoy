@@ -27,6 +27,12 @@ public class StateSeat : State{
 		m_GameController.UpdateOrderList();
 	}
 
+	public void ShowUI(){
+		m_GameController.UpdateRooimInfo ();
+		m_GameController.ShowTableInfo ();
+		m_GameController.ShowGameConsole ();
+	}
+
 	public override void Exit(){
 		Layer.Find ("TipsPick").gameObject.SetActive (false);
 		Layer.Find("TipsWaitStart").gameObject.SetActive (false);

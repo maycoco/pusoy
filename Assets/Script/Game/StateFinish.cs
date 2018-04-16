@@ -35,6 +35,7 @@ public class StateFinish : State {
 		Common.CPlayed_hands++;
 		CancelInvoke ();
 		Layer.gameObject.SetActive (false);
+		m_StateManage.m_StateSeat.ShowUI ();
 	}
 
 	public override void AdjustUI(){
@@ -58,7 +59,7 @@ public class StateFinish : State {
 
 	public void Next(){
 		if ((Common.CPlayed_hands + 1) < Common.CHands) {
-			m_StateManage.ChangeState(STATE.STATE_SEAT);
+			m_StateManage.ChangeState (STATE.STATE_SEAT);
 		} else {
 			HideLayer ();
 			m_GameController.m_LastDialog.SetActive (true);
