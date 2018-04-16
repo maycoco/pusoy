@@ -44,9 +44,7 @@ public class StateBetting : State {
 		if (m_GameController.m_SelfSeatID > 0 && m_GameController.GetPlayerInfoForSeatID(m_GameController.m_SelfSeatID).Bet == 0) {
 			AdjustUI ();
 		}
-
-		foreach(PlayerInfo p in Common.CPlayers){p.Bet = 0;}
-
+			
 		if(m_GameController.m_SelfSeatID == 0){
 			m_StateManage.m_StateSeat.ShowAutoBanker ();
 			m_StateManage.m_StateSeat.UpdateAutoBanker ();
@@ -86,12 +84,14 @@ public class StateBetting : State {
 	}
 
 	public override void Exit (){
+		foreach(PlayerInfo p in Common.CPlayers){p.Bet = 0;}
 		ClearChipsButton ();
 		ClearCountDown ();
 		m_StateManage.m_StateSeat.HideAutoBanker ();
 	}
 
 	public void RealExit(){
+		foreach(PlayerInfo p in Common.CPlayers){p.Bet = 0;}
 		ClearAllChips ();
 		Layer.gameObject.SetActive (false);
 	}
