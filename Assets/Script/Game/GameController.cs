@@ -725,7 +725,9 @@ public class GameController : MonoBehaviour {
 			if(data.StandUpNotify.Reason == StandUpReason.NoActionFor3Hands){
 				Loom.QueueOnMainThread (() => {
 					if(m_SelfSeatID == 0){m_FirstSetBanker =false;}
-					Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorOutdue);
+					if(data.StandUpNotify.Uid == Common.Uid){
+						Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorOutdue);
+					}
 				});
 			}
 			else if(data.StandUpNotify.Reason == StandUpReason.CreditPointsOut){
