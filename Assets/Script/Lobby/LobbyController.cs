@@ -354,9 +354,9 @@ public class LobbyController : MonoBehaviour {
 
 		case MessageID.CreateRoomRsp:
 			if (data.CreateRoomRsp.Ret == 0) {
-				Common.CRoom_id = data.CreateRoomRsp.RoomId;
-				Common.CRoom_number	= data.CreateRoomRsp.RoomNumber;
 				Loom.QueueOnMainThread (() => {
+					Common.CRoom_id = data.CreateRoomRsp.RoomId;
+					Common.CRoom_number	= data.CreateRoomRsp.RoomNumber;
 					JoinRoomServer (Common.CRoom_number);
 				}); 
 			} else if (data.CreateRoomRsp.Ret == ErrorID.CreateRoomNotEnoughDiamonds) {
