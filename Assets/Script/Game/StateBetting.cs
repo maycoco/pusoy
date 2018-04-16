@@ -117,7 +117,6 @@ public class StateBetting : State {
 	}
 		
 	public void UpdateBettingTime(){
-		
 		if (BettingTime > 0) {
 
 			if (BettingTime.ToString ().Length <= 1) {
@@ -138,7 +137,6 @@ public class StateBetting : State {
 			CanBet = false;
 			ClearCountDown ();
 			ClearChipsButton ();
-			BetConfim ();
 		}
 		BettingTime--;
 	}
@@ -323,6 +321,7 @@ public class StateBetting : State {
 	}
 
 	public void ShowConfimBet(){
+		BetConfim ();
 		DCanBetCall ();
 		ClearCountDown ();
 		ClearChipsButton ();

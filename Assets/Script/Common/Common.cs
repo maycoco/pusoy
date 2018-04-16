@@ -106,6 +106,7 @@ public class Common: MonoBehaviour
 	public static string	TipsComingSoon		= "Coming Soon";
 	public static string 	TipsSeatWasToken	= "Seat was taken";
 	public static string 	TipsMaxBet			= "Maximum bet is ";
+	public static string 	TipsCreditMax		= "Credit max out";
 
 	public static string 	ErrorGameCreditMax	= "Game credit max out";
 	public static string	ErrorOutdue			= "Out due to no action for 3 hands";

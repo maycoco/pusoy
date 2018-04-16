@@ -81,10 +81,10 @@ public class StateShowHand : State {
 	}
 
 	public void ShowHand(){
-		Invoke("ShowBankerHands", 0.6f);
+		Invoke("ShowBankerHands", 0.3f);
 
 		for(int i = 0; i < Seats.Count; i++) {
-			Invoke("ShowPlayerHand", i + 1);
+			Invoke("ShowPlayerHand", i + 1.4f);
 		}
 	}
 

@@ -539,7 +539,13 @@ public class GameController : MonoBehaviour {
 						m_StateManage.m_StateBetting.SitDown ();
 					}
 				}); 
-			} else {
+			} 
+			else if(data.SitDownRsp.Ret == ErrorID.SitDownCreditPointsOut){
+				Loom.QueueOnMainThread (() => {
+					Common.TipsOn (PrefabTips, Canvas.gameObject, Common.TipsCreditMax);
+				});
+			}
+			else {
 				Loom.QueueOnMainThread (() => {
 					Common.TipsOn (PrefabTips, Canvas.gameObject, Common.TipsSeatWasToken);
 				});
@@ -629,7 +635,6 @@ public class GameController : MonoBehaviour {
 	
 			case Msg.GameState.Ready:
 				Loom.QueueOnMainThread(()=>{
-					Debug.Log(1111);
 					m_StateManage.ChangeState (STATE.STATE_SEAT);
 					if(m_SelfSeatID == 0 && GetTablePlayersCount() > 1 ){m_Letplay.SetActive(true);}
 				}); 
@@ -676,13 +681,13 @@ public class GameController : MonoBehaviour {
 					m_GameConsole.HideWaitAnime();
 
 					ResultEvent(data.GameStateNotify.Result);
-					m_StateManage.m_StateSeat.UpdateSeatScore();
 					m_StateManage.ChangeState (STATE.STATE_SHOWHAND);
 				}); 
 				break;
 
 			case Msg.GameState.Result:
 				Loom.QueueOnMainThread(()=>{
+					m_StateManage.m_StateSeat.UpdateSeatScore();
 					Common.ConfigFinishTime = (int)data.GameStateNotify.Countdown / 1000;
 					m_StateManage.ChangeState (STATE.STATE_FINISH);
 				}); 
@@ -711,7 +716,7 @@ public class GameController : MonoBehaviour {
 					UpdateOrderList ();
 
 
-					if(GetTablePlayersCount() > 1 && Common.CState == Msg.GameState.Ready){m_Letplay.SetActive(true);}
+					if(m_SelfSeatID == 0 &&  GetTablePlayersCount() > 1 && Common.CState == Msg.GameState.Ready){m_Letplay.SetActive(true);}
 				}); 
 			}
 			break;
