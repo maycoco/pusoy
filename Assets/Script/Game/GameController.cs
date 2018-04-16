@@ -119,7 +119,7 @@ public class GameController : MonoBehaviour {
 		if(Common.CState == Msg.GameState.Bet){
 			m_StateManage.SetState (STATE.STATE_SEAT);
 			m_StateManage.ChangeState (STATE.STATE_BETTING);
-			m_StateManage.m_StateBetting.UpdatePlayersChips ();
+			m_StateManage.m_StateBetting.DisAdjustUIChipControl ();
 		}
 
 		if(Common.CState == Msg.GameState.ConfirmBet){
@@ -645,6 +645,7 @@ public class GameController : MonoBehaviour {
 					m_Letplay.SetActive(false);
 					Common.ConfigBetTime = (int)data.GameStateNotify.Countdown / 1000;
 					m_StateManage.ChangeState (STATE.STATE_BETTING);
+					m_StateManage.m_StateBetting.AdjustUIChipControl();
 				}); 
 				break;
 

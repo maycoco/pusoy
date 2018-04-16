@@ -41,10 +41,6 @@ public class StateBetting : State {
 		m_ChipsBeginPos.Clear ();
 		CreateChipPos ();
 
-		if (m_GameController.m_SelfSeatID > 0 && m_GameController.GetPlayerInfoForSeatID(m_GameController.m_SelfSeatID).Bet == 0) {
-			AdjustUI ();
-		}
-			
 		if(m_GameController.m_SelfSeatID == 0){
 			m_StateManage.m_StateSeat.ShowAutoBanker ();
 			m_StateManage.m_StateSeat.UpdateAutoBanker ();
@@ -75,7 +71,9 @@ public class StateBetting : State {
 		m_ChipsPos [0] = new Vector3 (0,0,0);
 	}
 
-	public override void AdjustUI (){
+	public void AdjustUIChipControl (){
+		foreach(PlayerInfo p in Common.CPlayers){p.Bet = 0;}
+
 		Layer.Find ("ChipsMask").localPosition =  CMPos;
 		for(int i = 0; i < m_ChipsType.Count; i++){
 			Layer.Find ("ChipsMask/Chip" + i + "/Value").GetComponent<Text> ().text = m_ChipsType [i].ToString ();
@@ -83,15 +81,25 @@ public class StateBetting : State {
 		ShowBeetingArea ();
 	}
 
+	public void DisAdjustUIChipControl (){
+		if(m_GameController.m_SelfSeatID > 0 && m_GameController.GetPlayerInfoForSeatID(m_GameController.m_SelfSeatID).Bet == 0){
+			Layer.Find ("ChipsMask").localPosition =  CMPos;
+			for(int i = 0; i < m_ChipsType.Count; i++){
+				Layer.Find ("ChipsMask/Chip" + i + "/Value").GetComponent<Text> ().text = m_ChipsType [i].ToString ();
+			}
+			ShowBeetingArea ();
+		}
+
+		UpdatePlayersChips ();
+	}
+
 	public override void Exit (){
-		foreach(PlayerInfo p in Common.CPlayers){p.Bet = 0;}
 		ClearChipsButton ();
 		ClearCountDown ();
 		m_StateManage.m_StateSeat.HideAutoBanker ();
 	}
 
 	public void RealExit(){
-		foreach(PlayerInfo p in Common.CPlayers){p.Bet = 0;}
 		ClearAllChips ();
 		Layer.gameObject.SetActive (false);
 	}
