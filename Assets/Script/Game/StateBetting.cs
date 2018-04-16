@@ -73,24 +73,24 @@ public class StateBetting : State {
 
 	public void AdjustUIChipControl (){
 		foreach(PlayerInfo p in Common.CPlayers){p.Bet = 0;}
+		if (m_GameController.m_SelfSeatID > 0) {
+			OnChipsControl ();
+		}
+	}
 
+	public void DisAdjustUIChipControl (){
+		if(m_GameController.m_SelfSeatID > 0 && m_GameController.GetPlayerInfoForSeatID(m_GameController.m_SelfSeatID).Bet == 0){
+			OnChipsControl ();
+		}
+		UpdatePlayersChips ();
+	}
+
+	public void OnChipsControl(){
 		Layer.Find ("ChipsMask").localPosition =  CMPos;
 		for(int i = 0; i < m_ChipsType.Count; i++){
 			Layer.Find ("ChipsMask/Chip" + i + "/Value").GetComponent<Text> ().text = m_ChipsType [i].ToString ();
 		}
 		ShowBeetingArea ();
-	}
-
-	public void DisAdjustUIChipControl (){
-		if(m_GameController.m_SelfSeatID > 0 && m_GameController.GetPlayerInfoForSeatID(m_GameController.m_SelfSeatID).Bet == 0){
-			Layer.Find ("ChipsMask").localPosition =  CMPos;
-			for(int i = 0; i < m_ChipsType.Count; i++){
-				Layer.Find ("ChipsMask/Chip" + i + "/Value").GetComponent<Text> ().text = m_ChipsType [i].ToString ();
-			}
-			ShowBeetingArea ();
-		}
-
-		UpdatePlayersChips ();
 	}
 
 	public override void Exit (){
