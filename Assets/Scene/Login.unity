@@ -501,7 +501,6 @@ MonoBehaviour:
   Canvas: {fileID: 684690734}
   PrefabDialog: {fileID: 1678114731079740, guid: 6ba7c72446a13554ea2f70fc89eb2db7,
     type: 2}
-  Test: {fileID: 0}
 --- !u!1 &1013955555
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,6 +824,7 @@ GameObject:
   - component: {fileID: 1425170699}
   - component: {fileID: 1425170698}
   - component: {fileID: 1425170697}
+  - component: {fileID: 1425170700}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -935,6 +935,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1425170695}
+--- !u!114 &1425170700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1425170695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adcd5271d2e9d144888564ad9bf50bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1493760649
 GameObject:
   m_ObjectHideFlags: 0
