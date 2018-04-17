@@ -14779,7 +14779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b030fb783dbb448db12801c4fb09726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabRoomInfo: {fileID: 1054372550421818, guid: 08138f929721adf43bed6717df88e270,
+  PrefabRoomInfo: {fileID: 1869011429082880, guid: 08138f929721adf43bed6717df88e270,
     type: 2}
   PrefabDialog: {fileID: 1678114731079740, guid: 6ba7c72446a13554ea2f70fc89eb2db7,
     type: 2}
