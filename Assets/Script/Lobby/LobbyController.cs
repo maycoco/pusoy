@@ -360,7 +360,7 @@ public class LobbyController : MonoBehaviour {
 				Loom.QueueOnMainThread (() => {
 					Common.CRoom_id = data.CreateRoomRsp.RoomId;
 					Common.CRoom_number	= data.CreateRoomRsp.RoomNumber;
-					JoinRoomServer (Common.CRoom_number);
+					JoinRoomServer (Common.CRoom_number, false);
 				}); 
 			} else if (data.CreateRoomRsp.Ret == ErrorID.CreateRoomNotEnoughDiamonds) {
 				Loom.QueueOnMainThread (() => {  
@@ -529,8 +529,11 @@ public class LobbyController : MonoBehaviour {
 		}
 	}
 
-	 public void JoinRoomServer(string room_number){
-		Conneting.SetActive (true);
+	public void JoinRoomServer(string room_number, bool reconect = true){
+		if(reconect){
+			Conneting.SetActive (true);
+		}
+
 		if(!Common.Sumbit (PrefabTips ,Canvas)){return;}
 
 		Protocol msg 					= new Protocol();

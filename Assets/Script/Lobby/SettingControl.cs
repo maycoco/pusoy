@@ -33,12 +33,17 @@ public class SettingControl : MonoBehaviour
 			transform.Find ("Consoles/Music/Button").GetComponent<Image>().sprite =  Resources.Load ("Image/Lobby/select_off", typeof(Sprite)) as Sprite;
 			transform.Find ("Consoles/Music/Button/Image").localPosition = new Vector3 (-19, 0, 0);
 		}
-		this.gameObject.SetActive (true);
+
+		transform.localPosition = new Vector3(-640, 0, 0);
+		Sequence s = DOTween.Sequence ();
+		s.Append (transform.DOLocalMoveX (30, 0.2f));
+		s.Append (transform.DOLocalMoveX (0, 0.2f));
+		s.Play ();
 	}
 
 	public void Exit(){
 		m_LobbyController.PlayerButtonEffect ();
-		this.gameObject.SetActive (false);
+		transform.DOLocalMoveX (-640, 0.15f);
 	}
 
 	public void Language(){

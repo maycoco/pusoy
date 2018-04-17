@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class JoinRoomControl : MonoBehaviour {
 	public LobbyController	LobbyControl;
@@ -22,12 +23,17 @@ public class JoinRoomControl : MonoBehaviour {
 	public void Enter(){
 		Roomnumber = "";
 		UpdatePssword ();
-		this.gameObject.SetActive (true);
+
+		transform.localPosition = new Vector3(-640, 0, 0);
+		Sequence s = DOTween.Sequence ();
+		s.Append (transform.DOLocalMoveX (30, 0.2f));
+		s.Append (transform.DOLocalMoveX (0, 0.2f));
+		s.Play ();
 	}
 
 	public void Exit(){
 		LobbyControl.PlayerButtonEffect ();
-		this.gameObject.SetActive (false);
+		transform.DOLocalMoveX (-640, 0.15f);
 	}
 
 	public void InputPassword(int Pword){
@@ -64,7 +70,7 @@ public class JoinRoomControl : MonoBehaviour {
 
 	public void JoinRoom(){
 		if(!string.IsNullOrEmpty(Roomnumber)){
-			LobbyControl.JoinRoomServer (Roomnumber);
+			LobbyControl.JoinRoomServer (Roomnumber, false);
 		}
 	}
 }

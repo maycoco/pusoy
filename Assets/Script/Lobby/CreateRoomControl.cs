@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class CreateRoomControl : MonoBehaviour {
 	public LobbyController	LobbyControl;
@@ -35,13 +36,18 @@ public class CreateRoomControl : MonoBehaviour {
 		MinBetArray = new List<uint> (Common.ConfigMinBet);
 		HandsArray 	= new List<uint> (Common.ConfigHands);
 
-		this.gameObject.SetActive (true);
 		AdjustUI ();
+
+		transform.localPosition = new Vector3(-640, 0, 0);
+		Sequence s = DOTween.Sequence ();
+		s.Append (transform.DOLocalMoveX (30, 0.2f));
+		s.Append (transform.DOLocalMoveX (0, 0.2f));
+		s.Play ();
 	}
 
 	public void Exit(){
+		transform.DOLocalMoveX (-640, 0.15f);
 		LobbyControl.PlayerButtonEffect ();
-		this.gameObject.SetActive (false);
 	}
 
 	void AdjustUI(){
