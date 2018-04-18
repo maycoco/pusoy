@@ -14,6 +14,7 @@ public class StateBetting : State {
 	private List<Vector3> 	m_ChipsBeginPos 	= new List<Vector3> ();
 	private List<int> 		m_ChipsType			= new List<int>();
 	private int 			m_MaxChips    		= 0;
+	private	bool 			m_BetConfim =false;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +33,7 @@ public class StateBetting : State {
 		Debug.Log ("==============================state betting===================================");
 		Layer.gameObject.SetActive (true);
 
+		m_BetConfim = false;
 		BettingTime = Common.ConfigBetTime;
 
 		ClearAllChips ();
@@ -325,12 +327,15 @@ public class StateBetting : State {
 		if(m_StateManage.GetCulState() != STATE.STATE_BETTING){return;}
 		if(GetChipsAmoun() > 0){
 			CanBet = false;
+			m_BetConfim = true;
 			m_GameController.BetServer ((uint)GetChipsAmoun());
 		}
 	}
 
 	public void ShowConfimBet(){
-		BetConfim ();
+		if(!m_BetConfim){
+			BetConfim ();
+		}
 		DCanBetCall ();
 		ClearCountDown ();
 		ClearChipsButton ();

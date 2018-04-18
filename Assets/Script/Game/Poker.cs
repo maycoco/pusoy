@@ -49,9 +49,7 @@ public class Poker : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDra
 
 		Border.SetActive(true);
 		Sequence seq = DOTween.Sequence();
-		seq.Append (Border.GetComponent<Image>().DOFade(1,0.1F));
-		seq.Append (Border.GetComponent<Image>().DOFade(0,0.1F));
-		seq.Append (Border.GetComponent<Image>().DOFade(1,0.1F));
+		seq.Append (Border.GetComponent<Image>().DOFade(1,0.4F));
 		seq.Play ();
 		transform.DOLocalMoveY(pos.y + 30, 0.03f).SetEase(Ease.OutQuad);
 	}
