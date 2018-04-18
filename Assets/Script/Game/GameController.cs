@@ -696,13 +696,7 @@ public class GameController : MonoBehaviour {
 					//m_StateManage.m_StateSeat.UpdateSeatScore();
 					Common.ConfigFinishTime = (int)data.GameStateNotify.Countdown / 1000;
 					m_StateManage.ChangeState (STATE.STATE_FINISH);
-				}); 
-				break;
-
-			case Msg.GameState.CloseRoom:
-				Loom.QueueOnMainThread(()=>{
-					m_StateManage.m_StateFinish.HideLayer();
-					m_LastDialog.SetActive(true);
+					Common.CPlayed_hands++;
 				}); 
 				break;
 			}

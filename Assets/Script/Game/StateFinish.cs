@@ -55,7 +55,6 @@ public class StateFinish : State {
 
 	public override void Exit(){
 		Layer.localPosition = new Vector3(-640, 0, 0);
-		Common.CPlayed_hands++;
 		CancelInvoke ();
 		m_StateManage.m_StateSeat.ShowUI ();
 	}
