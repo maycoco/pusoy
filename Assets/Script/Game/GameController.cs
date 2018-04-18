@@ -826,6 +826,9 @@ public class GameController : MonoBehaviour {
 	public void StandUpServer(){
 		if(m_SelfSeatID == -1){return;}
 
+		Debug.Log (m_StateManage.GetCulState ());
+		Debug.Log (GetPlayerInfoForSeatID(m_SelfSeatID).Bet);
+
 		if (m_StateManage.GetCulState () == STATE.STATE_SEAT || m_StateManage.GetCulState () == STATE.STATE_BETTING) {
 			if(GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){return;}
 			if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}

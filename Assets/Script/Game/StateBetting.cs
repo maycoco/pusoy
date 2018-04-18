@@ -96,6 +96,7 @@ public class StateBetting : State {
 	}
 
 	public override void Exit (){
+		ClearAllChips ();
 		ClearChipsButton ();
 		ClearCountDown ();
 		m_StateManage.m_StateSeat.HideAutoBanker ();

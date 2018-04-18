@@ -24,12 +24,12 @@ public class StateFinish : State {
 		Sequence s = DOTween.Sequence ();
 		s.Append (Layer.DOLocalMoveX (30, 0.2f));
 		s.Append (Layer.DOLocalMoveX (0, 0.2f));
-		s.Play ();
+		s.Play().OnComplete(() => ShowResultInfo(true));
+
 
 		m_StateManage.m_StateSeat.UpdateAllSeatScore ();
 		CountDowm = Common.ConfigFinishTime;
-		AdjustUI ();
-		ShowResultInfo (true);
+		ShowHandInfo ();
 
 		if ((Common.CPlayed_hands + 1) < Common.CHands) {
 			BeginCountDown ();
@@ -37,13 +37,13 @@ public class StateFinish : State {
 			Layer.Find ("OK/CountDown").GetComponent<Text> ().text = "OK";
 		}
 	}
-
+		
 	public override void DisEnter(){
 		Layer.localPosition = new Vector3(0, 0, 0);
 
 		m_StateManage.m_StateSeat.UpdateAllSeatScore ();
 		CountDowm = Common.ConfigFinishTime;
-		AdjustUI ();
+		ShowHandInfo ();
 		ShowResultInfo ();
 
 		if ((Common.CPlayed_hands + 1) < Common.CHands) {
@@ -59,11 +59,7 @@ public class StateFinish : State {
 		CancelInvoke ();
 		m_StateManage.m_StateSeat.ShowUI ();
 	}
-
-	public override void AdjustUI(){
-		ShowHandInfo ();
-	}
-
+		
 	public void BeginCountDown(){
 		InvokeRepeating("UpdateSortingTime", 0f, 1.0f);
 	}
