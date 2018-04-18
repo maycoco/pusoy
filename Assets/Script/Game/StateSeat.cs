@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class StateSeat : State{
 	private Transform 		Layer = null;
@@ -137,7 +138,13 @@ public class StateSeat : State{
 		}
 	}
 
-	public void UpdateSeatScore(){
+	public void UpdateSeatScore(int seat, int BScore, int Score){
+		int temp = BScore;
+		Tween t = DOTween.To (() => temp, x => temp = x, Score, 1.4f);
+		t.OnUpdate (()=>updateScore(seat, temp));
+	}
+
+	public void UpdateAllSeatScore(){
 		for (int i = 0; i < Layer.Find ("SeatCom").childCount; i++) {
 			Transform SeatObj = Layer.Find ("SeatCom").GetChild (i);
 
@@ -146,6 +153,10 @@ public class StateSeat : State{
 				SeatObj.Find ("Amount").GetComponent<Text> ().text = player.Score.ToString ();
 			}
 		}
+	}
+
+	public void updateScore(int seat, int num){
+		Layer.Find ("SeatCom/Seat" + seat).Find ("Amount").GetComponent<Text> ().text = num.ToString ();
 	}
 
 	public void UpdateAutoBanker(){

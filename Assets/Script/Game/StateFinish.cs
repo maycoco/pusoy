@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class StateFinish : State {
 	private Transform 		Layer 		= 	null;
@@ -19,10 +20,31 @@ public class StateFinish : State {
 	}
 
 	public override void Enter(){
-		Layer.gameObject.SetActive (true);
+		Layer.localPosition = new Vector3(-640, 0, 0);
+		Sequence s = DOTween.Sequence ();
+		s.Append (Layer.DOLocalMoveX (30, 0.2f));
+		s.Append (Layer.DOLocalMoveX (0, 0.2f));
+		s.Play ();
 
+		m_StateManage.m_StateSeat.UpdateAllSeatScore ();
 		CountDowm = Common.ConfigFinishTime;
 		AdjustUI ();
+		ShowResultInfo (true);
+
+		if ((Common.CPlayed_hands + 1) < Common.CHands) {
+			BeginCountDown ();
+		} else {
+			Layer.Find ("OK/CountDown").GetComponent<Text> ().text = "OK";
+		}
+	}
+
+	public override void DisEnter(){
+		Layer.localPosition = new Vector3(0, 0, 0);
+
+		m_StateManage.m_StateSeat.UpdateAllSeatScore ();
+		CountDowm = Common.ConfigFinishTime;
+		AdjustUI ();
+		ShowResultInfo ();
 
 		if ((Common.CPlayed_hands + 1) < Common.CHands) {
 			BeginCountDown ();
@@ -32,14 +54,13 @@ public class StateFinish : State {
 	}
 
 	public override void Exit(){
+		transform.DOLocalMoveX (-640, 0.15f);
 		Common.CPlayed_hands++;
 		CancelInvoke ();
-		Layer.gameObject.SetActive (false);
 		m_StateManage.m_StateSeat.ShowUI ();
 	}
 
 	public override void AdjustUI(){
-		ShowResultInfo ();
 		ShowHandInfo ();
 	}
 
@@ -81,7 +102,7 @@ public class StateFinish : State {
 		}  
 	}
 		
-	public void ShowResultInfo(){
+	public void ShowResultInfo(bool hasAni = false){
 		List<Vector3> poslist = new List<Vector3> ();
 		poslist.Add (new Vector3(0,286,0));
 		poslist.Add (new Vector3(0,54,0));
@@ -102,9 +123,11 @@ public class StateFinish : State {
 
 			GameObject PreInfoObj = (GameObject)Instantiate(m_GameController.m_PrefabPreInfo);
 			PreInfoObj.transform.SetParent (Layer.Find ("PreInfoCom"));
-			PreInfoObj.transform.localPosition = poslist [index];
-			PreInfoObj.transform.localScale = new Vector3 (1, 1, 1);
 
+			if(hasAni){
+				PreInfoObj.transform.localPosition = new Vector3 (0,-720,0);
+			}
+				
 			UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
 			avatar.transform.SetParent (PreInfoObj.transform.Find ("Avatar"));
 			avatar.GetComponent<RectTransform> ().sizeDelta = new Vector2 ();
@@ -170,6 +193,15 @@ public class StateFinish : State {
 				PreInfoObj.transform.Find ("Foul").gameObject.SetActive (true);
 				PreInfoObj.transform.Find ("Foul").localPosition = new Vector3( right, PreInfoObj.transform.Find ("GetLucky").localPosition.y, 0);
 			}
+
+			if (hasAni) {
+				PreInfoObj.transform.DOLocalMoveY (poslist [index].y, 0.3f).SetDelay (index);
+			} else {
+				PreInfoObj.transform.localPosition = poslist [index];
+			}
+
+			PreInfoObj.transform.localScale = new Vector3 (1, 1, 1);
+
 			index++;
 		}
 	}

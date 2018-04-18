@@ -55,6 +55,7 @@ public class StateShowHand : State {
 	}
 
 	public override void AdjustUI(){
+		m_GameController.HideTableInfo ();
 		m_StateManage.m_StateSeat.HideAutoBanker ();
 		Layer.gameObject.SetActive (true);
 
@@ -156,6 +157,8 @@ public class StateShowHand : State {
 				ParResult.gameObject.SetActive (true);
 			}
 				
+
+			m_StateManage.m_StateSeat.UpdateSeatScore (SeatID, pinfo.BWin, pinfo.BWin + pinfo.Win);
 			if(SeatID == 0){return;}
 
 			string	typestr = "";

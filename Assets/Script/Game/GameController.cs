@@ -40,6 +40,7 @@ public class SeatResult{
 	public bool 	foul;
 	public int 		Bet;
 	public int 		Win;
+	public int 		BWin;
 	public List<int> 							score	= new List<int> ();
 	public RepeatedField<RepeatedField<uint>> 	Pres 	= new RepeatedField<RepeatedField<uint>>();
 	public RepeatedField<global::Msg.CardRank> 	Ranks 	= new RepeatedField<global::Msg.CardRank>();
@@ -145,7 +146,7 @@ public class GameController : MonoBehaviour {
 
 		if(Common.CState == Msg.GameState.Result){
 			m_StateManage.SetState (STATE.STATE_SEAT);
-			m_StateManage.ChangeState (STATE.STATE_FINISH);
+			m_StateManage.ChangeState (STATE.STATE_FINISH, true);
 		}
 	}
 
@@ -169,7 +170,7 @@ public class GameController : MonoBehaviour {
 //		Common.CPlayed_hands= 19;
 //		Common.CIs_share 	= true;
 //		Common.CCredit_points = 1000;
-//		Common.CState 		= Msg.GameState.Combine;
+//		Common.CState 		= Msg.GameState.Result;
 //		Common.CAutoBanker	= true;
 //		if(Common.CState == Msg.GameState.Show){
 //			Common.ConfigBetTime = 5;
@@ -194,6 +195,7 @@ public class GameController : MonoBehaviour {
 //		p1.SeatID =  1;
 //		p1.Name = "Ali";
 //		p1.Bet = 0;
+//		p1.Score = 100;
 //		p1.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=20bd50a0ea50352ab16125006343fb1a/87c154e736d12f2ea376f1774cc2d56285356867.jpg";
 //
 //		Common.CPlayers.Add (p1);
@@ -203,6 +205,7 @@ public class GameController : MonoBehaviour {
 //		p2.SeatID =  2;
 //		p2.Name = "HAHA";
 //		p2.Bet = 200;
+//		p2.Score = 100;
 //		p2.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=f51e5f0dc55c1038247ececa8211931c/cafc2f2eb9389b50538cbf458635e5dde7116e67.jpg";
 //		Common.CPlayers.Add (p2);
 //
@@ -401,12 +404,6 @@ public class GameController : MonoBehaviour {
 
 			if((int)ResultList [i].SeatId != 0){info.score 			= new List<int> (ResultList [i].Scores);}
 
-			foreach(PlayerInfo player in Common.CPlayers){
-				if(player.Uid == ResultList [i].Uid){
-					player.Score += ResultList [i].Win;
-				}
-			}
-
 			PlayerInfo p = GetPlayerInfoForSeatID (info.SeatID);
 			if (p == null) {
 				info.Name = "";
@@ -416,6 +413,7 @@ public class GameController : MonoBehaviour {
 				info.Avatar = p.FB_avatar;
 			}
 
+			info.BWin 			= p.Score;
 			info.autowin 		= ResultList [i].Autowin;
 			info.foul			= ResultList [i].Foul;
 			info.Win 			= ResultList [i].Win;
@@ -426,6 +424,12 @@ public class GameController : MonoBehaviour {
 				info.Pres.Add (cg.Cards);
 			}
 			SeatResults.Add (info.SeatID, info);
+
+			foreach(PlayerInfo player in Common.CPlayers){
+				if(player.Uid == ResultList [i].Uid){
+					player.Score += ResultList [i].Win;
+				}
+			}
 		}
 
 
@@ -442,7 +446,7 @@ public class GameController : MonoBehaviour {
 //		hinfo.Name = "walter";
 //		hinfo.Avatar = "";
 //		hinfo.Bet = 2000;
-//		hinfo.Win = 0;
+//		hinfo.Win = 120;
 //		hinfo.SeatID = 0;
 //		hinfo.autowin = true;
 //		hinfo.foul = false;
@@ -457,7 +461,7 @@ public class GameController : MonoBehaviour {
 //
 //		SeatResults.Add (0, hinfo);
 //		SeatResults.Add (1, hinfo);
-//		SeatResults.Add (2, hinfo);
+//		//SeatResults.Add (2, hinfo);
 //		SeatResults.Add (3, hinfo);
 	}
 
@@ -689,7 +693,7 @@ public class GameController : MonoBehaviour {
 
 			case Msg.GameState.Result:
 				Loom.QueueOnMainThread(()=>{
-					m_StateManage.m_StateSeat.UpdateSeatScore();
+					//m_StateManage.m_StateSeat.UpdateSeatScore();
 					Common.ConfigFinishTime = (int)data.GameStateNotify.Countdown / 1000;
 					m_StateManage.ChangeState (STATE.STATE_FINISH);
 				}); 
