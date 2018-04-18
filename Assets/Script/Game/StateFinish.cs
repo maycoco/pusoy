@@ -89,7 +89,7 @@ public class StateFinish : State {
 
 	public void HideLayer(){
 		CancelInvoke ();
-		Layer.gameObject.SetActive (false);
+		Layer.DOLocalMoveX (-640, 0.15f);
 	}
 
 	public void ShowHandInfo(){
