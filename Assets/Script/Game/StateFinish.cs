@@ -54,7 +54,7 @@ public class StateFinish : State {
 	}
 
 	public override void Exit(){
-		transform.DOLocalMoveX (-640, 0.15f);
+		Layer.DOLocalMoveX (-640, 0.15f);
 		Common.CPlayed_hands++;
 		CancelInvoke ();
 		m_StateManage.m_StateSeat.ShowUI ();
