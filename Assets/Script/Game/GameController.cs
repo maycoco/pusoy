@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour {
 	public GameObject			   						m_PrefabPreInfo;
 	public UICircle			   							m_PrefabAvatar;
 	public Poker			   							m_PrefabPoker;
+	public GameObject								 	m_PrefabSelectAll;
 
 	public GameObject 									m_LastDialog;
 									
@@ -168,7 +169,7 @@ public class GameController : MonoBehaviour {
 //		Common.CPlayed_hands= 19;
 //		Common.CIs_share 	= true;
 //		Common.CCredit_points = 1000;
-//		Common.CState 		= Msg.GameState.Show;
+//		Common.CState 		= Msg.GameState.Combine;
 //		Common.CAutoBanker	= true;
 //		if(Common.CState == Msg.GameState.Show){
 //			Common.ConfigBetTime = 5;

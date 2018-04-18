@@ -10,6 +10,7 @@ public class Poker : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDra
 	public 	string 				Belong;
 	public 	StateSorting		StateSorting;
 	public 	RectTransform 		canvas;
+	public  GameObject			Border;
 	private RectTransform 		imgRect;
 
 	public bool 				TouchSwitch;
@@ -38,18 +39,27 @@ public class Poker : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDra
 		
 	public void ReseatSelected(){
 		IsSelected = false;
+		Border.SetActive(false);
 	}
 
 	public void Selected(){
 		IsSelected = true;
 		Vector3 pos = transform.localPosition;
 		//transform.localPosition = new Vector3 (pos.x, pos.y + 30, pos.z);
+
+		Border.SetActive(true);
+		Sequence seq = DOTween.Sequence();
+		seq.Append (Border.GetComponent<Image>().DOFade(1,0.1F));
+		seq.Append (Border.GetComponent<Image>().DOFade(0,0.1F));
+		seq.Append (Border.GetComponent<Image>().DOFade(1,0.1F));
+		seq.Play ();
 		transform.DOLocalMoveY(pos.y + 30, 0.03f).SetEase(Ease.OutQuad);
 	}
 
 	public void CancelSelect(){
 		IsSelected = false;
 		//transform.localPosition = BelongPos;
+		Border.SetActive(false);
 		transform.DOLocalMoveY(BelongPos.y, 0.03f);
 	}
 

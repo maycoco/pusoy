@@ -30,6 +30,8 @@ public class StateSorting : State {
 
 	Dictionary<Msg.CardRank, List<uint[]>> RankResult = new Dictionary<Msg.CardRank, List<uint[]>> ();
 
+	private GameObject PokerSelectObj	= null;
+
 	//config
 	List<Vector3> postype0 = new List<Vector3> ();
 	List<Vector3> postype1 = new List<Vector3> ();
@@ -407,10 +409,7 @@ public class StateSorting : State {
 
 
 		case "Upper":
-			if (UpperPokers.Count >= 3) {
-				MovePokers (belong, "Other", pokers);
-				return;
-			}
+			if (UpperPokers.Count >= 3) {MovePokers (belong, "Other", pokers);return;}
 
 			if (UpperPokers.Count + pokers.Length <= 3) {
 				DeletePokerFromTag (belong, pokers);
@@ -437,7 +436,10 @@ public class StateSorting : State {
 			break;
 
 		case "Under":
-			if(UnderPokers.Count >= 5){MovePokers(belong, "Other", pokers);return;}
+			if (UnderPokers.Count >= 5) {
+				MovePokers (belong, "Other", pokers);
+				return;
+			}
 
 			if(UnderPokers.Count + pokers.Length <= 5){
 				DeletePokerFromTag (belong, pokers);
@@ -472,9 +474,7 @@ public class StateSorting : State {
 			List<uint> temp = new List<uint> ();
 
 			foreach(int p in HandPokers){
-				if(!Pokers[p].IsSelected){
-					temp.Add ((uint)p);
-				}
+				temp.Add ((uint)p);
 			}
 
 			SelectPokers (temp.ToArray());
@@ -483,9 +483,7 @@ public class StateSorting : State {
 			List<uint> temp = new List<uint> ();
 
 			foreach(int p in HandPokers){
-				if(!Pokers[p].IsSelected){
-					temp.Add ((uint)p);
-				}
+				temp.Add ((uint)p);
 			}
 
 			SelectPokers (temp.ToArray());
@@ -494,9 +492,7 @@ public class StateSorting : State {
 			List<uint> temp = new List<uint> ();
 
 			foreach(int p in HandPokers){
-				if(!Pokers[p].IsSelected){
-					temp.Add ((uint)p);
-				}
+				temp.Add ((uint)p);
 			}
 
 			SelectPokers (temp.ToArray());
@@ -718,13 +714,41 @@ public class StateSorting : State {
 
 	public void EndDragSelects(){
 		foreach (int id in SelectedPokers) {
+			Pokers [id].Border.SetActive (true);
+		}
+
+		if(PokerSelectObj != null){Destroy (PokerSelectObj);PokerSelectObj = null;}
+
+		foreach (int id in SelectedPokers) {
 			Color temp = Pokers [id].transform.GetComponent<Image> ().color ;
 			Pokers [id].transform.GetComponent<Image> ().color = new Color (temp.r, temp.g, temp.b, 1);
 		}
 	}
 
 	public void DragSelects(int PokerID){
+		foreach (int id in SelectedPokers) {
+			if(id != PokerID){
+				Pokers [id].Border.SetActive (false);
+			}
+		}
+
 		if(SelectedPokers.Count <= 1){return;}
+		if(PokerSelectObj != null){Destroy (PokerSelectObj);PokerSelectObj = null;}
+
+		GameObject selected = Instantiate(m_GameController.m_PrefabSelectAll) as GameObject;
+		PokerSelectObj = selected;
+		selected.transform.SetParent (Pokers [PokerID].transform);
+		selected.transform.localScale = new Vector3(1,1,1);
+		selected.transform.localPosition = new Vector3 (0,0,0);
+
+		int index = 0;
+		foreach (int id in SelectedPokers) {
+			if(id != PokerID){
+				selected.transform.Find ("Poker" + index).gameObject.SetActive (true);
+				selected.transform.Find("Poker"+index).GetComponent<Image>().sprite = Resources.Load ("Image/Poker/" + id, typeof(Sprite)) as Sprite;
+				index++;
+			}
+		}
 
 		foreach (int id in SelectedPokers) {
 			if(id != PokerID){
