@@ -640,6 +640,7 @@ public class GameController : MonoBehaviour {
 	
 			case Msg.GameState.Ready:
 				Loom.QueueOnMainThread(()=>{
+					Common.CPlayed_hands = data.GameStateNotify.PlayedHands;
 					m_StateManage.ChangeState (STATE.STATE_SEAT);
 					if(m_SelfSeatID == 0 && GetTablePlayersCount() > 1 ){m_Letplay.SetActive(true);}
 				}); 
@@ -647,6 +648,7 @@ public class GameController : MonoBehaviour {
 
 			case Msg.GameState.Bet:
 				Loom.QueueOnMainThread(()=>{
+					Common.CPlayed_hands = data.GameStateNotify.PlayedHands;
 					m_Letplay.SetActive(false);
 					Common.ConfigBetTime = (int)data.GameStateNotify.Countdown / 1000;
 					m_StateManage.ChangeState (STATE.STATE_BETTING);
@@ -696,7 +698,6 @@ public class GameController : MonoBehaviour {
 					//m_StateManage.m_StateSeat.UpdateSeatScore();
 					Common.ConfigFinishTime = (int)data.GameStateNotify.Countdown / 1000;
 					m_StateManage.ChangeState (STATE.STATE_FINISH);
-					Common.CPlayed_hands++;
 				}); 
 				break;
 			}

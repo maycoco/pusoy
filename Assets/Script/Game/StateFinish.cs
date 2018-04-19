@@ -20,6 +20,8 @@ public class StateFinish : State {
 	}
 
 	public override void Enter(){
+		ClearResultInfo ();
+
 		Layer.localPosition = new Vector3(-640, 0, 0);
 		Sequence s = DOTween.Sequence ();
 		s.Append (Layer.DOLocalMoveX (30, 0.2f));
@@ -103,8 +105,6 @@ public class StateFinish : State {
 		poslist.Add (new Vector3(0,54,0));
 		poslist.Add (new Vector3(0,-165,0));
 		poslist.Add (new Vector3(0,-386,0));
-
-		ClearResultInfo ();
 
 		List<int> Seats = new List<int> ();
 		foreach (KeyValuePair<int, SeatResult> pair in m_GameController.SeatResults) {
