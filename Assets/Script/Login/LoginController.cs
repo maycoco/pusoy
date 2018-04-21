@@ -199,9 +199,10 @@ public class LoginController : MonoBehaviour {
 
 	public void shareline(){
 		FB.ShareLink (
-			contentTitle:"N3k Page massage",
 			contentURL:new System.Uri("http://n3k.ca"),
+			contentTitle:"N3k Page massage",
 			contentDescription:"Heres a link to my game",
+			photoURL:new System.Uri("http://n.sinaimg.cn/sinacn/w489h348/20180202/e05f-fyrcsrw8154846.jpg"),
 			callback:OnShare
 		);
 	}
