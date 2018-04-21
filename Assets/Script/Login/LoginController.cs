@@ -17,6 +17,7 @@ public class LoginController : MonoBehaviour {
 	public GameObject 				Canvas;
 	public GameObject 				PrefabDialog;
 
+
 	// Use this for initialization
 	void Start () {
 		//for demo
@@ -175,7 +176,9 @@ public class LoginController : MonoBehaviour {
 
 			if(FB.IsLoggedIn){
 				//FB.API("/me", HttpMethod.GET, this.InfoHandleResult);
-				ConnectServer ();
+
+				//for test 2018-4-
+				//ConnectServer ();
 			}
 		}
 	}
@@ -190,5 +193,27 @@ public class LoginController : MonoBehaviour {
 			Common.FB_name = acres.name;
 			ConnectServer ();
 		}
+	}
+
+	public delegate void OnFBShareLinkFaild(bool isCancel, string errorInfo);  
+
+	public void shareline(){
+		FB.ShareLink (
+			contentTitle:"N3k Page massage",
+			contentURL:new System.Uri("http://n3k.ca"),
+			contentDescription:"Heres a link to my game",
+			callback:OnShare
+		);
+	}
+
+	private void OnShare(IShareResult result){
+		if(result.Cancelled || !string.IsNullOrEmpty(result.Error)){
+			Debug.Log (11111);
+		}else if(!string.IsNullOrEmpty(result.PostId)){
+			Debug.Log (result.PostId);
+		}
+		else {  
+			Debug.Log("22222");
+		} 
 	}
 }
