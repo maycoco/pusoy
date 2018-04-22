@@ -205,7 +205,7 @@ namespace cn.sharesdk.unity3d
 		public const int type = (int) PlatformType.Facebook;
 		public string api_key = "1751224924947592";
 		public string app_secret = "52b8f639d72e7475ed4d28112837df06";
-		public string auth_type = "web";  //can pass "both","sso",or "web" 
+		public string auth_type = "both";  //can pass "both","sso",or "web" 
 		public string display_name = "Unlipoker Pusoy";//如果需要使用客户端分享，必填且需与FB 后台配置一样
 		#endif
 	}

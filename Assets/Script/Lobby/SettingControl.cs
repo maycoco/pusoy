@@ -129,7 +129,9 @@ public class SettingControl : MonoBehaviour
 		content.SetUrl ("https://www.baidu.com");
 		content.SetTitle("Unlipoker");
 		content.SetShareType(ContentType.Auto);
-		ssdk.ShowPlatformList (null, content, 100, 100);
+		//ssdk.ShowPlatformList (null, content, 100, 100);
+
+		ssdk.ShareContent (PlatformType.Facebook, content);
 	}
 
 	public void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
