@@ -7,12 +7,16 @@ using cn.sharesdk.unity3d;
 
 public class SettingControl : MonoBehaviour
 {
-	public LobbyController		m_LobbyController;
+	public 	LobbyController 	m_LobbyController;
+	public  GameObject			m_ShareLayer;
+	public 	GameObject 			m_CloseArea;
+	public 	GameObject 			m_ShareControl;
 	private	ShareSDK			ssdk;
 
 
 	// Use this for initialization
 	void Start (){
+		EventTriggerListener.Get(m_CloseArea).onClick = HideShareDialog;
 	}
 
 	void Awake(){
@@ -119,19 +123,41 @@ public class SettingControl : MonoBehaviour
 		transform.Find ("LanguageConsole").gameObject.SetActive (false);
 	}
 
-	public void Share(){
+	public void ShowShareDialog(){
+		m_ShareLayer.SetActive (true);
+		m_ShareControl.transform.DOLocalMoveY (-458, 0.12f);
+	}
+
+	public void HideShareDialog(GameObject obj){
+		m_ShareControl.transform.DOLocalMoveY (-678, 0.12f).onComplete = HideShareLayer;
+
+	}
+
+	public void HideShareLayer(){
+		m_ShareLayer.SetActive (false);
+	}
+
+	public void Share(int type){
 		ssdk = gameObject.GetComponent<ShareSDK>();
 		ssdk.shareHandler = ShareResultHandler;
 
 		ShareContent content = new ShareContent();
-		content.SetText("just test.");
-		content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+		content.SetText("kLet's play together.");
+		//content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
 		content.SetUrl ("https://www.baidu.com");
 		content.SetTitle("Unlipoker");
 		content.SetShareType(ContentType.Auto);
 		//ssdk.ShowPlatformList (null, content, 100, 100);
 
-		ssdk.ShareContent (PlatformType.Facebook, content);
+		switch(type){
+		case 0:
+			ShareFacebook ( content);
+			break;
+
+		case 1:
+			ShareMessenger (content);
+			break;
+		}
 	}
 
 	public void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
@@ -149,6 +175,14 @@ public class SettingControl : MonoBehaviour
 		{
 			Debug.Log  ("cancel !");
 		}
+	}
+
+	public void ShareFacebook(ShareContent content){
+		ssdk.ShareContent (PlatformType.Facebook, content);
+	}
+
+	public void ShareMessenger(ShareContent content){
+		ssdk.ShareContent (PlatformType.FacebookMessenger, content);
 	}
 }
 

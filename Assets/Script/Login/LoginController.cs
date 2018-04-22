@@ -25,11 +25,6 @@ public class LoginController : MonoBehaviour {
 	}
 
 	void Awake(){
-		//int id = Random.Range (100000, 999999);
-//		Common.FB_id 			= "740176969651535";
-//		Common.FB_access_token 	= "EAAY4utOSxIgBemjfkEu6rKKZCr0bsgXPsnZBHcIztcgDybpAI1ua2yKoYDoukx8nbRWg0GUxKaLWZCOKUQ2A6x4psVEu4JLvLuRZCYf7EjmmwnZCW41kljPsEVREsnGx2MUefBrZAFsFLop1rp26s59EjaXiaVEiS3av3U3unglcx73Xf6bGuETEAPZBzSrj697m2XrZBPgpfOHlgSAAlJ73oRclYGHPL4ZD";
-//		Common.FB_name			= "123333";
-
 		Loom.Initialize ();
 		InitCallbackForNet ();
 		if (!FB.IsInitialized) {Init ();}
@@ -176,9 +171,7 @@ public class LoginController : MonoBehaviour {
 
 			if(FB.IsLoggedIn){
 				//FB.API("/me", HttpMethod.GET, this.InfoHandleResult);
-
-				//for test 2018-4-
-				//ConnectServer ();
+				ConnectServer ();
 			}
 		}
 	}
