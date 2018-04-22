@@ -1,13 +1,8 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Game\GameController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\Lobby\LobbyController.cs">
     <Files>
-      <File FileName="Assets\Script\Game\GameController.cs" Line="179" Column="14" />
-      <File FileName="Assets\Script\Game\StateBetting.cs" Line="279" Column="21" />
-      <File FileName="Assets\Script\Game\GameConsole.cs" Line="61" Column="2" />
-      <File FileName="Assets\Script\Game\StateSeat.cs" Line="99" Column="76" />
-      <File FileName="Assets\Script\Game\StateDeal.cs" Line="37" Column="34" />
-      <File FileName="Assets\Script\Network\protonet.cs" Line="94" Column="63" />
+      <File FileName="Assets\Script\Lobby\LobbyController.cs" Line="59" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

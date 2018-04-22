@@ -47,11 +47,14 @@ public class LobbyController : MonoBehaviour {
 	public GameObject 				Canvas;
 	private List<RoomInfo>			RoomLists= new List<RoomInfo>();
 	private List<uint>				RoomIDs = new List<uint>();
+
+	public GameObject				NoData;
 	
 	// Use this for initialization
 	void Start () {
 		Common.Sumbiting = false;
 		Common.Trying = 0;
+		NoData.SetActive (false);
 		Conneting.SetActive (false);
 		CheckConnection ();
 	}
@@ -176,6 +179,14 @@ public class LobbyController : MonoBehaviour {
 		for (int i = Content.childCount - 1; i >= 0; i--) {  
 			Destroy(Content.GetChild(i).gameObject);
 		}  
+
+		if(RoomLists.Count == 0){
+			NoData.SetActive (true);
+			return;
+		}
+		else{
+			NoData.SetActive (false);
+		}
 
 		float width =Canvas.transform.Find ("RoomList").GetComponent<RectTransform> ().sizeDelta.x;;
 		float left 	= 4;

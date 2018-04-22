@@ -3,10 +3,13 @@ using UnityEngine.UI;
 
 using System.Collections;
 using DG.Tweening;
+using cn.sharesdk.unity3d;
 
 public class SettingControl : MonoBehaviour
 {
 	public LobbyController		m_LobbyController;
+	private	ShareSDK			ssdk;
+
 
 	// Use this for initialization
 	void Start (){
@@ -114,6 +117,36 @@ public class SettingControl : MonoBehaviour
 
 	public void OnHideLanguage(){
 		transform.Find ("LanguageConsole").gameObject.SetActive (false);
+	}
+
+	public void Share(){
+		ssdk = gameObject.GetComponent<ShareSDK>();
+		ssdk.shareHandler = ShareResultHandler;
+
+		ShareContent content = new ShareContent();
+		content.SetText("just test.");
+		content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+		content.SetUrl ("https://www.baidu.com");
+		content.SetTitle("Unlipoker");
+		content.SetShareType(ContentType.Auto);
+		ssdk.ShowPlatformList (null, content, 100, 100);
+	}
+
+	public void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
+	{
+		if (state == ResponseState.Success)
+		{
+			Debug.Log ("share result :");
+			Debug.Log  (MiniJSON.jsonEncode(result));
+		}
+		else if (state == ResponseState.Fail)
+		{
+			Debug.Log  ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+		}
+		else if (state == ResponseState.Cancel) 
+		{
+			Debug.Log  ("cancel !");
+		}
 	}
 }
 
