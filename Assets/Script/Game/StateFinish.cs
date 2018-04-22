@@ -56,6 +56,7 @@ public class StateFinish : State {
 	}
 
 	public override void Exit(){
+		ClearResultInfo ();
 		Layer.localPosition = new Vector3(-640, 0, 0);
 		CancelInvoke ();
 		m_StateManage.m_StateSeat.ShowUI ();

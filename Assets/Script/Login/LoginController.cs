@@ -194,27 +194,4 @@ public class LoginController : MonoBehaviour {
 			ConnectServer ();
 		}
 	}
-
-	public delegate void OnFBShareLinkFaild(bool isCancel, string errorInfo);  
-
-	public void shareline(){
-		FB.ShareLink (
-			contentURL:new System.Uri("http://n3k.ca"),
-			contentTitle:"N3k Page massage",
-			contentDescription:"Heres a link to my game",
-			photoURL:new System.Uri("http://n.sinaimg.cn/sinacn/w489h348/20180202/e05f-fyrcsrw8154846.jpg"),
-			callback:OnShare
-		);
-	}
-
-	private void OnShare(IShareResult result){
-		if(result.Cancelled || !string.IsNullOrEmpty(result.Error)){
-			Debug.Log (11111);
-		}else if(!string.IsNullOrEmpty(result.PostId)){
-			Debug.Log (result.PostId);
-		}
-		else {  
-			Debug.Log("22222");
-		} 
-	}
 }

@@ -72,7 +72,7 @@ public class PageView : MonoBehaviour, IBeginDragHandler, IEndDragHandler {
 				Title.text = "30 Days result "  + type + Common.CareerWins[index];;
 			}
 			else if(index == 2){
-				Title.text = "all Days result "  + type + Common.CareerWins[index];;
+				Title.text = "All Days Result "  + type + Common.CareerWins[index];;
 			}
         }
     }

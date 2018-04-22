@@ -238,7 +238,7 @@ public class CareerControl : MonoBehaviour {
 
 	public void UpdatePieTips(Transform winobj, Transform lostobj, int win, int lost){
 		winobj.GetComponent<Text> ().text = "Win" + win.ToString () + "%";
-		lostobj.GetComponent<Text> ().text = "Lost" + lost.ToString () + "%";
+		lostobj.GetComponent<Text> ().text = "Lose" + lost.ToString () + "%";
 //		string winstr = win.ToString();
 //		string loststr = lost.ToString();
 //
