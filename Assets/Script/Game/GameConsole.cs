@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using UnityEngine.Internal;
 
 using DG.Tweening;
+using cn.sharesdk.unity3d;
 
 public class GameConsole : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameConsole : MonoBehaviour
 	public  GameObject			m_ConsoleMenu_Mask;
 	public  GameObject 			m_WaitingSort;
 	public  List<GameObject> 	m_Pokers;
+	private	ShareSDK			ssdk;
 
 	void Start (){
 		HideWaitAnime();
@@ -427,5 +429,36 @@ public class GameConsole : MonoBehaviour
 		}
 		m_WaitingSort.SetActive (false);
 	}
+
+	public void ShareInTable(){
+		ssdk = gameObject.GetComponent<ShareSDK>();
+		ssdk.shareHandler = ShareResultHandler;
+
+		ShareContent content = new ShareContent();
+		content.SetText("kLet's play together.");
+		//content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+		content.SetUrl ("https://www.baidu.com");
+		content.SetTitle("Unlipoker");
+		content.SetShareType(ContentType.Auto);
+		ssdk.ShareContent (PlatformType.FacebookMessenger, content);
+	}
+		
+	public void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
+	{
+		if (state == ResponseState.Success)
+		{
+			Debug.Log ("share result :");
+			Debug.Log  (MiniJSON.jsonEncode(result));
+		}
+		else if (state == ResponseState.Fail)
+		{
+			Debug.Log  ("fail! error code = " + result["error_code"] + "; error msg = " + result["error_msg"]);
+		}
+		else if (state == ResponseState.Cancel) 
+		{
+			Debug.Log  ("cancel !");
+		}
+	}
+
 }
 

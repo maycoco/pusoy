@@ -9436,6 +9436,7 @@ GameObject:
   - component: {fileID: 608673515}
   - component: {fileID: 608673516}
   - component: {fileID: 608673517}
+  - component: {fileID: 608673518}
   m_Layer: 5
   m_Name: GameConsole
   m_TagString: Untagged
@@ -9504,6 +9505,30 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &608673518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 608673514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d266d8e8bcccf488686d3be61cf1fa24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appKey: 255ea0312d7c4
+  appSecret: ' 8a4f800564fbb7786b3a6de4b91f46a7'
+  devInfo:
+    facebook:
+      Enable: 1
+      api_key: 1751224924947592
+      app_secret: 52b8f639d72e7475ed4d28112837df06
+      auth_type: both
+      display_name: Unlipoker Pusoy
+    facebookMessenger:
+      Enable: 1
+    copy:
+      Enable: 1
 --- !u!1 &610997626
 GameObject:
   m_ObjectHideFlags: 0
@@ -15986,7 +16011,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1112188794}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 608673516}
+        m_MethodName: ShareInTable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1112188794
