@@ -75,8 +75,7 @@ public class StateSorting : State {
 	void Update () {
 	}
 
-	public override void Enter(){
-		Debug.Log ("==============================state sorting===================================");
+	public void PublicData(){
 		RoateAniIndex = 0;
 		RoateCAniIndex = 0;
 
@@ -96,37 +95,29 @@ public class StateSorting : State {
 		SelectedPokers.Clear ();
 		GetLuckyConfim = false;
 
+		ShowControlUI ();
 		AdjustUI ();
-		AdjustPokers ();
+	
 		CountDownTime = Common.ConfigSortTime;
 		BeginCountDown ();
 	}
 
+	public override void Enter(){
+		Debug.Log ("==============================state sorting===================================");
+		PublicData ();
+		AdjustPokers ();
+
+	}
+
 	public override void DisEnter(){
-		RoateAniIndex = 0;
-		RoateCAniIndex = 0;
-
-		m_GameController.HideSeatLayer ();
-		m_GameController.HideTableInfo ();
-		m_GameController.HideGameConsole ();
-		Layer.gameObject.SetActive (true);
-
-		RankResult.Clear ();
-		Pokers.Clear ();
-		HandPokers = new List<int> (Common.CPokers);
-		HandPokers.Sort ();
-
-		UpperPokers.Clear ();
-		MiddlePokers.Clear ();
-		UnderPokers.Clear ();
-		SelectedPokers.Clear ();
-		GetLuckyConfim = false;
-
-		AdjustUI ();
+		PublicData ();
 		AdjustPokers (true);
-		CountDownTime = Common.ConfigSortTime;
-		BeginCountDown ();
-		ShowControlUI ();
+	}
+
+	public void ConfimCombin(){
+		Layer1.Find ("GetLucky").gameObject.SetActive (false);
+		Layer1.Find ("Battle").gameObject.SetActive (false);
+		Layer2.Find ("Types").gameObject.SetActive (false);
 	}
 
 	public override void Exit(){
@@ -141,6 +132,7 @@ public class StateSorting : State {
 
 	 public override void AdjustUI(){
 		m_StateManage.m_StateSeat.HideAutoBanker ();
+		Layer.gameObject.SetActive (true);
 
 		if (Effect_BaoPai != null) {Destroy (Effect_BaoPai);Effect_BaoPai = null;} 
 		if (Effect_DX != null) {Destroy (Effect_DX);Effect_DX = null;} 
@@ -150,7 +142,6 @@ public class StateSorting : State {
 			Destroy (SortHandObjs[i]);
 		}
 
-		Layer.gameObject.SetActive (true);
 		CloseHelpLayer ();
 		Layer.Find ("Waiting").gameObject.SetActive (false);
 		Layer1.Find ("CountDown").gameObject.SetActive (false);
@@ -198,7 +189,7 @@ public class StateSorting : State {
 	}
 
 	public void GetLucky(){
-		ShowConfim ();
+		HideConfim ();
 		Layer1.Find ("GetLucky").gameObject.SetActive (false);
 		Layer1.Find ("Battle").gameObject.SetActive (false);
 		Layer2.Find ("Types").gameObject.SetActive (false);
@@ -758,46 +749,6 @@ public class StateSorting : State {
 		}
 	}
 
-	public void SortConfrm(){
-		AlreadyComfim = true;
-		Layer.Find ("Waiting").gameObject.SetActive (true);
-		DisPokers ();
-		HideConfim ();
-		if (TweenColor != null) {TweenColor.Kill ();}
-
-		if (!PlayBaoPai ()) {
-			SortConfrmServer ();
-		} else {
-			Invoke("SortConfrmServer", 2.0f);
-		}
-	}
-
-	public void SortConfrmServer(){
-		Msg.CardGroup upper_pokers = new Msg.CardGroup();
-		Msg.CardGroup middle_pokers = new Msg.CardGroup();
-		Msg.CardGroup under_pokers = new Msg.CardGroup();
-
-		for(int i = 0; i < UpperPokers.Count; i++){
-			upper_pokers.Cards.Add((uint)UpperPokers[i]);
-		}
-			
-		for(int i = 0; i < MiddlePokers.Count; i++){
-			middle_pokers.Cards.Add((uint)MiddlePokers[i]);
-		}
-			
-		for(int i = 0; i < UnderPokers.Count; i++){
-			under_pokers.Cards.Add((uint)UnderPokers[i]);
-		}
-
-		List<Msg.CardGroup> cards = new List<Msg.CardGroup> ();
-		cards.Add (upper_pokers);
-		cards.Add (middle_pokers);
-		cards.Add (under_pokers);
-
-		m_GameController.CombineServer (cards, GetLuckyConfim);
-		HideConfim ();
-	}
-
 	public void DisPokers(){
 		foreach (KeyValuePair<int, Poker> pair in Pokers){
 			pair.Value.CloseTouchSwitch ();
@@ -1061,5 +1012,52 @@ public class StateSorting : State {
 		}
 
 		return baopai;
+	}
+
+	public void StopSorting(){
+		AlreadyComfim = true;
+		DisPokers ();
+		HideConfim ();
+	}
+
+	public void SortConfrm(){
+		StopSorting ();
+
+		Layer.Find ("Waiting").gameObject.SetActive (true);
+		if (TweenColor != null) {TweenColor.Kill ();}
+
+		if (!PlayBaoPai ()) {SortConfrmServer ();
+		} else {Invoke("SortConfrmServer", 2.0f);}
+	}
+
+	public void AutoSortConfrm(){
+		StopSorting ();
+		SortConfrmServer ();
+	}
+
+	public void SortConfrmServer(){
+		Msg.CardGroup upper_pokers = new Msg.CardGroup();
+		Msg.CardGroup middle_pokers = new Msg.CardGroup();
+		Msg.CardGroup under_pokers = new Msg.CardGroup();
+
+		for(int i = 0; i < UpperPokers.Count; i++){
+			upper_pokers.Cards.Add((uint)UpperPokers[i]);
+		}
+
+		for(int i = 0; i < MiddlePokers.Count; i++){
+			middle_pokers.Cards.Add((uint)MiddlePokers[i]);
+		}
+
+		for(int i = 0; i < UnderPokers.Count; i++){
+			under_pokers.Cards.Add((uint)UnderPokers[i]);
+		}
+
+		List<Msg.CardGroup> cards = new List<Msg.CardGroup> ();
+		cards.Add (upper_pokers);
+		cards.Add (middle_pokers);
+		cards.Add (under_pokers);
+
+		m_GameController.CombineServer (cards, GetLuckyConfim);
+		HideConfim ();
 	}
 }
