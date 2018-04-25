@@ -108,14 +108,14 @@ public class StateFinish : State {
 		poslist.Add (new Vector3(0,-386,0));
 
 		List<int> Seats = new List<int> ();
-		foreach (KeyValuePair<int, SeatResult> pair in m_GameController.SeatResults) {
+		foreach (KeyValuePair<int, CSeatResult> pair in Common.CSeatResults) {
 			Seats.Add (pair.Key);
 		}
 		Seats.Sort ();
 
 		int index = 0;
 		foreach (int seatid in Seats){
-			SeatResult hInfo = m_GameController.SeatResults[seatid];
+			CSeatResult hInfo = Common.CSeatResults[seatid];
 
 			GameObject PreInfoObj = (GameObject)Instantiate(m_GameController.m_PrefabPreInfo);
 			PreInfoObj.transform.SetParent (Layer.Find ("PreInfoCom"));

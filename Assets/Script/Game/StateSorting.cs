@@ -75,7 +75,7 @@ public class StateSorting : State {
 	void Update () {
 	}
 
-	public void PublicData(){
+	public void InitData(){
 		RoateAniIndex = 0;
 		RoateCAniIndex = 0;
 
@@ -94,30 +94,47 @@ public class StateSorting : State {
 		UnderPokers.Clear ();
 		SelectedPokers.Clear ();
 		GetLuckyConfim = false;
-
-		ShowControlUI ();
-		AdjustUI ();
-	
-		CountDownTime = Common.ConfigSortTime;
-		BeginCountDown ();
 	}
 
 	public override void Enter(){
 		Debug.Log ("==============================state sorting===================================");
-		PublicData ();
-		AdjustPokers ();
+		InitData ();
 
+		ShowControlUI ();
+		AdjustUI ();
+
+		CountDownTime = Common.ConfigSortTime;
+		BeginCountDown ();
+
+		AdjustPokers ();
 	}
 
 	public override void DisEnter(){
-		PublicData ();
-		AdjustPokers (true);
+		InitData ();
+
+		ShowControlUI ();
+		AdjustUI ();
+
+		CountDownTime = Common.ConfigSortTime;
+		BeginCountDown ();
+
+		if (Common.CCPokers.Count <= 0) {
+			AdjustPokers (true);
+		} else {
+			StopSorting ();
+			SynchPoker (Common.CCPokers);
+			Common.CCPokers.Clear ();
+		}
 	}
 
 	public void ConfimCombin(){
 		Layer1.Find ("GetLucky").gameObject.SetActive (false);
 		Layer1.Find ("Battle").gameObject.SetActive (false);
 		Layer2.Find ("Types").gameObject.SetActive (false);
+
+		if(Common.CCPokers.Count <= 0){
+			AutoSortConfrm ();
+		}
 	}
 
 	public override void Exit(){
@@ -458,6 +475,7 @@ public class StateSorting : State {
 
 		AutoSelected ();
 		UpdateRanks ();
+		if (HandPokers.Count <= 0) {ShowConfim ();} else {HideConfim ();}
 	}
 
 	public void AutoSelected(){
@@ -796,12 +814,6 @@ public class StateSorting : State {
 	}
 
 	public void UpdateRanks(){
-		if (HandPokers.Count <= 0) {
-			ShowConfim ();
-		} else {
-			HideConfim ();
-		}
-			
 		for (int i = Layer2.Find("Types/PokerType").childCount - 1; i >= 0; i--) {
 			Destroy (Layer2.Find ("Types/PokerType").GetChild (i).gameObject);
 		}
@@ -1015,9 +1027,10 @@ public class StateSorting : State {
 	}
 
 	public void StopSorting(){
-		AlreadyComfim = true;
 		DisPokers ();
 		HideConfim ();
+		HandPokers.Clear ();
+		UpdateRanks ();
 	}
 
 	public void SortConfrm(){
@@ -1032,10 +1045,17 @@ public class StateSorting : State {
 
 	public void AutoSortConfrm(){
 		StopSorting ();
-		SortConfrmServer ();
+		CancelInvoke ();
+		Layer1.Find ("CountDown").gameObject.SetActive (false);
+
+		if(!AlreadyComfim){
+			SortConfrmServer ();
+		}
 	}
 
 	public void SortConfrmServer(){
+		AlreadyComfim = true;
+
 		Msg.CardGroup upper_pokers = new Msg.CardGroup();
 		Msg.CardGroup middle_pokers = new Msg.CardGroup();
 		Msg.CardGroup under_pokers = new Msg.CardGroup();
@@ -1059,5 +1079,37 @@ public class StateSorting : State {
 
 		m_GameController.CombineServer (cards, GetLuckyConfim);
 		HideConfim ();
+	}
+
+	public void SynchPoker(List<List<uint>> cards){
+		int[] s1 = new int[]{1,13,3};
+		int[] s2 = new int[]{14,5,6,24,40};
+		int[] s3 = new int[]{18,10,38,12,27};
+
+		List<List<int>> cardsa = new List<List<int>> ();
+		cardsa.Add(new List<int>(s1));
+		cardsa.Add(new List<int>(s2));
+		cardsa.Add(new List<int>(s3));
+
+		UpperPokers.Clear ();
+		MiddlePokers.Clear ();
+		UnderPokers.Clear ();
+		HandPokers.Clear ();
+
+		foreach(uint c in cardsa[0]){
+			UpperPokers.Add ((int)c);
+			UpdateUpperPokers (0);
+		}
+
+		foreach(uint c in cardsa[1]){
+			MiddlePokers.Add ((int)c);
+			UpdateMiddlePokers (0);
+		}
+
+		foreach(uint c in cardsa[2]){
+			UnderPokers.Add ((int)c);
+			UpdateUnderPokers (0);
+		}
+
 	}
 }

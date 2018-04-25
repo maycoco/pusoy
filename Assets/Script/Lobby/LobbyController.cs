@@ -11,6 +11,9 @@ using Google.Protobuf;
 using Msg;
 using System.IO;
 
+using Google.Protobuf.Collections;
+using Google.Protobuf;
+
 public class RoomInfo{
 	public uint 		Owner;
 	public uint 		RoomId ;
@@ -408,30 +411,7 @@ public class LobbyController : MonoBehaviour {
 
 				Common.CPokers.Clear ();
 				Common.CPlayers.Clear ();
-
-				switch (Common.CState) {
-
-				case Msg.GameState.Bet:
-					Common.ConfigBetTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
-					break;
-
-				case Msg.GameState.Combine:
-					Common.ConfigSortTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
-					for (int i = 0; i < data.JoinRoomRsp.Room.Cards.Count; i++) {
-						Common.CPokers.Add ((int)data.JoinRoomRsp.Room.Cards [i]);
-					}
-					break;
-
-				case  Msg.GameState.Result:
-					Common.ConfigFinishTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
-					break;
-
-				case Msg.GameState.Deal:
-					for (int i = 0; i < data.JoinRoomRsp.Room.Cards.Count; i++) {
-						Common.CPokers.Add ((int)data.JoinRoomRsp.Room.Cards [i]);
-					}
-					break;
-				}
+				Common.CSeatResults.Clear ();	
 
 				for (int i = 0; i < data.JoinRoomRsp.Room.Players.Count; i++) {
 					PlayerInfo p = new PlayerInfo ();
@@ -444,6 +424,62 @@ public class LobbyController : MonoBehaviour {
 
 					Debug.Log (p.Uid + "===" + p.SeatID + "===" + p.Name);
 					Common.CPlayers.Add (p);
+				}
+
+				switch (Common.CState) {
+
+				case Msg.GameState.Bet:
+					Common.ConfigBetTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
+					break;
+
+				case Msg.GameState.Deal:
+					for (int i = 0; i < data.JoinRoomRsp.Room.Cards.Count; i++) {
+						Common.CPokers.Add ((int)data.JoinRoomRsp.Room.Cards [i]);
+					}
+					break;
+
+				case Msg.GameState.Combine:
+					Common.ConfigSortTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
+					for (int i = 0; i < data.JoinRoomRsp.Room.Cards.Count; i++) {
+						Common.CPokers.Add ((int)data.JoinRoomRsp.Room.Cards [i]);
+					}
+
+
+					foreach( Msg.SeatResult res in data.JoinRoomRsp.Room.Result){
+						if(res.Uid == Common.Uid){
+							for(int o = 0; o < res.CardGroups.Count; o++){
+								List<uint> t = new List<uint> (res.CardGroups[o].Cards);
+								Common.CCPokers.Add (t);
+							}
+						}
+					}
+
+					break;
+
+				case Msg.GameState.ConfirmCombine:
+					Common.ConfigSortTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
+					for (int i = 0; i < data.JoinRoomRsp.Room.Cards.Count; i++) {
+						Common.CPokers.Add ((int)data.JoinRoomRsp.Room.Cards [i]);
+					}
+
+					foreach( Msg.SeatResult res in data.JoinRoomRsp.Room.Result){
+						if(res.Uid == Common.Uid){
+							for(int o = 0; o < res.CardGroups.Count; o++){
+								List<uint> t = new List<uint> (res.CardGroups[o].Cards);
+								Common.CCPokers.Add (t);
+							}
+						}
+					}
+					break;
+
+				case Msg.GameState.Show:
+					InitSeatResult (data.JoinRoomRsp.Room.Result);
+					break;
+
+				case  Msg.GameState.Result:
+					Common.ConfigFinishTime = (int)data.JoinRoomRsp.Room.Countdown / 1000;
+					InitSeatResult (data.JoinRoomRsp.Room.Result);
+					break;
 				}
 
 				Loom.QueueOnMainThread (() => {
@@ -517,6 +553,38 @@ public class LobbyController : MonoBehaviour {
 
 		case MessageID.ConsumeDiamondsNotify:
 			break;
+		}
+	}
+
+	public void InitSeatResult(RepeatedField<Msg.SeatResult> ResultList){
+		for(int i = 0; i <ResultList.Count; i++){
+			Msg.SeatResult result = ResultList [i];
+
+			CSeatResult info 	= new CSeatResult ();
+
+			info.SeatID 		= (int)result.SeatId;
+
+			for(int o = 0; o < result.CardGroups.Count; o++){
+				Msg.CardGroup cg = result.CardGroups[o];
+				info.Pres.Add (cg.Cards);
+			}
+				
+			if((int)result.SeatId != 0){info.score 			= new List<int> (result.Scores);}
+
+			foreach(PlayerInfo p in Common.CPlayers){
+				if(p.SeatID == info.SeatID){
+					info.Name 	= p.Name;
+					info.Avatar = p.FB_avatar;
+					info.BWin 	= p.Score;
+				}
+			}
+
+			info.autowin 		= result.Autowin;
+			info.foul			= result.Foul;
+			info.Win 			= result.Win;
+			info.Ranks 			= result.Ranks;
+
+			Common.CSeatResults.Add (info.SeatID, info);
 		}
 	}
 		

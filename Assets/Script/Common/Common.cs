@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+using Google.Protobuf.Collections;
+
 public class Result{
 	public string user_id;
 	public string access_token;
@@ -13,6 +15,21 @@ public class Result{
 
 public class AccountResult{
 	public string name;
+}
+
+public class CSeatResult{
+	public int 		SeatID;
+	public string	Name;
+	public string 	Avatar;
+	public string 	Uid;
+	public bool 	autowin;
+	public bool 	foul;
+	public int 		Bet;
+	public int 		Win;
+	public int 		BWin;
+	public List<int> 							score	= new List<int> ();
+	public RepeatedField<RepeatedField<uint>> 	Pres 	= new RepeatedField<RepeatedField<uint>>();
+	public RepeatedField<global::Msg.CardRank> 	Ranks 	= new RepeatedField<global::Msg.CardRank>();
 }
 
 public enum GameState:int{
@@ -67,6 +84,10 @@ public class Common: MonoBehaviour
 	public static List<PlayerInfo> CPlayers	= new List<PlayerInfo>();
 	public static List<int>	CPokers			= new List<int>();
 	public static List<int>	CSeats			= new List<int>();
+
+	//Players Info
+	public static Dictionary<int,  CSeatResult> CSeatResults 	= new Dictionary<int, CSeatResult>();
+	public static List<List<uint>>	CCPokers= new List<List<uint>>();
 
 	//GameObject
 	public static GameObject CallingObj		= null;		

@@ -27,7 +27,7 @@ public class StateShowHand : State {
 		AdjustUI ();
 
 
-		foreach (KeyValuePair<int, SeatResult> pair in m_GameController.SeatResults) {
+		foreach (KeyValuePair<int, CSeatResult> pair in Common.CSeatResults) {
 			Seats.Add (pair.Key);
 		}
 		Seats.Sort ();
@@ -41,7 +41,7 @@ public class StateShowHand : State {
 		AdjustUI ();
 
 
-		foreach (KeyValuePair<int, SeatResult> pair in m_GameController.SeatResults) {
+		foreach (KeyValuePair<int, CSeatResult> pair in Common.CSeatResults) {
 			Seats.Add (pair.Key);
 		}
 		Seats.Sort ();
@@ -123,8 +123,8 @@ public class StateShowHand : State {
 	}
 		
 	public void ShowPokerFace(int SeatID){
-		if(m_GameController.SeatResults.ContainsKey(SeatID)){
-			SeatResult pinfo = m_GameController.SeatResults [SeatID];
+		if(Common.CSeatResults.ContainsKey(SeatID)){
+			CSeatResult pinfo = Common.CSeatResults [SeatID];
 			Transform HandObj = Layer.Find ("SeatCom/Seat" + SeatID);
 
 			for (int i = 0; i <  3; i++) {
