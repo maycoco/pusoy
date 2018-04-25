@@ -327,7 +327,7 @@ public class CareerControl : MonoBehaviour {
 			string hour = time.Hour >= 10 ? time.Hour.ToString() : "0" + time.Hour.ToString();
 			string min =  time.Minute >= 10 ? time.Minute.ToString() : "0" + time.Minute.ToString();
 
-			Drecord.transform.Find ("RoomName").GetComponent<Text> ().text = hour.ToString () + " : " + min.ToString () + " " + room.Name;
+			Drecord.transform.Find ("RoomName").GetComponent<Text> ().text = hour + " : " + min + " " + room.Name;
 			if(room.Items.Count > 4){Drecord.transform.Find ("More").gameObject.SetActive (true);}
 
 			int score = 0;

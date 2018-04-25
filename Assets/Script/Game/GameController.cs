@@ -575,14 +575,15 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.CombineRsp:
-			if (data.CombineRsp.Ret == 0) {
-				List<List<uint>> cards = new List<List<uint>> (); 
-				foreach(Msg.CardGroup cardg in data.CombineRsp.CardGroups ){
-					List<uint> duan = new List<uint> (cardg.Cards);
-					cards.Add (duan);
-				}
-
-				m_StateManage.m_StateSorting.SynchPoker (cards);
+			if (data.CombineRsp.Ret == 0) {	
+				Loom.QueueOnMainThread (() => {
+					List<List<uint>> cards = new List<List<uint>> (); 
+					foreach(Msg.CardGroup cardg in data.CombineRsp.CardGroups ){
+						List<uint> duan = new List<uint> (cardg.Cards);
+						cards.Add (duan);
+					}
+					m_StateManage.m_StateSorting.SynchPoker (cards);
+				});
 			}
 				
 			break;
