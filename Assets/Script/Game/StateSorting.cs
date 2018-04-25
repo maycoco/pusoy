@@ -1082,31 +1082,22 @@ public class StateSorting : State {
 	}
 
 	public void SynchPoker(List<List<uint>> cards){
-		int[] s1 = new int[]{1,13,3};
-		int[] s2 = new int[]{14,5,6,24,40};
-		int[] s3 = new int[]{18,10,38,12,27};
-
-		List<List<int>> cardsa = new List<List<int>> ();
-		cardsa.Add(new List<int>(s1));
-		cardsa.Add(new List<int>(s2));
-		cardsa.Add(new List<int>(s3));
-
 		UpperPokers.Clear ();
 		MiddlePokers.Clear ();
 		UnderPokers.Clear ();
 		HandPokers.Clear ();
 
-		foreach(uint c in cardsa[0]){
+		foreach(uint c in cards[0]){
 			UpperPokers.Add ((int)c);
 			UpdateUpperPokers (0);
 		}
 
-		foreach(uint c in cardsa[1]){
+		foreach(uint c in cards[1]){
 			MiddlePokers.Add ((int)c);
 			UpdateMiddlePokers (0);
 		}
 
-		foreach(uint c in cardsa[2]){
+		foreach(uint c in cards[2]){
 			UnderPokers.Add ((int)c);
 			UpdateUnderPokers (0);
 		}
