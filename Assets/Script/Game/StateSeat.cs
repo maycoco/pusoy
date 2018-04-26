@@ -59,6 +59,10 @@ public class StateSeat : State{
 		UpdatePlayerUI ();
 	}
 
+	public void HideTipsWaitStart(){
+		Layer.Find ("TipsWaitStart").gameObject.SetActive (false);
+	}
+
 	public void UpdatePlayerUI(){
 		Layer.Find ("TipsNoPlayers").gameObject.SetActive (false);
 

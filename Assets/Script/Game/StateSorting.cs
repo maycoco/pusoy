@@ -100,7 +100,6 @@ public class StateSorting : State {
 		Debug.Log ("==============================state sorting===================================");
 		InitData ();
 
-		ShowControlUI ();
 		AdjustUI ();
 
 		CountDownTime = Common.ConfigSortTime;
@@ -111,28 +110,34 @@ public class StateSorting : State {
 
 	public override void DisEnter(){
 		InitData ();
-
-		ShowControlUI ();
 		AdjustUI ();
 
 		CountDownTime = Common.ConfigSortTime;
 		BeginCountDown ();
+	
+		AdjustPokers (true);
+		ShowControlUI ();
 
-		if (Common.CCPokers.Count <= 0) {
-			AdjustPokers (true);
-		} else {
+		if (Common.CCPokers.Count > 0) {
+			Layer.Find ("Waiting").gameObject.SetActive (true);
+			AlreadyComfim = true;
 			StopSorting ();
-			SynchPoker (Common.CCPokers);
-			Common.CCPokers.Clear ();
+			Invoke ("ShowSynch", 1.5f);
 		}
 	}
 
+	public void ShowSynch(){
+		SynchPoker (Common.CCPokers);
+		Common.CCPokers.Clear ();
+	}
+
 	public void ConfimCombin(){
+		Layer.Find ("Waiting").gameObject.SetActive (false);
 		Layer1.Find ("GetLucky").gameObject.SetActive (false);
 		Layer1.Find ("Battle").gameObject.SetActive (false);
 		Layer2.Find ("Types").gameObject.SetActive (false);
 
-		if(Common.CCPokers.Count <= 0){
+		if(Common.CCPokers.Count <= 0 && !AlreadyComfim){
 			AutoSortConfrm ();
 		}
 	}
@@ -211,6 +216,7 @@ public class StateSorting : State {
 		Layer1.Find ("Battle").gameObject.SetActive (false);
 		Layer2.Find ("Types").gameObject.SetActive (false);
 		GetLuckyConfim = true;
+		SortConfrmServer ();
 	}
 
 	public void BeginCountDown(){
@@ -1027,6 +1033,7 @@ public class StateSorting : State {
 	}
 
 	public void StopSorting(){
+		AlreadyComfim = true;
 		DisPokers ();
 		HideConfim ();
 		HandPokers.Clear ();
@@ -1089,18 +1096,19 @@ public class StateSorting : State {
 
 		foreach(uint c in cards[0]){
 			UpperPokers.Add ((int)c);
-			UpdateUpperPokers (0);
+			UpdateUpperPokers (0.3f);
 		}
 
 		foreach(uint c in cards[1]){
 			MiddlePokers.Add ((int)c);
-			UpdateMiddlePokers (0);
+			UpdateMiddlePokers (0.3f);
 		}
 
 		foreach(uint c in cards[2]){
 			UnderPokers.Add ((int)c);
-			UpdateUnderPokers (0);
+			UpdateUnderPokers (0.3f);
 		}
 
+		DisPokers ();
 	}
 }

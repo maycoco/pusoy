@@ -21,7 +21,7 @@ public class LoginController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//for demo
-		//Screen.SetResolution(448, 795, false);
+		Screen.SetResolution(448, 795, false);
 	}
 
 	void Awake(){
