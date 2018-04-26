@@ -268,7 +268,7 @@ public class CareerControl : MonoBehaviour {
 			m_LastPage.SetActive (true);
 		}
 
-		if(temp.Count <= 0){m_NextPage.SetActive (false); return;}
+		if(temp.Count <= 0 || temp.Count < m_CareerCount){m_NextPage.SetActive (false); return;}
 		else{m_NextPage.SetActive (true);ClearCareerRecord ();UpdateCareerRecord ();}
 
 	}
