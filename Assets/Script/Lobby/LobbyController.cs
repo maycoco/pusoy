@@ -728,13 +728,15 @@ public class LobbyController : MonoBehaviour {
 		}
 	}
 
-	public void  CareerRecordsServer(uint days){
+	public void  CareerRecordsServer(uint days, uint index, uint count){
 		Common.Calling (Canvas);
 
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.CareerRoomRecordsReq;
 		msg.CareerRoomRecordsReq 		= new CareerRoomRecordsReq();
 		msg.CareerRoomRecordsReq.Days	= days;
+		msg.CareerRoomRecordsReq.Pos	= index;
+		msg.CareerRoomRecordsReq.Count	= count;
 
 		using (var stream = new MemoryStream())
 		{

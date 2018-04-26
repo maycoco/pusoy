@@ -28,6 +28,12 @@ public class CareerControl : MonoBehaviour {
 	public GameObject 		m_CareerRecord;
 	public GameObject 		m_CareerPlayer;
 
+	public GameObject 		m_LastPage;
+	public GameObject		m_NextPage;
+
+	private uint 			m_CareerIndex;
+	private	uint 			m_CareerCount;
+
 	private	List<string>	m_months = new List<string>();
 	private RepeatedField<CareerRoomRecord> CareerRooms =  new RepeatedField<CareerRoomRecord>();
 
@@ -51,7 +57,7 @@ public class CareerControl : MonoBehaviour {
 		m_months.Add ("Oct");
 		m_months.Add ("Nov");
 		m_months.Add ("Dec");
-
+//
 //		for(int i = 0; i < 3; i++){
 //			Msg.CareerRoomRecord room = new CareerRoomRecord ();
 //			room.Name = "Ali's Room";
@@ -75,7 +81,7 @@ public class CareerControl : MonoBehaviour {
 //			CareerRooms.Add (room);
 //		}
 //
-//		for(int i = 0; i < 3; i++){
+//		for(int i = 0; i < 1; i++){
 //			Msg.CareerRoomRecord room = new CareerRoomRecord ();
 //			room.Name = "Ali's Room";
 //			room.BeginTime = 1541005261;
@@ -97,8 +103,8 @@ public class CareerControl : MonoBehaviour {
 //
 //			CareerRooms.Add (room);
 //		}
-//
-//		UpdateCareerRecord ();
+
+		//UpdateCareerRecord ();
 	}
 	
 	// Update is called once per frame
@@ -155,7 +161,11 @@ public class CareerControl : MonoBehaviour {
 		days.Add (365);
 
 		LobbyController.CareerWinLostServer (days);
-		LobbyController.CareerRecordsServer (Common.ConfigCareerDays);
+
+
+		m_CareerIndex = 0;
+		m_CareerCount = 4;
+		LobbyController.CareerRecordsServer (Common.ConfigCareerDays, m_CareerIndex, m_CareerCount);
 	}
 
 	public void Exit(){
@@ -239,50 +249,6 @@ public class CareerControl : MonoBehaviour {
 	public void UpdatePieTips(Transform winobj, Transform lostobj, int win, int lost){
 		winobj.GetComponent<Text> ().text = "Win" + win.ToString () + "%";
 		lostobj.GetComponent<Text> ().text = "Lose" + lost.ToString () + "%";
-//		string winstr = win.ToString();
-//		string loststr = lost.ToString();
-//
-//		float left = 0;
-//
-//		for (int c = loststr.Length - 1; c >= 0; c--) {  
-//			GameObject t = new GameObject ();
-//			t.AddComponent<Image> ();
-//			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/lost" + loststr[c] , typeof(Sprite)) as Sprite;
-//			t.transform.SetParent(lostobj);
-//			t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
-//			t.transform.localPosition = new Vector3 (left,0,0);
-//			t.transform.localScale = new Vector3 (1,1,1);
-//			left -= 20;
-//		}
-//
-//		GameObject licon = new GameObject ();
-//		licon.AddComponent<Image> ();
-//		licon.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/losticon", typeof(Sprite)) as Sprite;
-//		licon.transform.SetParent(lostobj);
-//		licon.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
-//		licon.transform.localPosition = new Vector3 (left,0,0);
-//		licon.transform.localScale = new Vector3 (1,1,1);
-//
-//		left = 0;
-//		GameObject wicon = new GameObject ();
-//		wicon.AddComponent<Image> ();
-//		wicon.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/winicon", typeof(Sprite)) as Sprite;
-//		wicon.transform.SetParent(winobj);
-//		wicon.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
-//		wicon.transform.localPosition = new Vector3 (left,0,0);
-//		wicon.transform.localScale = new Vector3 (1,1,1);
-//		left += 20;
-//
-//		for (int c = 0;  c < winstr.Length; c++) {  
-//			GameObject t = new GameObject ();
-//			t.AddComponent<Image> ();
-//			t.GetComponent<Image>().sprite = Resources.Load ("Image/Lobby/win"+ winstr[c] , typeof(Sprite)) as Sprite;
-//			t.transform.SetParent(winobj);
-//			t.transform.GetComponent<RectTransform> ().sizeDelta = new Vector2 (22, 29);
-//			t.transform.localPosition = new Vector3 (left,0,0);
-//			t.transform.localScale = new Vector3 (1,1,1);
-//			left += 20;
-//		}
 	}
 
 	public DateTime ConvertStringToDateTime(int timeStamp)
@@ -295,18 +261,22 @@ public class CareerControl : MonoBehaviour {
 	public void SetCareerRecordData(RepeatedField<CareerRoomRecord> temp){
 		CareerRooms.Clear ();
 		CareerRooms = temp;
-		UpdateCareerRecord ();
+
+		if (m_CareerIndex <= 0) {
+			m_LastPage.SetActive (false);
+		} else {
+			m_LastPage.SetActive (true);
+		}
+
+		if(temp.Count <= 0){m_NextPage.SetActive (false); return;}
+		else{m_NextPage.SetActive (true);ClearCareerRecord ();UpdateCareerRecord ();}
+
 	}
 
 	public void UpdateCareerRecord(){
-		Transform Content = transform.Find ("GameList/List/Viewport/Content");
+		Transform Content = transform.Find ("GameList/List");
 
-		float height = 140 * CareerRooms.Count + 12 * (CareerRooms.Count - 1);
-		if(height < 640){height = 640;}
-
-		Content.GetComponent<RectTransform> ().sizeDelta = new Vector2 (Content.GetComponent<RectTransform> ().sizeDelta.x, height);
-		Content.GetComponent<RectTransform> ().localPosition = new Vector3 (0, -height / 2, 0);
-
+		float height = 600;
 		float top = height / 2;
 		int month = 0;
 		int day = 0;
@@ -382,7 +352,7 @@ public class CareerControl : MonoBehaviour {
 	}
 
 	public void ClearCareerRecord(){
-		Transform Content = transform.Find ("GameList/List/Viewport/Content");
+		Transform Content = transform.Find ("GameList/List");
 		for (int i = Content.childCount - 1; i >= 0; i--) {  
 			Destroy(Content.GetChild(i).gameObject);
 		} 
@@ -489,5 +459,19 @@ public class CareerControl : MonoBehaviour {
 		for (int i = Content.childCount - 1; i >= 0; i--) {  
 			Destroy(Content.GetChild(i).gameObject);
 		} 
+	}
+
+	public void LastPage(){
+		if (m_CareerIndex <= 0) {
+			return;
+		} else {
+			m_CareerIndex = m_CareerIndex - 5;
+			LobbyController.CareerRecordsServer (Common.ConfigCareerDays, m_CareerIndex, m_CareerCount);
+		}
+	}
+
+	public void NextPage(){
+		m_CareerIndex = m_CareerIndex + 5;
+		LobbyController.CareerRecordsServer (Common.ConfigCareerDays, m_CareerIndex, m_CareerCount);
 	}
 }
