@@ -200,7 +200,6 @@ public class Common: MonoBehaviour
 				if (www!=null && string.IsNullOrEmpty(www.error))
 				{
 					if (AvatarCache.ContainsKey (url)) {
-						Debug.Log (1);
 						av.texture = AvatarCache [url];
 					} else {
 						AvatarCache.Add (url, www.texture as Texture);

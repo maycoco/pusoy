@@ -451,8 +451,6 @@ public class LobbyController : MonoBehaviour {
 
 					foreach( Msg.SeatResult res in data.JoinRoomRsp.Room.Result){
 						if(res.Uid == Common.Uid){
-							Debug.Log (1111);
-							Debug.Log (res.CardGroups.Count);
 							for(int o = 0; o < res.CardGroups.Count; o++){
 								List<uint> t = new List<uint> (res.CardGroups[o].Cards);
 
