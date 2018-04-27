@@ -365,7 +365,7 @@ public class GameController : MonoBehaviour {
 
 	public void UpdateRooimInfo(){
 		Canvas.Find ("TableInfo/RoomNumber").GetComponent<Text> ().text = "Password : " + Common.CRoom_number;
-		Canvas.Find ("TableInfo/BetSize").GetComponent<Text> ().text = "Bet Size  " + Common.CMin_bet.ToString () + "-" + Common.CMax_bet.ToString ();
+		Canvas.Find ("TableInfo/BetSize").GetComponent<Text> ().text = "Bet Size  " + Common.ToCarryNum((int)Common.CMin_bet) + "-" + Common.ToCarryNum((int)Common.CMax_bet);
 		Canvas.Find ("TableInfo/Share").GetComponent<Text> ().text = "Room Fee shared";
 		Canvas.Find ("TableInfo/Round").GetComponent<Text> ().text = (Common.CPlayed_hands + 1).ToString () + "/" + Common.CHands.ToString ();
 	}

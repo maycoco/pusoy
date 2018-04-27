@@ -108,7 +108,7 @@ public class StateSeat : State{
 
 				SeatObj.Find ("Tips").gameObject.SetActive (false);
 
-				SeatObj.Find ("Amount").GetComponent<Text> ().text = player.Score.ToString();
+				SeatObj.Find ("Amount").GetComponent<Text> ().text = Common.ToCarryNum (player.Score);
 				SeatObj.Find ("Amount").gameObject.SetActive (true);
 
 				UICircle avatar = (UICircle)Instantiate(m_GameController.m_PrefabAvatar);
@@ -154,13 +154,13 @@ public class StateSeat : State{
 
 			PlayerInfo player = m_GameController.GetPlayerInfoForSeatID (i);
 			if (player != null) {
-				SeatObj.Find ("Amount").GetComponent<Text> ().text = player.Score.ToString ();
+				SeatObj.Find ("Amount").GetComponent<Text> ().text = Common.ToCarryNum (player.Score);
 			}
 		}
 	}
 
 	public void updateScore(int seat, int num){
-		Layer.Find ("SeatCom/Seat" + seat).Find ("Amount").GetComponent<Text> ().text = num.ToString ();
+		Layer.Find ("SeatCom/Seat" + seat).Find ("Amount").GetComponent<Text> ().text = Common.ToCarryNum (num);
 	}
 
 	public void UpdateAutoBanker(){

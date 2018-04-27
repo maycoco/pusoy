@@ -300,5 +300,27 @@ public class Common: MonoBehaviour
 		Destroy (d);
 	}
 
+	public static string ToCarryNum(int num){
+		string t = (Math.Abs(num)).ToString ();
+		string temp = "";
+
+		int index = 1;
+		for(int i = t.Length - 1; i >= 0; i--){
+			temp = t [i] + temp;
+
+			if(index < t.Length){
+				if(index % 3 == 0){
+					temp = "," + temp;
+				}
+			}
+			index++;
+		}
+
+		if(num < 0){
+			temp = "-" + temp;
+		}
+		return temp;
+	}
+
 	private Common() {}
 }

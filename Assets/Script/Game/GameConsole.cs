@@ -111,7 +111,7 @@ public class GameConsole : MonoBehaviour
 		string Roomfee 		= "";
 		if(Common.CIs_share){Roomfee = "Shared";}{Roomfee = "Individual";}
 
-		string Betsize 		= Common.CMin_bet + "-" + Common.CMax_bet;
+		string Betsize 		= Common.ToCarryNum((int)Common.CMin_bet) + "-" + Common.ToCarryNum((int)Common.CMax_bet);
 		//layer.Find ("Date/Time").GetComponent<Text> ().text = BeginTime + " ~ " + EndTime;
 		layer.Find ("Totalhands/Text").GetComponent<Text> ().text = Hands;
 		layer.Find ("MVP/Text").GetComponent<Text> ().text = Mvp;

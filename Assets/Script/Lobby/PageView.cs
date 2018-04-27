@@ -66,13 +66,13 @@ public class PageView : MonoBehaviour, IBeginDragHandler, IEndDragHandler {
 			if (Common.CareerWins [index] >= 0) {type = "+";}
 
 			if(index == 0){
-				Title.text = "7 Days Result " + type + Common.CareerWins[index];
+				Title.text = "7 Days Result " + type + Common.ToCarryNum(Common.CareerWins[index]);
 			}
 			else if(index == 1){
-				Title.text = "30 Days Result "  + type + Common.CareerWins[index];;
+				Title.text = "30 Days Result "  + type + Common.ToCarryNum(Common.CareerWins[index]);
 			}
 			else if(index == 2){
-				Title.text = "All Days Result "  + type + Common.CareerWins[index];;
+				Title.text = "All Days Result "  + type + Common.ToCarryNum(Common.CareerWins[index]);
 			}
         }
     }

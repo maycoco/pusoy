@@ -72,7 +72,7 @@ public class CreateRoomControl : MonoBehaviour {
 		if (CreditPointsArray[CurCreditPoints] == 0) {
 			transform.Find ("CreditPoints/Amount").GetComponent<Text> ().text = "Unlimited";
 		} else {
-			transform.Find ("CreditPoints/Amount").GetComponent<Text> ().text = CreditPointsArray[CurCreditPoints].ToString();
+			transform.Find ("CreditPoints/Amount").GetComponent<Text> ().text = Common.ToCarryNum ((int)CreditPointsArray[CurCreditPoints]);
 		}
 	}
 

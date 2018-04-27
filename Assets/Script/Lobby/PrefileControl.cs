@@ -127,7 +127,7 @@ public class PrefileControl : MonoBehaviour
 		float left = (640 - width) / 2;
 		transform.Find ("SelfInfo/Diamonds/Icon").gameObject.SetActive (true);
 		transform.Find ("SelfInfo/Diamonds/Amount").gameObject.SetActive (true);
-		transform.Find ("SelfInfo/Diamonds/Amount").GetComponent<Text> ().text = Common.DiamondAmount.ToString();
+		transform.Find ("SelfInfo/Diamonds/Amount").GetComponent<Text> ().text = Common.ToCarryNum((int)Common.DiamondAmount);
 
 		transform.Find ("SelfInfo/Diamonds/Icon").localPosition = new Vector3 (left, 0, 0);
 		transform.Find ("SelfInfo/Diamonds/Amount").localPosition = new Vector3 (left + 45, 0, 0);
@@ -166,13 +166,13 @@ public class PrefileControl : MonoBehaviour
 
 	public void InputNumber(int number){
 		if(m_InputType == "userid"){
-			if (m_UserID.Length < 12) {
+			if (m_UserID.Length < 11) {
 				m_UserID = m_UserID + number.ToString();
 			}
 		}
 
 		if(m_InputType == "amount"){
-			if (m_Amount.Length < 12) {
+			if (m_Amount.Length < 10) {
 				m_Amount = m_Amount + number.ToString();
 			}
 		}
@@ -202,8 +202,9 @@ public class PrefileControl : MonoBehaviour
 			transform.Find ("SendDiamond/UserIDInput/Tag").localPosition = new Vector3 (m_UseridTagPos.x + (18 * m_UserID.Length) - (3.5f * (m_UserID.Length - 1)), m_UseridTagPos.y, m_UseridTagPos.z);
 		}
 		if(m_InputType == "amount"){
-			transform.Find ("SendDiamond/AmountInput/InputAmount").GetComponent<Text> ().text = m_Amount;
-			transform.Find ("SendDiamond/AmountInput/Tag").localPosition = new Vector3 (m_AmountTagPos.x + (18 * m_Amount.Length) - (3.5f * (m_Amount.Length - 1)), m_AmountTagPos.y, m_AmountTagPos.z);
+			string amt = Common.ToCarryNum (Convert.ToInt32(m_Amount));
+			transform.Find ("SendDiamond/AmountInput/InputAmount").GetComponent<Text> ().text = amt;
+			transform.Find ("SendDiamond/AmountInput/Tag").localPosition = new Vector3 (m_AmountTagPos.x + (17 * amt.Length) - (3.6f * (amt.Length - 1)), m_AmountTagPos.y, m_AmountTagPos.z);
 		}
 	}
 
@@ -320,7 +321,7 @@ public class PrefileControl : MonoBehaviour
 					Precord.GetComponent<RectTransform> ().localPosition = new Vector3 (0, top, 0);
 					Precord.transform.Find("Time").GetComponent<Text> ().text = d.Time;
 					Precord.transform.Find("Text").GetComponent<Text> ().text = d.Name;
-					Precord.transform.Find("Amount").GetComponent<Text> ().text = d.Amount.ToString();
+					Precord.transform.Find ("Amount").GetComponent<Text> ().text = Common.ToCarryNum (d.Amount);
 					if (d.Amount >= 0) {
 						Precord.transform.Find ("Amount").GetComponent<Text> ().color = new Color (0, 255.0f / 255, 6.0f / 255);
 					} else {
