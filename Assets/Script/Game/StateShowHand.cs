@@ -23,9 +23,8 @@ public class StateShowHand : State {
 
 	public override void Enter(){
 		Debug.Log ("==============================state show hand===================================");
-		m_GameController.ShowSeatLayer ();
 		AdjustUI ();
-
+		m_GameController.ShowSeatLayer ();
 
 		foreach (KeyValuePair<int, CSeatResult> pair in Common.CSeatResults) {
 			Seats.Add (pair.Key);
@@ -37,9 +36,8 @@ public class StateShowHand : State {
 	}
 
 	public override void DisEnter(){
-		m_GameController.ShowSeatLayer ();
 		AdjustUI ();
-
+		m_GameController.ShowSeatLayer ();
 
 		foreach (KeyValuePair<int, CSeatResult> pair in Common.CSeatResults) {
 			Seats.Add (pair.Key);
@@ -51,6 +49,7 @@ public class StateShowHand : State {
 	}
 
 	public override void Exit(){
+		ClearShowInfo ();
 		Layer.gameObject.SetActive (false);
 	}
 
@@ -64,11 +63,17 @@ public class StateShowHand : State {
 			objs[i].GetComponent<Image>().sprite = Resources.Load("Image/Poker/poker_back", typeof(Sprite)) as Sprite;
 		}
 
-		for(int i = 0; i < Layer.Find ("SeatCom").childCount; i++){
+		ClearShowInfo ();
+	}
+
+	public void ClearShowInfo(){
+		for(int i = 0; i < 4; i++){
 			Transform HandObj = Layer.Find ("SeatCom/Seat" + i);
-			for(int o = 0; o < 3; o++){
-				HandObj.Find ("ParResult" + o).gameObject.SetActive (false);
+
+			for(int n = 0; n < 3; n++){
+				HandObj.Find ("ParResult" + n).gameObject.SetActive (false);
 			}
+
 			HandObj.Find ("Lost").gameObject.SetActive (false);
 			HandObj.Find ("Win").gameObject.SetActive (false);
 			HandObj.Find ("Getlucky").gameObject.SetActive (false);
@@ -143,18 +148,21 @@ public class StateShowHand : State {
 				Image ResI = ParResult.Find("Res").GetComponent<Image> ();
 
 				if(!pinfo.foul){
+					Debug.Log (pinfo.score.Count);
 					if(pinfo.score.Count > 0){
+						Debug.Log (pinfo.score [i]);
 						if (pinfo.score[i] > 0) {
 							typeI.sprite = Resources.Load ("Image/Game/winicon", typeof(Sprite)) as Sprite;
 							ResI.sprite = Resources.Load ("Image/Game/win1", typeof(Sprite)) as Sprite;
+
 						} else {
 							typeI.sprite = Resources.Load ("Image/Game/losticon", typeof(Sprite)) as Sprite;
 							ResI.sprite = Resources.Load ("Image/Game/lost1", typeof(Sprite)) as Sprite;
 						}
+
+						ParResult.gameObject.SetActive (true);
 					}
 				}
-
-				ParResult.gameObject.SetActive (true);
 			}
 				
 

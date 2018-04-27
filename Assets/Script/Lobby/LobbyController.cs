@@ -71,6 +71,10 @@ public class LobbyController : MonoBehaviour {
 	void Update () {
 	}
 		
+	public void ComingSoon(){
+		Common.TipsOn (PrefabTips, Canvas, Common.TipsComingSoon);
+	}
+
 	public void CreateRoom(){
 		PlayerButtonEffect ();
 		CreateRoomControl.Enter();

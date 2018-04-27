@@ -213,7 +213,7 @@ public class GameController : MonoBehaviour {
 //		p3.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=2864ac7b133853438ccf8729a313b01f/d303b9389b504fc2c82cef12e6dde71190ef6d67.jpg";
 //		Common.CPlayers.Add (p3);
 //
-//		int[] s = new int[]{1,13,3,14,5,6,24,40,18,10,38,12,27};
+//		int[] s = new int[]{1,13,3,6,5,7,24,8,18,11,38,12,27};
 //		Common.CPokers = new List<int> (s);
 //		ResultEvent (null);
 

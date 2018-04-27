@@ -1044,7 +1044,6 @@ public class StateSorting : State {
 		StopSorting ();
 
 		Layer.Find ("Waiting").gameObject.SetActive (true);
-		if (TweenColor != null) {TweenColor.Kill ();}
 
 		if (!PlayBaoPai ()) {SortConfrmServer ();
 		} else {Invoke("SortConfrmServer", 2.0f);}
@@ -1061,6 +1060,7 @@ public class StateSorting : State {
 	}
 
 	public void SortConfrmServer(){
+		if (TweenColor != null) {TweenColor.Kill (); TweenColor = null;}
 		AlreadyComfim = true;
 
 		Msg.CardGroup upper_pokers = new Msg.CardGroup();

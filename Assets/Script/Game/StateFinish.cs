@@ -72,6 +72,7 @@ public class StateFinish : State {
 		} 
 		else {
 			CancelInvoke ();
+			Next ();
 		}
 		CountDowm--;
 	}
@@ -192,7 +193,7 @@ public class StateFinish : State {
 			}
 
 			if (hasAni) {
-				PreInfoObj.transform.DOLocalMoveY (poslist [index].y, 0.3f).SetDelay (index);
+				PreInfoObj.transform.DOLocalMoveY (poslist [index].y, 0.15f).SetDelay (index * 0.5f);
 			} else {
 				PreInfoObj.transform.localPosition = poslist [index];
 			}
