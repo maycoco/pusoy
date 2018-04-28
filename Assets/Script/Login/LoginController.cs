@@ -22,7 +22,7 @@ public class LoginController : MonoBehaviour {
 	void Start () {
 		#if UNITY_STANDALONE_WIN || UNITY_EDITOR
 			Screen.SetResolution(448, 795, false);
-			Application.runInBackground = true;
+			Application.runInBackground = false;
 		#endif
 	}
 

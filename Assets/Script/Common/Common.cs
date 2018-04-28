@@ -117,6 +117,9 @@ public class Common: MonoBehaviour
 	public static uint 		ConfigCareerDays = 30;
 
 	//Focus Time
+	public static int       PauseTimeOut		= 10;
+	public static int       PauseTimeOutLong	= 20;
+
 	public static long		PauseTime			= 0;
 	public static bool		isPause				= false;
 	public static bool		isFocus				= false;

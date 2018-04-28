@@ -459,15 +459,8 @@ public class LobbyController : MonoBehaviour {
 						if(res.Uid == Common.Uid){
 							for(int o = 0; o < res.CardGroups.Count; o++){
 								List<uint> t = new List<uint> (res.CardGroups[o].Cards);
-
-								foreach(uint pok in t){
-									Debug.Log (pok);
-								}
-
 								Common.CCPokers.Add (t);
 							}
-
-							Debug.Log (Common.CCPokers.Count);
 						}
 					}
 
@@ -816,13 +809,13 @@ public class LobbyController : MonoBehaviour {
 		{
 			long timet = Common.GetTimeStamp() - Common.PauseTime;
 
-			if( timet <= 10){
+			if( timet <= Common.PauseTimeOut){
 				if( !Client.Instance.IsConnected() ){
 					CheckConnection ();
 				}
 			}
 
-			if( timet > 10 && timet < 20*60){
+			if( timet > Common.PauseTimeOut && timet < Common.PauseTimeOutLong){
 				if (!Client.Instance.IsConnected ()) {
 					CheckConnection ();
 				} else {
@@ -832,7 +825,7 @@ public class LobbyController : MonoBehaviour {
 
 			}
 
-			if( timet >= 20*60){
+			if( timet >= Common.PauseTimeOutLong){
 				if (!Client.Instance.IsConnected ()) {
 					SceneManager.LoadScene("Scene/UpdateVersion");
 				} else {

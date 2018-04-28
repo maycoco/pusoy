@@ -990,13 +990,16 @@ public class GameController : MonoBehaviour {
 		{
 			long timet = Common.GetTimeStamp() - Common.PauseTime;
 
-			if( timet <= 10){
+			Debug.Log (timet);
+			Debug.Log (Client.Instance.IsConnected());
+
+			if( timet <= Common.PauseTimeOut){
 				if( !Client.Instance.IsConnected() ){
 					SceneManager.LoadScene ("Scene/Lobby");
 				}
 			}
 
-			if( timet > 10 && timet < 20*60){
+			if( timet > Common.PauseTimeOut && timet < Common.PauseTimeOutLong){
 				if (!Client.Instance.IsConnected ()) {
 					SceneManager.LoadScene ("Scene/Lobby");
 				} else {
@@ -1006,7 +1009,7 @@ public class GameController : MonoBehaviour {
 
 			}
 
-			if( timet >= 20*60){
+			if( timet >= Common.PauseTimeOutLong){
 				if (!Client.Instance.IsConnected ()) {
 					SceneManager.LoadScene("Scene/UpdateVersion");
 				} else {
