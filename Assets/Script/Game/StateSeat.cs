@@ -98,7 +98,7 @@ public class StateSeat : State{
 			Transform SeatObj = Layer.Find ("SeatCom").GetChild (i);
 			PlayerInfo player = m_GameController.GetPlayerInfoForSeatID (i);
 
-			Debug.Log ("PLayer=========="+player.ToString());
+			Debug.Log (player);
 
 			if (player != null) {
 
