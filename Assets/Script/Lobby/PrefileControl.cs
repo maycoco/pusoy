@@ -112,6 +112,14 @@ public class PrefileControl : MonoBehaviour
 		HideCalendar ();
 
 		LobbyControl.GetProfileServer ();
+
+		DateTime d1 = DateTime.Now;
+		DateTime d2 = d1.AddDays(-7);
+
+		m_EndDate = d1.Year + "-" + d1.Month + "-" + d1.Day;
+		m_BeginDate = d2.Year + "-" + d2.Month + "-" + d2.Day;
+		HideCalendar ();
+		LobbyControl.DiamondsRecordsServer(m_BeginDate, m_EndDate);
 	}
 
 	public void Exit(){
@@ -347,6 +355,7 @@ public class PrefileControl : MonoBehaviour
 		if (!string.IsNullOrEmpty (m_BeginDate) && !string.IsNullOrEmpty (m_EndDate)) {
 			m_BeginDate = m_BeginDate.Replace ("/", "-");
 			m_EndDate = m_EndDate.Replace ("/", "-");
+
 
 			LobbyControl.DiamondsRecordsServer(m_BeginDate, m_EndDate);
 		}

@@ -700,6 +700,9 @@ public class LobbyController : MonoBehaviour {
 	public void  DiamondsRecordsServer(string begin_time, string end_time){
 		Common.Calling (Canvas);
 
+		Debug.Log (begin_time);
+		Debug.Log (end_time);
+
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.DiamondsRecordsReq;
 		msg.DiamondsRecordsReq 			= new DiamondsRecordsReq();

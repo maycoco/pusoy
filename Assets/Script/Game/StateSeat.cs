@@ -93,11 +93,17 @@ public class StateSeat : State{
 
 		//HandUI
 		for(int i = 0; i < Layer.Find ("SeatCom").childCount; i++){
-			Transform SeatObj = Layer.Find ("SeatCom").GetChild (i);
+			Debug.Log ("Seat=========="+i);
 
+			Transform SeatObj = Layer.Find ("SeatCom").GetChild (i);
 			PlayerInfo player = m_GameController.GetPlayerInfoForSeatID (i);
+
+			Debug.Log ("PLayer=========="+player.ToString());
+
 			if (player != null) {
-				
+
+				Debug.Log (player.Uid);
+
 				SeatObj.Find ("AddSeat").gameObject.SetActive (false);
 
 				SeatObj.Find ("Name").GetComponent<Text> ().text = player.Name;

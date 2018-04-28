@@ -717,10 +717,14 @@ public class GameController : MonoBehaviour {
 							p.Score = data.SitDownNotify.Score;
 						}
 					}
-						
-					SetSeatID (data.SitDownNotify.Uid, (int)data.SitDownNotify.SeatId);
-					UpdateOrderList ();
 
+					SetSeatID (data.SitDownNotify.Uid, (int)data.SitDownNotify.SeatId);
+
+					foreach(PlayerInfo p1 in Common.CPlayers){
+						Debug.Log(p1.Uid + "===============" + p1.SeatID);
+					}
+
+					UpdateOrderList ();
 
 					if(m_SelfSeatID == 0 &&  GetTablePlayersCount() > 1 && Common.CState == Msg.GameState.Ready){m_Letplay.SetActive(true);}
 				}); 
@@ -759,6 +763,11 @@ public class GameController : MonoBehaviour {
 				p.FB_avatar	= data.JoinRoomNotify.Avatar;
 				p.SeatID 	= -1;
 				Common.CPlayers.Add (p);
+
+				foreach(PlayerInfo p1 in Common.CPlayers){
+					Debug.Log(p1.Uid + "===============" + p1.SeatID);
+				}
+
 			}); 
 			break;
 
