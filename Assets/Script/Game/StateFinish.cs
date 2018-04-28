@@ -79,6 +79,7 @@ public class StateFinish : State {
 
 	public void Next(){
 		if ((Common.CPlayed_hands + 1) < Common.CHands) {
+			m_GameController.CloseResultServer ();
 			m_StateManage.ChangeState (STATE.STATE_SEAT);
 			m_StateManage.m_StateSeat.HideTipsWaitStart ();
 		} else {

@@ -600,6 +600,13 @@ public class GameController : MonoBehaviour {
 			}
 			break;
 
+		case MessageID.CloseResultRsp:
+			if (data.GetScoreboardRsp.Ret == 0) {
+				Loom.QueueOnMainThread (() => {
+				});
+			}
+			break;
+
 		case MessageID.GetRoundHistoryRsp:
 			if (data.GetRoundHistoryRsp.Ret == 0) {
 				Loom.QueueOnMainThread (() => {
@@ -921,6 +928,18 @@ public class GameController : MonoBehaviour {
 		msg.Msgid 						= MessageID.GetRoundHistoryReq;
 		msg.GetRoundHistoryReq 			= new GetRoundHistoryReq();
 		msg.GetRoundHistoryReq.Round 	= round;
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
+	public void CloseResultServer(){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.CloseResultReq;
+		msg.CloseResultReq 				= new CloseResultReq();
 
 		using (var stream = new MemoryStream())
 		{
