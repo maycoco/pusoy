@@ -601,7 +601,7 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.CloseResultRsp:
-			if (data.GetScoreboardRsp.Ret == 0) {
+			if (data.CloseResultRsp.Ret == 0) {
 				Loom.QueueOnMainThread (() => {
 				});
 			}
