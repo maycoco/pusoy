@@ -20,8 +20,10 @@ public class LoginController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//for demo
-		Screen.SetResolution(448, 795, false);
+		#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+			Screen.SetResolution(448, 795, false);
+			Application.runInBackground = true;
+		#endif
 	}
 
 	void Awake(){

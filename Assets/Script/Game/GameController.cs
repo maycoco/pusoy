@@ -484,7 +484,14 @@ public class GameController : MonoBehaviour {
 	public void DisConnect(){
 		Loom.QueueOnMainThread(()=>{
 			Common.IsOnline = false;
-			ExitGame ();
+
+			if(Common.needReConnect){
+				ExitGame ();
+			}
+			else{
+				Common.needReConnect = true;
+				SceneManager.LoadScene("Scene/UpdateVersion");
+			}
 		}); 
 	}
 
@@ -963,7 +970,60 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	public void test(){
-		m_StateManage.m_StateSorting.AutoSortConfrm();
+	public void OnApplicationPause(){
+		if(!Common.isPause)
+		{
+			Common.PauseTime = Common.GetTimeStamp();
+		}
+
+		else 
+		{
+			Common.isFocus=true;
+		}
+
+		Common.isPause=true;
+	}
+
+	public void OnApplicationFocus(){
+
+		if(Common.isFocus)
+		{
+			long timet = Common.GetTimeStamp() - Common.PauseTime;
+
+			if( timet <= 10){
+				if( !Client.Instance.IsConnected() ){
+					SceneManager.LoadScene ("Scene/Lobby");
+				}
+			}
+
+			if( timet > 10 && timet < 20*60){
+				if (!Client.Instance.IsConnected ()) {
+					SceneManager.LoadScene ("Scene/Lobby");
+				} else {
+					Common.needReConnect = true;
+					Client.Instance.Disconnect ();
+				}
+
+			}
+
+			if( timet >= 20*60){
+				if (!Client.Instance.IsConnected ()) {
+					SceneManager.LoadScene("Scene/UpdateVersion");
+				} else {
+					Common.needReConnect = false;
+					Client.Instance.Disconnect ();
+				}
+			}
+
+
+			Common.PauseTime = 0;
+			Common.isPause=false;
+			Common.isFocus=false;
+		}
+
+		if(Common.isPause)
+		{
+			Common.isFocus=true;
+		}
 	}
 }

@@ -116,6 +116,13 @@ public class Common: MonoBehaviour
 	//CareerReqDays
 	public static uint 		ConfigCareerDays = 30;
 
+	//Focus Time
+	public static long		PauseTime			= 0;
+	public static bool		isPause				= false;
+	public static bool		isFocus				= false;
+	public static bool      needReConnect		= true;
+
+
 	public static bool	 	Sumbiting = false;
 
 	//DialogText
@@ -319,6 +326,17 @@ public class Common: MonoBehaviour
 			temp = "-" + temp;
 		}
 		return temp;
+	}
+
+	public static long GetTimeStamp(bool bflag = true)
+	{
+		TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+		long ret;
+		if (bflag)
+			ret = Convert.ToInt64(ts.TotalSeconds);
+		else
+			ret = Convert.ToInt64(ts.TotalMilliseconds);
+		return ret;
 	}
 
 	private Common() {}

@@ -284,7 +284,13 @@ public class LobbyController : MonoBehaviour {
 	public void DisConnect(){
 		Loom.QueueOnMainThread(()=>{  
 			Common.IsOnline = false;
-			CheckConnection ();
+			if(Common.needReConnect){
+				CheckConnection ();
+			}
+			else{
+				Common.needReConnect = true;
+				SceneManager.LoadScene("Scene/UpdateVersion");
+			}
 		}); 
 
 	}
@@ -700,9 +706,6 @@ public class LobbyController : MonoBehaviour {
 	public void  DiamondsRecordsServer(string begin_time, string end_time){
 		Common.Calling (Canvas);
 
-		Debug.Log (begin_time);
-		Debug.Log (end_time);
-
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.DiamondsRecordsReq;
 		msg.DiamondsRecordsReq 			= new DiamondsRecordsReq();
@@ -791,5 +794,62 @@ public class LobbyController : MonoBehaviour {
 	public void Logout(){
 		FB.LogOut ();
 		GoLogin ();
+	}
+
+	public void OnApplicationPause(){
+		if(!Common.isPause)
+		{
+			Common.PauseTime = Common.GetTimeStamp();
+		}
+
+		else 
+		{
+			Common.isFocus=true;
+		}
+
+		Common.isPause=true;
+	}
+
+	public void OnApplicationFocus(){
+		
+		if(Common.isFocus)
+		{
+			long timet = Common.GetTimeStamp() - Common.PauseTime;
+
+			if( timet <= 10){
+				if( !Client.Instance.IsConnected() ){
+					CheckConnection ();
+				}
+			}
+
+			if( timet > 10 && timet < 20*60){
+				if (!Client.Instance.IsConnected ()) {
+					CheckConnection ();
+				} else {
+					Common.needReConnect = true;
+					Client.Instance.Disconnect ();
+				}
+
+			}
+
+			if( timet >= 20*60){
+				if (!Client.Instance.IsConnected ()) {
+					SceneManager.LoadScene("Scene/UpdateVersion");
+				} else {
+					Common.needReConnect = false;
+					Client.Instance.Disconnect ();
+				}
+			}
+
+
+			Common.PauseTime = 0;
+			Common.isPause=false;
+			Common.isFocus=false;
+		}
+
+		if(Common.isPause)
+		{
+			Common.isFocus=true;
+		}
 	}
 }
