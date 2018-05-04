@@ -16,6 +16,11 @@ public class Result{
 public class AccountResult{
 	public string name;
 }
+	
+public class NoticeMessage{
+	public string 	text;
+	public int 		times;
+}
 
 public class CSeatResult{
 	public int 		SeatID;
@@ -70,8 +75,8 @@ public class Common: MonoBehaviour
 	public static uint		DiamondAmount	= 0;	
 
 	//setver Info
-	public static string	SServer			= "";
-	public static int		SPort			= 80;
+	public static string	SServer			= "118.184.23.103";
+	public static int		SPort			= 8010;
 	public static int		SUpdate			= 0;
 
 	//Room Data
@@ -129,6 +134,9 @@ public class Common: MonoBehaviour
 	public static bool		isPause				= false;
 	public static bool		isFocus				= false;
 	public static bool      needReConnect		= true;
+
+	//Notices
+	public static List<NoticeMessage> GameNotices	= new List<NoticeMessage>();
 
 
 	public static bool	 	Sumbiting = false;
@@ -347,6 +355,14 @@ public class Common: MonoBehaviour
 		else
 			ret = Convert.ToInt64(ts.TotalMilliseconds);
 		return ret;
+	}
+
+	public static Notice InitNotices(Notice Obj, GameObject Parent){
+		Notice nitice = Instantiate(Obj) as Notice;
+		nitice.transform.SetParent (Parent.transform);
+		nitice.transform.localScale = new Vector3 (1,1,1);
+		nitice.transform.localPosition = new Vector3 (0,1136/2,0);
+		return nitice;
 	}
 
 	private Common() {}

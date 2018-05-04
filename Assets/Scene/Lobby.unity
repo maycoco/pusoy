@@ -15621,6 +15621,8 @@ MonoBehaviour:
   PrefabAvatar: {fileID: 114181347771996772, guid: 9af53284b99d0d145a6f67254a9c92ea,
     type: 2}
   PrefabTips: {fileID: 1585707637974460, guid: f892e31d2722fe34d94a5e1a8128143b, type: 2}
+  PrefabNotice: {fileID: 114954181906528070, guid: f8352bdbe93c443beb70a5c94d35a51b,
+    type: 2}
   CreateRoomControl: {fileID: 1670155776}
   JoinRoomControl: {fileID: 1608508388}
   CareerControl: {fileID: 185764625}

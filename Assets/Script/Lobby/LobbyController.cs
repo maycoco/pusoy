@@ -30,6 +30,7 @@ public class LobbyController : MonoBehaviour {
 	public GameObject 				PrefabDialog;
 	public UICircle 				PrefabAvatar;
 	public GameObject 				PrefabTips;
+	public Notice 					PrefabNotice;
 
 	//Controller
 	public CreateRoomControl 		CreateRoomControl;
@@ -52,9 +53,12 @@ public class LobbyController : MonoBehaviour {
 	private List<uint>				RoomIDs = new List<uint>();
 
 	public GameObject				NoData;
+	private Notice 					NoticeBar;
 	
 	// Use this for initialization
 	void Start () {
+		NoticeBar = Common.InitNotices (PrefabNotice, Canvas);
+
 		Common.Sumbiting = false;
 		Common.Trying = 0;
 		NoData.SetActive (false);
@@ -63,6 +67,16 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	void Awake(){
+		NoticeMessage a = new NoticeMessage ();
+		a.text = "wangtaoshidazhutizi";
+		a.times = 3;
+		Common.GameNotices.Add(a);
+		NoticeMessage b = new NoticeMessage ();
+		b.text = "wangtaoshishabi";
+		b.times = 2;
+		Common.GameNotices.Add(b);
+
+
 		InitCallbackForNet ();
 		OnMusic ();
 	}
@@ -382,7 +396,14 @@ public class LobbyController : MonoBehaviour {
 		case MessageID.GetNoticesRsp:
 			if (data.GetNoticesRsp.Ret == 0) {
 				Loom.QueueOnMainThread (() => {
+					foreach(Msg.Notice s in data.GetNoticesRsp.Notices){
+						NoticeMessage nm =  new NoticeMessage();
+						nm.text = s.Content;
+						nm.times = 3;
+						Common.GameNotices.Add(nm);
+					}
 
+					NoticeBar.OnPlay ();
 				}); 
 			} 
 			break;
