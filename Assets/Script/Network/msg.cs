@@ -181,7 +181,7 @@ namespace Msg {
             "KA0SIgoFaXRlbXMYCiADKAsyEy5tc2cuU2NvcmVib2FyZEl0ZW0iDwoNR2V0",
             "Tm90aWNlc1JlcSJICg1HZXROb3RpY2VzUnNwEhkKA3JldBgBIAEoDjIMLm1z",
             "Zy5FcnJvcklEEhwKB25vdGljZXMYAiADKAsyCy5tc2cuTm90aWNlImAKBk5v",
-            "dGljZRIKCgJpZBgBIAEoDRINCgViZWdpbhgCIAEoCRILCgNlbmQYAyABKAkS",
+            "dGljZRIKCgJpZBgBIAEoDRINCgViZWdpbhgCIAEoDRILCgNlbmQYAyABKA0S",
             "DwoHY29udGVudBgEIAEoCRIdCgR0eXBlGAUgASgOMg8ubXNnLk5vdGljZVR5",
             "cGUiLQoNTm90aWNlc05vdGlmeRIcCgdub3RpY2VzGAEgAygLMgsubXNnLk5v",
             "dGljZSqXCQoJTWVzc2FnZUlEEg0KCUxvZ2luX1JlcRAAEg0KCUxvZ2luX1Jz",
@@ -13900,29 +13900,29 @@ namespace Msg {
 
     /// <summary>Field number for the "begin" field.</summary>
     public const int BeginFieldNumber = 2;
-    private string begin_ = "";
+    private uint begin_;
     /// <summary>
     /// 开始时间
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Begin {
+    public uint Begin {
       get { return begin_; }
       set {
-        begin_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        begin_ = value;
       }
     }
 
     /// <summary>Field number for the "end" field.</summary>
     public const int EndFieldNumber = 3;
-    private string end_ = "";
+    private uint end_;
     /// <summary>
     /// 结束时间
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string End {
+    public uint End {
       get { return end_; }
       set {
-        end_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        end_ = value;
       }
     }
 
@@ -13979,8 +13979,8 @@ namespace Msg {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
-      if (Begin.Length != 0) hash ^= Begin.GetHashCode();
-      if (End.Length != 0) hash ^= End.GetHashCode();
+      if (Begin != 0) hash ^= Begin.GetHashCode();
+      if (End != 0) hash ^= End.GetHashCode();
       if (Content.Length != 0) hash ^= Content.GetHashCode();
       if (Type != 0) hash ^= Type.GetHashCode();
       return hash;
@@ -13997,13 +13997,13 @@ namespace Msg {
         output.WriteRawTag(8);
         output.WriteUInt32(Id);
       }
-      if (Begin.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Begin);
+      if (Begin != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(Begin);
       }
-      if (End.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(End);
+      if (End != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(End);
       }
       if (Content.Length != 0) {
         output.WriteRawTag(34);
@@ -14021,11 +14021,11 @@ namespace Msg {
       if (Id != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Id);
       }
-      if (Begin.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Begin);
+      if (Begin != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Begin);
       }
-      if (End.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(End);
+      if (End != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(End);
       }
       if (Content.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Content);
@@ -14044,10 +14044,10 @@ namespace Msg {
       if (other.Id != 0) {
         Id = other.Id;
       }
-      if (other.Begin.Length != 0) {
+      if (other.Begin != 0) {
         Begin = other.Begin;
       }
-      if (other.End.Length != 0) {
+      if (other.End != 0) {
         End = other.End;
       }
       if (other.Content.Length != 0) {
@@ -14070,12 +14070,12 @@ namespace Msg {
             Id = input.ReadUInt32();
             break;
           }
-          case 18: {
-            Begin = input.ReadString();
+          case 16: {
+            Begin = input.ReadUInt32();
             break;
           }
-          case 26: {
-            End = input.ReadString();
+          case 24: {
+            End = input.ReadUInt32();
             break;
           }
           case 34: {
