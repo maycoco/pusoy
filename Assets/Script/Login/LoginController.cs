@@ -13,6 +13,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public class JsonFor  
+{  
+	public string server;
+	public int port; 
+	public int update; 
+	public string notice;
+}  
+
+
 public class LoginController : MonoBehaviour { 
 	public GameObject 				Canvas;
 	public GameObject 				PrefabDialog;
@@ -24,6 +33,8 @@ public class LoginController : MonoBehaviour {
 			Screen.SetResolution(448, 795, false);
 			Application.runInBackground = false;
 		#endif
+
+		StartCoroutine(RequestQuickLogin ());
 	}
 
 	void Awake(){
@@ -76,7 +87,11 @@ public class LoginController : MonoBehaviour {
 		protonet.SetDataCall(Data);	
 	} 
 
-	public void ConnectServer(){
+	public void ConnectServer(){ 
+		if(string.IsNullOrEmpty(Common.SServer) || Common.SPort == 0){
+			Common.ErrorDialog (PrefabDialog, Canvas, Common.ErrorLogin);
+			return;
+		}
 		if(!string.IsNullOrEmpty(Common.FB_id) || !string.IsNullOrEmpty(Common.FB_access_token)){
 			protonet.ConnectServer ();
 		}
@@ -188,5 +203,24 @@ public class LoginController : MonoBehaviour {
 			Common.FB_name = acres.name;
 			ConnectServer ();
 		}
+	}
+
+	public IEnumerator RequestQuickLogin()
+	{
+		string http = "http://127.0.0.1/json" ;
+		WWW www = new WWW(http);
+		yield return www;
+
+		if (www!=null && string.IsNullOrEmpty(www.error))
+		{
+			JsonFor td = JsonUtility.FromJson<JsonFor> (www.text);  
+			Common.SServer 	= td.server;
+			Common.SPort	= td.port;
+			Common.SUpdate	= td.update;
+
+			if(Common.SUpdate == 1){
+				Common.CloseServerDialog (PrefabDialog, Canvas, td.notice);
+			}
+		} 
 	}
 }

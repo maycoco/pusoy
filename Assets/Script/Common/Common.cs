@@ -69,6 +69,11 @@ public class Common: MonoBehaviour
 	//UserInfo
 	public static uint		DiamondAmount	= 0;	
 
+	//setver Info
+	public static string	SServer			= "";
+	public static int		SPort			= 80;
+	public static int		SUpdate			= 0;
+
 	//Room Data
 	public  static uint 	CRoom_id		=	0;
 	public  static string 	CRoom_number	= 	"";
@@ -166,23 +171,6 @@ public class Common: MonoBehaviour
 			return _instance;
 		}
 	}
-
-//	public static IEnumerator Load(Image img, string url)
-//	{
-//		double startTime = (double) Time.time;
-//
-//		WWW www = new WWW(url);
-//		yield return www;
-//		if (www!=null && string.IsNullOrEmpty(www.error))
-//		{
-//
-//			Texture2D texture = www.texture;
-//			Sprite sprite = Sprite.Create(texture,new Rect(0,0,texture.width,texture.height),new Vector2(0.5f,0.5f) );
-//
-//			img.sprite = sprite;
-//			double time = (double)Time.time - startTime;
-//		} 
-//	}
 
 	public static Dictionary<string,  Texture> AvatarCache 	= new Dictionary<string, Texture>();
 
@@ -290,6 +278,25 @@ public class Common: MonoBehaviour
 
 	public static void CloseErrorDialog(GameObject Obj){
 		Destroy (Obj.transform.parent.gameObject);
+	}
+
+	public static void CloseServerDialog(GameObject Obj, GameObject Parent, string text, EventTriggerListener.VoidDelegate call = null){
+		GameObject Dialog = Instantiate(Obj) as GameObject;
+		Dialog.transform.Find ("Conten").GetComponent<Text> ().text = text;
+		Dialog.transform.SetParent (Parent.transform);
+		Dialog.transform.localScale = new Vector3 (1,1,1);
+		Dialog.transform.localPosition = new Vector3 (0,0,0);
+
+		Dialog.transform.Find ("Close").gameObject.SetActive (false);
+		EventTriggerListener.Get(Dialog.transform.Find("OK").gameObject).onClick = CloseServerDialog;
+	}
+
+	public static void CloseServerDialog(GameObject Obj){
+		#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+		#else
+			Application.Quit();
+		#endif
 	}
 
 	public static void TipsOn(GameObject Obj, GameObject Parent, string text){

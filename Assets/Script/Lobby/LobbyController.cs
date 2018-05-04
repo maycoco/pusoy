@@ -379,6 +379,14 @@ public class LobbyController : MonoBehaviour {
 			} 
 			break;
 
+		case MessageID.GetNoticesRsp:
+			if (data.GetNoticesRsp.Ret == 0) {
+				Loom.QueueOnMainThread (() => {
+
+				}); 
+			} 
+			break;
+
 		case MessageID.CreateRoomRsp:
 			if (data.CreateRoomRsp.Ret == 0) {
 				Loom.QueueOnMainThread (() => {
@@ -750,6 +758,18 @@ public class LobbyController : MonoBehaviour {
 		Protocol msg 					= new Protocol();
 		msg.Msgid 						= MessageID.GetPlayingRoomReq;
 		msg.GetPlayingRoomReq 			= new GetPlayingRoomReq();
+
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
+		}
+	}
+
+	public void  GetNoticesServer(){
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.GetNoticesReq;
+		msg.GetNoticesReq 			= new GetNoticesReq();
 
 		using (var stream = new MemoryStream())
 		{
