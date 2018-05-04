@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour {
 	public GameObject									PrefabDialog;
 	public GameObject									PrefabTips;
 
+	public Notice 										PrefabNotice;
 	public GameObject			   						m_PrefabChip;
 	public GameObject			   						m_PrefabRank;
 	public GameObject			   						m_PrefabTPlayer;
@@ -80,9 +81,12 @@ public class GameController : MonoBehaviour {
 	[HideInInspector] public int 						m_PlayerListMode = 0;
 
 	[HideInInspector] public bool m_FirstSetBanker 		= false;
+	private Notice 					NoticeBar;
+
 
 	// Use this for initialization
 	void Start () {
+		NoticeBar = Common.InitNotices (PrefabNotice, Canvas.gameObject);
 		Common.Sumbiting = false;
 	}
 
@@ -785,6 +789,32 @@ public class GameController : MonoBehaviour {
 			}); 
 			break;
 
+		case MessageID.KickNotify:
+			if(data.KickNotify.Type == Msg.KickType.StopServer){
+				Loom.QueueOnMainThread (() => {
+					Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorKickGame, Common.CloseServerDialog);
+				}); 
+
+			}
+			break;
+
+		case MessageID.NoticesNotify:
+			Loom.QueueOnMainThread (() => {
+				foreach(Msg.Notice s in data.NoticesNotify.Notices){
+					if (s.Type == Msg.NoticeType.HorseLamp) {
+						NoticeMessage nm = new NoticeMessage ();
+						nm.text = s.Content;
+						nm.times = 3;
+						Common.GameNotices.Add (nm);
+					} else {
+						Common.ErrorDialog (PrefabDialog, Canvas.gameObject, s.Content);
+					}
+				}
+
+				NoticeBar.OnPlay ();
+			}); 
+			break;
+
 		case MessageID.LeaveRoomNotify:
 			Loom.QueueOnMainThread (() => {
 				LeaveRoomEvent (data.LeaveRoomNotify.Uid);
@@ -999,15 +1029,15 @@ public class GameController : MonoBehaviour {
 				}
 			}
 
-			if( timet > Common.PauseTimeOut && timet < Common.PauseTimeOutLong){
-				if (!Client.Instance.IsConnected ()) {
-					SceneManager.LoadScene ("Scene/Lobby");
-				} else {
-					Common.needReConnect = true;
-					Client.Instance.Disconnect ();
-				}
-
-			}
+//			if( timet > Common.PauseTimeOut && timet < Common.PauseTimeOutLong){
+//				if (!Client.Instance.IsConnected ()) {
+//					SceneManager.LoadScene ("Scene/Lobby");
+//				} else {
+//					Common.needReConnect = true;
+//					Client.Instance.Disconnect ();
+//				}
+//
+//			}
 
 			if( timet >= Common.PauseTimeOutLong){
 				if (!Client.Instance.IsConnected ()) {

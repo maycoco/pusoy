@@ -46,11 +46,13 @@ public class Notice : MonoBehaviour
 			message.transform.localPosition = new Vector3 (320, 0, 0);
 
 			Sequence mySequence = DOTween.Sequence ();
-			mySequence.Append (message.transform.DOLocalMoveX (-320 - message.preferredWidth, 5).SetEase (Ease.Linear));
+			mySequence.Append (message.transform.DOLocalMoveX (-320 - message.preferredWidth, 8).SetEase (Ease.Linear));
 			mySequence.Append (message.transform.DOLocalMoveX (320, 0));
 			mySequence.Play ().SetLoops (not.times).onComplete = PlayComplete;
 		} else {
 			isPlaying = false;
+			bk.SetActive (false);
+			message.text = "";
 		}
 	}
 
@@ -60,6 +62,8 @@ public class Notice : MonoBehaviour
 			Play ();
 		} else {
 			isPlaying = false;
+			bk.SetActive (false);
+			message.text = "";
 		}
 	}
 }

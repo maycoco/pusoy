@@ -67,16 +67,6 @@ public class LobbyController : MonoBehaviour {
 	}
 
 	void Awake(){
-		NoticeMessage a = new NoticeMessage ();
-		a.text = "wangtaoshidazhutizi";
-		a.times = 3;
-		Common.GameNotices.Add(a);
-		NoticeMessage b = new NoticeMessage ();
-		b.text = "wangtaoshishabi";
-		b.times = 2;
-		Common.GameNotices.Add(b);
-
-
 		InitCallbackForNet ();
 		OnMusic ();
 	}
@@ -132,6 +122,7 @@ public class LobbyController : MonoBehaviour {
 			protonet.ConnectServer ();
 		} else {
 			GetPlayingRoomServer ();
+			//GetNoticesServer ();
 		}
 	}
 
@@ -592,6 +583,31 @@ public class LobbyController : MonoBehaviour {
 
 		case MessageID.ConsumeDiamondsNotify:
 			break;
+
+		case MessageID.KickNotify:
+			if(data.KickNotify.Type == Msg.KickType.StopServer){
+				Loom.QueueOnMainThread (() => {
+					Common.ErrorDialog (PrefabDialog, Canvas, Common.ErrorKickGame, Common.CloseServerDialog);
+				}); 
+			}
+			break;
+
+		case MessageID.NoticesNotify:
+			Loom.QueueOnMainThread(()=>{
+				foreach(Msg.Notice s in data.NoticesNotify.Notices){
+					if (s.Type == Msg.NoticeType.HorseLamp) {
+						NoticeMessage nm = new NoticeMessage ();
+						nm.text = s.Content;
+						nm.times = 3;
+						Common.GameNotices.Add (nm);
+					} else {
+						Common.ErrorDialog (PrefabDialog, Canvas, s.Content);
+					}
+				}
+
+				NoticeBar.OnPlay ();
+				break;
+			}); 
 		}
 	}
 
@@ -856,15 +872,15 @@ public class LobbyController : MonoBehaviour {
 				}
 			}
 
-			if( timet > Common.PauseTimeOut && timet < Common.PauseTimeOutLong){
-				if (!Client.Instance.IsConnected ()) {
-					CheckConnection ();
-				} else {
-					Common.needReConnect = true;
-					Client.Instance.Disconnect ();
-				}
-
-			}
+//			if( timet > Common.PauseTimeOut && timet < Common.PauseTimeOutLong){
+//				if (!Client.Instance.IsConnected ()) {
+//					CheckConnection ();
+//				} else {
+//					Common.needReConnect = true;
+//					Client.Instance.Disconnect ();
+//				}
+//
+//			}
 
 			if( timet >= Common.PauseTimeOutLong){
 				if (!Client.Instance.IsConnected ()) {

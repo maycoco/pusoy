@@ -75,8 +75,8 @@ public class Common: MonoBehaviour
 	public static uint		DiamondAmount	= 0;	
 
 	//setver Info
-	public static string	SServer			= "118.184.23.103";
-	public static int		SPort			= 8010;
+	public static string	SServer			= "";
+	public static int		SPort			= 0;
 	public static int		SUpdate			= 0;
 
 	//Room Data
@@ -127,8 +127,8 @@ public class Common: MonoBehaviour
 	public static uint 		ConfigCareerDays = 30;
 
 	//Focus Time
-	public static int       PauseTimeOut		= 10;
-	public static int       PauseTimeOutLong	= 20;
+	public static int       PauseTimeOut		= 30;
+	public static int       PauseTimeOutLong	= 1200;
 
 	public static long		PauseTime			= 0;
 	public static bool		isPause				= false;
@@ -163,6 +163,8 @@ public class Common: MonoBehaviour
 	public static string    ErrorLogin			= "Login failed";
 	public static string    ErrorInsufficient	= "Insufficient diamonds,please require to your agent";
 	public static string    ErrorCantGame		= "Failed to continue the game: Player has insufficient diamond";
+
+	public static string    ErrorKickGame		= "Forced to quit due to maintenance, sorry for the inconvenience";
 
 	public static Common Instance
 	{
