@@ -790,12 +790,13 @@ public class GameController : MonoBehaviour {
 			break;
 
 		case MessageID.KickNotify:
-			if(data.KickNotify.Type == Msg.KickType.StopServer){
-				Loom.QueueOnMainThread (() => {
+			Loom.QueueOnMainThread (() => {
+				if (data.KickNotify.Type == Msg.KickType.StopServer) {
 					Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorKickGame, Common.CloseServerDialog);
-				}); 
-
-			}
+				} else {
+					Common.CloseServerDialog (null);
+				}
+			}); 
 			break;
 
 		case MessageID.NoticesNotify:

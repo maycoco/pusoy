@@ -39,6 +39,7 @@ public class Notice : MonoBehaviour
 
 	void Play(){
 		if (Common.GameNotices.Count > 0) {
+			bk.SetActive (true);
 			isPlaying = true;
 			NoticeMessage not = Common.GameNotices [0];
 			message.text = not.text;

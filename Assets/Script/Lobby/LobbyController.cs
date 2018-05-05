@@ -122,7 +122,7 @@ public class LobbyController : MonoBehaviour {
 			protonet.ConnectServer ();
 		} else {
 			GetPlayingRoomServer ();
-			//GetNoticesServer ();
+			GetNoticesServer ();
 		}
 	}
 
@@ -388,10 +388,14 @@ public class LobbyController : MonoBehaviour {
 			if (data.GetNoticesRsp.Ret == 0) {
 				Loom.QueueOnMainThread (() => {
 					foreach(Msg.Notice s in data.GetNoticesRsp.Notices){
-						NoticeMessage nm =  new NoticeMessage();
-						nm.text = s.Content;
-						nm.times = 3;
-						Common.GameNotices.Add(nm);
+						if (s.Type == Msg.NoticeType.HorseLamp) {
+							NoticeMessage nm = new NoticeMessage ();
+							nm.text = s.Content;
+							nm.times = 3;
+							Common.GameNotices.Add (nm);
+						} else {
+							Common.ErrorDialog (PrefabDialog, Canvas, s.Content);
+						}
 					}
 
 					NoticeBar.OnPlay ();
@@ -585,11 +589,15 @@ public class LobbyController : MonoBehaviour {
 			break;
 
 		case MessageID.KickNotify:
-			if(data.KickNotify.Type == Msg.KickType.StopServer){
-				Loom.QueueOnMainThread (() => {
+			Loom.QueueOnMainThread (() => {
+				if(data.KickNotify.Type == Msg.KickType.StopServer){
 					Common.ErrorDialog (PrefabDialog, Canvas, Common.ErrorKickGame, Common.CloseServerDialog);
-				}); 
-			}
+				}
+				else{
+					Common.CloseServerDialog (null);
+				}
+			}); 
+
 			break;
 
 		case MessageID.NoticesNotify:
