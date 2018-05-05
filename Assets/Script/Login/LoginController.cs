@@ -207,8 +207,7 @@ public class LoginController : MonoBehaviour {
 
 	public IEnumerator RequestQuickLogin()
 	{
-		string http = "http://127.0.0.1/json" ;
-		WWW www = new WWW(http);
+		WWW www = new WWW(Common.SJsonHttp);
 		yield return www;
 
 		if (www!=null && string.IsNullOrEmpty(www.error))
