@@ -606,8 +606,8 @@ public class LobbyController : MonoBehaviour {
 				}
 
 				NoticeBar.OnPlay ();
-				break;
 			}); 
+			break;
 		}
 	}
 
