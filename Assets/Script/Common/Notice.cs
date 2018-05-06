@@ -2,8 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 using DG.Tweening;
+using  UnityEngine.EventSystems;
+using System.Collections.Generic;
 
-public class Notice : MonoBehaviour
+public class Notice : MonoBehaviour,IPointerClickHandler ,IPointerDownHandler,IPointerUpHandler
 {
 	public GameObject 	bk;
 	public Text 		message;
@@ -65,6 +67,38 @@ public class Notice : MonoBehaviour
 			isPlaying = false;
 			bk.SetActive (false);
 			message.text = "";
+		}
+	}
+		
+	public void OnPointerDown(PointerEventData eventData)
+	{
+		PassEvent(eventData,ExecuteEvents.pointerDownHandler);
+	}
+		
+	public void OnPointerUp(PointerEventData eventData)
+	{
+		PassEvent(eventData,ExecuteEvents.pointerUpHandler);
+	}
+		
+	public void OnPointerClick(PointerEventData eventData)
+	{
+		PassEvent(eventData,ExecuteEvents.submitHandler);
+		PassEvent(eventData,ExecuteEvents.pointerClickHandler);
+	}
+
+
+	public void  PassEvent<T>(PointerEventData data,ExecuteEvents.EventFunction<T> function)
+		where T : IEventSystemHandler
+	{
+		List<RaycastResult> results = new List<RaycastResult>();
+		EventSystem.current.RaycastAll(data, results); 
+		GameObject current = data.pointerCurrentRaycast.gameObject ;
+		for(int i =0; i< results.Count;i++)
+		{
+			if(current!= results[i].gameObject)
+			{
+				ExecuteEvents.Execute(results[i].gameObject, data,function);
+			}
 		}
 	}
 }
