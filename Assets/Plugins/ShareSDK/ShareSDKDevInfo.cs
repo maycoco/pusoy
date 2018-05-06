@@ -200,7 +200,7 @@ namespace cn.sharesdk.unity3d
 		public string ConsumerKey = "1751224924947592";
 		public string ConsumerSecret = "52b8f639d72e7475ed4d28112837df06";
 		public string RedirectUrl = "https://mob.com/";
-		public bool ShareByAppClient = false;
+		public bool ShareByAppClient = true;
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.Facebook;
 		public string api_key = "1751224924947592";
@@ -673,7 +673,7 @@ namespace cn.sharesdk.unity3d
 		#if UNITY_ANDROID
 		public string SortId = "37";
 		public const int type = (int) PlatformType.FacebookMessenger;
-		public string AppId = "107704292745179";
+		public string AppId = "1751224924947592";
 		#elif UNITY_IPHONE
 		public const int type = (int) PlatformType.FacebookMessenger;
 		#endif
