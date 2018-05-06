@@ -92,8 +92,8 @@ namespace cn.sharesdk.unity3d
 			{
 				if(appKey.Length == 0)
 				{
-					appKey = "moba6b6c6d6";
-					appSecret = "b89d2427a3bc7ad1aea1e1e8c1d36bf3";
+					appKey = "255ea0312d7c4";
+					appSecret = "8a4f800564fbb7786b3a6de4b91f46a7";
 				}
 				Debug.LogException (e);
 			}
