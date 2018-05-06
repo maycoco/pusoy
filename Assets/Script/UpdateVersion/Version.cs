@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public static class VersionInfo
 {
-    public static readonly string version = "0.1.2";
-    public static readonly int version_code = 12;
+    public static readonly string version = "0.1.3";
+    public static readonly int version_code = 13;
 }
 
 public class Version : MonoBehaviour {
