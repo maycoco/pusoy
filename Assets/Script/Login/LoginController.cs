@@ -270,14 +270,14 @@ public class LoginController : MonoBehaviour {
 //				uriObject);
 
 
-			AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "http://www.baidu.com");
-			intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"),
-				uriObject);
-			
-			intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"),
-				"Can you beat my score?");
+			//AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "http://www.baidu.com");
+//			intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"),
+//				uriObject);
 
-			intentObject.Call<AndroidJavaObject>("setType", "url/*");
+			intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"),
+				"<a href='https://www.baidu.com/'>woshibaidu</a>");
+			intentObject.Call<AndroidJavaObject>("setType", "text/html");
+
 			AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 			AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
 			AndroidJavaObject chooser = intentClass.CallStatic<AndroidJavaObject>("createChooser",
