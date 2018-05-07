@@ -25,6 +25,7 @@ public class PrefileControl : MonoBehaviour
 {
 	public LobbyController	LobbyControl;
 
+	public 	Text		m_DiaAmount;
 	public 	UICircle 	m_Avatar;
 	//Prefab
 	public GameObject 	m_Drecord;
@@ -106,7 +107,7 @@ public class PrefileControl : MonoBehaviour
 		m_TogReceived.isOn = true;
 
 		transform.Find ("SelfInfo/Diamonds/Icon").gameObject.SetActive (false);
-		transform.Find ("SelfInfo/Diamonds/Amount").gameObject.SetActive (false);
+		m_DiaAmount.gameObject.SetActive (false);
 
 		ClearDiamondRecord ();
 		HideCalendar ();
@@ -127,6 +128,10 @@ public class PrefileControl : MonoBehaviour
 		transform.DOLocalMoveX (-640, 0.15f);
 	}
 
+	public void UpdateDiamAmount(string amount){
+		m_DiaAmount.text = amount;
+	}
+
 	public void UpdateSelfInfo(){
 		transform.Find ("SelfInfo/ID").GetComponent<Text> ().text 	= Common.Uid.ToString();
 		transform.Find ("SelfInfo/Name").GetComponent<Text> ().text = Common.FB_name;
@@ -134,11 +139,11 @@ public class PrefileControl : MonoBehaviour
 		float width = Common.DiamondAmount.ToString ().Length * 12 + 45;
 		float left = (640 - width) / 2;
 		transform.Find ("SelfInfo/Diamonds/Icon").gameObject.SetActive (true);
-		transform.Find ("SelfInfo/Diamonds/Amount").gameObject.SetActive (true);
-		transform.Find ("SelfInfo/Diamonds/Amount").GetComponent<Text> ().text = Common.ToCarryNum((int)Common.DiamondAmount);
+		m_DiaAmount.gameObject.SetActive (true);
+		m_DiaAmount.text = Common.ToCarryNum((int)Common.DiamondAmount);
 
 		transform.Find ("SelfInfo/Diamonds/Icon").localPosition = new Vector3 (left, 0, 0);
-		transform.Find ("SelfInfo/Diamonds/Amount").localPosition = new Vector3 (left + 45, 0, 0);
+		m_DiaAmount.transform.localPosition = new Vector3 (left + 45, 0, 0);
 
 		if (string.IsNullOrEmpty(Common.FB_avatar)) {
 			m_Avatar.UseDefAvatar ();
@@ -503,6 +508,55 @@ public class PrefileControl : MonoBehaviour
 			return;
 		}
 		return;
+	}
+
+	//滑动退出
+	enum slideVector { nullVector, left, right };
+	private Vector2 lastPos;
+	private Vector2 currentPos;
+	private slideVector currentVector = slideVector.nullVector;
+	private float timer;
+	public float offsetTime = 0.01f;
+
+	void OnGUI(){
+		if (Event.current.type == EventType.MouseDown) {//滑动开始
+			lastPos = Event.current.mousePosition;
+			currentPos = Event.current.mousePosition;
+			timer = 0;
+		}
+
+		if (Event.current.type == EventType.MouseDrag) {//滑动过程
+			currentPos = Event.current.mousePosition;
+			timer += Time.deltaTime;
+			if (timer > offsetTime) {
+				if (currentPos.x < lastPos.x) {
+					if (currentVector == slideVector.left) {
+						return;
+					}
+					//TODO trun Left event
+
+					currentVector = slideVector.left;
+					Exit ();
+				} 
+
+				if (currentPos.x > lastPos.x) {
+					if (currentVector == slideVector.right) {
+						return;
+					}
+					//TODO trun right event
+
+					currentVector = slideVector.right;
+
+				}
+
+				lastPos = currentPos;
+				timer = 0;
+			}		
+		}
+
+		if (Event.current.type == EventType.MouseUp) {//滑动结束  
+			currentVector = slideVector.nullVector;  
+		}  
 	}
 }
 

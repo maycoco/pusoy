@@ -12,6 +12,7 @@ public class SettingControl : MonoBehaviour
 	public 	GameObject 			m_CloseArea;
 	public 	GameObject 			m_ShareControl;
 	private	ShareSDK			ssdk;
+	private bool 				m_OnConrent;
 
 
 	// Use this for initialization
@@ -29,6 +30,7 @@ public class SettingControl : MonoBehaviour
 	}
 
 	public void Enter(){
+		m_OnConrent = false;
 		transform.Find ("Content").localPosition = new Vector3 (-640, 0,  0);
 		transform.Find ("LanguageConsole").gameObject.SetActive (false);
 		transform.Find ("LanguageConsole").localPosition = new Vector3 (0, -275,  0);
@@ -96,15 +98,17 @@ public class SettingControl : MonoBehaviour
 
 		OnContent ();
 		transform.Find ("Content/Top/Title").GetComponent<Text>().text = "Contact Us";
-		transform.Find ("Content/Context").GetComponent<Text> ().text = "Info@unlipoker.com\n" +
-			"www.unlipoker.com";
+		transform.Find ("Content/Context").GetComponent<Text> ().text = "Email：Info@unlipoker.com\n" +
+			"Webesite：www.unlipoker.com\n" + "Facebook：UnliPoker";
 	}
 
 	public void OnContent(){
+		m_OnConrent = true;
 		transform.Find ("Content").DOLocalMove (new Vector3 (0, 0, 0), 0.2f).SetEase (Ease.OutQuad);
 	}
 
 	public void OffContext(){
+		m_OnConrent = false;
 		transform.Find ("Content").DOLocalMove (new Vector3 (-640, 0, 0), 0.2f).SetEase (Ease.OutQuad);
 	}
 
@@ -183,6 +187,60 @@ public class SettingControl : MonoBehaviour
 
 	public void ShareMessenger(ShareContent content){
 		ssdk.ShareContent (PlatformType.FacebookMessenger, content);
+	}
+
+
+	//滑动退出
+	enum slideVector { nullVector, left, right };
+	private Vector2 lastPos;
+	private Vector2 currentPos;
+	private slideVector currentVector = slideVector.nullVector;
+	private float timer;
+	public float offsetTime = 0.01f;
+
+	void OnGUI(){
+		if (Event.current.type == EventType.MouseDown) {//滑动开始
+			lastPos = Event.current.mousePosition;
+			currentPos = Event.current.mousePosition;
+			timer = 0;
+		}
+
+		if (Event.current.type == EventType.MouseDrag) {//滑动过程
+			currentPos = Event.current.mousePosition;
+			timer += Time.deltaTime;
+			if (timer > offsetTime) {
+				if (currentPos.x < lastPos.x) {
+					if (currentVector == slideVector.left) {
+						return;
+					}
+					//TODO trun Left event
+
+					currentVector = slideVector.left;
+					if (m_OnConrent) {
+						OffContext ();
+					} else {
+						Exit ();
+					}
+				} 
+
+				if (currentPos.x > lastPos.x) {
+					if (currentVector == slideVector.right) {
+						return;
+					}
+					//TODO trun right event
+
+					currentVector = slideVector.right;
+
+				}
+
+				lastPos = currentPos;
+				timer = 0;
+			}		
+		}
+
+		if (Event.current.type == EventType.MouseUp) {//滑动结束  
+			currentVector = slideVector.nullVector;  
+		}  
 	}
 }
 

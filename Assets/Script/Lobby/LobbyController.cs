@@ -542,6 +542,8 @@ public class LobbyController : MonoBehaviour {
 			if (data.SendDiamondsRsp.Ret == 0) {
 				Loom.QueueOnMainThread(()=>{
 					PrefileControl.HideSendDiamond ();
+					PrefileControl.UpdateDiamAmount(data.SendDiamondsRsp.Diamonds.ToString());
+					Common.TipsOn (PrefabTips, Canvas, Common.TipsSendSuccess);
 				}); 
 			}
 			else if(data.SendDiamondsRsp.Ret == ErrorID.SendDiamondsNoUser){
@@ -874,30 +876,34 @@ public class LobbyController : MonoBehaviour {
 		{
 			long timet = Common.GetTimeStamp() - Common.PauseTime;
 
-			if( timet <= Common.PauseTimeOut){
-				if( !Client.Instance.IsConnected() ){
-					CheckConnection ();
-				}
-			}
+			if (!Client.Instance.IsConnected ()) {
+				SceneManager.LoadScene("Scene/UpdateVersion");
+			} 
 
+//			if( timet <= Common.PauseTimeOut){
+//				if( !Client.Instance.IsConnected() ){
+//					CheckConnection ();
+//				}
+//			}
+//
 //			if( timet > Common.PauseTimeOut && timet < Common.PauseTimeOutLong){
 //				if (!Client.Instance.IsConnected ()) {
 //					CheckConnection ();
-//				} else {
+//				} 
+//				else {
 //					Common.needReConnect = true;
 //					Client.Instance.Disconnect ();
 //				}
-//
 //			}
-
-			if( timet >= Common.PauseTimeOutLong){
-				if (!Client.Instance.IsConnected ()) {
-					SceneManager.LoadScene("Scene/UpdateVersion");
-				} else {
-					Common.needReConnect = false;
-					Client.Instance.Disconnect ();
-				}
-			}
+//
+//			if( timet >= Common.PauseTimeOutLong){
+//				if (!Client.Instance.IsConnected ()) {
+//					SceneManager.LoadScene("Scene/UpdateVersion");
+//				} else {
+//					Common.needReConnect = false;
+//					Client.Instance.Disconnect ();
+//				}
+//			}
 
 
 			Common.PauseTime = 0;

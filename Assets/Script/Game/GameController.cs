@@ -506,7 +506,7 @@ public class GameController : MonoBehaviour {
 		}); 
 
 
-		Debug.Log (data.ToString());
+		//Debug.Log (data.ToString());
 		if(data == null){return; }
 
 		switch (data.Msgid) {
@@ -1021,33 +1021,36 @@ public class GameController : MonoBehaviour {
 		{
 			long timet = Common.GetTimeStamp() - Common.PauseTime;
 
-			Debug.Log (timet);
-			Debug.Log (Client.Instance.IsConnected());
+			if (!Client.Instance.IsConnected ()) {
+				SceneManager.LoadScene("Scene/UpdateVersion");
+			} 
 
-			if( timet <= Common.PauseTimeOut){
-				if( !Client.Instance.IsConnected() ){
-					SceneManager.LoadScene ("Scene/Lobby");
-				}
-			}
 
+//			if( timet <= Common.PauseTimeOut){
+//				if( !Client.Instance.IsConnected() ){
+//					SceneManager.LoadScene ("Scene/Lobby");
+//				}
+//			}
+//
 //			if( timet > Common.PauseTimeOut && timet < Common.PauseTimeOutLong){
 //				if (!Client.Instance.IsConnected ()) {
 //					SceneManager.LoadScene ("Scene/Lobby");
-//				} else {
+//				} 
+//				else {
 //					Common.needReConnect = true;
 //					Client.Instance.Disconnect ();
 //				}
 //
 //			}
-
-			if( timet >= Common.PauseTimeOutLong){
-				if (!Client.Instance.IsConnected ()) {
-					SceneManager.LoadScene("Scene/UpdateVersion");
-				} else {
-					Common.needReConnect = false;
-					Client.Instance.Disconnect ();
-				}
-			}
+//
+//			if( timet >= Common.PauseTimeOutLong){
+//				if (!Client.Instance.IsConnected ()) {
+//					SceneManager.LoadScene("Scene/UpdateVersion");
+//				} else {
+//					Common.needReConnect = false;
+//					Client.Instance.Disconnect ();
+//				}
+//			}
 
 
 			Common.PauseTime = 0;

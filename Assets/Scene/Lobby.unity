@@ -15597,7 +15597,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1074403912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.876616, y: 486.07397, z: -6.1181836}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -17821,6 +17821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LobbyControl: {fileID: 1074403914}
+  m_DiaAmount: {fileID: 114610597}
   m_Avatar: {fileID: 822244975}
   m_Drecord: {fileID: 1589461707301654, guid: 20c47dc1359f797439984e80ba15d76e, type: 2}
   m_Precord: {fileID: 1560996728390920, guid: c6e937e69900d2f4596b490526381fe9, type: 2}
@@ -25566,10 +25567,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d266d8e8bcccf488686d3be61cf1fa24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appKey: 255ea0312d7c4
+  appSecret: 8a4f800564fbb7786b3a6de4b91f46a7
   devInfo:
     facebook:
       Enable: 1
+      api_key: 1751224924947592
+      app_secret: 52b8f639d72e7475ed4d28112837df06
+      auth_type: both
+      display_name: Unlipoker Pusoy
     facebookMessenger:
+      Enable: 1
+    copy:
       Enable: 1
 --- !u!114 &1820385265
 MonoBehaviour:
@@ -26837,7 +26846,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: X
+  m_Text: "\u2190"
 --- !u!222 &1908358927
 CanvasRenderer:
   m_ObjectHideFlags: 0

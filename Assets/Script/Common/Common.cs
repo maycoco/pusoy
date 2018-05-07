@@ -128,8 +128,8 @@ public class Common: MonoBehaviour
 	public static uint 		ConfigCareerDays = 30;
 
 	//Focus Time
-	public static int       PauseTimeOut		= 30;
-	public static int       PauseTimeOutLong	= 1200;
+	public static int       PauseTimeOut		= 10;
+	public static int       PauseTimeOutLong	= 300;
 
 	public static long		PauseTime			= 0;
 	public static bool		isPause				= false;
@@ -143,6 +143,7 @@ public class Common: MonoBehaviour
 	public static bool	 	Sumbiting = false;
 
 	//DialogText
+	public static string    TipsSendSuccess		= "Successfully Sent";
 	public static string	TipsCreareRoom 		= "Failed to create room";
 	public static string	TipsJoinRoom 		= "Failed to joining room";
 	public static string 	TipsCantLeave 		= "On going ation, can't quit the room";
@@ -318,9 +319,9 @@ public class Common: MonoBehaviour
 		Dialog.transform.localPosition = new Vector3 (0,-568,0);
 
 		Sequence s = DOTween.Sequence ();
-		s.Append (Dialog.transform.DOLocalMoveY (-480, 0.3f));
-		s.Append (Dialog.transform.GetComponent<Image>().DOFade(0, 5f));
-		Dialog.transform.Find ("Text").GetComponent<Text> ().DOFade (0, 1.6f).OnComplete(()=>TipsOff(Dialog));
+		s.Append (Dialog.transform.DOLocalMoveY (-480, 0.2f));
+		s.Append (Dialog.transform.GetComponent<Image>().DOFade(0, 4f));
+		Dialog.transform.Find ("Text").GetComponent<Text> ().DOFade (0, 2f).OnComplete(()=>TipsOff(Dialog));
 	}
 
 	public static void TipsOff(GameObject d){

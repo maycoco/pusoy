@@ -98,6 +98,7 @@ public class Notice : MonoBehaviour,IPointerClickHandler ,IPointerDownHandler,IP
 			if(current!= results[i].gameObject)
 			{
 				ExecuteEvents.Execute(results[i].gameObject, data,function);
+				break;
 			}
 		}
 	}

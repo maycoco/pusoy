@@ -73,5 +73,54 @@ public class JoinRoomControl : MonoBehaviour {
 			LobbyControl.JoinRoomServer (Roomnumber, false);
 		}
 	}
+
+	//滑动退出
+	enum slideVector { nullVector, left, right };
+	private Vector2 lastPos;
+	private Vector2 currentPos;
+	private slideVector currentVector = slideVector.nullVector;
+	private float timer;
+	public float offsetTime = 0.01f;
+
+	void OnGUI(){
+		if (Event.current.type == EventType.MouseDown) {//滑动开始
+			lastPos = Event.current.mousePosition;
+			currentPos = Event.current.mousePosition;
+			timer = 0;
+		}
+
+		if (Event.current.type == EventType.MouseDrag) {//滑动过程
+			currentPos = Event.current.mousePosition;
+			timer += Time.deltaTime;
+			if (timer > offsetTime) {
+				if (currentPos.x < lastPos.x) {
+					if (currentVector == slideVector.left) {
+						return;
+					}
+					//TODO trun Left event
+
+					currentVector = slideVector.left;
+					Exit ();
+				} 
+
+				if (currentPos.x > lastPos.x) {
+					if (currentVector == slideVector.right) {
+						return;
+					}
+					//TODO trun right event
+
+					currentVector = slideVector.right;
+
+				}
+
+				lastPos = currentPos;
+				timer = 0;
+			}		
+		}
+
+		if (Event.current.type == EventType.MouseUp) {//滑动结束  
+			currentVector = slideVector.nullVector;  
+		}  
+	}
 }
 
