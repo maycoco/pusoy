@@ -222,4 +222,23 @@ public class LoginController : MonoBehaviour {
 			}
 		} 
 	}
+
+	public void OnShareClicked() {
+		#if UNITY_ANDROID
+		// Get the required Intent and UnityPlayer classes.
+		AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+		AndroidJavaClass unityPlayerClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+
+		// Construct the intent.
+		AndroidJavaObject intent = new AndroidJavaObject("android.content.Intent");
+		intent.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
+		intent.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), "Here's the text I want to share.");
+		intent.Call<AndroidJavaObject>("setType", "text/plain");
+
+		// Display the chooser.
+		AndroidJavaObject currentActivity = unityPlayerClass.GetStatic<AndroidJavaObject>("currentActivity");
+		AndroidJavaObject chooser = intentClass.CallStatic<AndroidJavaObject>("createChooser", intent, "Share");
+		currentActivity.Call("startActivity", chooser);
+		#endif
+	}
 }
