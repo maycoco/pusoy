@@ -320,8 +320,8 @@ public class Common: MonoBehaviour
 
 		Sequence s = DOTween.Sequence ();
 		s.Append (Dialog.transform.DOLocalMoveY (-480, 0.2f));
-		s.Append (Dialog.transform.GetComponent<Image>().DOFade(0, 4f));
-		Dialog.transform.Find ("Text").GetComponent<Text> ().DOFade (0, 2f).OnComplete(()=>TipsOff(Dialog));
+		s.Append (Dialog.transform.GetComponent<Image>().DOFade(0, 3f)).OnComplete(()=>TipsOff(Dialog));
+		Dialog.transform.Find ("Text").GetComponent<Text> ().DOFade (0, 2f);
 	}
 
 	public static void TipsOff(GameObject d){

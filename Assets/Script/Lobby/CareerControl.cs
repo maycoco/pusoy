@@ -11,6 +11,13 @@ using Msg;
 using Google.Protobuf;
 using Google.Protobuf.Collections;
 
+using UnityEngine.EventSystems;
+
+enum TouchMoveDir
+{
+	idle,left,right,up,down
+}
+
 public class Wol{
 	public int Win;
 	public int Lose;
@@ -19,6 +26,7 @@ public class Wol{
 }
 
 public class CareerControl : MonoBehaviour {
+	
 	public LobbyController	LobbyController;
 	public PieGraph			Pie7Day;
 	public PieGraph			Pie30Day;
@@ -57,54 +65,6 @@ public class CareerControl : MonoBehaviour {
 		m_months.Add ("Oct");
 		m_months.Add ("Nov");
 		m_months.Add ("Dec");
-//
-//		for(int i = 0; i < 3; i++){
-//			Msg.CareerRoomRecord room = new CareerRoomRecord ();
-//			room.Name = "Ali's Room";
-//			room.BeginTime = 1522393690;
-//			room.EndTime = 1522393690;
-//			room.PlayedHands = 13;
-//			room.Hands = 20;
-//			room.IsShare = false;
-//			room.MinBet = 100;
-//			room.MaxBet = 200;
-//
-//			for(int o = 0; o < 5; o++){
-//				ScoreboardItem s = new ScoreboardItem ();
-//				s.Avatar = "https://img5.duitang.com/uploads/item/201609/26/20160926124027_vxRkt.jpeg";
-//				s.Name = "Walter";
-//				s.Score = 200;
-//				s.Uid = 222;
-//				room.Items.Add (s);
-//			}
-//
-//			CareerRooms.Add (room);
-//		}
-//
-//		for(int i = 0; i < 1; i++){
-//			Msg.CareerRoomRecord room = new CareerRoomRecord ();
-//			room.Name = "Ali's Room";
-//			room.BeginTime = 1541005261;
-//			room.EndTime = 1541005261;
-//			room.PlayedHands = 13;
-//			room.Hands = 20;
-//			room.IsShare = false;
-//			room.MinBet = 100;
-//			room.MaxBet = 200;
-//
-//			for(int o = 0; o < 5; o++){
-//				ScoreboardItem s = new ScoreboardItem ();
-//				s.Avatar = "https://img5.duitang.com/uploads/item/201609/26/20160926124027_vxRkt.jpeg";
-//				s.Name = "Walter";
-//				s.Score = 200;
-//				s.Uid = 222;
-//				room.Items.Add (s);
-//			}
-//
-//			CareerRooms.Add (room);
-//		}
-
-		//UpdateCareerRecord ();
 	}
 	
 	// Update is called once per frame
@@ -112,7 +72,8 @@ public class CareerControl : MonoBehaviour {
 	}
 
 	public void Enter(){
-		transform.localPosition = new Vector3(-640, 0, 0);
+		m_Enter = true;
+		transform.localPosition = new Vector3(640, 0, 0);
 		Sequence s = DOTween.Sequence ();
 		s.Append (transform.DOLocalMoveX (30, 0.2f));
 		s.Append (transform.DOLocalMoveX (0, 0.2f));
@@ -169,8 +130,9 @@ public class CareerControl : MonoBehaviour {
 	}
 
 	public void Exit(){
+		m_Enter = false;
 		LobbyController.PlayerButtonEffect ();
-		transform.DOLocalMoveX (-640, 0.15f);
+		transform.DOLocalMoveX (640, 0.15f);
 	}
 
 	public void UpdateRecordPie(RepeatedField<CareerWinLoseDataItem> winlost){
@@ -475,52 +437,32 @@ public class CareerControl : MonoBehaviour {
 		LobbyController.CareerRecordsServer (Common.ConfigCareerDays, m_CareerIndex, m_CareerCount);
 	}
 
-	//滑动退出
-	enum slideVector { nullVector, left, right };
+	private bool 	m_Enter;
 	private Vector2 lastPos;
 	private Vector2 currentPos;
-	private slideVector currentVector = slideVector.nullVector;
-	private float timer;
-	public float offsetTime = 0.01f;
+
 
 	void OnGUI(){
+		if(!m_Enter){return;}
+
 		if (Event.current.type == EventType.MouseDown) {
 			lastPos = Event.current.mousePosition;
 			currentPos = Event.current.mousePosition;
-			timer = 0;
 		}
 
 		if (Event.current.type == EventType.MouseDrag) {
 			currentPos = Event.current.mousePosition;
-			timer += Time.deltaTime;
-			if (timer > offsetTime) {
-				if (currentPos.x < lastPos.x) {
-					if (currentVector == slideVector.left) {
-						return;
-					}
-					//TODO trun Left event
-
-					currentVector = slideVector.left;
-
-				} 
-
-				if (currentPos.x > lastPos.x) {
-					if (currentVector == slideVector.right) {
-						return;
-					}
-					//TODO trun right event
-
-					currentVector = slideVector.right;
-					Exit ();
-				}
-
-				lastPos = currentPos;
-				timer = 0;
-			}		
+			transform.localPosition = new Vector3(currentPos.x - lastPos.x, 0, 0);	
 		}
 
 		if (Event.current.type == EventType.MouseUp) {
-			currentVector = slideVector.nullVector;  
+			if(lastPos== currentPos){return;}
+
+			if (transform.localPosition.x < 320) {
+				transform.DOLocalMoveX (0, 0.2f);
+			} else {
+				Exit ();
+			}
 		}  
 	}
 }

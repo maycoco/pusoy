@@ -21,10 +21,11 @@ public class JoinRoomControl : MonoBehaviour {
 	}
 
 	public void Enter(){
+		m_Enter = true;
 		Roomnumber = "";
 		UpdatePssword ();
 
-		transform.localPosition = new Vector3(-640, 0, 0);
+		transform.localPosition = new Vector3(640, 0, 0);
 		Sequence s = DOTween.Sequence ();
 		s.Append (transform.DOLocalMoveX (30, 0.2f));
 		s.Append (transform.DOLocalMoveX (0, 0.2f));
@@ -32,8 +33,9 @@ public class JoinRoomControl : MonoBehaviour {
 	}
 
 	public void Exit(){
+		m_Enter = false;
 		LobbyControl.PlayerButtonEffect ();
-		transform.DOLocalMoveX (-640, 0.15f);
+		transform.DOLocalMoveX (640, 0.15f);
 	}
 
 	public void InputPassword(int Pword){
@@ -74,52 +76,32 @@ public class JoinRoomControl : MonoBehaviour {
 		}
 	}
 
-	//滑动退出
-	enum slideVector { nullVector, left, right };
+	private bool 	m_Enter;
 	private Vector2 lastPos;
 	private Vector2 currentPos;
-	private slideVector currentVector = slideVector.nullVector;
-	private float timer;
-	public float offsetTime = 0.01f;
+
 
 	void OnGUI(){
+		if(!m_Enter){return;}
+
 		if (Event.current.type == EventType.MouseDown) {
 			lastPos = Event.current.mousePosition;
 			currentPos = Event.current.mousePosition;
-			timer = 0;
 		}
 
 		if (Event.current.type == EventType.MouseDrag) {
 			currentPos = Event.current.mousePosition;
-			timer += Time.deltaTime;
-			if (timer > offsetTime) {
-				if (currentPos.x < lastPos.x) {
-					if (currentVector == slideVector.left) {
-						return;
-					}
-					//TODO trun Left event
-
-					currentVector = slideVector.left;
-
-				} 
-
-				if (currentPos.x > lastPos.x) {
-					if (currentVector == slideVector.right) {
-						return;
-					}
-					//TODO trun right event
-
-					currentVector = slideVector.right;
-					Exit ();
-				}
-
-				lastPos = currentPos;
-				timer = 0;
-			}		
+			transform.localPosition = new Vector3(currentPos.x - lastPos.x, 0, 0);	
 		}
 
 		if (Event.current.type == EventType.MouseUp) {
-			currentVector = slideVector.nullVector;  
+			if(lastPos== currentPos){return;}
+
+			if (transform.localPosition.x < 320) {
+				transform.DOLocalMoveX (0, 0.2f);
+			} else {
+				Exit ();
+			}
 		}  
 	}
 }

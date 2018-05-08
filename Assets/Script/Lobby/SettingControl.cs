@@ -30,8 +30,9 @@ public class SettingControl : MonoBehaviour
 	}
 
 	public void Enter(){
+		m_Enter = true;
 		m_OnConrent = false;
-		transform.Find ("Content").localPosition = new Vector3 (-640, 0,  0);
+		transform.Find ("Content").gameObject.SetActive (false);
 		transform.Find ("LanguageConsole").gameObject.SetActive (false);
 		transform.Find ("LanguageConsole").localPosition = new Vector3 (0, -275,  0);
 
@@ -43,7 +44,7 @@ public class SettingControl : MonoBehaviour
 			transform.Find ("Consoles/Music/Button/Image").localPosition = new Vector3 (-19, 0, 0);
 		}
 
-		transform.localPosition = new Vector3(-640, 0, 0);
+		transform.localPosition = new Vector3(640, 0, 0);
 		Sequence s = DOTween.Sequence ();
 		s.Append (transform.DOLocalMoveX (30, 0.2f));
 		s.Append (transform.DOLocalMoveX (0, 0.2f));
@@ -51,8 +52,9 @@ public class SettingControl : MonoBehaviour
 	}
 
 	public void Exit(){
+		m_Enter = false;
 		m_LobbyController.PlayerButtonEffect ();
-		transform.DOLocalMoveX (-640, 0.15f);
+		transform.DOLocalMoveX (640, 0.15f);
 	}
 
 	public void Language(){
@@ -104,12 +106,12 @@ public class SettingControl : MonoBehaviour
 
 	public void OnContent(){
 		m_OnConrent = true;
-		transform.Find ("Content").DOLocalMove (new Vector3 (0, 0, 0), 0.2f).SetEase (Ease.OutQuad);
+		transform.Find ("Content").gameObject.SetActive (true);
 	}
 
 	public void OffContext(){
 		m_OnConrent = false;
-		transform.Find ("Content").DOLocalMove (new Vector3 (-640, 0, 0), 0.2f).SetEase (Ease.OutQuad);
+		transform.Find ("Content").gameObject.SetActive (false);
 	}
 
 	public void OnLanguage(){
@@ -209,54 +211,32 @@ public class SettingControl : MonoBehaviour
 		#endif
 	}
 		
-	enum slideVector { nullVector, left, right };
+	private bool 	m_Enter;
 	private Vector2 lastPos;
 	private Vector2 currentPos;
-	private slideVector currentVector = slideVector.nullVector;
-	private float timer;
-	public float offsetTime = 0.01f;
+
 
 	void OnGUI(){
+		if(!m_Enter){return;}
+
 		if (Event.current.type == EventType.MouseDown) {
 			lastPos = Event.current.mousePosition;
 			currentPos = Event.current.mousePosition;
-			timer = 0;
 		}
 
 		if (Event.current.type == EventType.MouseDrag) {
 			currentPos = Event.current.mousePosition;
-			timer += Time.deltaTime;
-			if (timer > offsetTime) {
-				if (currentPos.x < lastPos.x) {
-					if (currentVector == slideVector.left) {
-						return;
-					}
-					//TODO trun Left event
-
-					currentVector = slideVector.left;
-				} 
-
-				if (currentPos.x > lastPos.x) {
-					if (currentVector == slideVector.right) {
-						return;
-					}
-					//TODO trun right event
-
-					currentVector = slideVector.right;
-					if (m_OnConrent) {
-						OffContext ();
-					} else {
-						Exit ();
-					}
-				}
-
-				lastPos = currentPos;
-				timer = 0;
-			}		
+			transform.localPosition = new Vector3(currentPos.x - lastPos.x, 0, 0);	
 		}
 
 		if (Event.current.type == EventType.MouseUp) {
-			currentVector = slideVector.nullVector;  
+			if(lastPos== currentPos){return;}
+
+			if (transform.localPosition.x < 320) {
+				transform.DOLocalMoveX (0, 0.2f);
+			} else {
+				Exit ();
+			}
 		}  
 	}
 }
