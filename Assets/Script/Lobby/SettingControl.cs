@@ -147,11 +147,10 @@ public class SettingControl : MonoBehaviour
 
 		ShareContent content = new ShareContent();
 		content.SetText("kLet's play together.");
-		//content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
 		content.SetUrl ("https://www.baidu.com");
 		content.SetTitle("Unlipoker");
 		content.SetShareType(ContentType.Auto);
-		//ssdk.ShowPlatformList (null, content, 100, 100);
+		ssdk.GetUserInfo (PlatformType.FacebookMessenger);
 
 		switch(type){
 		case 0:
@@ -186,11 +185,30 @@ public class SettingControl : MonoBehaviour
 	}
 
 	public void ShareMessenger(ShareContent content){
-		ssdk.ShareContent (PlatformType.FacebookMessenger, content);
+		#if UNITY_IPHONE
+			ssdk.ShareContent (PlatformType.FacebookMessenger, content);
+		#endif
+
+		#if UNITY_ANDROID
+		// Get the required Intent and UnityPlayer classes.
+		AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+		AndroidJavaClass unityPlayerClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+
+		// Construct the intent.
+		AndroidJavaObject intent = new AndroidJavaObject("android.content.Intent");
+		intent.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
+		intent.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), "kLet's play together.http://www.baidu.com");
+		intent.Call<AndroidJavaObject>("setPackage","com.facebook.orca");
+		intent.Call<AndroidJavaObject>("setType", "*/*");
+
+
+		// Display the chooser.
+		AndroidJavaObject currentActivity = unityPlayerClass.GetStatic<AndroidJavaObject>("currentActivity");
+		AndroidJavaObject chooser = intentClass.CallStatic<AndroidJavaObject>("createChooser", intent, "Share");
+		currentActivity.Call("startActivity", chooser);
+		#endif
 	}
-
-
-	//滑动退出
+		
 	enum slideVector { nullVector, left, right };
 	private Vector2 lastPos;
 	private Vector2 currentPos;
