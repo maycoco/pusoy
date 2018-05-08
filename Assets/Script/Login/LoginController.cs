@@ -235,8 +235,9 @@ public class LoginController : MonoBehaviour {
 		// Construct the intent.
 		AndroidJavaObject intent = new AndroidJavaObject("android.content.Intent");
 		intent.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
-		intent.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), "Here's the text I want to share.");
-		intent.Call<AndroidJavaObject>("setType", "text/plain");
+		intent.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), "请点击http://www.baidu.com");
+		intent.Call<AndroidJavaObject>("setPackage","com.facebook.orca");
+		intent.Call<AndroidJavaObject>("setType", "*/*");
 
 
 		// Display the chooser.

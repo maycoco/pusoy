@@ -787,11 +787,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d266d8e8bcccf488686d3be61cf1fa24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appKey: 255ea0312d7c4
+  appSecret: 8a4f800564fbb7786b3a6de4b91f46a7
   devInfo:
     facebook:
       Enable: 1
+      SortId: 8
+      ConsumerKey: 1751224924947592
+      ConsumerSecret: 52b8f639d72e7475ed4d28112837df06
+      RedirectUrl: https://mob.com/
+      ShareByAppClient: 1
     facebookMessenger:
       Enable: 1
+      SortId: 37
+      AppId: 1751224924947592
 --- !u!1 &1013955555
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +864,6 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -1107,7 +1115,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 711045101}
-        m_MethodName: OnShareClicked
+        m_MethodName: OnShareClicked1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1632,7 +1640,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 711045101}
-        m_MethodName: OnShareClicked
+        m_MethodName: OnsShareClick3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
