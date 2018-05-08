@@ -519,13 +519,13 @@ public class PrefileControl : MonoBehaviour
 	public float offsetTime = 0.01f;
 
 	void OnGUI(){
-		if (Event.current.type == EventType.MouseDown) {//滑动开始
+		if (Event.current.type == EventType.MouseDown) {
 			lastPos = Event.current.mousePosition;
 			currentPos = Event.current.mousePosition;
 			timer = 0;
 		}
 
-		if (Event.current.type == EventType.MouseDrag) {//滑动过程
+		if (Event.current.type == EventType.MouseDrag) {
 			currentPos = Event.current.mousePosition;
 			timer += Time.deltaTime;
 			if (timer > offsetTime) {
@@ -536,7 +536,7 @@ public class PrefileControl : MonoBehaviour
 					//TODO trun Left event
 
 					currentVector = slideVector.left;
-					Exit ();
+
 				} 
 
 				if (currentPos.x > lastPos.x) {
@@ -546,7 +546,7 @@ public class PrefileControl : MonoBehaviour
 					//TODO trun right event
 
 					currentVector = slideVector.right;
-
+					Exit ();
 				}
 
 				lastPos = currentPos;
@@ -554,7 +554,7 @@ public class PrefileControl : MonoBehaviour
 			}		
 		}
 
-		if (Event.current.type == EventType.MouseUp) {//滑动结束  
+		if (Event.current.type == EventType.MouseUp) {
 			currentVector = slideVector.nullVector;  
 		}  
 	}
