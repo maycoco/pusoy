@@ -13,6 +13,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+using cn.sharesdk.unity3d;
+
 public class JsonFor  
 {  
 	public string server;
@@ -247,6 +249,44 @@ public class LoginController : MonoBehaviour {
 
 	public void OnShareClicked2(){
 		StartCoroutine(ShareScreenshot());
+	}
+
+	private	ShareSDK			ssdk;
+	public void OnsShareClick3(){
+		ssdk = gameObject.GetComponent<ShareSDK>();
+		ssdk.shareHandler = ShareResultHandler;
+
+		ShareContent content = new ShareContent();
+		content.SetText("this is a test string.");
+		content.SetImageUrl("https://f1.webshare.mob.com/code/demo/img/1.jpg");
+		content.SetTitle("test title");
+		content.SetTitleUrl("http://www.mob.com");
+		content.SetSite("Mob-ShareSDK");
+		content.SetSiteUrl("http://www.mob.com");
+		content.SetUrl("http://www.mob.com");
+		content.SetComment("test description");
+		content.SetMusicUrl("http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3");
+		content.SetShareType(ContentType.Webpage);
+
+		ssdk.ShowPlatformList(null, content, 100, 100);
+		ssdk.Authorize(PlatformType.FacebookMessenger);
+	}
+
+	void ShareResultHandler (int reqID, ResponseState state, PlatformType type, Hashtable result)
+	{
+		if (state == ResponseState.Success)
+		{
+			print ("share result :");
+			print (MiniJSON.jsonEncode(result));
+		}
+		else if (state == ResponseState.Fail)
+		{
+			print ("fail! throwable stack = " + result["stack"] + "; error msg = " + result["msg"]);
+		}
+		else if (state == ResponseState.Cancel) 
+		{
+			print ("cancel !");
+		}
 	}
 		
 	private bool isProcessing = false;
