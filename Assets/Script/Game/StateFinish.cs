@@ -21,12 +21,9 @@ public class StateFinish : State {
 
 	public override void Enter(){
 		ClearResultInfo ();
-		Sequence s = DOTween.Sequence ();
-		s.Append (Layer.DOLocalMoveX (30, 0.2f));
-		s.Append (Layer.DOLocalMoveX (0, 0.2f));
-		s.Play().OnComplete(() => ShowResultInfo(true));
-
-
+	
+		Layer.gameObject.SetActive (true);
+		ShowResultInfo (true);
 		m_StateManage.m_StateSeat.UpdateAllSeatScore ();
 		CountDowm = Common.ConfigFinishTime;
 		ShowHandInfo ();
@@ -39,7 +36,7 @@ public class StateFinish : State {
 	}
 		
 	public override void DisEnter(){
-		Layer.localPosition = new Vector3(0, 0, 0);
+		Layer.gameObject.SetActive (true);
 
 		m_StateManage.m_StateSeat.UpdateAllSeatScore ();
 		CountDowm = Common.ConfigFinishTime;
@@ -54,12 +51,12 @@ public class StateFinish : State {
 	}
 
 	public void ResrtUI(){
-		Layer.localPosition = new Vector3(-640, 0, 0);
+		Layer.gameObject.SetActive (false);
 	}
 
 	public override void Exit(){
 		ClearResultInfo ();
-		Layer.localPosition = new Vector3(-640, 0, 0);
+		Layer.gameObject.SetActive (false);
 		CancelInvoke ();
 		m_StateManage.m_StateSeat.ShowUI ();
 	}
@@ -81,7 +78,10 @@ public class StateFinish : State {
 
 	public void Next(){
 		if ((Common.CPlayed_hands + 1) < Common.CHands) {
-			m_GameController.CloseResultServer ();
+			if(m_GameController.m_SelfSeatID >= 0){
+				m_GameController.CloseResultServer ();
+			}
+
 			m_StateManage.ChangeState (STATE.STATE_SEAT);
 			m_StateManage.m_StateSeat.HideTipsWaitStart ();
 		} else {
@@ -92,7 +92,7 @@ public class StateFinish : State {
 
 	public void HideLayer(){
 		CancelInvoke ();
-		Layer.DOLocalMoveX (-640, 0.15f);
+		ResrtUI ();
 	}
 
 	public void ShowHandInfo(){
@@ -196,7 +196,7 @@ public class StateFinish : State {
 			}
 
 			if (hasAni) {
-				PreInfoObj.transform.DOLocalMoveY (poslist [index].y, 0.15f).SetDelay (index * 0.09f);
+				PreInfoObj.transform.DOLocalMoveY (poslist [index].y, 0.25f).SetDelay ((index  + 1)* 0.17f);
 			} else {
 				PreInfoObj.transform.localPosition = poslist [index];
 			}

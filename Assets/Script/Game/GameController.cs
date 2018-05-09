@@ -170,7 +170,7 @@ public class GameController : MonoBehaviour {
 //		Common.CPlayed_hands= 19;
 //		Common.CIs_share 	= true;
 //		Common.CCredit_points = 1000;
-//		Common.CState 		= Msg.GameState.Result;
+//		Common.CState 		= Msg.GameState.Combine;
 //		Common.CAutoBanker	= true;
 //		if(Common.CState == Msg.GameState.Show){
 //			Common.ConfigBetTime = 5;
@@ -1067,16 +1067,6 @@ public class GameController : MonoBehaviour {
 		{
 			Common.isFocus=true;
 		}
-	}
-
-	public void test(){
-		SetSeatID (222, 3);
-		UpdateOrderList ();
-	}
-
-	public void test2(){
-		SetSeatID (Common.Uid, 2);
-		UpdateOrderList ();
 	}
 }
  

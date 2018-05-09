@@ -1111,6 +1111,7 @@ public class StateSorting : State {
 			UpdateUnderPokers (0.3f);
 		}
 
+		UpdatePokerTips ();
 		DisPokers ();
 	}
 }
