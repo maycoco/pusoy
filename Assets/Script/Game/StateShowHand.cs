@@ -23,6 +23,7 @@ public class StateShowHand : State {
 
 	public override void Enter(){
 		Debug.Log ("==============================state show hand===================================");
+		m_StateManage.m_StateFinish.ResrtUI ();
 		AdjustUI ();
 		m_GameController.ShowSeatLayer ();
 
@@ -148,9 +149,7 @@ public class StateShowHand : State {
 				Image ResI = ParResult.Find("Res").GetComponent<Image> ();
 
 				if(!pinfo.foul){
-					Debug.Log (pinfo.score.Count);
 					if(pinfo.score.Count > 0){
-						Debug.Log (pinfo.score [i]);
 						if (pinfo.score[i] > 0) {
 							typeI.sprite = Resources.Load ("Image/Game/winicon", typeof(Sprite)) as Sprite;
 							ResI.sprite = Resources.Load ("Image/Game/win1", typeof(Sprite)) as Sprite;

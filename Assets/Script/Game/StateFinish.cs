@@ -21,8 +21,6 @@ public class StateFinish : State {
 
 	public override void Enter(){
 		ClearResultInfo ();
-
-		Layer.localPosition = new Vector3(-640, 0, 0);
 		Sequence s = DOTween.Sequence ();
 		s.Append (Layer.DOLocalMoveX (30, 0.2f));
 		s.Append (Layer.DOLocalMoveX (0, 0.2f));
@@ -53,6 +51,10 @@ public class StateFinish : State {
 		} else {
 			Layer.Find ("OK/CountDown").GetComponent<Text> ().text = "OK";
 		}
+	}
+
+	public void ResrtUI(){
+		Layer.localPosition = new Vector3(-640, 0, 0);
 	}
 
 	public override void Exit(){
@@ -182,7 +184,7 @@ public class StateFinish : State {
 				}
 			}
 
-			float right = number.localPosition.x - 16 * amount.Length;
+			float right = number.localPosition.x - 18 * amount.Length;
 			if (hInfo.autowin) {
 				PreInfoObj.transform.Find ("GetLucky").gameObject.SetActive (true);
 				PreInfoObj.transform.Find ("GetLucky").localPosition = new Vector3 (right, PreInfoObj.transform.Find ("GetLucky").localPosition.y, 0);
@@ -194,7 +196,7 @@ public class StateFinish : State {
 			}
 
 			if (hasAni) {
-				PreInfoObj.transform.DOLocalMoveY (poslist [index].y, 0.15f).SetDelay (index * 0.5f);
+				PreInfoObj.transform.DOLocalMoveY (poslist [index].y, 0.15f).SetDelay (index * 0.09f);
 			} else {
 				PreInfoObj.transform.localPosition = poslist [index];
 			}

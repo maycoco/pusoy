@@ -31,6 +31,7 @@ public class StateBetting : State {
 
 	public override void Enter (){
 		Debug.Log ("==============================state betting===================================");
+		m_StateManage.m_StateFinish.ResrtUI ();
 		Layer.gameObject.SetActive (true);
 
 		m_BetConfim = false;

@@ -97,13 +97,7 @@ public class StateSeat : State{
 
 			Transform SeatObj = Layer.Find ("SeatCom").GetChild (i);
 			PlayerInfo player = m_GameController.GetPlayerInfoForSeatID (i);
-
-			Debug.Log (player);
-
 			if (player != null) {
-
-				Debug.Log (player.Uid);
-
 				SeatObj.Find ("AddSeat").gameObject.SetActive (false);
 
 				SeatObj.Find ("Name").GetComponent<Text> ().text = player.Name;
@@ -129,8 +123,6 @@ public class StateSeat : State{
 				}
 
 			} else {
-				SeatObj.Find ("Tips").gameObject.SetActive (true);
-
 				SeatObj.Find ("Amount").GetComponent<Text> ().text = "";
 				SeatObj.Find ("Amount").gameObject.SetActive (false);
 
@@ -143,7 +135,13 @@ public class StateSeat : State{
 					Destroy(SeatObj.Find ("Avatar").GetChild(c).gameObject);
 				} 
 
-				SeatObj.Find ("AddSeat").gameObject.SetActive (true);
+				if (m_GameController.m_SelfSeatID >= 0) {
+					SeatObj.Find ("Tips").gameObject.SetActive (false);
+					SeatObj.Find ("AddSeat").gameObject.SetActive (false);
+				} else {
+					SeatObj.Find ("Tips").gameObject.SetActive (true);
+					SeatObj.Find ("AddSeat").gameObject.SetActive (true);
+				}
 			}
 		}
 	}

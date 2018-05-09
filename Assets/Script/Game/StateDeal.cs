@@ -23,6 +23,7 @@ public class StateDeal : State {
 
 	public override void Enter(){
 		Debug.Log ("==============================state deal===================================");
+		m_StateManage.m_StateFinish.ResrtUI ();
 		AdjustUI ();
 	}
 

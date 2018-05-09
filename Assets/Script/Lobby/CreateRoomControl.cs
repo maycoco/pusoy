@@ -21,7 +21,7 @@ public class CreateRoomControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	}
-
+		
 	void Awake(){
 	}
 
@@ -31,6 +31,8 @@ public class CreateRoomControl : MonoBehaviour {
 
 	public void Enter(){
 		m_Enter 		= true;
+		m_HuaTag 		= false;
+
 		CurMinBet 		= 0;
 		CurHands 		= 0;
 
@@ -173,32 +175,48 @@ public class CreateRoomControl : MonoBehaviour {
 		//Commingsoon.SetActive (false);
 	}
 
+	public void SetHuaTag(){
+		m_HuaTag = true;
+		Debug.Log (123);
+	}
+
+	public void CancelHuaTag(){
+		m_HuaTag = false;
+	}
+
+	private	bool 	m_HuaTag;
 	private bool 	m_Enter;
 	private Vector2 lastPos;
 	private Vector2 currentPos;
 
 
+
+
 	void OnGUI(){
-		if(!m_Enter){return;}
-
-		if (Event.current.type == EventType.MouseDown) {
-			lastPos = Event.current.mousePosition;
-			currentPos = Event.current.mousePosition;
-		}
-
-		if (Event.current.type == EventType.MouseDrag) {
-			currentPos = Event.current.mousePosition;
-			transform.localPosition = new Vector3(currentPos.x - lastPos.x, 0, 0);	
-		}
-
-		if (Event.current.type == EventType.MouseUp) {
-			if(lastPos== currentPos){return;}
-
-			if (transform.localPosition.x < 320) {
-				transform.DOLocalMoveX (0, 0.2f);
-			} else {
-				Exit ();
-			}
-		}  
+//		if(!m_Enter){return;}
+//
+//		if (Event.current.type == EventType.MouseDown) {
+//			lastPos = Event.current.mousePosition;
+//			currentPos = Event.current.mousePosition;
+//		}
+//
+//		if (Event.current.type == EventType.MouseDrag) {
+//			currentPos = Event.current.mousePosition;
+//
+//			if(!m_HuaTag){
+//				transform.localPosition = new Vector3(currentPos.x - lastPos.x, 0, 0);	
+//			}
+//
+//		}
+//
+//		if (Event.current.type == EventType.MouseUp) {
+//			if(lastPos== currentPos){return;}
+//
+//			if (transform.localPosition.x < 320) {
+//				transform.DOLocalMoveX (0, 0.2f);
+//			} else {
+//				Exit ();
+//			}
+//		}  
 	}
 }

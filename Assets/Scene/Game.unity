@@ -5336,7 +5336,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pick a seat
+  m_Text: Pick A Seat
 --- !u!222 &344983240
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15426,7 +15426,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Auto banker
+  m_Text: Auto Banker
 --- !u!222 &1080183636
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30284,7 +30284,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabObInfo: {fileID: 1554605694919392, guid: c948a7fb6280c524da258de451b57070,
     type: 2}
-  m_PrefabPreInfo: {fileID: 1282199104857564, guid: 17f3ebf299693bb46b122641c941e030,
+  m_PrefabPreInfo: {fileID: 1341491223478034, guid: 17f3ebf299693bb46b122641c941e030,
     type: 2}
   m_PrefabAvatar: {fileID: 114181347771996772, guid: 9af53284b99d0d145a6f67254a9c92ea,
     type: 2}

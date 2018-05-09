@@ -170,7 +170,7 @@ public class GameController : MonoBehaviour {
 //		Common.CPlayed_hands= 19;
 //		Common.CIs_share 	= true;
 //		Common.CCredit_points = 1000;
-//		Common.CState 		= Msg.GameState.Combine;
+//		Common.CState 		= Msg.GameState.Result;
 //		Common.CAutoBanker	= true;
 //		if(Common.CState == Msg.GameState.Show){
 //			Common.ConfigBetTime = 5;
@@ -202,7 +202,7 @@ public class GameController : MonoBehaviour {
 //
 //		PlayerInfo p2 = new PlayerInfo ();
 //		p2.Uid = 333;
-//		p2.SeatID =  2;
+//		p2.SeatID =  -1;
 //		p2.Name = "HAHA";
 //		p2.Bet = 200;
 //		p2.Score = 100;
@@ -211,7 +211,7 @@ public class GameController : MonoBehaviour {
 //
 //		PlayerInfo p3 = new PlayerInfo ();
 //		p3.Uid = 444;
-//		p3.SeatID =  3;
+//		p3.SeatID =  -1;
 //		p3.Name = "gegeg";
 //		p3.Bet = 100;
 //		p3.FB_avatar = "https://imgsa.baidu.com/forum/w%3D580/sign=2864ac7b133853438ccf8729a313b01f/d303b9389b504fc2c82cef12e6dde71190ef6d67.jpg";
@@ -370,7 +370,7 @@ public class GameController : MonoBehaviour {
 	public void UpdateRooimInfo(){
 		Canvas.Find ("TableInfo/RoomNumber").GetComponent<Text> ().text = "Password : " + Common.CRoom_number;
 		Canvas.Find ("TableInfo/BetSize").GetComponent<Text> ().text = "Bet Size  " + Common.ToCarryNum((int)Common.CMin_bet) + "-" + Common.ToCarryNum((int)Common.CMax_bet);
-		Canvas.Find ("TableInfo/Share").GetComponent<Text> ().text = "Room Fee shared";
+		Canvas.Find ("TableInfo/Share").GetComponent<Text> ().text = "Room Fee Shared";
 		Canvas.Find ("TableInfo/Round").GetComponent<Text> ().text = (Common.CPlayed_hands + 1).ToString () + "/" + Common.CHands.ToString ();
 	}
 
@@ -439,7 +439,7 @@ public class GameController : MonoBehaviour {
 //		hinfo.Name = "walter";
 //		hinfo.Avatar = "";
 //		hinfo.Bet = 2000;
-//		hinfo.Win = 120;
+//		hinfo.Win = 1200;
 //		hinfo.SeatID = 0;
 //		hinfo.autowin = true;
 //		hinfo.foul = false;
@@ -506,7 +506,7 @@ public class GameController : MonoBehaviour {
 		}); 
 
 
-		//Debug.Log (data.ToString());
+		Debug.Log (data.ToString());
 		if(data == null){return; }
 
 		switch (data.Msgid) {
@@ -559,11 +559,15 @@ public class GameController : MonoBehaviour {
 
 		case MessageID.StandUpRsp:
 			if (data.StandUpRsp.Ret == 0) {
-				Loom.QueueOnMainThread(()=>{
-					m_StateManage.m_StateBetting.CancelBet();
+				Loom.QueueOnMainThread (() => {
+					m_StateManage.m_StateBetting.CancelBet ();
 					SetSeatID (Common.Uid, -1);
 					UpdateOrderList ();
-					m_Letplay.SetActive(false);
+					m_Letplay.SetActive (false);
+				}); 
+			} else {
+				Loom.QueueOnMainThread (() => {
+					Common.TipsOn (PrefabTips, Canvas.gameObject, Common.TipsCantStandUp);
 				}); 
 			}
 			break;
@@ -880,21 +884,22 @@ public class GameController : MonoBehaviour {
 	public void StandUpServer(){
 		if(m_SelfSeatID == -1){return;}
 
-		if (m_StateManage.GetCulState () == STATE.STATE_SEAT || m_StateManage.GetCulState () == STATE.STATE_BETTING) {
-			if(GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){return;}
-			if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
-			m_GameConsole.CloseMenu ();
+		m_GameConsole.CloseMenu ();
 
-			Protocol msg 					= new Protocol();
-			msg.Msgid 						= MessageID.StandUpReq;
-			msg.StandUpReq 					= new StandUpReq();
+		Protocol msg 					= new Protocol();
+		msg.Msgid 						= MessageID.StandUpReq;
+		msg.StandUpReq 					= new StandUpReq();
 
-			using (var stream = new MemoryStream())
-			{
-				msg.WriteTo(stream);
-				Client.Instance.Send(stream.ToArray());
-			}
+		using (var stream = new MemoryStream())
+		{
+			msg.WriteTo(stream);
+			Client.Instance.Send(stream.ToArray());
 		}
+
+//		if (m_StateManage.GetCulState () == STATE.STATE_SEAT || m_StateManage.GetCulState () == STATE.STATE_BETTING) {
+//			if(GetPlayerInfoForSeatID(m_SelfSeatID).Bet > 0){return;}
+//			if(!Common.Sumbit (PrefabTips ,Canvas.gameObject)){return;}
+//		}
 	}
 
 	public void StartGameServer(){
@@ -1063,4 +1068,15 @@ public class GameController : MonoBehaviour {
 			Common.isFocus=true;
 		}
 	}
+
+	public void test(){
+		SetSeatID (222, 3);
+		UpdateOrderList ();
+	}
+
+	public void test2(){
+		SetSeatID (Common.Uid, 2);
+		UpdateOrderList ();
+	}
 }
+ 

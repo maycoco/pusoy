@@ -60,15 +60,15 @@ public class StateSorting : State {
 		postype1.Add (new Vector3( 128, -270, 0));
 		postype1.Add (new Vector3 (252, -328, 0));
 
-		RanksText.Add ("high card");
-		RanksText.Add ("one pair");
-		RanksText.Add ("two pair");
-		RanksText.Add ("three of a kind");
-		RanksText.Add ("straight");
-		RanksText.Add ("flush");
-		RanksText.Add ("full house");
-		RanksText.Add ("four of a kind");
-		RanksText.Add ("straight flush");
+		RanksText.Add ("High Card");
+		RanksText.Add ("One Pair");
+		RanksText.Add ("Two Pair");
+		RanksText.Add ("Three Of A Kind");
+		RanksText.Add ("Straight");
+		RanksText.Add ("Flush");
+		RanksText.Add ("Full House");
+		RanksText.Add ("Four Of A Kind");
+		RanksText.Add ("Straight Flush");
 	}
 
 	// Update is called once per frame
@@ -98,6 +98,8 @@ public class StateSorting : State {
 
 	public override void Enter(){
 		Debug.Log ("==============================state sorting===================================");
+		m_StateManage.m_StateFinish.ResrtUI ();
+
 		InitData ();
 
 		AdjustUI ();

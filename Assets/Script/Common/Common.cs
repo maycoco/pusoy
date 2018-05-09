@@ -143,6 +143,7 @@ public class Common: MonoBehaviour
 	public static bool	 	Sumbiting = false;
 
 	//DialogText
+	public static string 	TipsCantStandUp		= "You can’t stand up right now";
 	public static string    TipsSendSuccess		= "Successfully Sent";
 	public static string	TipsCreareRoom 		= "Failed to create room";
 	public static string	TipsJoinRoom 		= "Failed to joining room";
