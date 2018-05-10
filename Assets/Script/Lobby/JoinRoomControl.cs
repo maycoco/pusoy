@@ -21,6 +21,7 @@ public class JoinRoomControl : MonoBehaviour {
 	}
 
 	public void Enter(){
+		gameObject.SetActive (true);
 		m_Enter = true;
 		Roomnumber = "";
 		UpdatePssword ();
@@ -33,9 +34,15 @@ public class JoinRoomControl : MonoBehaviour {
 	}
 
 	public void Exit(){
-		m_Enter = false;
 		LobbyControl.PlayerButtonEffect ();
-		transform.DOLocalMoveX (640, 0.15f);
+		if(m_Enter){
+			transform.DOLocalMoveX (640, 0.15f).onComplete = OnExit;
+			m_Enter = false;
+		}
+	}
+
+	public void OnExit(){
+		gameObject.SetActive (false);
 	}
 
 	public void InputPassword(int Pword){

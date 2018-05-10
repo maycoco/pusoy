@@ -72,6 +72,7 @@ public class CareerControl : MonoBehaviour {
 	}
 
 	public void Enter(){
+		gameObject.SetActive (true);
 		m_Enter = true;
 		transform.localPosition = new Vector3(640, 0, 0);
 		Sequence s = DOTween.Sequence ();
@@ -130,9 +131,15 @@ public class CareerControl : MonoBehaviour {
 	}
 
 	public void Exit(){
-		m_Enter = false;
 		LobbyController.PlayerButtonEffect ();
-		transform.DOLocalMoveX (640, 0.15f);
+		if(m_Enter){
+			transform.DOLocalMoveX (640, 0.15f).onComplete = OnExit;
+			m_Enter = false;
+		}
+	}
+
+	public void OnExit(){
+		gameObject.SetActive (false);
 	}
 
 	public void UpdateRecordPie(RepeatedField<CareerWinLoseDataItem> winlost){

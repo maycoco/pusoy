@@ -30,6 +30,7 @@ public class SettingControl : MonoBehaviour
 	}
 
 	public void Enter(){
+		gameObject.SetActive (true);
 		m_Enter = true;
 		m_OnConrent = false;
 		transform.Find ("Content").gameObject.SetActive (false);
@@ -52,9 +53,16 @@ public class SettingControl : MonoBehaviour
 	}
 
 	public void Exit(){
-		m_Enter = false;
 		m_LobbyController.PlayerButtonEffect ();
-		transform.DOLocalMoveX (640, 0.15f);
+
+		if(m_Enter){
+			transform.DOLocalMoveX (640, 0.15f).onComplete = OnExit;
+			m_Enter = false;
+		}
+	}
+
+	public void OnExit(){
+		gameObject.SetActive (false);
 	}
 
 	public void Language(){
@@ -226,7 +234,10 @@ public class SettingControl : MonoBehaviour
 
 		if (Event.current.type == EventType.MouseDrag) {
 			currentPos = Event.current.mousePosition;
-			transform.localPosition = new Vector3(currentPos.x - lastPos.x, 0, 0);	
+
+			if( (currentPos.x - lastPos.x) > 20 ){
+				transform.localPosition = new Vector3(currentPos.x - lastPos.x - 20, 0, 0);	
+			}
 		}
 
 		if (Event.current.type == EventType.MouseUp) {
