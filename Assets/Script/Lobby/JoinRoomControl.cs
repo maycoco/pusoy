@@ -74,7 +74,7 @@ public class JoinRoomControl : MonoBehaviour {
 
 		if(Roomnumber.Length == 4){
 			JoinRoom ();
-		}
+		}Exit
 	}
 
 	public void JoinRoom(){
@@ -98,7 +98,9 @@ public class JoinRoomControl : MonoBehaviour {
 
 		if (Event.current.type == EventType.MouseDrag) {
 			currentPos = Event.current.mousePosition;
-			transform.localPosition = new Vector3(currentPos.x - lastPos.x, 0, 0);	
+			if( (currentPos.x - lastPos.x) > 20 ){
+				transform.localPosition = new Vector3(currentPos.x - lastPos.x - 20, 0, 0);	
+			}
 		}
 
 		if (Event.current.type == EventType.MouseUp) {
