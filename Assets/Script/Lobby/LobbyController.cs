@@ -876,34 +876,19 @@ public class LobbyController : MonoBehaviour {
 		{
 			long timet = Common.GetTimeStamp() - Common.PauseTime;
 
-			if (!Client.Instance.IsConnected ()) {
-				SceneManager.LoadScene("Scene/UpdateVersion");
-			} 
+			if (timet < Common.PauseTimeOut) {
+				if (!Client.Instance.IsConnected ()) {
+					CheckConnection ();
+				}
+			} else {
+				if (!Client.Instance.IsConnected ()) {
+					SceneManager.LoadScene("Scene/UpdateVersion");
+				} else {
+					Common.needReConnect = false;
+					Client.Instance.Disconnect ();
+				}
+			}
 
-//			if( timet <= Common.PauseTimeOut){
-//				if( !Client.Instance.IsConnected() ){
-//					CheckConnection ();
-//				}
-//			}
-//
-//			if( timet > Common.PauseTimeOut && timet < Common.PauseTimeOutLong){
-//				if (!Client.Instance.IsConnected ()) {
-//					CheckConnection ();
-//				} 
-//				else {
-//					Common.needReConnect = true;
-//					Client.Instance.Disconnect ();
-//				}
-//			}
-//
-//			if( timet >= Common.PauseTimeOutLong){
-//				if (!Client.Instance.IsConnected ()) {
-//					SceneManager.LoadScene("Scene/UpdateVersion");
-//				} else {
-//					Common.needReConnect = false;
-//					Client.Instance.Disconnect ();
-//				}
-//			}
 
 
 			Common.PauseTime = 0;
