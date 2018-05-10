@@ -123,11 +123,6 @@ public class CreateRoomControl : MonoBehaviour {
 		this.transform.Find ("RoomRate/Amount").GetComponent<Text> ().text = amount.ToString ();
 	}
 
-	public void ChangeMinBet(){
-		CurMinBet = (int)transform.Find ("BetSize/Slider").GetComponent<Slider> ().value;
-		UpdateBetSize ();
-	}
-
 	public void ChangeHands(){
 		CurHands = (int)transform.Find ("MaxHands/Slider").GetComponent<Slider> ().value;
 		UpdateHands ();
@@ -177,11 +172,35 @@ public class CreateRoomControl : MonoBehaviour {
 
 	public void SetHuaTag(){
 		m_HuaTag = true;
-		Debug.Log (123);
 	}
 
-	public void CancelHuaTag(){
+	public void CancelHuaTagHand(){
 		m_HuaTag = false;
+	}
+
+	public void CancelHuaTagBet(){
+		m_HuaTag = false;
+
+		CurMinBet = (int)transform.Find ("BetSize/Slider").GetComponent<Slider> ().value;
+
+		if(CurMinBet <= 5){
+			transform.Find ("BetSize/Slider").GetComponent<Slider> ().value = 0;
+			CurMinBet = 0;
+		}
+		else if(CurMinBet > 5 && CurMinBet <= 15){
+			transform.Find ("BetSize/Slider").GetComponent<Slider> ().value = 9;
+			CurMinBet = 1;
+		}
+		else if(CurMinBet > 15 && CurMinBet <= 25){
+			transform.Find ("BetSize/Slider").GetComponent<Slider> ().value = 19;
+			CurMinBet = 2;
+		}
+		else if(CurMinBet > 25 && CurMinBet <= 29){
+			transform.Find ("BetSize/Slider").GetComponent<Slider> ().value = 29;
+			CurMinBet = 3;
+		}
+
+		UpdateBetSize ();
 	}
 
 	private	bool 	m_HuaTag;
@@ -193,30 +212,30 @@ public class CreateRoomControl : MonoBehaviour {
 
 
 	void OnGUI(){
-//		if(!m_Enter){return;}
-//
-//		if (Event.current.type == EventType.MouseDown) {
-//			lastPos = Event.current.mousePosition;
-//			currentPos = Event.current.mousePosition;
-//		}
-//
-//		if (Event.current.type == EventType.MouseDrag) {
-//			currentPos = Event.current.mousePosition;
-//
-//			if(!m_HuaTag){
-//				transform.localPosition = new Vector3(currentPos.x - lastPos.x, 0, 0);	
-//			}
-//
-//		}
-//
-//		if (Event.current.type == EventType.MouseUp) {
-//			if(lastPos== currentPos){return;}
-//
-//			if (transform.localPosition.x < 320) {
-//				transform.DOLocalMoveX (0, 0.2f);
-//			} else {
-//				Exit ();
-//			}
-//		}  
+		if(!m_Enter){return;}
+
+		if (Event.current.type == EventType.MouseDown) {
+			lastPos = Event.current.mousePosition;
+			currentPos = Event.current.mousePosition;
+		}
+
+		if (Event.current.type == EventType.MouseDrag) {
+			currentPos = Event.current.mousePosition;
+
+			if(!m_HuaTag){
+				transform.localPosition = new Vector3(currentPos.x - lastPos.x, 0, 0);	
+			}
+
+		}
+
+		if (Event.current.type == EventType.MouseUp) {
+			if(lastPos== currentPos){return;}
+
+			if (transform.localPosition.x < 320) {
+				transform.DOLocalMoveX (0, 0.2f);
+			} else {
+				Exit ();
+			}
+		}  
 	}
 }
