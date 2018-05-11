@@ -74,7 +74,7 @@ public class JoinRoomControl : MonoBehaviour {
 
 		if(Roomnumber.Length == 4){
 			JoinRoom ();
-		}Exit
+		}
 	}
 
 	public void JoinRoom(){

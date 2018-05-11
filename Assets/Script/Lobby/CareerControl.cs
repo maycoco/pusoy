@@ -448,9 +448,9 @@ public class CareerControl : MonoBehaviour {
 	private Vector2 lastPos;
 	private Vector2 currentPos;
 
-
 	void OnGUI(){
 		if(!m_Enter){return;}
+		if(PageView.isFoucs){return;}
 
 		if (Event.current.type == EventType.MouseDown) {
 			lastPos = Event.current.mousePosition;

@@ -7269,6 +7269,8 @@ MonoBehaviour:
   - {fileID: 1537370887}
   - {fileID: 1517179455}
   - {fileID: 814692990}
+  isDrag: 0
+  isFoucs: 0
   Title: {fileID: 1061227653}
   smooting: 4
   sensitivity: 0
@@ -25516,18 +25518,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d266d8e8bcccf488686d3be61cf1fa24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appKey: 255ea0312d7c4
-  appSecret: 8a4f800564fbb7786b3a6de4b91f46a7
   devInfo:
     facebook:
       Enable: 1
-      api_key: 1751224924947592
-      app_secret: 52b8f639d72e7475ed4d28112837df06
-      auth_type: both
-      display_name: Unlipoker Pusoy
     facebookMessenger:
-      Enable: 1
-    copy:
       Enable: 1
 --- !u!114 &1820385265
 MonoBehaviour:

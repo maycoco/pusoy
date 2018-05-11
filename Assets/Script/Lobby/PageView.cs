@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using System;
 
-public class PageView : MonoBehaviour, IBeginDragHandler, IEndDragHandler {
+public class PageView : MonoBehaviour, IBeginDragHandler, IEndDragHandler ,IPointerUpHandler, IPointerDownHandler{
 	public List<UICircle> lightObj;
-
 
     private ScrollRect rect;                   
     private float targethorizontal = 0;        
-    private bool isDrag = false;                 
+	public bool isDrag = false;  
+	public bool isFoucs = false;
     private List<float> posList = new List<float> ();
     private int currentPageIndex = -1;
     public Action<int> OnPageChanged;
@@ -76,6 +76,14 @@ public class PageView : MonoBehaviour, IBeginDragHandler, IEndDragHandler {
 			}
         }
     }
+
+	public void OnPointerDown(PointerEventData eventData){
+		isFoucs = true;
+	}
+
+	public void OnPointerUp(PointerEventData eventData){
+		isFoucs = false;
+	}
 
     public void OnBeginDrag (PointerEventData eventData) {
         isDrag = true;
