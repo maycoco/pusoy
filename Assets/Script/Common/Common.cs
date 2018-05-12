@@ -130,7 +130,7 @@ public class Common: MonoBehaviour
 	public static uint 		ConfigCareerDays = 30;
 
 	//Focus Time
-	public static int       PauseTimeOut		= 20;
+	public static int       PauseTimeOut		= 300;
 	public static int       PauseTimeOutLong	= 300;
 
 	public static long		PauseTime			= 0;
