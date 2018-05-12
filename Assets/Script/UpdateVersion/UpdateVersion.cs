@@ -58,7 +58,7 @@ public class UpdateVersion : MonoBehaviour {
     {
         SetMessage("Checking new version ...");
 
-        var r = new UnityWebRequest("http://118.184.23.103:8012/get_version", UnityWebRequest.kHttpVerbGET);
+        var r = new UnityWebRequest("http://pusoyserver.unlipoker.net:8012/get_version", UnityWebRequest.kHttpVerbGET);
         r.downloadHandler = new DownloadHandlerBuffer();
         yield return r.SendWebRequest();
 
