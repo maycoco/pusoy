@@ -426,5 +426,25 @@ public class Common: MonoBehaviour
 		mainActivity.Dispose();
 	}
 
+	public static void openPackage(string pkgName)  
+	{  
+		using (AndroidJavaClass jcPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))  
+		{  
+			using (AndroidJavaObject joActivity = jcPlayer.GetStatic<AndroidJavaObject>("currentActivity"))  
+			{  
+				using (AndroidJavaObject joPackageManager = joActivity.Call<AndroidJavaObject>("getPackageManager"))  
+				{  
+					using (AndroidJavaObject joIntent = joPackageManager.Call<AndroidJavaObject>("getLaunchIntentForPackage", pkgName))  
+					{  
+						if (null != joIntent)  
+						{  
+							joActivity.Call("startActivity", joIntent);  
+						}  
+					}  
+				}  
+			}  
+		}  
+	}  
+
 	private Common() {}
 }

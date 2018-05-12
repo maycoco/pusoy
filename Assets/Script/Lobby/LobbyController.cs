@@ -865,15 +865,17 @@ public class LobbyController : MonoBehaviour {
 		if (!hasFocus) {
 			Common.PauseTime = Common.GetTimeStamp ();
 		} else {
-			long timet = Common.GetTimeStamp () - Common.PauseTime;
-
-			Debug.Log (timet);
-			if (timet < Common.PauseTimeOut) {
-				if (!Client.Instance.IsConnected ()) {
-					CheckConnection ();
-				}
-			} else {
-				Common.Restart (0);
+//			long timet = Common.GetTimeStamp () - Common.PauseTime;
+//
+//			if (timet < Common.PauseTimeOut) {
+//				if (!Client.Instance.IsConnected ()) {
+//					CheckConnection ();
+//				}
+//			} else {
+//				SceneManager.LoadScene("Scene/UpdateVersion");
+//			}
+			if (!Client.Instance.IsConnected ()) {
+				SceneManager.LoadScene("Scene/UpdateVersion");
 			}
 
 			Common.PauseTime = 0;
