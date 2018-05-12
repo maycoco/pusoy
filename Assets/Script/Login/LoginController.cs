@@ -44,7 +44,7 @@ public class LoginController : MonoBehaviour {
 		InitCallbackForNet ();
 		if (!FB.IsInitialized) {Init ();}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	}

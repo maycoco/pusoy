@@ -8,6 +8,8 @@ using DG.Tweening;
 
 using Google.Protobuf.Collections;
 
+using System.IO;
+
 public class Result{
 	public string user_id;
 	public string access_token;
@@ -122,13 +124,13 @@ public class Common: MonoBehaviour
 	public static int 		ConfigMaxChips	= 20;
 
 	//Music Config
-	public static bool 	 	ConfigMusicOn	= false;
+	public static bool 	 	ConfigMusicOn	= true;
 
 	//CareerReqDays
 	public static uint 		ConfigCareerDays = 30;
 
 	//Focus Time
-	public static int       PauseTimeOut		= 10;
+	public static int       PauseTimeOut		= 300;
 	public static int       PauseTimeOutLong	= 300;
 
 	public static long		PauseTime			= 0;
@@ -368,6 +370,53 @@ public class Common: MonoBehaviour
 		nitice.transform.localScale = new Vector3 (1,1,1);
 		nitice.transform.localPosition = new Vector3 (0,1136/2,0);
 		return nitice;
+	}
+
+	public static void SetMusicConfig(bool music){
+		StreamWriter sw;  
+		string file = "Assets//Config//Config.txt";
+
+		if(!File.Exists(file))  
+		{  
+			sw=File.CreateText(file);
+		}  
+		else  
+		{  
+			File.Delete (file);
+			sw = File.CreateText(file);
+		}  
+
+		string con = "1";
+		if(!music){con = "0";}
+
+		sw.Write(con);
+		sw.Close ();  
+		sw.Dispose ();
+
+		ConfigMusicOn = music;
+	}
+
+	public static bool GetMusicConfig(){
+		
+		StreamReader sr;  
+		string file = "Assets//Config//Config.txt";
+		if(File.Exists(file))  
+		{  
+			sr=File.OpenText(file);  
+		}  
+		else  
+		{  
+			return true;  
+		}
+
+		string str;  
+		while ((str = sr.ReadLine ()) != null) {
+			sr.Close ();  
+			sr.Dispose ();
+			if (str == "1") {return true;} else {return false;}
+		}
+
+		return true;
 	}
 
 	private Common() {}

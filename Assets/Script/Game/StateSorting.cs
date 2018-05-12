@@ -28,6 +28,8 @@ public class StateSorting : State {
 	private bool AlreadyComfim				= false;
 	private bool GetLuckyConfim				= false;
 
+	private bool PokerMoving 				= false;
+
 	Dictionary<Msg.CardRank, List<uint[]>> RankResult = new Dictionary<Msg.CardRank, List<uint[]>> ();
 
 	private GameObject PokerSelectObj	= null;
@@ -99,6 +101,7 @@ public class StateSorting : State {
 	public override void Enter(){
 		Debug.Log ("==============================state sorting===================================");
 		m_StateManage.m_StateFinish.ResrtUI ();
+		m_GameController.m_GameConsole.CloseMenu ();
 
 		InitData ();
 
@@ -430,7 +433,9 @@ public class StateSorting : State {
 			if (UpperPokers.Count + pokers.Length <= 3) {
 				DeletePokerFromTag (belong, pokers);
 				AddPokerToTag (tag, pokers);
+				PokerMoving = true;
 				UpdateUpperPokers (0.2f);
+				DisControlButton (0.2f);
 				UpdateBelongPokets (belong);
 				UpdateControlButton ();
 				UpdatePokerTips ();
@@ -443,7 +448,9 @@ public class StateSorting : State {
 			if(MiddlePokers.Count + pokers.Length <= 5){
 				DeletePokerFromTag (belong, pokers);
 				AddPokerToTag (tag, pokers);
+				PokerMoving = true;
 				UpdateMiddlePokers (0.2f);
+				DisControlButton (0.2f);
 				UpdateBelongPokets (belong);
 				UpdateControlButton ();
 				UpdatePokerTips ();
@@ -460,7 +467,9 @@ public class StateSorting : State {
 			if(UnderPokers.Count + pokers.Length <= 5){
 				DeletePokerFromTag (belong, pokers);
 				AddPokerToTag (tag, pokers);
+				PokerMoving = true;
 				UpdateUnderPokers (0.2f);
+				DisControlButton (0.2f);
 				UpdateBelongPokets (belong);
 				UpdateControlButton ();
 				UpdatePokerTips ();
@@ -484,6 +493,15 @@ public class StateSorting : State {
 		AutoSelected ();
 		UpdateRanks ();
 		if (HandPokers.Count <= 0) {ShowConfim ();} else {HideConfim ();}
+	}
+
+	public void EnbleControlButton(){
+		PokerMoving = false;
+	}
+
+	public void DisControlButton(float time){
+		PokerMoving = true;
+		Invoke("EnbleControlButton", time);
 	}
 
 	public void AutoSelected(){
@@ -673,7 +691,10 @@ public class StateSorting : State {
 	}
 
 	public void BatchAddControl(string Tag){
+		if(PokerMoving){return;}
 		if(AlreadyComfim){return;}
+		if(SelectedPokers.Count <= 0){return;}
+
 		if(Tag == "Upper"){
 			if (UpperPokers.Count + SelectedPokers.Count > 3) {
 				if( SelectedPokers.Count <= 3){
@@ -714,6 +735,7 @@ public class StateSorting : State {
 	}
 
 	public void BatchRemoveControl(string Tag){
+		if(PokerMoving){return;}
 		if(AlreadyComfim){return;}
 		if(Tag == "Upper"){
 			MovePokers(Tag, "Hand", UpperPokers.ToArray());
@@ -945,6 +967,7 @@ public class StateSorting : State {
 			Layer1.Find ("UnderTips").GetComponent<Text> ().text = "Best";
 			Layer1.Find ("UnderTips").GetComponent<Text> ().color = gcolor;
 		} else {
+			Layer1.Find ("UnderTips").GetComponent<Text> ().color = gcolor;
 			Layer1.Find ("UnderTips").GetComponent<Text> ().text = RanksText [(int)GetRanksType (UnderPokers)];
 		}
 
@@ -959,8 +982,10 @@ public class StateSorting : State {
 				t1.Add ((uint)p);
 			}
 
-			if(Pusoy.CardRankFinder.Compare (t.ToArray(), t1.ToArray()) > 0){
+			if (Pusoy.CardRankFinder.Compare (t.ToArray (), t1.ToArray ()) > 0) {
 				Layer1.Find ("UpperTips").GetComponent<Text> ().color = rcolor;
+			} else {
+				Layer1.Find ("UpperTips").GetComponent<Text> ().color = gcolor;
 			}
 		}
 
@@ -977,8 +1002,10 @@ public class StateSorting : State {
 			}
 
 
-			if(Pusoy.CardRankFinder.Compare (t.ToArray(), t1.ToArray()) > 0){
+			if (Pusoy.CardRankFinder.Compare (t.ToArray (), t1.ToArray ()) > 0) {
 				Layer1.Find ("MiddleTips").GetComponent<Text> ().color = rcolor;
+			} else {
+				Layer1.Find ("MiddleTips").GetComponent<Text> ().color = gcolor;
 			}
 		}
 	}

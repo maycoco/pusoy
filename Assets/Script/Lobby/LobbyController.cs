@@ -827,6 +827,7 @@ public class LobbyController : MonoBehaviour {
 
 
 	public void OnMusic(){
+		Common.ConfigMusicOn = Common.GetMusicConfig ();
 		Music.Stop ();
 		if(Common.ConfigMusicOn){
 			Music.clip = BGMs [Random.Range (0, 2)];
@@ -881,12 +882,12 @@ public class LobbyController : MonoBehaviour {
 					CheckConnection ();
 				}
 			} else {
-				if (!Client.Instance.IsConnected ()) {
-					SceneManager.LoadScene("Scene/UpdateVersion");
-				} else {
-					Common.needReConnect = false;
-					Client.Instance.Disconnect ();
-				}
+//				if (!Client.Instance.IsConnected ()) {
+//					SceneManager.LoadScene("Scene/UpdateVersion");
+//				} else {
+//					Common.needReConnect = false;
+//					Client.Instance.Disconnect ();
+//				}
 			}
 
 

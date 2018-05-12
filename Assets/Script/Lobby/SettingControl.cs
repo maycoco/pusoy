@@ -75,9 +75,9 @@ public class SettingControl : MonoBehaviour
 		m_LobbyController.PlayerButtonEffect ();
 
 		if (Common.ConfigMusicOn) {
-			Common.ConfigMusicOn = false;
+			Common.SetMusicConfig (false);
 		} else {
-			Common.ConfigMusicOn = true;
+			Common.SetMusicConfig (true);
 		}
 
 		if (Common.ConfigMusicOn) {

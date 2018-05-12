@@ -22,6 +22,8 @@ public class GameConsole : MonoBehaviour
 	public  GameObject			m_ConsoleMenu_Mask;
 	public  GameObject 			m_WaitingSort;
 	public  List<GameObject> 	m_Pokers;
+
+	public Image 				SoundIcon;
 	private	ShareSDK			ssdk;
 
 	void Start (){
@@ -37,6 +39,11 @@ public class GameConsole : MonoBehaviour
 
 	void AdjustUI(){
 		EventTriggerListener.Get(m_ConsoleMenu_Mask).onClick = onClickButtonHandler;
+		if (Common.ConfigMusicOn) {
+			SoundIcon.sprite = Resources.Load ("Image/Game/menu_sound_open", typeof(Sprite)) as Sprite;
+		} else {
+			SoundIcon.sprite = Resources.Load ("Image/Game/menu_sound_close", typeof(Sprite)) as Sprite;
+		}
 	}
 
 	public void MenuBTConsole(){
@@ -56,23 +63,40 @@ public class GameConsole : MonoBehaviour
 	}
 
 	public void OpenMenu(){
-		m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
-		m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_open");
-		m_ConsoleMenu_Mask.SetActive (true);
-		MenuOpen = true;
+		if(!MenuOpen){
+			m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
+			m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_open");
+			m_ConsoleMenu_Mask.SetActive (true);
+			MenuOpen = true;
+		}
 	}
 		
 	public void CloseMenu(){
-		m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
-		m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_close");
-		m_ConsoleMenu_Mask.SetActive (false);
-		MenuOpen = false;
+		if(MenuOpen){
+			m_ConsoleMenu.transform.Find("Menu").gameObject.SetActive(true);
+			m_ConsoleMenu.GetComponent<Animation>().Play("GameConsole_Menu_close");
+			m_ConsoleMenu_Mask.SetActive (false);
+			MenuOpen = false;
+		}
 	}
 
 	public void StandUp(){
 		m_GameController.PlayEffect (Effect.BUTTON);
 		MenuBTConsole ();
 		m_GameController.StandUpServer ();
+	}
+
+	public void OnSound(){
+		if (Common.ConfigMusicOn) {
+			Common.SetMusicConfig (false);
+			SoundIcon.sprite = Resources.Load ("Image/Game/menu_sound_close", typeof(Sprite)) as Sprite;
+			m_GameController.Music.Pause ();
+
+		} else {
+			Common.SetMusicConfig (true);
+			SoundIcon.sprite = Resources.Load ("Image/Game/menu_sound_open", typeof(Sprite)) as Sprite;
+			m_GameController.Music.Play ();
+		}
 	}
 		
 	///==============================
