@@ -419,5 +419,14 @@ public class Common: MonoBehaviour
 		return true;
 	}
 
+	public static void Restart(int delay)
+	{
+		AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+		AndroidJavaObject mainActivity = jc.GetStatic<AndroidJavaObject>("currentActivity");
+		mainActivity.Call("doRestart", delay);
+		jc.Dispose();
+		mainActivity.Dispose();
+	}
+
 	private Common() {}
 }

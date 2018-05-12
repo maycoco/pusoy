@@ -459,8 +459,10 @@ public class CareerControl : MonoBehaviour {
 
 		if (Event.current.type == EventType.MouseDrag) {
 			currentPos = Event.current.mousePosition;
-			if( (currentPos.x - lastPos.x) > 20 ){
-				transform.localPosition = new Vector3(currentPos.x - lastPos.x - 20, 0, 0);	
+			if ((currentPos.x - lastPos.x) > 20) {
+				transform.localPosition = new Vector3 (currentPos.x - lastPos.x - 20, 0, 0);	
+			} else {
+				transform.localPosition = new Vector3 (0,0,0);
 			}
 		}
 
@@ -474,4 +476,5 @@ public class CareerControl : MonoBehaviour {
 			}
 		}  
 	}
+
 }

@@ -888,6 +888,7 @@ public class LobbyController : MonoBehaviour {
 //					Common.needReConnect = false;
 //					Client.Instance.Disconnect ();
 //				}
+				Common.Restart(0);
 			}
 
 
