@@ -591,17 +591,19 @@ public class GameController : MonoBehaviour {
 						PlayerInfo p = GetPlayerIDForUID(data.StartGameRsp.NomoneyUids[i]);
 
 						if(p != null){
-							if(data.StartGameRsp.NomoneyUids.Count > 1 && i != 0){
+							names += p.Name;
+
+							if( (data.StartGameRsp.NomoneyUids.Count  - (i + 1)) >= 2 ){
 								names += ",";
 							}
-							names += p.Name;
+							else if((data.StartGameRsp.NomoneyUids.Count  - (i + 1)) == 1){
+								names += " and ";
+							}
 						}
 					}
 
 					string str = "Insufficient diamond for " + names + " to resume the game";
 					Common.ErrorDialog (PrefabDialog, Canvas.gameObject, str);
-
-
 				}); 
 			}
 			break;
