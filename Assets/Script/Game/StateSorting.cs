@@ -82,7 +82,7 @@ public class StateSorting : State {
 		RoateCAniIndex = 0;
 
 		m_GameController.HideSeatLayer ();
-		m_GameController.HideTableInfo ();
+		//m_GameController.HideTableInfo ();
 		m_GameController.HideGameConsole ();
 		Layer.gameObject.SetActive (true);
 

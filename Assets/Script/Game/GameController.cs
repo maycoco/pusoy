@@ -1035,47 +1035,26 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void OnApplicationPause(){
-		if(!Common.isPause)
-		{
-			Common.PauseTime = Common.GetTimeStamp();
-		}
-
-		else 
-		{
-			Common.isFocus=true;
-		}
-
-		Common.isPause=true;
 	}
 
-	public void OnApplicationFocus(){
-
-		if(Common.isFocus)
-		{
-			long timet = Common.GetTimeStamp() - Common.PauseTime;
-
-			if (timet < Common.PauseTimeOut) {
-				if (!Client.Instance.IsConnected ()) {
-					SceneManager.LoadScene ("Scene/Lobby");
-				}
-			} else {
-				if (!Client.Instance.IsConnected ()) {
-					SceneManager.LoadScene("Scene/UpdateVersion");
-				} else {
-					Common.needReConnect = false;
-					Client.Instance.Disconnect ();
-				}
+	public void OnApplicationFocus(bool hasFocus){
+		if (!hasFocus) {
+			Common.PauseTime = Common.GetTimeStamp ();
+		} else {
+			//			long timet = Common.GetTimeStamp () - Common.PauseTime;
+			//
+			//			if (timet < Common.PauseTimeOut) {
+			//				if (!Client.Instance.IsConnected ()) {
+			//					CheckConnection ();
+			//				}
+			//			} else {
+			//				SceneManager.LoadScene("Scene/UpdateVersion");
+			//			}
+			if (!Client.Instance.IsConnected ()) {
+				SceneManager.LoadScene("Scene/UpdateVersion");
 			}
 
-
 			Common.PauseTime = 0;
-			Common.isPause=false;
-			Common.isFocus=false;
-		}
-
-		if(Common.isPause)
-		{
-			Common.isFocus=true;
 		}
 	}
 }

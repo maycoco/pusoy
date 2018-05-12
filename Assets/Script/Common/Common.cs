@@ -130,12 +130,10 @@ public class Common: MonoBehaviour
 	public static uint 		ConfigCareerDays = 30;
 
 	//Focus Time
-	public static int       PauseTimeOut		= 300;
+	public static int       PauseTimeOut		= 20;
 	public static int       PauseTimeOutLong	= 300;
 
 	public static long		PauseTime			= 0;
-	public static bool		isPause				= false;
-	public static bool		isFocus				= false;
 	public static bool      needReConnect		= true;
 
 	//Notices
@@ -418,6 +416,35 @@ public class Common: MonoBehaviour
 
 		return true;
 	}
+
+	public static void Restart(int delay)
+	{
+		AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+		AndroidJavaObject mainActivity = jc.GetStatic<AndroidJavaObject>("currentActivity");
+		mainActivity.Call("doRestart", delay);
+		jc.Dispose();
+		mainActivity.Dispose();
+	}
+
+	public static void openPackage(string pkgName)  
+	{  
+		using (AndroidJavaClass jcPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))  
+		{  
+			using (AndroidJavaObject joActivity = jcPlayer.GetStatic<AndroidJavaObject>("currentActivity"))  
+			{  
+				using (AndroidJavaObject joPackageManager = joActivity.Call<AndroidJavaObject>("getPackageManager"))  
+				{  
+					using (AndroidJavaObject joIntent = joPackageManager.Call<AndroidJavaObject>("getLaunchIntentForPackage", pkgName))  
+					{  
+						if (null != joIntent)  
+						{  
+							joActivity.Call("startActivity", joIntent);  
+						}  
+					}  
+				}  
+			}  
+		}  
+	}  
 
 	private Common() {}
 }

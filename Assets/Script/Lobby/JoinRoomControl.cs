@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
-public class JoinRoomControl : MonoBehaviour {
+public class JoinRoomControl : MonoBehaviour{
 	public LobbyController	LobbyControl;
 
 	private string 			Roomnumber;
@@ -98,8 +99,10 @@ public class JoinRoomControl : MonoBehaviour {
 
 		if (Event.current.type == EventType.MouseDrag) {
 			currentPos = Event.current.mousePosition;
-			if( (currentPos.x - lastPos.x) > 20 ){
-				transform.localPosition = new Vector3(currentPos.x - lastPos.x - 20, 0, 0);	
+			if ((currentPos.x - lastPos.x) > 20) {
+				transform.localPosition = new Vector3 (currentPos.x - lastPos.x - 20, 0, 0);	
+			} else {
+				transform.localPosition = new Vector3 (0,0,0);
 			}
 		}
 
