@@ -256,6 +256,15 @@ public class GameController : MonoBehaviour {
 		}
 		return 0;
 	}
+
+	public PlayerInfo GetPlayerIDForUID(uint uid){
+		foreach(PlayerInfo p in Common.CPlayers){
+			if(p.Uid == uid){
+				return p;
+			}
+		}
+		return null;
+	}
 		
 	public int GetSeatIDForPlayerID(uint PlayerID){
 		foreach(PlayerInfo p in Common.CPlayers){
@@ -508,7 +517,7 @@ public class GameController : MonoBehaviour {
 		}); 
 
 
-		Debug.Log (data.ToString());
+		//Debug.Log (data.ToString());
 		if(data == null){return; }
 
 		switch (data.Msgid) {
@@ -576,8 +585,23 @@ public class GameController : MonoBehaviour {
 
 		case MessageID.StartGameRsp:
 			if(data.StartGameRsp.Ret == ErrorID.StartGameNotEnoughDiamonds){
-				Loom.QueueOnMainThread (() => {  
-					Common.ErrorDialog (PrefabDialog, Canvas.gameObject, Common.ErrorCantGame);
+				Loom.QueueOnMainThread (() => {
+					string names  = "";
+					for(int i = 0; i < data.StartGameRsp.NomoneyUids.Count; i++){
+						PlayerInfo p = GetPlayerIDForUID(data.StartGameRsp.NomoneyUids[i]);
+
+						if(p != null){
+							if(data.StartGameRsp.NomoneyUids.Count > 1 && i != 0){
+								names += ",";
+							}
+							names += p.Name;
+						}
+					}
+
+					string str = "Insufficient diamond for " + names + " to resume the game";
+					Common.ErrorDialog (PrefabDialog, Canvas.gameObject, str);
+
+
 				}); 
 			}
 			break;
