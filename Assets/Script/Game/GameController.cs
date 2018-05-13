@@ -380,7 +380,7 @@ public class GameController : MonoBehaviour {
 		Canvas.Find ("TableInfo/RoomNumber").GetComponent<Text> ().text = "Password : " + Common.CRoom_number;
 		Canvas.Find ("TableInfo/BetSize").GetComponent<Text> ().text = "Bet Size  " + Common.ToCarryNum((int)Common.CMin_bet) + "-" + Common.ToCarryNum((int)Common.CMax_bet);
 		string Roomfee = "";
-		if(Common.CIs_share){Roomfee = "Shared";}{Roomfee = "Individual";}
+		if(Common.CIs_share){Roomfee = "Shared";}else{Roomfee = "Individual";}
 		Canvas.Find ("TableInfo/Share").GetComponent<Text> ().text = "Room Fee " + Roomfee;;
 		Canvas.Find ("TableInfo/Round").GetComponent<Text> ().text = (Common.CPlayed_hands + 1).ToString () + "/" + Common.CHands.ToString ();
 	}

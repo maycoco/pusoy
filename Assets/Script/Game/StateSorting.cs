@@ -81,10 +81,6 @@ public class StateSorting : State {
 		RoateAniIndex = 0;
 		RoateCAniIndex = 0;
 
-		m_GameController.HideSeatLayer ();
-		//m_GameController.HideTableInfo ();
-		m_GameController.HideGameConsole ();
-		Layer.gameObject.SetActive (true);
 
 		RankResult.Clear ();
 		Pokers.Clear ();
@@ -104,7 +100,6 @@ public class StateSorting : State {
 		m_GameController.m_GameConsole.CloseMenu ();
 
 		InitData ();
-
 		AdjustUI ();
 
 		CountDownTime = Common.ConfigSortTime;
@@ -158,8 +153,12 @@ public class StateSorting : State {
 	}
 
 	 public override void AdjustUI(){
-		m_StateManage.m_StateSeat.HideAutoBanker ();
+		m_GameController.m_GameConsole.CloseHandReview ();
+		m_GameController.HideSeatLayer ();
+		m_GameController.HideTableInfo ();
+		m_GameController.HideGameConsole ();
 		Layer.gameObject.SetActive (true);
+		m_StateManage.m_StateSeat.HideAutoBanker ();
 
 		if (Effect_BaoPai != null) {Destroy (Effect_BaoPai);Effect_BaoPai = null;} 
 		if (Effect_DX != null) {Destroy (Effect_DX);Effect_DX = null;} 

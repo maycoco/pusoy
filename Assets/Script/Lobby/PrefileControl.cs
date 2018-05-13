@@ -208,13 +208,12 @@ public class PrefileControl : MonoBehaviour
 				m_UserID = m_UserID.Substring (0, m_UserID.Length - 1);
 			}
 		}
-
+			
 		if(m_InputType == "amount"){
 			if (m_Amount.Length > 0) {
 				m_Amount = m_Amount.Substring (0, m_Amount.Length - 1);
 			}
 		}
-
 		UpdateNumber ();
 	}
 
@@ -224,6 +223,10 @@ public class PrefileControl : MonoBehaviour
 			transform.Find ("SendDiamond/UserIDInput/Tag").localPosition = new Vector3 (m_UseridTagPos.x + (18 * m_UserID.Length) - (3.5f * (m_UserID.Length - 1)), m_UseridTagPos.y, m_UseridTagPos.z);
 		}
 		if(m_InputType == "amount"){
+			if(string.IsNullOrEmpty(m_Amount)){
+				transform.Find ("SendDiamond/AmountInput/InputAmount").GetComponent<Text> ().text = m_Amount;
+				return;
+			}
 			string amt = Common.ToCarryNum (Convert.ToInt32(m_Amount));
 			transform.Find ("SendDiamond/AmountInput/InputAmount").GetComponent<Text> ().text = amt;
 			transform.Find ("SendDiamond/AmountInput/Tag").localPosition = new Vector3 (m_AmountTagPos.x + (17 * amt.Length) - (3.6f * (amt.Length - 1)), m_AmountTagPos.y, m_AmountTagPos.z);

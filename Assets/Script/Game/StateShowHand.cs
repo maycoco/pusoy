@@ -55,7 +55,7 @@ public class StateShowHand : State {
 	}
 
 	public override void AdjustUI(){
-		//m_GameController.HideTableInfo ();
+		m_GameController.ShowTableInfo ();
 		m_StateManage.m_StateSeat.HideAutoBanker ();
 		Layer.gameObject.SetActive (true);
 
