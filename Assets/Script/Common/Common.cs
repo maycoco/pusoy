@@ -151,7 +151,7 @@ public class Common: MonoBehaviour
 	public static string	TipsCantCloseRoom 	= "Failed to disband room:On going action";
 	public static string	TipsInvalidUserID 	= "Invalid user ID";
 	public static string	TipsCantSendSelf 	= "Can't send diamond to yourself";
-	public static string	TipsInsufficient 	= "Insufficient diamonds,please require to your agent";
+	public static string	TipsInsufficient 	= "Unable to send out diamond under 100 diamond balance";
 
 	public static string	TipsCreateRoomMax	= "You can’t create more then 10 rooms";
 	public static string	TipsComingSoon		= "Coming Soon";

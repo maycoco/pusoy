@@ -460,7 +460,7 @@ public class GameConsole : MonoBehaviour
 		ssdk.shareHandler = ShareResultHandler;
 
 		ShareContent content = new ShareContent();
-		content.SetText("kLet's play together.");
+		content.SetText("Play Pusoy online with me! Click to join my table!");
 		content.SetUrl ("https://www.baidu.com");
 		content.SetTitle("Unlipoker");
 		content.SetShareType(ContentType.Auto);
@@ -475,7 +475,7 @@ public class GameConsole : MonoBehaviour
 		// Construct the intent.
 		AndroidJavaObject intent = new AndroidJavaObject("android.content.Intent");
 		intent.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
-		intent.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), "kLet's play together.http://www.baidu.com");
+		intent.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), "Play Pusoy online with me! Click to join my table! http://www.baidu.com");
 		intent.Call<AndroidJavaObject>("setPackage","com.facebook.orca");
 		intent.Call<AndroidJavaObject>("setType", "*/*");
 
