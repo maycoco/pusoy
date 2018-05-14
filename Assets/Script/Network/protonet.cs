@@ -41,6 +41,7 @@ public class protonet
     public static void ConnectServer()
     {
 		Client.Instance.Connect(Common.SServer, Common.SPort, eventDelegate);
+        //Client.Instance.Connect("127.0.0.1", 8010, eventDelegate);
     }
 
     public static void DisconnectServer()

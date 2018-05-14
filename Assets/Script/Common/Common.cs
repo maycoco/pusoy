@@ -77,7 +77,7 @@ public class Common: MonoBehaviour
 	public static uint		DiamondAmount	= 0;	
 
 	//setver Info
-	public static string	SJsonHttp 		= "http://pusoy.apppark.xyz/json.txt" ;
+	public static string	SJsonHttp 		= "http://www.unlipoker.com/versions/json.txt" ;
 	public static string	SServer			= "";
 	public static int		SPort			= 0;
 	public static int		SUpdate			= 0;
