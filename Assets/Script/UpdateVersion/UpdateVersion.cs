@@ -110,6 +110,8 @@ public class UpdateVersion : MonoBehaviour {
             Directory.CreateDirectory(Path.GetDirectoryName(savePath));
         }
 
+        File.Delete(savePath);
+
         var r = new UnityWebRequest(update_url, UnityWebRequest.kHttpVerbGET);
         //r.downloadHandler = new DownloadHandlerBuffer();
         r.downloadHandler = new DownloadHandlerFile(savePath);
