@@ -188,6 +188,10 @@ public class CareerControl : MonoBehaviour {
 			if (wins > 0 || losts > 0) {
 				UpdatePieTips (Content.Find ("PieScroll7/Win"), Content.Find ("PieScroll7/Lost"), win, lost);
 			}
+
+			if(wins == 0 && losts == 0){
+				UpdatePieTips (Content.Find ("PieScroll7/Win"), Content.Find ("PieScroll7/Lost"), 50, 50);
+			}
 		}
 
 		if(pie == 1){
@@ -200,6 +204,10 @@ public class CareerControl : MonoBehaviour {
 			if (wins > 0 || losts > 0) {
 				UpdatePieTips (Content.Find("PieScroll30/Win"), Content.Find("PieScroll30/Lost"), win, lost);
 			}
+
+			if(wins == 0 && losts == 0){
+				UpdatePieTips (Content.Find ("PieScroll30/Win"), Content.Find ("PieScroll30/Lost"), 50, 50);
+			}
 		}
 
 		if(pie == 2){
@@ -211,6 +219,10 @@ public class CareerControl : MonoBehaviour {
 
 			if (wins > 0 || losts > 0) {
 				UpdatePieTips (Content.Find ("PieScrollAll/Win"), Content.Find ("PieScrollAll/Lost"), win, lost);
+			}
+
+			if(wins == 0 && losts == 0){
+				UpdatePieTips (Content.Find ("PieScrollAll/Win"), Content.Find ("PieScrollAll/Lost"), 50, 50);
 			}
 		}
 	}
