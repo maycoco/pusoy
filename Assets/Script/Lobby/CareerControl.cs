@@ -236,10 +236,12 @@ public class CareerControl : MonoBehaviour {
 		} else {
 			m_LastPage.SetActive (true);
 		}
+			
+		if(temp.Count <= 0){return;}
+		if(temp.Count < m_CareerCount){m_NextPage.SetActive (false); }
+		else{m_NextPage.SetActive (true);ClearCareerRecord ();}
 
-		if(temp.Count <= 0 || temp.Count < m_CareerCount){m_NextPage.SetActive (false); return;}
-		else{m_NextPage.SetActive (true);ClearCareerRecord ();UpdateCareerRecord ();}
-
+		UpdateCareerRecord ();
 	}
 
 	public void UpdateCareerRecord(){
