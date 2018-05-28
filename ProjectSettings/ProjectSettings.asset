@@ -127,7 +127,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.2.2
+  bundleVersion: 1.0.1
   preloadedAssets: []
   metroInputSource: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -154,7 +154,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.unlipoker.pusoy
   buildNumber: {}
-  AndroidBundleVersionCode: 22
+  AndroidBundleVersionCode: 101
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
@@ -235,8 +235,8 @@ PlayerSettings:
   AndroidTargetDevice: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: G:/Users/Bruce/pusoy-release-key.jks
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: E:/Pusoy/release.keystore
+  AndroidKeyaliasName: pusoy
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
   AndroidEnableTango: 0
